@@ -1,0 +1,1886 @@
+<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>
+/* Wider screens get the desktop layout (the main page). Add ?view=mobile to force this page. */
+(function () {
+  try {
+    if (/[?&]view=mobile\b/.test(location.search)) return;
+    if ((window.matchMedia("(min-width: 761px)").matches && !(screen && screen.width <= 760))) location.replace("./" + location.hash);
+  } catch (e) {}
+})();
+</script>
+<script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react-18.3.1.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom-18.3.1.production.min.js"};</script>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aldar Robotics Deployments">
+<meta name="application-name" content="Aldar Robotics Deployments">
+<title>Aldar Robotics Deployments</title>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#12102A">
+<link rel="apple-touch-icon" sizes="180x180" href="data:image/png;base64,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">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20fill%3D%22%2312102A%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2217%22%20fill%3D%22none%22%20stroke%3D%22%23769CD2%22%20stroke-width%3D%223%22%2F%3E%3Ccircle%20cx%3D%2232%22%20cy%3D%2232%22%20r%3D%2210%22%20fill%3D%22%23DCE7F6%22%2F%3E%3C%2Fsvg%3E">
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Aldar%20Robotics%20Deployments%22%2C%22short_name%22%3A%22Aldar%20Robotics%20Deployments%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%230B0A1F%22%2C%22theme_color%22%3A%22%2312102A%22%2C%22start_url%22%3A%22.%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fpng%3Bbase64%2CiVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAYAAAA9zQYyAAAQAElEQVR4AeydC5gUxbXHz5hEVMIVFEGDqwZUAoqP9QkEEaLLVXwQ0UiMT4KPRAL5DGiEq4heMArxCwQSEURBYiCKARS8rIaHBFDRRURBFAiyEAER8BIQSPKZ%2FQ2g625XdU93z0xVd%2FFtM711HnXO%2F%2Fxpqquqew44rH7Lz93hMEgKBw4Q98chkCAEHKETVEyXiogjtGNBohBwhE5UOV0yjtCp4UA6EnWETkedU5OlI3RqSp2ORB2h01Hn1GTpCJ2aUqcjUUfodNQ5NVk6QotIaqqdgkQdoVNQ5DSl6AidpmqnIFdH6BQUOU0pOkKnqdopyNUROgVFTlOKPoROExQu1yQg4AidhCq6HL5AwBH6CyjcSRIQcIROQhVdDl8g4Aj9BRTuJAkIOELnuYo9hk6U6keeuwvvPiGWjtAJKaRLYy8CjtB7cXB%2FJwQBR%2BiEFNKlsRcBR%2Bi9OLi%2FE4KAI3RCCunS2IuAI%2FReHHR%2FO5lFCDhCW1QsF6o%2FAo7Q%2Fhg5DYsQcIS2qFguVH8EHKH9MXIaFiHgCG1RsVyo%2FghEI7S%2Ff6fhECgoAo7QBYXbdZZvBByh842w819QBByhCwq36yzfCDhCx4jwwfUOlYYlTeXYlmfIiWedLyefd3Et77QhQwddbGopuYbQCDhCh4QOMrZsUybtfnCrXN5rkNww6An50YBR0qX3YLmwe1857%2Brb5NzLrq%2FlnTZk6KCLDbb4wFfLtmXZfxS1DIvcYEv3jtABK1XvsEYCgctu6pMlL2Rsc0V3aX52BznimGbyjToHB%2FRUWw1bfOCrzfe7Z%2F9RQHL6guD0XdvKtXgh4Ajthcq%2BNoYDDBEu7Xm%2FXN1vuEDgY046MxJ597n2%2FYDk9AXB6ZsYiIWYfI1TrOAI7VH8b53QSjpc%2B7PsEIIhQuPjTvTQKmwTMRALQxRiI8bCRmBHb47Q1erU9LQ2wpXw4lv7S7PT2laTmHVKbMRIrMRsVnTFjcYRugr%2F41qdnb2x63htL%2BFKWNVkxQ%2BxEjM3lORgRdB5DjLVhG5Y0kw69bhLLrjhjuyNnYT686XRv%2F%2F1T9m2ab2sX%2FG2fFAxT9796%2F99Kdx3Rhuy9SuWZnWx2ScK%2FcENJTmQCzmFdpQAw9QS%2BqzO11TNJgySku%2BcHqqMn3%2F%2BuXy0apksmTVFXh73iPzpVz%2BXJ355nTz78C%2FkxdGDZe7TI2XhlCdlTJ9uXzloQ%2Fbi6EFZXWywxQe%2B8InvMEGRS5feg4TcwtgnwSZ1hOZmqmufIXJqh8tyrt9n27fJ8oUvS%2FnYh%2BXJu6%2BX6b%2B%2FXxbNmChrlr4u%2F795Q87%2B9htgiw984RPf9LF84UtCn%2Fv1gn6SGzmSa1CbpOilitClZV2Fm6kGR5bkVL%2FVby3MkvgPA2%2BT%2BZPHyNplFRLHUEEVBL7pY%2F7kx4U%2BITcxqPS92smRXEvLrvQSJ7YtFYQ%2B6JBvCosUpWVXBS7kP3d%2Flh1OTBzUU2ZNGJYlcWDjmBUhNzEQC8MSYgvaRWkVockdDILa2KyXeEI3LGmanYpjkSJIobg6VpRPlqfv%2F2l2OPGPrZuDmBVEh1gYlhAbMRJrkI7JnSk%2BsAiib7NOXgldbGDYAHTp7ffJoY2%2BFSgUxqwTB%2F1MKsqfkVyugoGcx6hEbMRIrMQcxDUYgAWYBNG3VSexhD6htF12k9DXvn6gb202V66W6Y%2FeXzU%2BfjzUTZhvB3lS4IaRcTaxk4NfN2DBpiiw8dO1VZ5IQrM9s%2F01tweqCWPSKcP6yUcrlwXSN1GJ2MmBXILEBzZgFETXNp3EEZqrD9sz%2FQrB1Y3ZA8akfrq2yMmFnMjNL2YwAis%2FPdvkiSI040OuPn5FYPFi6vD%2FKerMhV%2BMYeXMiJAbOfr5ACsw89OzSZ4YQnMH3%2FH63r7Yr3xzXnZBhBkDX2VLFciNBRpy9UsBzMDOT89Hbow4EYRmjrXDD3sKNz06ZNlHMeePI3UqiZKRKznrkgIzsANDnZ4tskQQmvEg01I60JfOeSG7t0Knk0QZe0fIXZcb2IGhTscWmfWEZiWMhQMd4FylXnthgk4l0TJyBwNdkmDI1gCdjg0yqwnN5hsIrQOacSRXKZ1OGmRgABa6XEvLrhIw1emYLrOa0K0vr%2F1UdXXAudNnHFm9Lc3nYAEmOgz8MNXZmiCzltDs%2BWVHmQpE5mLnTvydSpyX9tPPLJVru18nAx8aKI9PHCvPz54uryz%2Bq7y2bFH2eKXqnDZk6KCLTV6CUTgFE7BRiAVMwVYlN73dSkI3LGnmu5953jOPCdNX%2BS5Ap86d5MHfPCSQddRTj0mvvr3loss6S6tTT5HGRzaWgw46SDKZTPbgnDZk6KCLDbb4wFe%2B4wUTsNH1w35qMNbpmCqzktBndNLv8WUJmAWGfIHe8Igj5PY7ekr5gpflgaGD5Hudvpclbtj%2BIDo%2B8IVPfNNHWH9%2BdmADRjo9P4x1tsWUWUdoHgblUSMVaGzSYQlYJY%2FSfuCBdbJEnj53htxw841Sv0H9KO48bfGJb%2FqA2PTpqRixEYzASuUGjMFaJTe13TpCn9rhci2Wr02foJWHFXa6uJNMnvlclsiZTCasm8B2mUwm2xd90ndgwxwU%2FbDywzqHrgqmahWhm57WRvt09vKFL%2BVl19zd9%2FWTB349KDsmLlhl9nXEmJu%2BiWFfU2wf7NIDM5VDniYHc5XcxPZiEjpnPE767n8rbXh6g6c4lAohBEeXNMnOVnz%2F6itCWMdrQgzMjhBTnJ7BDOxUPnWYq2yK2W4NoZnwb6x5JdeSWdNi3ZzfolVL%2Bf34x7KzFcUsUPW%2BmR0hJmKr3h7lnCk8sFP5AHOwV8lNa7eG0M3POV%2BJHY8kLZ37glKeqwDCDBs1vChDDL9YGYIQGzH66QaVgx0YqvR12KtsitVuBaF54ybvc1OBtGz%2BzNieAeS%2F9IeHD8nLDIYq%2FlzbmQkhRmLN1dZLHzKDoZeMNrCnBpybflhB6Gant9XiyMtftAo5CAcOecDIK3PNFLhSE2vN9rC%2F%2B2HoV4Ow%2FcZtZwWhv33Kucq8eQELq19KhRwEzCQwTs3BpKiqxErMcQQBhmCp8qWrgcrmy%2FbCnRlPaN5ez42JCpKVFfNUopzametlJiEnIwOUiZnY4whFhyU1oBZx9JNPH8YTuqTFacr8uUNnGVepEFDAalzPvr0CapunRuzkEDUysARTlZ%2BS76hrobIpdLvxhD76xFOUmKx5Z5FSlovg5p43WzFuVuXEeJocVPJc2te884ZS%2Fejm6loojQosMJ7QRx1%2FkhKSyuWLlbKgAjYBXd%2FjhqDqxuqRA7lEDbByeYXSha4WSqMCC4wmdMOSpsov6OEdyuvfXxoZrquvuzq7tTOyoyI7yGQyQi5RwwBTsPXywxcZURMvmSltRhO60THHK3HasHp5LK%2B0vfzKLso%2BCiGIs484cmEZHGxVcTUqUddEZVPIdqMJfXiTbyux2PTh%2B0pZUAEb6lmkCKpvuh65kFPUOHXYHn60uiZR%2B43D3mhCH3bkMcocP65crZQFFZx%2FYcegqtboxZGTDltdTUwAyWhC12%2Bsfg3ulo%2FWRsavbXv9CmTkDorgII6cdNjqalKEdGt1aSyh2TvATUitiKsaGOfxvSRVp6F%2FeDiVR59COzDUkJzILUp4YAvGXj6oCbXxkpnQZiyh69Y%2FXInP9i2blLKggpNOUU8HBvVhql4cuekw1tWm2JgcUOwAVP3XrddAJZIdW7coZUEFJzQ3%2B249aB5eenHktmPrJ16us21166lrk1Uo4l%2FGErpO3XpKWHbu2KaUBRUcfWxJUFXr9OLIbeeOT5V562qjNCqQwFhCH3jwIUoI9uzcoZQFFTRq3DioqnV6ceSmw1hXm2KDlTdC9xg6UaIc516mfs1XHM%2B5HVr%2F0GJjn7f%2B48hNhzG1iVJbbPOVfN4Ina%2BA4%2FJbp06duFwZ5yfJufmBnVpC%2BwHj5AVEIMauUkvo3bt3xwijWa6SnJsf0nkj9Jg%2B3STK8eq08crY%2FV7erTSsJvh0m%2Fouvpqaladx5KbDmNpEqS22%2BQI2b4SOGvCez3YqXRx4SF2lLKhg08aNQVWt04sjNx3GutoUGyxjCb17x3YlNofUjT5Dse7DSqV%2F2wVx5HZIXfWLKHW1KTZ2xhJ6x%2FatSmzqNlAviyuNagg%2BWLGyRktyfo0jt7oNDlMCoquN0qhAAnMJvU299BrH08fvvv1ugSCO1E0o4zhy02G8Q1ObUAHHaGQsoT%2Fb%2FqnybUhf%2B%2Fo35L8aHhkJhsVvVMiuXbsi%2BTDRmJzILUpsYAvGXj54yxK18ZKZ0HaACUGoYti28e8qkRx2lHrzv9KohmD%2B3Pk1Wuz%2FNY6cdNjqamICekYTessG9Sb%2BI0qaRsZvzkuzIvswzUEcOemw1dXEBCyMJvQn6%2F6mxKjRsScqZUEFM6fPlG1bo%2B%2FcC9pfvvXIhZyi9qPD9pP16ppE7TcOe6MJvalSPRNxZNMWohrn5QLM1Gen5KJutG4cuYAp2KoS3bRWXROVTSHbjSY0X2rDTYgXIJlMRpqc2MpLlFPbpKcmieo9FDk5KrIyOZBL1DDANJPx%2Fg4ZakFNovaRT3ujCU3iH61UT6%2BVtChFJdKx%2BeOPZfyYcZF8mGBMDuQSNZaSFqcrXehqoTQqsMB4Qq9b8bYSkuNOPlMpy0UwesRo2bjB3qVwYieHXHJW6R538lkqkax7X10LpVGBBcYTuvK9t5SQHFyvvhzTMvpVes%2Be3TJiyHBlP6YLiJ0cosYJlmCq8lO5XF0LlU2h240nNE8fb1yjfkvS8aXtYsFs5oyZ8udJz8Xiq5BOiJnY4%2BhThyU1oBZx9JNPH8YTmuT%2F9varfHgeTU9rLd9s0NBTlmvjg%2FcNlqVLzP9vdX9exErM%2B3%2BP8gmGYKnyoauByiau9lz8WEHoVYv1K3otWl%2BQS85a3QF977FiPM24mVi1yeQg9MPQrwY5dJVXVSsIzd6BVW%2BpSd2ybSfla3dzRW9d5Xq5s1dfoxdcWEAhRmLNNT8vfd6GBIZeMtrAnhpwbvphBaEBccVrc%2FjwPChIq%2FaXeMrCNC5fukx639rLyCs1V2ZiI8YwuXnZgB0Yeslo02GP3KTDGkL%2F%2FYOlwo2JCrxTO14mujt0lZ2qHcL85PpbjBpTM2YmJmJTxZ1rO5iBncoOzMFeJTet3RpCA5zuOTeWbEvLuqIW28F%2F6T%2Fu1t2I2Q9mM4iFmGJLsMoRmIFd1annjw5zT4MiN1pF6NVvLZCP165SQtai9YVy1PEtlfKwAmYS7vlF%2F6IMQRhi0Dcx1I4%2FWgtYgZnKC1iDuUpuYrtVhAbAJbOn8qE8zul8rVIWRcBcb9dOV8i40U8WZO8HezPoiz7pO0rsKls%2FrPywVvktZvsBxew8TN9rlr4ule%2Bpv%2F2KL7U56%2BJuYVz72rAaN%2FKREdK5%2FcVZYjPb4GuUowI%2BITJ90Bd95ugikDoYgZVKGYzBWiU3td06QgPkmzOf5UN5nNqxSyxL4qoO2AQE2cra6OeQrwAABoVJREFUXCD39Okvf5n5l0iPc%2B3atSvrA1%2F4xDd9qPqP2s4SNxjp%2FPhhrLMtpsxKQm%2BuXCVLZk%2FT4tbuqltiW0HUdcSG%2Brt%2Ffpecd%2Fp35dbrbpHhQ4bJi9OmZ2dHGP9CVoYPHJzTxmwFOuhigy0%2B8KXrKw4ZK4Jgo%2FMFtmCs0zFVZiWhAXPR9Kdl6wb1uzWYjmrf7aeoFuzg4dQJY5%2BSAXcNEGYkLu3QOUv0c1qeJRwQlzZk6KCLTcECrOoITMCm6tTzB0zB1lNoQaO1hAbbhVPVrwtDflSzlnL%2BD2%2Fn1B1VCIAFmFSdKn%2F8MFUaGiKwmtBM%2BFeUP6OF8vgz2knrLjdqddIgBAOw0OVaUf6sgKlOx3SZ1YQG3IryybL23Tc4VR68vPucS%2FIznafs1CABuYOBLiQwrKgitE7HBpn1hAbkVyY9Kp9uUr%2FDA51W51%2BSyis1V2ZyBwPVAXZgqJLb1J4IQu%2Fa%2BQ%2BZ%2FccR8u9%2F7dFiz1WKcaRWKUFCciVnXUpgBnZgqNOzRZYIQgM2TyPPGj%2BMU%2B3BOLLzT%2B4tyJSeNpA8CpmaI0dy9esGzMDOT89g%2BVdCSwyhyerDZW%2FK3KdHcqo9uNO%2FvNf%2F5nXxRRtAHoUsmpAbOfp1A1Zg5qdnkzxRhAb4DyrmSZDxIHOxZd3vFJaAsUvCQS7kRG5%2B%2BYARWPnp2SZPHKEpwPuL5gS6UqPLEnCX3oPzsksP%2F4U42DVHDuQSpD%2BuzGAURNc2nUQSmiJw9Xlp7BDfG0V02aTT%2BbZ7pW3XH8f6kAC%2B83lwJSZmYicHv764AQQTsPHTtVWeWEJTEMaHz4%2B8z3dKD10O9gZ36%2F9bKS27KrZnFPEb98HjUsRIrMQcxD9Tc2ABJkH0bdVJNKEpCnfwz4%2B413fxBV0Ont7gKY5r7v1ddnzNjAHtJhzEwjiZ2IiRWLVx7ROyaAIGYLGvKbEfiSc0lWOOtfyJoZLLShhXQcak3fqPkI7X9i7qjAgzF8RALMREbOQV5GBrALmDQRB923VSQej9RYLQM0YN0u7S269b%2FZMXsDB78KMBj2bH2RAs6NWxup%2Bg5%2Fimj7Zdewh90jcxBLVHj11z5FpRPplfU3OkitBUlc03k4f29d1PjW7Ng5swxqwQ7MYHxwuLFwwBjmt1dqTvfOE7TfCBL3zimz5atL4g1E0q%2B5nJkVxr5pD031NH6P0FZc%2FvlGH9tY9z7df1%2BsxkMsLiBUOAC264Q37wy9%2FITb96Sq6889dy0c39pf01t2f3jvQYOlGqH%2BytQHbRzf2yuthgiw984TOT8X4%2Fs1cc1dsq31ss5ERu1dvTdJ5aQlNknsqYOeYheXncI9qnydENcjBUqN%2BoiTRp3kpOKG0nXvsoaEPWpPkpgi42QXzrdHg6mxzIhZx0ukmXpZXQX6krD4NOHd5fZk0Yrn2ZzVeMDPiFl8AQM7GTgwEhFT0ER%2BhqJeAdFExvcTPF%2B9yqiYw6JTZiJFZiNiq4IgfjCO1RAG6mZk%2F4rfxh4K3y6rTxRly1uRoTCzERGzF6hJ76JkdoDQV44%2BY7r8wQroSTBveSBX8em12g4ctzNGaxiOiDBZEFz40V%2BiYGYiGmWDpIqBNH6ICF3b5lkyybXy4sUozrf1PVbEK%2FLMFXvD47e0MJAQO6qqWGLTd2%2BILAU4b1E%2Fqgr2ULyoW%2Baxm5Bk8EHKE9YfFvZBkZgs%2F70yjhpgwCMhyAjGwAYnsmQ4SanmhDhg662GCLD3xBYHzXtHO%2FB0OgNqGD2TktDwQYDkBGNgCxPZMhQk012pChgy42NXXc7%2BERcIQOj52zNBABR2gDi%2BJCCo%2BAI3R47JylgQg4QhtYFBdSeAQcocNjZ71lEhNwhE5iVVOckyN0ioufxNQdoZNY1RTn5Aid4uInMXVH6CRWNcU5OUJ7Ft812oqAI7StlXNxeyLgCO0Ji2u0FQFHaFsr5%2BL2RMAR2hMW12grAo7Qea7cmD7dpPqR5%2B5S7z5nQqceMQeA0Qg4QhtdHhdcrgg4QueKmNM3GgFHaKPL44LLFQFH6FwRc%2FpGI%2BAIbXR5ihqclZ07QltZNhe0CgFHaBUyrt1KBByhrSybC1qFgCO0ChnXbiUCjtBWls0FrULAEVqFjK7dyYxFwBHa2NK4wMIg4AgdBjVnYywCjtDGlsYFFgYBR%2BgwqDkbYxFwhDa2NC6wMAjETegwMTgbh0BsCDhCxwalc2QCAo7QJlTBxRAbAo7QsUHpHJmAwH8AAAD%2F%2F7IpY2sAAAAGSURBVAMAWdeUnRMyqBQAAAAASUVORK5CYII%3D%22%2C%22sizes%22%3A%22180x180%22%2C%22type%22%3A%22image%2Fpng%22%7D%5D%7D">
+<script src="assets/vendor/dc-runtime.js"></script>
+</head>
+<body>
+
+<x-dc>
+<helmet>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Aldar Robotics Deployments</title>
+<link rel="preconnect" href="https://server.arcgisonline.com" crossorigin="">
+<style>/* required styles */
+
+.leaflet-pane,
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-tile-container,
+.leaflet-pane > svg,
+.leaflet-pane > canvas,
+.leaflet-zoom-box,
+.leaflet-image-layer,
+.leaflet-layer {
+	position: absolute;
+	left: 0;
+	top: 0;
+	}
+.leaflet-container {
+	overflow: hidden;
+	}
+.leaflet-tile,
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	-webkit-user-select: none;
+	   -moz-user-select: none;
+	        user-select: none;
+	  -webkit-user-drag: none;
+	}
+/* Prevents IE11 from highlighting tiles in blue */
+.leaflet-tile::selection {
+	background: transparent;
+}
+/* Safari renders non-retina tile on retina better with this, but Chrome is worse */
+.leaflet-safari .leaflet-tile {
+	image-rendering: -webkit-optimize-contrast;
+	}
+/* hack that prevents hw layers "stretching" when loading new tiles */
+.leaflet-safari .leaflet-tile-container {
+	width: 1600px;
+	height: 1600px;
+	-webkit-transform-origin: 0 0;
+	}
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+	display: block;
+	}
+/* .leaflet-container svg: reset svg max-width decleration shipped in Joomla! (joomla.org) 3.x */
+/* .leaflet-container img: map is broken in FF if you have max-width: 100% on tiles */
+.leaflet-container .leaflet-overlay-pane svg {
+	max-width: none !important;
+	max-height: none !important;
+	}
+.leaflet-container .leaflet-marker-pane img,
+.leaflet-container .leaflet-shadow-pane img,
+.leaflet-container .leaflet-tile-pane img,
+.leaflet-container img.leaflet-image-layer,
+.leaflet-container .leaflet-tile {
+	max-width: none !important;
+	max-height: none !important;
+	width: auto;
+	padding: 0;
+	}
+
+.leaflet-container img.leaflet-tile {
+	/* See: https://bugs.chromium.org/p/chromium/issues/detail?id=600120 */
+	mix-blend-mode: plus-lighter;
+}
+
+.leaflet-container.leaflet-touch-zoom {
+	-ms-touch-action: pan-x pan-y;
+	touch-action: pan-x pan-y;
+	}
+.leaflet-container.leaflet-touch-drag {
+	-ms-touch-action: pinch-zoom;
+	/* Fallback for FF which doesn't support pinch-zoom */
+	touch-action: none;
+	touch-action: pinch-zoom;
+}
+.leaflet-container.leaflet-touch-drag.leaflet-touch-zoom {
+	-ms-touch-action: none;
+	touch-action: none;
+}
+.leaflet-container {
+	-webkit-tap-highlight-color: transparent;
+}
+.leaflet-container a {
+	-webkit-tap-highlight-color: rgba(51, 181, 229, 0.4);
+}
+.leaflet-tile {
+	filter: inherit;
+	visibility: hidden;
+	}
+.leaflet-tile-loaded {
+	visibility: inherit;
+	}
+.leaflet-zoom-box {
+	width: 0;
+	height: 0;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	z-index: 800;
+	}
+/* workaround for https://bugzilla.mozilla.org/show_bug.cgi?id=888319 */
+.leaflet-overlay-pane svg {
+	-moz-user-select: none;
+	}
+
+.leaflet-pane         { z-index: 400; }
+
+.leaflet-tile-pane    { z-index: 200; }
+.leaflet-overlay-pane { z-index: 400; }
+.leaflet-shadow-pane  { z-index: 500; }
+.leaflet-marker-pane  { z-index: 600; }
+.leaflet-tooltip-pane   { z-index: 650; }
+.leaflet-popup-pane   { z-index: 700; }
+
+.leaflet-map-pane canvas { z-index: 100; }
+.leaflet-map-pane svg    { z-index: 200; }
+
+.leaflet-vml-shape {
+	width: 1px;
+	height: 1px;
+	}
+.lvml {
+	behavior: url(#default#VML);
+	display: inline-block;
+	position: absolute;
+	}
+
+
+/* control positioning */
+
+.leaflet-control {
+	position: relative;
+	z-index: 800;
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+.leaflet-top,
+.leaflet-bottom {
+	position: absolute;
+	z-index: 1000;
+	pointer-events: none;
+	}
+.leaflet-top {
+	top: 0;
+	}
+.leaflet-right {
+	right: 0;
+	}
+.leaflet-bottom {
+	bottom: 0;
+	}
+.leaflet-left {
+	left: 0;
+	}
+.leaflet-control {
+	float: left;
+	clear: both;
+	}
+.leaflet-right .leaflet-control {
+	float: right;
+	}
+.leaflet-top .leaflet-control {
+	margin-top: 10px;
+	}
+.leaflet-bottom .leaflet-control {
+	margin-bottom: 10px;
+	}
+.leaflet-left .leaflet-control {
+	margin-left: 10px;
+	}
+.leaflet-right .leaflet-control {
+	margin-right: 10px;
+	}
+
+
+/* zoom and fade animations */
+
+.leaflet-fade-anim .leaflet-popup {
+	opacity: 0;
+	-webkit-transition: opacity 0.2s linear;
+	   -moz-transition: opacity 0.2s linear;
+	        transition: opacity 0.2s linear;
+	}
+.leaflet-fade-anim .leaflet-map-pane .leaflet-popup {
+	opacity: 1;
+	}
+.leaflet-zoom-animated {
+	-webkit-transform-origin: 0 0;
+	    -ms-transform-origin: 0 0;
+	        transform-origin: 0 0;
+	}
+svg.leaflet-zoom-animated {
+	will-change: transform;
+}
+
+.leaflet-zoom-anim .leaflet-zoom-animated {
+	-webkit-transition: -webkit-transform 0.25s cubic-bezier(0,0,0.25,1);
+	   -moz-transition:    -moz-transform 0.25s cubic-bezier(0,0,0.25,1);
+	        transition:         transform 0.25s cubic-bezier(0,0,0.25,1);
+	}
+.leaflet-zoom-anim .leaflet-tile,
+.leaflet-pan-anim .leaflet-tile {
+	-webkit-transition: none;
+	   -moz-transition: none;
+	        transition: none;
+	}
+
+.leaflet-zoom-anim .leaflet-zoom-hide {
+	visibility: hidden;
+	}
+
+
+/* cursors */
+
+.leaflet-interactive {
+	cursor: pointer;
+	}
+.leaflet-grab {
+	cursor: -webkit-grab;
+	cursor:    -moz-grab;
+	cursor:         grab;
+	}
+.leaflet-crosshair,
+.leaflet-crosshair .leaflet-interactive {
+	cursor: crosshair;
+	}
+.leaflet-popup-pane,
+.leaflet-control {
+	cursor: auto;
+	}
+.leaflet-dragging .leaflet-grab,
+.leaflet-dragging .leaflet-grab .leaflet-interactive,
+.leaflet-dragging .leaflet-marker-draggable {
+	cursor: move;
+	cursor: -webkit-grabbing;
+	cursor:    -moz-grabbing;
+	cursor:         grabbing;
+	}
+
+/* marker & overlays interactivity */
+.leaflet-marker-icon,
+.leaflet-marker-shadow,
+.leaflet-image-layer,
+.leaflet-pane > svg path,
+.leaflet-tile-container {
+	pointer-events: none;
+	}
+
+.leaflet-marker-icon.leaflet-interactive,
+.leaflet-image-layer.leaflet-interactive,
+.leaflet-pane > svg path.leaflet-interactive,
+svg.leaflet-image-layer.leaflet-interactive path {
+	pointer-events: visiblePainted; /* IE 9-10 doesn't have auto */
+	pointer-events: auto;
+	}
+
+/* visual tweaks */
+
+.leaflet-container {
+	background: #ddd;
+	outline-offset: 1px;
+	}
+.leaflet-container a {
+	color: #0078A8;
+	}
+.leaflet-zoom-box {
+	border: 2px dotted #38f;
+	background: rgba(255,255,255,0.5);
+	}
+
+
+/* general typography */
+.leaflet-container {
+	font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-size: 0.75rem;
+	line-height: 1.5;
+	}
+
+
+/* general toolbar styles */
+
+.leaflet-bar {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+	border-radius: 4px;
+	}
+.leaflet-bar a {
+	background-color: #fff;
+	border-bottom: 1px solid #ccc;
+	width: 26px;
+	height: 26px;
+	line-height: 26px;
+	display: block;
+	text-align: center;
+	text-decoration: none;
+	color: black;
+	}
+.leaflet-bar a,
+.leaflet-control-layers-toggle {
+	background-position: 50% 50%;
+	background-repeat: no-repeat;
+	display: block;
+	}
+.leaflet-bar a:hover,
+.leaflet-bar a:focus {
+	background-color: #f4f4f4;
+	}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+	border-bottom: none;
+	}
+.leaflet-bar a.leaflet-disabled {
+	cursor: default;
+	background-color: #f4f4f4;
+	color: #bbb;
+	}
+
+.leaflet-touch .leaflet-bar a {
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
+	}
+.leaflet-touch .leaflet-bar a:first-child {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	}
+.leaflet-touch .leaflet-bar a:last-child {
+	border-bottom-left-radius: 2px;
+	border-bottom-right-radius: 2px;
+	}
+
+/* zoom control */
+
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+	font: bold 18px 'Lucida Console', Monaco, monospace;
+	text-indent: 1px;
+	}
+
+.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out  {
+	font-size: 22px;
+	}
+
+
+/* layers control */
+
+.leaflet-control-layers {
+	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
+	background: #fff;
+	border-radius: 5px;
+	}
+.leaflet-control-layers-toggle {
+	background-image: url("assets/img/leaflet-layers.png");
+	width: 36px;
+	height: 36px;
+	}
+.leaflet-retina .leaflet-control-layers-toggle {
+	background-image: url("assets/img/leaflet-layers-2x.png");
+	background-size: 26px 26px;
+	}
+.leaflet-touch .leaflet-control-layers-toggle {
+	width: 44px;
+	height: 44px;
+	}
+.leaflet-control-layers .leaflet-control-layers-list,
+.leaflet-control-layers-expanded .leaflet-control-layers-toggle {
+	display: none;
+	}
+.leaflet-control-layers-expanded .leaflet-control-layers-list {
+	display: block;
+	position: relative;
+	}
+.leaflet-control-layers-expanded {
+	padding: 6px 10px 6px 6px;
+	color: #333;
+	background: #fff;
+	}
+.leaflet-control-layers-scrollbar {
+	overflow-y: scroll;
+	overflow-x: hidden;
+	padding-right: 5px;
+	}
+.leaflet-control-layers-selector {
+	margin-top: 2px;
+	position: relative;
+	top: 1px;
+	}
+.leaflet-control-layers label {
+	display: block;
+	font-size: 13px;
+	font-size: 1.08333em;
+	}
+.leaflet-control-layers-separator {
+	height: 0;
+	border-top: 1px solid #ddd;
+	margin: 5px -10px 5px -6px;
+	}
+
+/* Default icon URLs */
+.leaflet-default-icon-path { /* used only in path-guessing heuristic, see L.Icon.Default */
+	background-image: url("assets/img/leaflet-marker-icon.png");
+	}
+
+
+/* attribution and scale controls */
+
+.leaflet-container .leaflet-control-attribution {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.8);
+	margin: 0;
+	}
+.leaflet-control-attribution,
+.leaflet-control-scale-line {
+	padding: 0 5px;
+	color: #333;
+	line-height: 1.4;
+	}
+.leaflet-control-attribution a {
+	text-decoration: none;
+	}
+.leaflet-control-attribution a:hover,
+.leaflet-control-attribution a:focus {
+	text-decoration: underline;
+	}
+.leaflet-attribution-flag {
+	display: inline !important;
+	vertical-align: baseline !important;
+	width: 1em;
+	height: 0.6669em;
+	}
+.leaflet-left .leaflet-control-scale {
+	margin-left: 5px;
+	}
+.leaflet-bottom .leaflet-control-scale {
+	margin-bottom: 5px;
+	}
+.leaflet-control-scale-line {
+	border: 2px solid #777;
+	border-top: none;
+	line-height: 1.1;
+	padding: 2px 5px 1px;
+	white-space: nowrap;
+	-moz-box-sizing: border-box;
+	     box-sizing: border-box;
+	background: rgba(255, 255, 255, 0.8);
+	text-shadow: 1px 1px #fff;
+	}
+.leaflet-control-scale-line:not(:first-child) {
+	border-top: 2px solid #777;
+	border-bottom: none;
+	margin-top: -2px;
+	}
+.leaflet-control-scale-line:not(:first-child):not(:last-child) {
+	border-bottom: 2px solid #777;
+	}
+
+.leaflet-touch .leaflet-control-attribution,
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	box-shadow: none;
+	}
+.leaflet-touch .leaflet-control-layers,
+.leaflet-touch .leaflet-bar {
+	border: 2px solid rgba(0,0,0,0.2);
+	background-clip: padding-box;
+	}
+
+
+/* popup */
+
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	margin-bottom: 20px;
+	}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 12px;
+	}
+.leaflet-popup-content {
+	margin: 13px 24px 13px 20px;
+	line-height: 1.3;
+	font-size: 13px;
+	font-size: 1.08333em;
+	min-height: 1px;
+	}
+.leaflet-popup-content p {
+	margin: 17px 0;
+	margin: 1.3em 0;
+	}
+.leaflet-popup-tip-container {
+	width: 40px;
+	height: 20px;
+	position: absolute;
+	left: 50%;
+	margin-top: -1px;
+	margin-left: -20px;
+	overflow: hidden;
+	pointer-events: none;
+	}
+.leaflet-popup-tip {
+	width: 17px;
+	height: 17px;
+	padding: 1px;
+
+	margin: -10px auto 0;
+	pointer-events: auto;
+
+	-webkit-transform: rotate(45deg);
+	   -moz-transform: rotate(45deg);
+	    -ms-transform: rotate(45deg);
+	        transform: rotate(45deg);
+	}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	color: #333;
+	box-shadow: 0 3px 14px rgba(0,0,0,0.4);
+	}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	border: none;
+	text-align: center;
+	width: 24px;
+	height: 24px;
+	font: 16px/24px Tahoma, Verdana, sans-serif;
+	color: #757575;
+	text-decoration: none;
+	background: transparent;
+	}
+.leaflet-container a.leaflet-popup-close-button:hover,
+.leaflet-container a.leaflet-popup-close-button:focus {
+	color: #585858;
+	}
+.leaflet-popup-scrolled {
+	overflow: auto;
+	}
+
+.leaflet-oldie .leaflet-popup-content-wrapper {
+	-ms-zoom: 1;
+	}
+.leaflet-oldie .leaflet-popup-tip {
+	width: 24px;
+	margin: 0 auto;
+
+	-ms-filter: "progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678)";
+	filter: progid:DXImageTransform.Microsoft.Matrix(M11=0.70710678, M12=0.70710678, M21=-0.70710678, M22=0.70710678);
+	}
+
+.leaflet-oldie .leaflet-control-zoom,
+.leaflet-oldie .leaflet-control-layers,
+.leaflet-oldie .leaflet-popup-content-wrapper,
+.leaflet-oldie .leaflet-popup-tip {
+	border: 1px solid #999;
+	}
+
+
+/* div icon */
+
+.leaflet-div-icon {
+	background: #fff;
+	border: 1px solid #666;
+	}
+
+
+/* Tooltip */
+/* Base styles for the element that has a tooltip */
+.leaflet-tooltip {
+	position: absolute;
+	padding: 6px;
+	background-color: #fff;
+	border: 1px solid #fff;
+	border-radius: 3px;
+	color: #222;
+	white-space: nowrap;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	pointer-events: none;
+	box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+	}
+.leaflet-tooltip.leaflet-interactive {
+	cursor: pointer;
+	pointer-events: auto;
+	}
+.leaflet-tooltip-top:before,
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	position: absolute;
+	pointer-events: none;
+	border: 6px solid transparent;
+	background: transparent;
+	content: "";
+	}
+
+/* Directions */
+
+.leaflet-tooltip-bottom {
+	margin-top: 6px;
+}
+.leaflet-tooltip-top {
+	margin-top: -6px;
+}
+.leaflet-tooltip-bottom:before,
+.leaflet-tooltip-top:before {
+	left: 50%;
+	margin-left: -6px;
+	}
+.leaflet-tooltip-top:before {
+	bottom: 0;
+	margin-bottom: -12px;
+	border-top-color: #fff;
+	}
+.leaflet-tooltip-bottom:before {
+	top: 0;
+	margin-top: -12px;
+	margin-left: -6px;
+	border-bottom-color: #fff;
+	}
+.leaflet-tooltip-left {
+	margin-left: -6px;
+}
+.leaflet-tooltip-right {
+	margin-left: 6px;
+}
+.leaflet-tooltip-left:before,
+.leaflet-tooltip-right:before {
+	top: 50%;
+	margin-top: -6px;
+	}
+.leaflet-tooltip-left:before {
+	right: 0;
+	margin-right: -12px;
+	border-left-color: #fff;
+	}
+.leaflet-tooltip-right:before {
+	left: 0;
+	margin-left: -12px;
+	border-right-color: #fff;
+	}
+
+/* Printing */
+
+@media print {
+	/* Prevent printers from removing background-images of controls. */
+	.leaflet-control {
+		-webkit-print-color-adjust: exact;
+		print-color-adjust: exact;
+		}
+	}
+</style>
+<script src="assets/vendor/leaflet-1.9.4.js"></script>
+<style>/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("assets/fonts/poppins-200-devanagari.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF4, U+1CF7-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B0A;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("assets/fonts/poppins-200-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url("assets/fonts/poppins-200-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("assets/fonts/poppins-300-devanagari.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF4, U+1CF7-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B0A;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("assets/fonts/poppins-300-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("assets/fonts/poppins-300-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/poppins-400-devanagari.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF4, U+1CF7-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B0A;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/poppins-400-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/poppins-400-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/poppins-500-devanagari.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF4, U+1CF7-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B0A;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/poppins-500-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/poppins-500-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/poppins-600-devanagari.woff2") format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF4, U+1CF7-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B0A;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/poppins-600-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("assets/fonts/poppins-600-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+</style>
+<script src="data/fleet-data.js"></script>
+<style>
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#0B0A1F;font-family:Poppins,sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+*{-webkit-tap-highlight-color:transparent}
+button,a,select,input,label{touch-action:manipulation}
+a{color:#2F245C;text-decoration:none}a:active{color:#769CD2}
+input::placeholder{color:#8E9AB8}
+button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:2px solid #769CD2;outline-offset:2px}
+.leaflet-container{background:#0B0A1F;font-family:Poppins,sans-serif;outline:0}
+.leaflet-tile-pane{filter:sepia(0.5) hue-rotate(200deg) saturate(1.5) brightness(0.95)}
+.leaflet-control-attribution{background:rgba(11,10,31,0.82)!important;color:rgba(255,255,255,0.7)!important;font-size:10px;padding:2px 8px!important}
+.leaflet-control-attribution a{color:#9DB9E0!important}
+.leaflet-bar{border:1px solid rgba(118,156,210,0.4)!important;border-radius:0!important;box-shadow:none!important}
+.leaflet-bar a{background:rgba(18,16,42,0.94)!important;color:#DCE7F6!important;border-radius:0!important;border-bottom:1px solid rgba(118,156,210,0.25)!important;width:44px!important;height:44px!important;line-height:44px!important;font-size:20px!important;font-weight:300}
+.leaflet-bar a:active{background:#2F245C!important;color:#fff!important}
+.leaflet-control-zoom{margin:12px calc(env(safe-area-inset-right) + 12px) 0 0!important}
+.leaflet-tooltip.rr-tip{display:none!important}
+.rr-poly{cursor:pointer;transition:fill-opacity .6s,stroke-opacity .6s}
+.rr-in{animation:rrDraw 1.9s cubic-bezier(.2,.7,.2,1) both}
+.leaflet-interactive:focus,.leaflet-container path:focus,.leaflet-container svg:focus{outline:none}
+.leaflet-marker-icon:focus-visible{outline:1px solid #DCE7F6;outline-offset:4px}
+@keyframes rrDraw{from{stroke-dasharray:0 3000;fill-opacity:0}to{stroke-dasharray:3000 0}}
+@keyframes rrScanY{0%{top:0;opacity:0}8%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
+@keyframes rrPulse{0%{transform:scale(0.85);opacity:0.9}100%{transform:scale(2.1);opacity:0}}
+@keyframes rrBlink{0%,100%{opacity:1}50%{opacity:0.25}}
+@keyframes rrSpin{to{transform:rotate(360deg)}}
+@media (min-width:600px){body{display:flex;justify-content:center;background:#05040F}[data-rr-root]{max-width:390px;border-left:1px solid rgba(118,156,210,0.22);border-right:1px solid rgba(118,156,210,0.22)}}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+*{scrollbar-width:thin;scrollbar-color:rgba(118,156,210,0.45) transparent}
+@media (prefers-reduced-motion:reduce){*{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important}}
+</style>
+</helmet>
+
+<div ref="{{ rootRef }}" data-rr-root="1" style="width:100%;height:100vh;height:100dvh;display:flex;flex-direction:column;overflow:hidden;background:#0B0A1F;font-family:Poppins,sans-serif;color:#0B0B0B;font-size:16px;line-height:1.5">
+
+  <header style="flex:none;position:relative;z-index:1400;display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top) + 8px) calc(env(safe-area-inset-right) + 16px) 8px calc(env(safe-area-inset-left) + 16px);background:#12102A;border-bottom:1px solid rgba(118,156,210,0.22)">
+    <img src="assets/img/aldar-logo.png" alt="Aldar" style="height:20px;width:auto;display:block;flex:none">
+    <span style="width:1px;height:22px;background:rgba(255,255,255,0.25);flex:none"></span>
+    <div style="display:flex;flex-direction:column;min-width:0;flex:1">
+      <span style="font-size:15px;font-weight:500;color:#FFFFFF;line-height:1.25">Robotics Fleet</span>
+      <span style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4">Command view · Portfolio</span>
+    </div>
+    <button sc-camel-on-click="{{ goMenu }}" aria-label="{{ unitsAria }}" style="flex:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 0 0 12px;border:0;border-left:1px solid rgba(118,156,210,0.3);background:transparent;font-family:Poppins,sans-serif;cursor:pointer;text-align:left">
+      <span style="font-size:28px;font-weight:300;line-height:1;color:#FFFFFF;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">{{ unitsTotal }}</span>
+      <span style="font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#9DB9E0;line-height:1.3">Robotic<br>units</span>
+    </button>
+  </header>
+
+  <main style="flex:1;min-height:0;position:relative">
+    <div style="position:absolute;inset:0;background:#0B0A1F;overflow:hidden">
+      <div ref="{{ mapRef }}" style="position:absolute;inset:0;z-index:0;background:#0B0A1F"></div>
+      <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(118,156,210,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(118,156,210,0.07) 1px,transparent 1px);background-size:48px 48px;-webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,transparent 30%,#000 100%);mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,transparent 30%,#000 100%)"></div>
+      <span style="position:absolute;left:10px;top:10px;z-index:2;width:16px;height:16px;border-left:1px solid #769CD2;border-top:1px solid #769CD2;pointer-events:none"></span>
+      <span style="position:absolute;right:10px;bottom:10px;z-index:2;width:16px;height:16px;border-right:1px solid #769CD2;border-bottom:1px solid #769CD2;pointer-events:none"></span>
+      {{ scanLine }}
+      <sc-if value="{{ isMap }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;left:calc(env(safe-area-inset-left) + 10px);right:calc(env(safe-area-inset-right) + 10px);bottom:22px;z-index:5;background:rgba(14,12,36,0.95);border:1px solid rgba(118,156,210,0.38);color:#FFFFFF;display:flex;flex-direction:column;gap:12px;padding:14px;max-height:calc(100% - 90px);overflow-y:auto;box-sizing:border-box">
+          <div style="display:flex;align-items:flex-start;gap:12px;min-width:0">
+            <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+              <button sc-camel-on-click="{{ back }}" aria-label="Back one level" style="flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.3);color:#FFFFFF;cursor:pointer" style-active="background:#2F245C"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+            </sc-if>
+            <div style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1">
+              <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:10px;color:#9DB9E0"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2s infinite"></span>{{ lvlTag }}</span>
+              <span style="font-size:clamp(20px,5.6vw,24px);font-weight:300;line-height:1.2;letter-spacing:-0.01em;text-wrap:pretty">{{ mapTitle }}</span>
+              <span style="font-size:13px;line-height:1.45;color:rgba(255,255,255,0.75)">{{ mapSub }}</span>
+            </div>
+            <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+              <span style="font-size:34px;font-weight:200;line-height:1;letter-spacing:-0.03em;font-variant-numeric:tabular-nums">{{ hero.big }}</span>
+              <span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:10px;color:#9DB9E0">Initiatives</span>
+            </div>
+          </div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:rgba(255,255,255,0.85);font-variant-numeric:tabular-nums">
+            <sc-for list="{{ mapSplit }}" as="m" hint-placeholder-count="3">
+              <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="display:block;width:10px;height:10px;background-image:url('{{ m.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ m.n }} {{ m.l }}</span>
+            </sc-for>
+          </div>
+          <sc-if value="{{ legendOpen }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;gap:12px;padding-top:12px;border-top:1px solid rgba(118,156,210,0.22)">
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <span style="font-size:12px;color:rgba(255,255,255,0.72)">Node size · initiatives at location</span>
+                <div style="display:flex;align-items:flex-end;gap:16px">
+                  <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="18" height="18" sc-camel-view-box="0 0 18 18"><circle cx="9" cy="9" r="7" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">1</span></span>
+                  <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="26" height="26" sc-camel-view-box="0 0 26 26"><circle cx="13" cy="13" r="11" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">4</span></span>
+                  <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="34" height="34" sc-camel-view-box="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">9</span></span>
+                </div>
+              </div>
+              <div style="display:flex;flex-direction:column;gap:7px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
+                <span style="font-size:12px;color:rgba(255,255,255,0.72)">Status · ring split and nodes</span>
+                <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#DCE7F6"></circle></svg>Launched · solid</span>
+                <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3" stroke-dasharray="2 2"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><defs><pattern id="lgH" width="2.6" height="2.6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.2" height="2.6" fill="#DCE7F6"></rect></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#lgH)" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Trialled · broken</span>
+                <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="1" stroke-opacity="0.75"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Pending · outline</span>
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
+                <sc-for list="{{ legendTypes }}" as="t" hint-placeholder-count="0">
+                  <span style="display:flex;align-items:center;gap:8px;font-size:13px;min-width:0"><span aria-hidden="true" style="flex:none;display:block;width:16px;height:16px;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ t.label }}</span>
+                </sc-for>
+              </div>
+            </div>
+          </sc-if>
+          <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px">
+            <button sc-camel-on-click="{{ toggleLegend }}" aria-expanded="{{ legendOpenS }}" style="min-height:44px;padding:0 14px;display:flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(118,156,210,0.45);color:#DCE7F6;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;cursor:pointer" style-active="background:#2F245C">Legend<span style="font-size:16px;letter-spacing:0;color:#FFFFFF">{{ legendSign }}</span></button>
+            <button sc-camel-on-click="{{ goDetails }}" style="min-height:44px;padding:0 14px;display:flex;align-items:center;justify-content:center;gap:8px;background:#769CD2;border:0;color:#12102A;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;font-weight:600;cursor:pointer" style-active="background:#DCE7F6">View details<svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
+        <div style="position:absolute;inset:0;z-index:6;background:#0B0A1F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:24px;text-align:center">
+          <svg width="56" height="56" sc-camel-view-box="0 0 64 64" fill="none" style="animation:rrSpin 2.4s linear infinite"><circle cx="32" cy="32" r="28" stroke="rgba(118,156,210,0.25)" stroke-width="1"></circle><path d="M32 4a28 28 0 0 1 28 28" stroke="#9DB9E0" stroke-width="2"></path><circle cx="32" cy="4" r="2.5" fill="#DCE7F6"></circle></svg>
+          <span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#9DB9E0">Initialising map layer</span>
+          <span style="font-size:14px;color:rgba(255,255,255,0.7)">Resolving districts and asset nodes</span>
+        </div>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ isDetails }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:1200;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--pFFFFFF,#FFFFFF)">
+        <div style="position:sticky;top:0;z-index:5;background:rgba(var(--pPaper,255,255,255),0.97);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.08);padding:6px calc(env(safe-area-inset-right) + 10px) 6px calc(env(safe-area-inset-left) + 10px);display:flex;align-items:center;gap:6px;min-height:56px;box-sizing:border-box">
+          <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+            <button sc-camel-on-click="{{ back }}" aria-label="Back one level" style="flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.16);cursor:pointer;color:var(--p12102A,#12102A)" style-active="background:var(--pF2F5FA,#F2F5FA)"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+          </sc-if>
+          <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:0;flex-wrap:wrap;min-width:0;flex:1">
+            <sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="1">
+              <span style="display:flex;align-items:center;min-width:0">
+                <sc-if value="{{ c.sep }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="color:var(--p9A9A98,#9A9A98);font-size:15px">›</span></sc-if>
+                <button sc-camel-on-click="{{ c.go }}" aria-current="{{ c.cur }}" style="min-height:44px;background:none;border:0;padding:0 6px;font-family:Poppins,sans-serif;font-size:15px;line-height:1.3;font-weight:{{ c.fw }};color:{{ c.color }};cursor:pointer;text-align:left">{{ c.label }}</button>
+              </span>
+            </sc-for>
+          </nav>
+          <button sc-camel-on-click="{{ goMap }}" aria-label="Show on map" style="flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.16);cursor:pointer;color:var(--p12102A,#12102A)" style-active="background:var(--pF2F5FA,#F2F5FA)"><svg sc-camel-view-box="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4L3 6.5v13L9 17l6 2.5 6-2.5v-13L15 7 9 4z"></path><path d="M9 4v13M15 7v12.5"></path></svg></button>
+        </div>
+
+        <div style="padding:14px calc(env(safe-area-inset-right) + 16px) 14px calc(env(safe-area-inset-left) + 16px);display:flex;flex-direction:column;gap:12px;border-bottom:1px solid rgba(var(--pInk,11,11,11),0.08);background:var(--pFAFAF8,#FAFAF8)">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:8px 12px;flex-wrap:wrap">
+            <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;color:var(--p515150,#515150)"><span style="width:20px;height:20px;display:flex;align-items:center;justify-content:center;background:var(--p12102A,#12102A);color:var(--pFFFFFF,#FFFFFF);font-size:11px;letter-spacing:0">{{ stepNo }}</span>{{ stepTxt }}</span>
+            <span style="font-size:13px;color:var(--p515150,#515150);font-variant-numeric:tabular-nums">{{ fInfo.count }}</span>
+          </div>
+          <sc-if value="{{ picker.show }}" hint-placeholder-val="{{ true }}">
+            <span style="position:relative;display:flex;align-items:center">
+              <sc-raw-select aria-label="{{ picker.ph }}" value="{{ picker.val }}" sc-camel-on-change="{{ picker.change }}" style="appearance:none;-webkit-appearance:none;width:100%;min-height:48px;box-sizing:border-box;background:var(--pFFFFFF,#FFFFFF);border:1px dashed rgba(63,111,174,0.6);border-radius:0;padding:0 42px 0 14px;font-family:Poppins,sans-serif;font-size:16px;color:var(--p3F6FAE,#3F6FAE);cursor:pointer">
+                <option value="">{{ picker.ph }}</option>
+                <sc-for list="{{ picker.opts }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}">{{ o.label }}</option></sc-for>
+              </sc-raw-select>
+              <svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="#3F6FAE" stroke-width="2" stroke-linecap="round" style="position:absolute;right:16px;pointer-events:none"><path d="M6 9l6 6 6-6"></path></svg>
+            </span>
+          </sc-if>
+          <sc-if value="{{ fInfo.on }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+              <sc-for list="{{ fInfo.chips }}" as="fc" hint-placeholder-count="0">
+                <button sc-camel-on-click="{{ fc.x }}" aria-label="Remove {{ fc.kind }} filter {{ fc.label }}" style="display:flex;align-items:center;gap:8px;white-space:nowrap;flex:none;min-height:44px;padding:0 10px 0 12px;background:var(--pFFFFFF,#FFFFFF);border:1px solid rgba(63,111,174,0.5);font-family:Poppins,sans-serif;font-size:14px;color:var(--p12102A,#12102A);cursor:pointer" style-active="background:var(--pF2F5FA,#F2F5FA)"><span style="font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--p515150,#515150)">{{ fc.kind }}</span>{{ fc.label }}<span aria-hidden="true" style="font-size:18px;line-height:1;color:var(--p3F6FAE,#3F6FAE)">×</span></button>
+              </sc-for>
+              <button sc-camel-on-click="{{ clearFilters }}" style="min-height:44px;background:none;border:0;padding:0 8px;font-family:Poppins,sans-serif;font-size:14px;color:var(--p3F6FAE,#3F6FAE);text-decoration:underline;cursor:pointer">Clear all</button>
+            </div>
+          </sc-if>
+        </div>
+
+        <div style="padding:24px calc(env(safe-area-inset-right) + 16px) calc(env(safe-area-inset-bottom) + 32px) calc(env(safe-area-inset-left) + 16px);display:flex;flex-direction:column;gap:34px;min-width:0">
+
+          <div style="display:flex;flex-direction:column;gap:16px;min-width:0">
+            <div style="display:flex;align-items:center;gap:12px"><span style="width:24px;height:2px;background:#769CD2;flex:none"></span><span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;color:var(--p3F6FAE,#3F6FAE)">{{ hero.over }}</span></div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <h1 style="margin:0;font-size:clamp(22px,6.4vw,28px);font-weight:300;letter-spacing:-0.02em;line-height:1.1;color:var(--p12102A,#12102A);text-wrap:pretty">{{ hero.title }}</h1>
+              <span style="font-size:13px;color:var(--p515150,#515150)">{{ hero.sub }}</span>
+            </div>
+            <sc-if value="{{ hasAny }}" hint-placeholder-val="{{ true }}">
+              <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:16px;align-items:center;padding-top:14px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1)">
+                <div style="position:relative;width:76px;height:76px;flex:none">
+                  <span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:76px;height:76px;background-image:url('{{ ringBig }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>
+                  <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px"><span style="font-size:20px;font-weight:300;line-height:1;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ hero.big }}</span><span style="font-size:8px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--p515150,#515150)">Initiatives</span></div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+                  <sc-for list="{{ splitLegend }}" as="l" hint-placeholder-count="3">
+                    <div style="display:flex;align-items:center;justify-content:space-between;gap:8px"><span style="display:flex;align-items:center;gap:7px;font-size:13px;color:var(--p12102A,#12102A)"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ l.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ l.l }}</span><span style="font-size:13px;color:var(--p515150,#515150);font-variant-numeric:tabular-nums;white-space:nowrap">{{ l.n }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+          </div>
+
+          <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:24px 18px;border:1px dashed rgba(var(--pInk,11,11,11),0.2);background:var(--pFAFAF8,#FAFAF8);color:var(--p12102A,#12102A)">
+              <svg width="40" height="40" sc-camel-view-box="0 0 44 44" fill="none"><circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"></circle><path d="M15 22h14" stroke="currentColor" stroke-width="1.4"></path></svg>
+              <span style="font-size:18px;font-weight:400;color:var(--p12102A,#12102A)">No robots match this filter set</span>
+              <span style="font-size:15px;line-height:1.55;color:var(--p515150,#515150)">Widen the type, status or district filters to bring units back into view. The map reflects the same filters.</span>
+              <button sc-camel-on-click="{{ clearFilters }}" style="min-height:48px;background:var(--p12102A,#12102A);border:0;color:var(--pFFFFFF,#FFFFFF);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;padding:0 20px;cursor:pointer">Clear filters</button>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ showTypes }}" hint-placeholder-val="{{ false }}">
+            <section style="display:flex;flex-direction:column;min-width:0">
+              <div style="display:flex;flex-direction:column;gap:8px;padding-bottom:12px">
+                <span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">Fleet by robot type</span>
+                <span style="display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;font-size:12px;color:var(--p515150,#515150)">
+                  <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.deployed }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Launched</span>
+                  <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.pilot }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Trialled</span>
+                  <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.planned }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Pending</span>
+                  <span>· Tap a type to filter</span>
+                </span>
+              </div>
+              <sc-for list="{{ typeRows }}" as="t" hint-placeholder-count="0">
+                <button sc-camel-on-click="{{ t.toggle }}" aria-pressed="{{ t.pressed }}" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:start;min-height:64px;padding:14px 8px;margin:0 -8px;border:0;border-top:1px solid rgba(var(--pInk,11,11,11),0.08);background:{{ t.bg }};text-align:left;cursor:pointer;font-family:Poppins,sans-serif;color:var(--p12102A,#12102A)" style-active="background:var(--pF2F5FA,#F2F5FA)">
+                  <span style="flex:none;width:40px;height:40px;border:1px solid rgba(var(--pInk,11,11,11),0.12);display:flex;align-items:center;justify-content:center"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:22px;height:22px;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span></span>
+                  <span style="display:flex;flex-direction:column;gap:6px;min-width:0">
+                    <span style="font-size:16px;font-weight:500;line-height:1.3;color:var(--p12102A,#12102A)">{{ t.label }}</span>
+                    <span style="font-size:13px;color:var(--p515150,#515150);line-height:1.4;text-wrap:pretty">{{ t.models }}</span>
+                    <span style="display:flex;flex-wrap:wrap;gap:4px">
+                      <sc-for list="{{ t.nodes }}" as="n" hint-placeholder-count="0"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:13px;height:13px;background-image:url('{{ n }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span></sc-for>
+                    </span>
+                    <sc-if value="{{ t.hasDetail }}" hint-placeholder-val="{{ false }}"><span style="font-size:13px;line-height:1.5;color:var(--p12102A,#12102A);white-space:pre-line;padding-top:4px">{{ t.detail }}</span></sc-if>
+                  </span>
+                  <span style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-variant-numeric:tabular-nums"><span style="font-size:26px;font-weight:300;line-height:1;color:var(--p12102A,#12102A)">{{ t.total }}</span><span style="font-size:12px;color:var(--p515150,#515150);white-space:nowrap">{{ t.split }}</span></span>
+                </button>
+              </sc-for>
+            </section>
+          </sc-if>
+
+          <sc-if value="{{ showL0 }}" hint-placeholder-val="{{ false }}">
+            <section style="display:flex;flex-direction:column;min-width:0">
+              <div style="display:flex;flex-direction:column;gap:10px;padding-bottom:12px">
+                <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap"><span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">District league</span><span style="font-size:12px;color:var(--p515150,#515150)">Tap a row to drill in</span></div>
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px">
+                  <span style="position:relative;display:flex;align-items:center">
+                    <sc-raw-select aria-label="Sort districts by" value="{{ sortK }}" sc-camel-on-change="{{ onSortK }}" style="appearance:none;-webkit-appearance:none;width:100%;min-height:44px;box-sizing:border-box;background:var(--pFFFFFF,#FFFFFF);border:1px solid rgba(var(--pInk,11,11,11),0.18);border-radius:0;padding:0 40px 0 12px;font-family:Poppins,sans-serif;font-size:16px;color:var(--p12102A,#12102A)">
+                      <sc-for list="{{ sortOpts }}" as="o" hint-placeholder-count="0"><option value="{{ o.k }}">Sort by {{ o.label }}</option></sc-for>
+                    </sc-raw-select>
+                    <svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" style="position:absolute;right:14px;pointer-events:none;color:var(--p515150,#515150)"><path d="M6 9l6 6 6-6"></path></svg>
+                  </span>
+                  <button sc-camel-on-click="{{ flipSort }}" aria-label="{{ sortDirLbl }}" style="min-width:44px;min-height:44px;padding:0 12px;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.18);font-family:Poppins,sans-serif;font-size:14px;color:var(--p12102A,#12102A);cursor:pointer" style-active="background:var(--pF2F5FA,#F2F5FA)">{{ sortArrow }}</button>
+                </div>
+              </div>
+              <sc-for list="{{ league }}" as="r" hint-placeholder-count="0">
+                <button sc-camel-on-click="{{ r.go }}" aria-label="Open {{ r.name }}" style="display:flex;flex-direction:column;gap:10px;padding:16px 8px;margin:0 -8px;border:0;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);background:transparent;text-align:left;cursor:pointer;font-family:Poppins,sans-serif;font-variant-numeric:tabular-nums;color:var(--p12102A,#12102A)" style-active="background:var(--pF2F5FA,#F2F5FA)">
+                  <span style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;width:100%">
+                    <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font-size:17px;font-weight:500;line-height:1.3;color:var(--p12102A,#12102A)">{{ r.name }}</span><span style="font-size:13px;color:var(--p515150,#515150)">{{ r.nA }}</span></span>
+                    <span style="display:flex;align-items:center;gap:10px;flex:none"><span style="display:flex;flex-direction:column;align-items:flex-end"><span style="font-size:30px;font-weight:300;line-height:1;color:var(--p12102A,#12102A)">{{ r.total }}</span><span style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--p515150,#515150)">Total</span></span><svg sc-camel-view-box="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="color:var(--p9A9A98,#9A9A98)"><path d="M9 5l7 7-7 7"></path></svg></span>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:6px 16px;flex-wrap:wrap;font-size:13px;color:var(--p12102A,#12102A)">
+                    <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.deployed }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ r.deployed }} Launched</span>
+                    <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.pilot }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ r.pilot }} Trialled</span>
+                    <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.planned }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ r.planned }} Pending</span>
+                  </span>
+                  <span style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--p515150,#515150)">Dominant<span aria-hidden="true" style="filter:var(--pImgF,none);display:block;flex:none;width:16px;height:16px;background-image:url('{{ r.domI }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span><span style="color:var(--p12102A,#12102A)">{{ r.domL }}</span></span>
+                </button>
+              </sc-for>
+            </section>
+          </sc-if>
+
+          <sc-if value="{{ showL1 }}" hint-placeholder-val="{{ false }}">
+            <section style="display:flex;flex-direction:column;min-width:0">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:12px">
+                <span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">Locations in district</span>
+                <span style="font-size:13px;color:var(--p515150,#515150)">{{ assetCount }}</span>
+              </div>
+              <sc-for list="{{ assetRows }}" as="r" hint-placeholder-count="0">
+                <button sc-camel-on-click="{{ r.go }}" aria-label="Open {{ r.name }}" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:14px 8px;margin:0 -8px;border:0;border-top:1px solid rgba(var(--pInk,11,11,11),0.08);background:transparent;text-align:left;cursor:pointer;font-family:Poppins,sans-serif" style-active="background:var(--pF2F5FA,#F2F5FA)">
+                  <span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:52px;height:52px;background-image:url('{{ r.ring }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>
+                  <span style="display:flex;flex-direction:column;gap:7px;min-width:0">
+                    <span style="font-size:16px;font-weight:500;line-height:1.3;color:var(--p12102A,#12102A)">{{ r.name }}</span>
+                    <span style="display:flex;align-items:center;gap:6px;flex-wrap:wrap"><span style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:3px 6px;border:1px solid rgba(var(--pInk,11,11,11),0.18);color:var(--p515150,#515150)">{{ r.type }}</span><span style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;padding:3px 6px;background:var(--p12102A,#12102A);color:var(--pFFFFFF,#FFFFFF)">{{ r.wave }}</span></span>
+                    <span style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+                      <sc-for list="{{ r.types }}" as="tt" hint-placeholder-count="0">
+                        <span style="display:flex;align-items:center;gap:5px;font-size:13px;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:16px;height:16px;background-image:url('{{ tt.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span><span style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">{{ tt.label }}</span>{{ tt.n }}</span>
+                      </sc-for>
+                    </span>
+                  </span>
+                  <span style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
+                    <span style="font-size:26px;font-weight:300;line-height:1;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ r.total }}</span>
+                    <span style="display:flex;align-items:center;gap:5px;font-size:10.5px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--p515150,#515150);white-space:nowrap"><sc-if value="{{ r.hasSg }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:9px;height:9px;background-image:url('{{ r.sg }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span></sc-if>{{ r.status }}</span>
+                  </span>
+                </button>
+              </sc-for>
+            </section>
+          </sc-if>
+
+          <sc-if value="{{ showL2 }}" hint-placeholder-val="{{ false }}">
+            <section style="display:flex;flex-direction:column;min-width:0">
+              <div style="display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:12px">
+                <span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">Robots by initiative</span>
+                <span style="font-size:13px;color:var(--p515150,#515150)">{{ initCount }}</span>
+              </div>
+              <sc-for list="{{ fleetRows }}" as="f" hint-placeholder-count="0">
+                <div style="display:flex;flex-direction:column;gap:8px;padding:14px 0;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);color:var(--p12102A,#12102A);min-width:0">
+                  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
+                    <span style="display:flex;align-items:center;gap:8px;min-width:0;font-size:12px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;color:var(--p515150,#515150)"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;flex:none;width:18px;height:18px;background-image:url('{{ f.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ f.type }}</span>
+                    <span style="display:flex;align-items:baseline;gap:6px;flex:none"><span style="font-size:24px;font-weight:300;line-height:1;font-variant-numeric:tabular-nums">{{ f.count }}</span><span style="font-size:10px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--p515150,#515150)">Units</span></span>
+                  </div>
+                  <div style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:16px;font-weight:500;line-height:1.35">{{ f.vendor }}</span><span style="font-size:14px;color:var(--p515150,#515150);line-height:1.4">{{ f.model }}</span></div>
+                  <div style="display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;font-size:14px">
+                    <span style="display:flex;align-items:center;gap:7px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;flex:none;width:10px;height:10px;background-image:url('{{ f.sg }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ f.tstatus }}</span>
+                    <span style="color:var(--p515150,#515150)">Owner · {{ f.owner }}</span>
+                  </div>
+                </div>
+              </sc-for>
+            </section>
+            <section style="display:flex;flex-direction:column;min-width:0">
+              <span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A);padding-bottom:12px">Initiatives</span>
+              <sc-for list="{{ inits }}" as="i" hint-placeholder-count="0">
+                <article style="display:flex;flex-direction:column;gap:14px;padding:18px 0 22px;border-top:1px solid var(--p12102A,#12102A);min-width:0">
+                  <div style="display:flex;align-items:flex-start;gap:12px;min-width:0">
+                    <span style="flex:none;width:40px;height:40px;border:1px solid rgba(var(--pInk,11,11,11),0.14);display:flex;align-items:center;justify-content:center"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:22px;height:22px;background-image:url('{{ i.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span></span>
+                    <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--p3F6FAE,#3F6FAE)">#{{ i.id }} · {{ i.category }}</span><span style="font-size:18px;font-weight:500;color:var(--p12102A,#12102A);line-height:1.3;text-wrap:pretty">{{ i.useCase }}</span><span style="font-size:14px;color:var(--p515150,#515150)">{{ i.vm }}</span></div>
+                  </div>
+                  <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+                    <span style="display:flex;align-items:center;gap:6px;font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 9px;border:1px solid var(--p12102A,#12102A);color:var(--p12102A,#12102A)"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:9px;height:9px;background-image:url('{{ i.sg }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ i.tstatus }}</span>
+                    <sc-if value="{{ i.hasStage }}" hint-placeholder-val="{{ false }}"><span style="font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:5px 9px;background:{{ i.stageBg }};color:{{ i.stageFg }}">{{ i.stage }}</span></sc-if>
+                  </div>
+                  <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 14px">
+                    <sc-for list="{{ i.facts }}" as="k" hint-placeholder-count="0">
+                      <div style="display:flex;flex-direction:column;gap:3px;padding-top:8px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);min-width:0"><span style="font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--p515150,#515150)">{{ k.k }}</span><span style="font-size:15px;color:var(--p12102A,#12102A);overflow-wrap:anywhere">{{ k.v }}</span></div>
+                    </sc-for>
+                  </div>
+                  <sc-if value="{{ i.hasUpdate }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:5px"><span style="font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--p515150,#515150)">Latest update</span><p style="margin:0;font-size:16px;line-height:1.55;color:var(--p12102A,#12102A);white-space:pre-line;text-wrap:pretty">{{ i.update }}</p></div>
+                  </sc-if>
+                  <sc-if value="{{ i.hasDesc }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:5px"><span style="font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--p515150,#515150)">Scope</span><p style="margin:0;font-size:16px;line-height:1.55;color:var(--p515150,#515150);text-wrap:pretty">{{ i.desc }}</p></div>
+                  </sc-if>
+                  <sc-if value="{{ i.hasNext }}" hint-placeholder-val="{{ false }}">
+                    <div style="display:flex;flex-direction:column;gap:4px;padding:12px 14px;background:var(--pF2F5FA,#F2F5FA)"><span style="font-size:10.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--p3F6FAE,#3F6FAE)">Next</span><span style="font-size:16px;line-height:1.5;color:var(--p12102A,#12102A)">{{ i.next }}</span></div>
+                  </sc-if>
+                  <sc-if value="{{ i.empty }}" hint-placeholder-val="{{ false }}">
+                    <span style="font-size:15px;color:var(--p515150,#515150)">No update, scope or commercial details recorded in the tracker.</span>
+                  </sc-if>
+                </article>
+              </sc-for>
+            </section>
+          </sc-if>
+
+          <div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);font-size:13px;line-height:1.5;color:var(--p515150,#515150)">
+            <span>District boundaries from OpenStreetMap. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isFilters }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:1200;display:flex;flex-direction:column;background:var(--pFFFFFF,#FFFFFF)">
+        <div style="flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:22px calc(env(safe-area-inset-right) + 16px) 24px calc(env(safe-area-inset-left) + 16px);display:flex;flex-direction:column;gap:28px">
+          <div style="display:flex;flex-direction:column;gap:4px">
+            <h2 style="margin:0;font-size:clamp(24px,7vw,30px);font-weight:300;letter-spacing:-0.01em;line-height:1.15;color:var(--p12102A,#12102A)">Filters</h2>
+            <span style="font-size:14px;color:var(--p515150,#515150)">Totals count initiatives</span>
+          </div>
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">Type</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ mTypes }}" as="t" hint-placeholder-count="6">
+                <button sc-camel-on-click="{{ t.toggle }}" aria-pressed="{{ t.pressed }}" style="display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px 0 10px;background:{{ t.bg }};border:1px solid {{ t.bd }};color:var(--p12102A,#12102A);font-family:Poppins,sans-serif;font-size:15px;font-weight:{{ t.fw }};white-space:nowrap;cursor:pointer" style-active="background:var(--pF2F5FA,#F2F5FA)">
+                  <span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:20px;height:20px;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ t.label }}<span aria-hidden="true" style="font-size:14px;color:var(--p3F6FAE,#3F6FAE)">{{ t.check }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">Status</span>
+            <div role="radiogroup" aria-label="Status" style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px">
+              <sc-for list="{{ mStatus }}" as="o" hint-placeholder-count="4">
+                <button sc-camel-on-click="{{ o.go }}" role="radio" aria-checked="{{ o.pressed }}" style="display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:3px;min-height:60px;padding:8px 12px;background:{{ o.bg }};border:1px solid {{ o.bd }};text-align:left;font-family:Poppins,sans-serif;cursor:pointer;min-width:0" style-active="background:var(--pF2F5FA,#F2F5FA)">
+                  <span style="display:flex;align-items:center;gap:8px;font-size:15px;font-weight:{{ o.fw }};color:var(--p12102A,#12102A)"><sc-if value="{{ o.hasG }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:11px;height:11px;background-image:url('{{ o.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span></sc-if>{{ o.label }}<span aria-hidden="true" style="font-size:14px;color:var(--p3F6FAE,#3F6FAE)">{{ o.check }}</span></span>
+                  <span style="font-size:12px;line-height:1.35;color:var(--p515150,#515150)">{{ o.tip }}</span>
+                </button>
+              </sc-for>
+            </div>
+          </section>
+          <section style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">District</span>
+            <div style="display:flex;flex-wrap:wrap;gap:8px">
+              <sc-for list="{{ mDists }}" as="d" hint-placeholder-count="5">
+                <button sc-camel-on-click="{{ d.toggle }}" aria-pressed="{{ d.pressed }}" style="display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;background:{{ d.bg }};border:1px solid {{ d.bd }};color:var(--p12102A,#12102A);font-family:Poppins,sans-serif;font-size:15px;font-weight:{{ d.fw }};white-space:nowrap;cursor:pointer" style-active="background:var(--pF2F5FA,#F2F5FA)">{{ d.label }}<span aria-hidden="true" style="font-size:14px;color:var(--p3F6FAE,#3F6FAE)">{{ d.check }}</span></button>
+              </sc-for>
+            </div>
+          </section>
+        </div>
+        <div style="flex:none;display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;padding:10px calc(env(safe-area-inset-right) + 16px) 10px calc(env(safe-area-inset-left) + 16px);border-top:1px solid rgba(var(--pInk,11,11,11),0.1);background:var(--pFAFAF8,#FAFAF8)">
+          <button sc-camel-on-click="{{ clearFilters }}" style="min-height:48px;padding:0 16px;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.2);color:var(--p12102A,#12102A);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;cursor:pointer" style-active="background:var(--pF2F5FA,#F2F5FA)">Clear all</button>
+          <button sc-camel-on-click="{{ goMap }}" style="min-height:48px;padding:0 16px;background:var(--p12102A,#12102A);border:0;color:var(--pFFFFFF,#FFFFFF);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;letter-spacing:0.14em;cursor:pointer">{{ showLbl }}</button>
+        </div>
+      </div>
+    </sc-if>
+
+    <sc-if value="{{ isMenu }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;inset:0;z-index:1200;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--pFFFFFF,#FFFFFF)">
+        <div style="padding:22px calc(env(safe-area-inset-right) + 16px) 32px calc(env(safe-area-inset-left) + 16px);display:flex;flex-direction:column;gap:28px">
+          <section style="display:flex;flex-direction:column;gap:10px">
+            <label for="rr-search" style="font-size:12px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p12102A,#12102A)">Search</label>
+            <span style="position:relative;display:flex;align-items:center">
+              <svg sc-camel-view-box="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="position:absolute;left:14px;pointer-events:none;color:var(--p515150,#515150)"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg>
+              <input id="rr-search" type="search" enterkeyhint="search" autocomplete="off" value="{{ q }}" sc-camel-on-change="{{ onQ }}" sc-camel-on-key-down="{{ onQKey }}" placeholder="Search a district or asset" style="width:100%;min-height:48px;box-sizing:border-box;background:var(--pFAFAF8,#FAFAF8);border:1px solid rgba(var(--pInk,11,11,11),0.2);border-radius:0;color:var(--p12102A,#12102A);font-family:Poppins,sans-serif;font-size:16px;padding:0 14px 0 44px;outline:none;-webkit-appearance:none;appearance:none">
+            </span>
+            <sc-if value="{{ showMRes }}" hint-placeholder-val="{{ false }}">
+              <div role="listbox" style="display:flex;flex-direction:column;border:1px solid rgba(var(--pInk,11,11,11),0.12)">
+                <sc-for list="{{ mResults }}" as="r" hint-placeholder-count="0">
+                  <button sc-camel-on-click="{{ r.go }}" role="option" style="display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:56px;padding:8px 14px;background:transparent;border:0;border-bottom:1px solid rgba(var(--pInk,11,11,11),0.08);text-align:left;cursor:pointer;font-family:Poppins,sans-serif" style-active="background:var(--pF2F5FA,#F2F5FA)">
+                    <span style="display:flex;flex-direction:column;gap:1px;min-width:0"><span style="font-size:16px;font-weight:500;color:var(--p12102A,#12102A)">{{ r.label }}</span><span style="font-size:13px;color:var(--p515150,#515150)">{{ r.sub }}</span></span>
+                    <span style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--p3F6FAE,#3F6FAE);flex:none">{{ r.kind }}</span>
+                  </button>
+                </sc-for>
+                <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
+                  <span style="padding:14px;font-size:15px;color:var(--p515150,#515150)">No district or asset matches “{{ q }}”.</span>
+                </sc-if>
+              </div>
+            </sc-if>
+          </section>
+
+          <section style="display:flex;flex-direction:column;gap:10px;padding:18px 16px;background:#12102A;color:#FFFFFF">
+            <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:10.5px;color:#9DB9E0;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2.4s infinite"></span>Data as of {{ asOf }}</span>
+            <div style="display:flex;align-items:flex-end;gap:12px">
+              <span style="font-size:56px;font-weight:200;line-height:0.95;letter-spacing:-0.03em;font-variant-numeric:tabular-nums">{{ unitsTotal }}</span>
+              <span style="display:flex;flex-direction:column;gap:2px;padding-bottom:4px"><span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;color:#9DB9E0">Robotic units</span><span style="font-size:13px;color:rgba(255,255,255,0.75)">{{ unitsSub }}</span></span>
+            </div>
+            <span style="font-size:13px;line-height:1.5;color:rgba(255,255,255,0.72)">{{ unitsTip }}</span>
+          </section>
+
+          <a href="https://roboticadoptionataldar.netlify.app/" target="_blank" rel="noopener" aria-label="View deployments in action (opens in a new tab)" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 16px;border:1px solid #769CD2;background:rgba(118,156,210,0.14);color:var(--p12102A,#12102A);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;letter-spacing:0.14em;text-decoration:none"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 1.8s infinite"></span>See deployments in action<svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+
+          <section style="display:flex;flex-direction:column;gap:8px">
+            <button sc-camel-on-click="{{ resetAll }}" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.2);color:var(--p12102A,#12102A);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;cursor:pointer" style-active="background:var(--pF2F5FA,#F2F5FA)"><svg sc-camel-view-box="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"></path><path d="M4 4v4h4"></path></svg>Reset to portfolio</button>
+            <button sc-camel-on-click="{{ openImport }}" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;background:var(--p12102A,#12102A);border:0;color:var(--pFFFFFF,#FFFFFF);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;cursor:pointer"><svg sc-camel-view-box="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"></path></svg>Import</button>
+            <span style="font-size:13px;color:var(--p515150,#515150)">Import tracker data (password required)</span>
+          </section>
+
+          <div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);font-size:13px;line-height:1.5;color:var(--p515150,#515150)">
+            <span>District boundaries from OpenStreetMap. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
+          </div>
+        </div>
+      </div>
+    </sc-if>
+  </main>
+
+  <nav aria-label="Sections" style="flex:none;position:relative;z-index:1400;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;background:#12102A;border-top:1px solid rgba(118,156,210,0.22);padding:4px calc(env(safe-area-inset-right) + 6px) calc(env(safe-area-inset-bottom) + 4px) calc(env(safe-area-inset-left) + 6px)">
+    <sc-for list="{{ tabs }}" as="t" hint-placeholder-count="4">
+      <button sc-camel-on-click="{{ t.go }}" aria-current="{{ t.cur }}" style="position:relative;min-height:54px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;background:{{ t.bg }};box-shadow:inset 0 2px 0 {{ t.ind }};color:{{ t.fg }};font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;cursor:pointer;min-width:0">
+        <span aria-hidden="true" style="display:block;width:22px;height:22px;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ t.label }}
+        <sc-if value="{{ t.hasBadge }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;top:5px;left:calc(50% + 8px);min-width:18px;height:18px;border-radius:9px;background:#769CD2;color:#12102A;font-size:11px;font-weight:600;letter-spacing:0;display:flex;align-items:center;justify-content:center;padding:0 5px;box-sizing:border-box">{{ t.badge }}</span></sc-if>
+      </button>
+    </sc-for>
+  </nav>
+
+  <sc-if value="{{ impOpen }}" hint-placeholder-val="{{ false }}">
+    <div sc-camel-on-click="{{ closeImport }}" style="position:fixed;inset:0;z-index:3000;background:rgba(11,10,31,0.62);display:flex;align-items:flex-end;justify-content:center">
+      <div role="dialog" aria-modal="true" aria-label="Import data" sc-camel-on-click="{{ stop }}" style="position:relative;width:100%;max-height:90dvh;overflow-y:auto;box-sizing:border-box;background:#FFFFFF;padding:22px calc(env(safe-area-inset-right) + 16px) calc(env(safe-area-inset-bottom) + 22px) calc(env(safe-area-inset-left) + 16px);display:flex;flex-direction:column;gap:16px;font-family:Poppins,sans-serif">
+        <span style="position:absolute;left:0;top:0;width:14px;height:14px;border-left:2px solid #769CD2;border-top:2px solid #769CD2"></span>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
+          <span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;color:#3F6FAE">Import tracker data</span>
+          <button sc-camel-on-click="{{ closeImport }}" aria-label="Close" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(11,11,11,0.14);cursor:pointer;color:#12102A;font-size:20px;line-height:1">×</button>
+        </div>
+        <sc-if value="{{ impLocked }}" hint-placeholder-val="{{ true }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:22px;font-weight:300;color:#12102A;letter-spacing:-0.01em">Enter password</span>
+            <span style="font-size:15px;line-height:1.55;color:#515150">Importing replaces the fleet data shown on the map and in the panel.</span>
+            <input type="password" value="{{ pw }}" sc-camel-on-change="{{ onPw }}" sc-camel-on-key-down="{{ onPwKey }}" aria-label="Password" placeholder="Password" enterkeyhint="go" style="width:100%;min-height:48px;box-sizing:border-box;border:1px solid {{ pwBd }};border-radius:0;background:#FAFAF8;padding:0 14px;font-family:Poppins,sans-serif;font-size:16px;color:#12102A;outline:none;-webkit-appearance:none">
+            <sc-if value="{{ pwErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#B0501E">Incorrect password. Try again.</span></sc-if>
+            <button sc-camel-on-click="{{ unlock }}" style="min-height:48px;background:#12102A;border:0;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;padding:0 20px;cursor:pointer">Unlock</button>
+          </div>
+        </sc-if>
+        <sc-if value="{{ impUnlocked }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <span style="font-size:22px;font-weight:300;color:#12102A;letter-spacing:-0.01em">Choose a file</span>
+            <span style="font-size:15px;line-height:1.55;color:#515150">Export the tracker sheet from Excel as CSV and select it here. Columns are matched by header: #, Category, Use Case, Vendor, Model, Location, Owner, Status, Latest Update, Description, Entity, Funded By, Stage, Next Steps. Robot type is read from the use case. Locations are matched by name; rows with an unknown location are skipped and listed. Changes apply to this session only.</span>
+            <input ref="{{ fileRef }}" type="file" accept=".csv,.json,text/csv,application/json" sc-camel-on-change="{{ onFile }}" style="display:none">
+            <button sc-camel-on-click="{{ pickFile }}" style="min-height:48px;background:#12102A;border:0;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;padding:0 20px;cursor:pointer">Select file</button>
+            <sc-if value="{{ impHasMsg }}" hint-placeholder-val="{{ false }}"><span style="font-size:15px;line-height:1.5;color:{{ impMsgColor }}">{{ impMsg }}</span></sc-if>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844}}">
+class Component extends DCLogic {
+  state = { level: 0, d: null, a: null, types: [], status: "all", dists: [], q: "", qFocus: false, sort: { k: "total", dir: -1 }, anim: 1, narrow: false, mapReady: false, scanKey: 1, hov: null, legend: false, tab: "map" };
+  cache = {};
+  rootRef = (n) => { this.rootEl = n; };
+  mapRef = (n) => { if (n) this.mapEl = n; };
+  tickRef = (n) => { if (n) { this.tickEl = n; this.updateFrame(); } };
+  curRef = (n) => { if (n) this.curEl = n; };
+  zRef = (n) => { if (n) this.zEl = n; };
+
+  componentDidMount() {
+    this.onResize = () => {
+      const w = this.rootEl ? this.rootEl.offsetWidth : window.innerWidth, n = w < 980;
+      if (n !== this.state.narrow) this.setState({ narrow: n }, () => setTimeout(() => { if (this.mapOk()) { this.map.invalidateSize(); this.sig = null; this.syncMap(); } }, 30));
+      else if (this.mapOk()) { this.map.invalidateSize(); if (this.state.level === 0) this.fitAll(false); this.sig = null; this.syncMap(); }
+    };
+    window.addEventListener("resize", this.onResize); this.onResize();
+    this.onKey = (e) => { if (e.key === "Escape" && !(e.target && e.target.tagName === "INPUT")) this.back(); };
+    window.addEventListener("keydown", this.onKey);
+    this.waitL();
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.onResize); window.removeEventListener("keydown", this.onKey); clearTimeout(this.dataWait); clearTimeout(this.rvRetry); clearTimeout(this.navFix); clearTimeout(this.flushT); clearTimeout(this.animT);
+    clearTimeout(this.wt); cancelAnimationFrame(this.raf); if (this.map) this.map.remove();
+  }
+  componentDidUpdate() { this.syncMap(); }
+  waitL() { if (window.L && window.FLEET_DATA && this.mapEl) { this.forceUpdate(); this.initMap(); } else this.wt = setTimeout(() => this.waitL(), 60); }
+
+  idx(D) {
+    if (this.idxDone) return; this.idxDone = true;
+    this.A = {}; this.DI = {}; this.T = {};
+    D.assets.forEach((a) => (this.A[a.id] = a)); D.districts.forEach((d) => (this.DI[d.id] = d)); D.robot_types.forEach((t) => (this.T[t.id] = t));
+  }
+  rows() {
+    const s = this.state, A = this.A;
+    return window.FLEET_DATA.fleet.filter((f) => this.A && this.A[f.asset_id] && this.T && this.T[f.robot_type]).filter((f) => (!s.types.length || s.types.includes(f.robot_type)) && (s.status === "all" || f.status === s.status) && (!s.dists.length || s.dists.includes(A[f.asset_id].district_id)));
+  }
+  agg(rows) {
+    const g = { total: 0, deployed: 0, pilot: 0, planned: 0, by: {}, sample: false };
+    window.FLEET_DATA.robot_types.forEach((t) => (g.by[t.id] = { total: 0, deployed: 0, pilot: 0, planned: 0 }));
+    const seen = new Set();
+    rows.forEach((f) => { const k = f.init || f.id; if (seen.has(k)) return; seen.add(k); g.total += 1; g[f.status] += 1; g.by[f.robot_type].total += 1; g.by[f.robot_type][f.status] += 1; });
+    return g;
+  }
+  dom(g) { let b = null, v = 0; window.FLEET_DATA.robot_types.forEach((t) => { if (g.by[t.id].total > v) { v = g.by[t.id].total; b = t.id; } }); return b; }
+
+  u(key, fn) { if (!this.cache[key]) this.cache[key] = "data:image/svg+xml," + encodeURIComponent(fn()).replace(/'/g, "%27").replace(/\(/g, "%28").replace(/\)/g, "%29"); return this.cache[key]; }
+  iconU(id, c) { return this.u("i" + id + c, () => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="' + c + '" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">' + ICON[id] + "</svg>"); }
+  nodeU(st, c) { return this.u("n" + st + c, () => nodeSvg(st, c)); }
+  ringU(g, S, R, sw) { return this.u("r" + [g.total, g.deployed, g.pilot, g.planned, S, R, sw].join("_"), () => ringSvg(g, S, R, false, sw)); }
+
+  kick(noScan) {
+    cancelAnimationFrame(this.raf);
+    const t0 = performance.now();
+    this.setState((s) => ({ anim: 0, scanKey: noScan ? s.scanKey : s.scanKey + 1 }));
+    const step = (n) => { const p = Math.min(1, (n - t0) / 750); this.setState({ anim: p }); if (p < 1) this.raf = requestAnimationFrame(step); };
+    this.raf = requestAnimationFrame(step);
+    clearTimeout(this.animT); this.animT = setTimeout(() => { if (this.state.anim < 1) { cancelAnimationFrame(this.raf); this.setState({ anim: 1 }); } }, 1000);
+  }
+  goPortfolio() { this.setState({ level: 0, d: null, a: null, q: "" }); this.kick(true); }
+  goDistrict(id) { this.setState({ level: 1, d: id, a: null, q: "" }); this.kick(); }
+  goAsset(id) { this.setState({ level: 2, d: this.A[id].district_id, a: id, q: "" }); this.kick(); }
+  back() { const s = this.state; if (s.level === 2) this.goDistrict(s.d); else if (s.level === 1) this.goPortfolio(); }
+  toggleType(id) { this.setState((s) => ({ types: s.types.includes(id) ? s.types.filter((x) => x !== id) : s.types.concat(id) })); this.kick(); }
+  toggleDist(id) { this.setState((s) => ({ dists: s.dists.includes(id) ? s.dists.filter((x) => x !== id) : s.dists.concat(id) })); this.kick(); }
+
+  initMap() {
+    if (this.map) return;
+    const L = window.L, D = window.FLEET_DATA; this.idx(D);
+    const map = (this.map = L.map(this.mapEl, { zoomControl: false, attributionControl: true, zoomSnap: 0.25, zoomDelta: 0.5, minZoom: 9, maxZoom: 18, wheelPxPerZoomLevel: 120 }));
+    map.setView([24.47, 54.47], 11, { animate: false });
+    const tl = this.tl = L.tileLayer(this.tileUrl(true), { maxZoom: 18, maxNativeZoom: 15, attribution: 'Tiles &copy; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+    const ready = () => { if (!this.state.mapReady) this.setState((s) => ({ mapReady: true, scanKey: s.scanKey + 1 })); };
+    tl.once("load", ready); setTimeout(ready, 3500);
+    this.polys = {}; this.badges = {}; this.marks = {};
+    let all = null;
+    D.districts.forEach((d) => {
+      if (!d.geometry) return;
+      const ll = d.geometry.type === "MultiPolygon" ? d.geometry.coordinates.map((p) => p[0].map((c) => [c[1], c[0]])) : d.geometry.coordinates[0].map((c) => [c[1], c[0]]);
+      const p = L.polygon(ll, { className: "rr-poly rr-in", color: "#9DB9E0", weight: 1.2, fillColor: "#769CD2", fillOpacity: 0.1, smoothFactor: 0.5 }).addTo(map);
+      p.bindTooltip("", { className: "rr-tip", sticky: true, direction: "top", offset: [0, -12], opacity: 1 });
+      p.on("tooltipopen", (e) => { const el = e.tooltip.getElement(); if (el) el.style.display = p._rrNoTip ? "none" : ""; });
+      p.on("click", () => { const s = this.state; if (!(s.level === 1 && s.d === d.id)) this.goDistrict(d.id); });
+      this.polys[d.id] = p;
+      all = all ? all.extend(p.getBounds()) : L.latLngBounds(p.getBounds().getSouthWest(), p.getBounds().getNorthEast());
+      const b = L.marker(d.centroid, { icon: L.divIcon({ className: "", html: "", iconSize: [0, 0] }), keyboard: true, title: "Open " + d.name, zIndexOffset: 400 });
+      b.on("click", () => this.goDistrict(d.id));
+      this.badges[d.id] = b;
+    });
+    setTimeout(() => Object.values(this.polys).forEach((p) => { const e = p.getElement(); if (e) e.classList.remove("rr-in"); }), 2100);
+    D.assets.forEach((a) => {
+      if (a.lat == null) return;
+      const m = L.marker([a.lat, a.lng], { icon: L.divIcon({ className: "", html: "", iconSize: [20, 20] }), keyboard: true, title: "Open " + a.name, riseOnHover: true, zIndexOffset: 800 });
+      m.bindTooltip("", { className: "rr-tip", direction: "top", offset: [0, -18], opacity: 1 });
+      m.on("tooltipopen", (e) => { const el = e.tooltip.getElement(); if (el) el.style.display = m._rrNoTip ? "none" : ""; });
+      m.on("click", () => this.goAsset(a.id));
+      this.marks[a.id] = m;
+    });
+    this.ringG = L.layerGroup().addTo(map);
+    this.allB = all;
+    this.fitAll(false);
+    map.on("move zoom", () => { if (!this.fr) this.fr = requestAnimationFrame(() => { this.fr = null; this.updateFrame(); this.clampBadges(); }); });
+    const m0 = () => !map._animatingZoom;
+    map.on("moveend zoomend", () => { setTimeout(() => this.clampBadges(), 0); if ((this.flyUntil || 0) > Date.now() && !m0()) return; this.flyUntil = 0; this.flushSoon(30); });
+    map.on("zoomend", () => { this.compactB = map.getZoom() < 10.9; this.sig = null; this.syncMap(); });
+    map.on("dragend", () => { if (this.state.level > 0) { this.sig = null; this.syncMap(); } });
+    map.on("movestart", () => { if (this.state.hov) this.setState({ hov: null }); });
+    map.on("mousemove", (e) => { if (this.curEl) this.curEl.textContent = "Cursor · " + e.latlng.lat.toFixed(4) + "°N  " + e.latlng.lng.toFixed(4) + "°E"; });
+    this.navSig = "0||"; this.sig = null; this.compactB = map.getZoom() < 10.9;
+    this.applyTheme(); this.syncMap(); this.updateFrame();
+    setTimeout(() => { if (!this.mapOk()) return; map.invalidateSize(); if (this.state.level === 0) this.fitAll(false); this.updateFrame(); }, 80);
+  }
+
+  fitAll(anim) {
+    const m = this.map; if (!this.mapOk() || !this.allB) return;
+    const sz = m.getSize(); if (!sz || !sz.x || !sz.y) return;
+    const px = (v, f) => Math.round(Math.min(v, sz.x * f)), py = (v, f) => Math.round(Math.min(v, sz.y * f));
+    let o = { paddingTopLeft: [px(24, 0.08), py(40, 0.08)], paddingBottomRight: [px(24, 0.08), py(this.cardH(), 0.45)] };
+    const z = m.getBoundsZoom(this.allB, false, window.L.point(o.paddingTopLeft[0] + o.paddingBottomRight[0], o.paddingTopLeft[1] + o.paddingBottomRight[1]));
+    if (!isFinite(z)) o = { padding: [40, 40] };
+    if (anim) m.flyToBounds(this.allB, Object.assign(o, { duration: 1.15, easeLinearity: 0.2 })); else m.fitBounds(this.allB, o);
+  }
+  cardH() { return 230; }
+  clampBadges() {
+    if (!this.mapOk() || !this.badges) return;
+    const c = this.map.getContainer().getBoundingClientRect(), pad = 6, bot = c.bottom - (this.state.tab && this.state.tab !== "map" ? 0 : this.cardH() - 18);
+    const B = [];
+    Object.values(this.badges).forEach((b) => {
+      const w = b.getElement && b.getElement(), el = w && w.firstElementChild; if (!el || !this.map.hasLayer(b)) return;
+      el.style.marginLeft = "0px"; el.style.marginTop = "0px";
+      const r = el.getBoundingClientRect(); if (!r.width) return;
+      B.push({ el, x: r.left, y: r.top, w: r.width, h: r.height, ox: r.left, oy: r.top });
+    });
+    const clamp = (q) => { q.x = Math.min(Math.max(q.x, c.left + pad), c.right - pad - q.w); q.y = Math.min(Math.max(q.y, c.top + pad), bot - pad - q.h); };
+    B.forEach(clamp);
+    for (let it = 0; it < 80; it++) {
+      let moved = false;
+      for (let i = 0; i < B.length; i++) for (let j = i + 1; j < B.length; j++) {
+        const p = B[i], q = B[j], gap = 4;
+        const ox = Math.min(p.x + p.w, q.x + q.w) + gap - Math.max(p.x, q.x), oy = Math.min(p.y + p.h, q.y + q.h) + gap - Math.max(p.y, q.y);
+        if (ox <= 0 || oy <= 0) continue;
+        moved = true;
+        if (ox < oy) { const s = (p.x + p.w / 2 < q.x + q.w / 2 ? -1 : 1) * ox / 2; p.x += s; q.x -= s; }
+        else { const s = (p.y + p.h / 2 < q.y + q.h / 2 ? -1 : 1) * oy / 2; p.y += s; q.y -= s; }
+        clamp(p); clamp(q);
+      }
+      if (!moved) break;
+    }
+    B.forEach((q) => { q.el.style.marginLeft = Math.round(q.x - q.ox) + "px"; q.el.style.marginTop = Math.round(q.y - q.oy) + "px"; });
+  }
+
+  hoverPoly(id) {
+    if (!this.mapOk() || !this.polys[id]) return;
+    const pts = this.polys[id].getLatLngs()[0].map((ll) => this.map.latLngToContainerPoint(ll));
+    const xs = pts.map((q) => q.x), ys = pts.map((q) => q.y);
+    const x = Math.min.apply(null, xs), y = Math.min.apply(null, ys), w = Math.max.apply(null, xs) - x, h = Math.max.apply(null, ys) - y;
+    const clip = "polygon(" + pts.map((q) => (q.x - x).toFixed(1) + "px " + (q.y - y).toFixed(1) + "px").join(",") + ")";
+    this.setState({ hov: { id, x, y, w, h, clip, k: Date.now() } });
+  }
+
+  syncMap() {
+    if (!this.mapOk()) return;
+    const s = this.state, sig = [s.level, s.d, s.a, s.types.join(), s.status, s.dists.join()].join("|");
+    if (sig === this.sig) return;
+    this.sig = sig; this.paint();
+    const nav = [s.level, s.d || "", s.a || ""].join("|");
+    if (nav !== this.navSig) { this.navSig = nav; this.fly(); }
+  }
+  fly() {
+    const s = this.state, m = this.map, o = { duration: 1.15, easeLinearity: 0.2 }; if (!this.mapOk()) return;
+    this.flyUntil = Date.now() + 1400; this.flushSoon(1450);
+    const sz0 = m.getSize(); if (!sz0 || !sz0.x || !sz0.y) return;
+    if (s.level === 0) this.fitAll(true);
+    else if (s.level === 1) {
+      const p = this.polys[s.d]; if (!p) { this.fitAll(true); return; }
+      let bb = p.getBounds();
+      window.FLEET_DATA.assets.filter((x) => x.district_id === s.d && x.lat != null).forEach((x) => bb = bb.extend([x.lat, x.lng]));
+      const sz = m.getSize();
+      m.flyToBounds(bb, Object.assign({ paddingTopLeft: [24, 56], paddingBottomRight: [24, Math.round(Math.min(this.cardH(), sz.y * 0.45))], maxZoom: 16 }, o));
+    }
+    else { const a = this.A[s.a]; if (a && a.lat != null) { const z = 15.25, sz = m.getSize(), off = Math.round(Math.min(this.cardH(), sz.y * 0.45) / 2 - 20), pt = m.project([a.lat, a.lng], z).add([0, off]); m.flyTo(m.unproject(pt, z), z, o); } }
+  }
+  paint() { try { this.paint0(); } catch (err) { console.warn("[fleet] paint recovered:", err && err.stack ? err.stack.split("\n").slice(0, 5).join(" | ") : err); this.sig = null; } }
+  paint0() {
+    const s = this.state, L = window.L, map = this.map, D = window.FLEET_DATA, A = this.A, rows = this.rows();
+    const byD = {}, byA = {};
+    D.districts.forEach((d) => (byD[d.id] = this.agg(rows.filter((f) => A[f.asset_id] && A[f.asset_id].district_id === d.id))));
+    D.assets.forEach((a) => (byA[a.id] = this.agg(rows.filter((f) => f.asset_id === a.id))));
+    const max = Math.max.apply(null, [1].concat(D.districts.map((d) => byD[d.id].total)));
+    D.districts.forEach((d) => {
+      const g = byD[d.id], inF = !s.dists.length || s.dists.includes(d.id), focus = s.level === 0 ? inF : d.id === s.d;
+      const p = this.polys[d.id]; if (!p) return;
+      p.setStyle(focus ? { opacity: 0.95, weight: s.level ? 1.8 : 1.3, fillOpacity: 0.07 + 0.28 * (g.total / max), color: this.theme() === "light" ? "#3F6FAE" : "#9DB9E0", fillColor: this.theme() === "light" ? "#3F6FAE" : "#769CD2" } : { opacity: this.theme() === "light" ? 0.5 : 0.3, weight: 1, fillOpacity: 0.025, color: this.theme() === "light" ? "#5B7FB5" : "#769CD2" });
+      const selD = s.level > 0 && s.d === d.id;
+      p._rrNoTip = selD; if (selD) p.closeTooltip(); else p.setTooltipContent(miniTip(d.name, "Click for details"));
+      const b = this.badges[d.id], vH = map.getSize().y - this.cardH(), cp = map.latLngToContainerPoint(d.centroid), inView = cp.x > 20 && cp.x < map.getSize().x - 20 && cp.y > 20 && cp.y < vH - 20;
+      const show = (s.level === 0 || (d.id !== s.d && inView)) && g.total > 0;
+      if (show) { b.setIcon(L.divIcon({ className: "", html: badgeHtml(d, g, true, !focus), iconSize: [0, 0] })); if (!map.hasLayer(b)) b.addTo(map); setTimeout(() => this.clampBadges(), 0); }
+      else if (map.hasLayer(b)) map.removeLayer(b);
+    });
+    const vis = s.level > 0 ? D.assets.filter((a) => this.marks[a.id] && a.district_id === s.d && byA[a.id].total > 0) : [], lay = {};
+    const msz = map.getSize(), sc = 1; this.mScale = sc;
+    if (vis.length) {
+      const rad = (a) => (Math.round(10 + Math.sqrt(Math.min(byA[a.id].total, 12)) * 4.5) + 8) * sc;
+      const N = vis.map((a) => { const p = map.latLngToContainerPoint([a.lat, a.lng]); return { a, ox: p.x, oy: p.y, x: p.x, y: p.y, r: rad(a), on: a.id === s.a }; });
+      const gap = 10 * sc;
+      for (let it = 0; it < 140; it++) {
+        let moved = 0;
+        for (let i = 0; i < N.length; i++) for (let j = i + 1; j < N.length; j++) {
+          const A = N[i], B = N[j]; let dx = B.x - A.x, dy = B.y - A.y, d = Math.hypot(dx, dy); const need = A.r + B.r + gap;
+          if (d >= need) continue;
+          if (d < 0.01) { const ang = (i * 2.4 + j) % (2 * Math.PI); dx = Math.cos(ang); dy = Math.sin(ang); d = 1; }
+          const push = (need - d) / 2, ux = dx / d, uy = dy / d, wa = A.on ? 0.15 : 1, wb = B.on ? 0.15 : 1;
+          A.x -= ux * push * wa; A.y -= uy * push * wa; B.x += ux * push * wb; B.y += uy * push * wb; moved = 1;
+        }
+        N.forEach((n) => { n.x += (n.ox - n.x) * 0.04; n.y += (n.oy - n.y) * 0.04; });
+        if (!moved && it > 20) break;
+      }
+      const fs = 13 * sc, vH = msz.y - this.cardH(), boxes = N.map((n) => ({ x0: n.x - n.r, y0: n.y - n.r, x1: n.x + n.r, y1: n.y + n.r }));
+      const ov = (p, q) => Math.max(0, Math.min(p.x1, q.x1) - Math.max(p.x0, q.x0)) * Math.max(0, Math.min(p.y1, q.y1) - Math.max(p.y0, q.y0));
+      const placed = [];
+      N.slice().sort((p, q) => (q.on - p.on) || (p.y - q.y)).forEach((n) => {
+        const w = n.a.short.length * fs * 0.6 + 18, h = fs + 12, g = 4;
+        const C = { right: { x0: n.x + n.r + g, y0: n.y - h / 2, x1: n.x + n.r + g + w, y1: n.y + h / 2 }, left: { x0: n.x - n.r - g - w, y0: n.y - h / 2, x1: n.x - n.r - g, y1: n.y + h / 2 }, top: { x0: n.x - w / 2, y0: n.y - n.r - g - h, x1: n.x + w / 2, y1: n.y - n.r - g }, bottom: { x0: n.x - w / 2, y0: n.y + n.r + g, x1: n.x + w / 2, y1: n.y + n.r + g + h } };
+        const order = [n.a.label_side === "left" ? "left" : "right", n.a.label_side === "left" ? "right" : "left", "bottom", "top"];
+        let best = order[0], bs = Infinity;
+        order.forEach((k, oi) => { const b = C[k]; let sco = oi * 4;
+          boxes.forEach((q) => (sco += ov(b, q) * 3)); placed.forEach((q) => (sco += ov(b, q) * 3));
+          sco += (Math.max(0, -b.x0) + Math.max(0, b.x1 - msz.x) + Math.max(0, -b.y0) + Math.max(0, b.y1 - vH)) * h * 4;
+          if (sco < bs) { bs = sco; best = k; } });
+        const bb = C[best], clash = placed.reduce((t, q) => t + ov(bb, q), 0) + boxes.reduce((t, q) => t + ov(bb, q), 0), hide = !n.on && clash > w * h * 0.12;
+        if (!hide) placed.push(bb);
+        lay[n.a.id] = { dx: n.x - n.ox, dy: n.y - n.oy, side: best, hide, z: n.on ? 3000 : Math.round(1000 - n.r) };
+      });
+    }
+    D.assets.forEach((a) => {
+      const m = this.marks[a.id], show = s.level > 0 && a.district_id === s.d && byA[a.id] && byA[a.id].total > 0;
+      if (!m) return;
+      if (!show) { if (map.hasLayer(m)) map.removeLayer(m); return; }
+      const g = byA[a.id], on = a.id === s.a, ly = lay[a.id] || { dx: 0, dy: 0, side: a.label_side }, mk = markerHtml(a, g, on, s.level === 2 && !on, ly, this.mScale);
+      m.setIcon(L.divIcon({ className: "", html: mk.html, iconSize: [mk.S, mk.S], iconAnchor: [mk.S / 2 - mk.dx, mk.S / 2 - mk.dy] })); m.setZIndexOffset(ly.z || 800);
+      m._rrNoTip = on;
+      if (on) m.closeTooltip();
+      else { const tt = m.getTooltip(); if (tt) { tt.options.offset = [Math.round(mk.dx), Math.round(mk.dy - mk.S / 2 - 4)]; m.setTooltipContent(miniTip("<b style=\"font-weight:600\">" + a.short + "</b>&nbsp;·&nbsp;" + a.asset_type + " · " + g.total + (g.total === 1 ? " initiative" : " initiatives"), "Click for details")); } }
+      m.setZIndexOffset(on ? 1200 : 800);
+      if (!map.hasLayer(m)) m.addTo(map);
+    });
+    this.ringG.clearLayers();
+    if (this.isMoving()) { this.ringPending = true; this.flushSoon(); }
+    else if (s.level === 2 && A[s.a] && A[s.a].lat != null) {
+      const a = A[s.a], c = [a.lat, a.lng];
+      const mpp = 40075016.686 * Math.cos(a.lat * Math.PI / 180) / Math.pow(2, map.getZoom() + 8), px = (m) => Math.max(4, Math.round(m / mpp));
+      const ring = (m, css) => L.marker(c, { interactive: false, keyboard: false, zIndexOffset: -500, icon: L.divIcon({ className: "", iconSize: [0, 0], html: '<span style="position:absolute;left:0;top:0;width:' + px(m) * 2 + 'px;height:' + px(m) * 2 + 'px;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;' + css + '"></span>' }) }).addTo(this.ringG);
+      ring(320, "border:1px dashed #DCE7F6");
+      ring(640, "border:1px solid rgba(118,156,210,0.45)");
+      L.marker([a.lat + 0.0058, a.lng], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: [0, 0], html: '<span style="position:absolute;transform:translate(-50%,-50%);font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.2em;color:#9DB9E0;background:#0B0A1F;padding:1px 6px;white-space:nowrap">R 640 M</span>' }) }).addTo(this.ringG);
+    }
+  }
+  updateFrame() {
+    const m = this.map, el = this.tickEl; if (!this.mapOk() || !el) return;
+    const sz = m.getSize(); if (!sz || !sz.x) return; const C = "var(--mTick,rgba(157,185,224,0.8))"; let h = "";
+    for (let i = 1; i < 24; i++) {
+      const x = (sz.x * i) / 24, mj = i % 4 === 0, hh = mj ? 10 : 4;
+      h += '<span style="position:absolute;left:' + x.toFixed(1) + "px;top:0;width:1px;height:" + hh + "px;background:" + C + '"></span><span style="position:absolute;left:' + x.toFixed(1) + "px;bottom:0;width:1px;height:" + hh + "px;background:" + C + '"></span>';
+      if (mj) h += '<span style="position:absolute;left:' + (x + 5).toFixed(1) + "px;top:12px;font-size:9px;letter-spacing:0.06em;color:" + C + ';font-variant-numeric:tabular-nums">' + m.containerPointToLatLng([x, 0]).lng.toFixed(3) + "°E</span>";
+    }
+    for (let i = 1; i < 16; i++) {
+      const y = (sz.y * i) / 16, mj = i % 4 === 0, ww = mj ? 10 : 4;
+      h += '<span style="position:absolute;top:' + y.toFixed(1) + "px;left:0;height:1px;width:" + ww + "px;background:" + C + '"></span><span style="position:absolute;top:' + y.toFixed(1) + "px;right:0;height:1px;width:" + ww + "px;background:" + C + '"></span>';
+      if (mj) h += '<span style="position:absolute;top:' + (y + 4).toFixed(1) + "px;right:14px;font-size:9px;letter-spacing:0.06em;color:" + C + ';font-variant-numeric:tabular-nums">' + m.containerPointToLatLng([0, y]).lat.toFixed(3) + "°N</span>";
+    }
+    el.innerHTML = h;
+    if (this.zEl) this.zEl.textContent = "Zoom " + m.getZoom().toFixed(2);
+  }
+
+  theme() { return "dark"; }
+  setTheme(th) { this.setState({ theme: th }, () => { try { this.applyTheme(); this.sig = null; this.syncMap(); } catch (err) { console.warn("[fleet] theme", err); } }); }
+  applyTheme() {
+    const el = this.rootEl; if (!el) return; const dk = this.theme() === "dark";
+    const V = { FFFFFF: "#12102A", "12102A": "#FFFFFF", "515150": "#B5C6DE", F2F5FA: "#1C1940", FAFAF8: "#171433", EDEDEA: "#2A2650", "9A9A98": "#8E9AB8", "3F6FAE": "#9DB9E0", "2F245C": "#DCE7F6", "0B0B0B": "#FFFFFF", Ink: "255,255,255", Paper: "18,16,42", ImgF: "invert(1) hue-rotate(180deg)" };
+    Object.keys(V).forEach((k) => dk ? el.style.setProperty("--p" + k, V[k]) : el.style.removeProperty("--p" + k));
+    const MV = { mFg: "#12102A", mFg2: "#3A3A52", mAcc: "#3F6FAE", mSh: "rgba(255,255,255,0.9)", mTick: "rgba(63,111,174,0.75)" };
+    Object.keys(MV).forEach((k) => dk ? el.style.removeProperty("--" + k) : el.style.setProperty("--" + k, MV[k]));
+    if (this.map) { const tp = this.map.getPane("tilePane"); if (tp) tp.style.filter = dk ? "" : "saturate(0.4) sepia(0.12) hue-rotate(190deg) brightness(1.02)"; const ct = this.map.getContainer(); if (ct) ct.style.background = dk ? "" : "#E8ECF2"; }
+    if (this.tl) { const u = this.tileUrl(dk); if (this.isMoving()) { this.pendingUrl = u; this.flushSoon(); } else if (this.tl._url !== u) this.tl.setUrl(u); }
+  }
+  tileUrl(dk) {
+    return "https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}";
+  }
+  isMoving() { const m = this.map; return !!(m && (m._animatingZoom || (this.flyUntil || 0) > Date.now() || (m._panAnim && m._panAnim._inProgress))); }
+  flushSoon(ms) {
+    clearTimeout(this.flushT);
+    this.flushT = setTimeout(() => {
+      if (!this.mapOk()) return;
+      if (this.isMoving()) { this.flushSoon(); return; }
+      if (this.pendingUrl) { const u = this.pendingUrl; this.pendingUrl = null; if (this.tl._url !== u) this.tl.setUrl(u); }
+      if (this.ringPending) { this.ringPending = false; this.sig = null; this.syncMap(); }
+    }, ms == null ? 250 : ms);
+  }
+  mapOk() { const m = this.map; return !!(m && m._loaded && m._mapPane && m.getContainer && m.getContainer().isConnected); }
+  fileRef = (n) => { if (n) this.fileEl = n; };
+  async unlock() {
+    const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(this.state.pw || ""));
+    const h = Array.from(new Uint8Array(b)).map((x) => x.toString(16).padStart(2, "0")).join("");
+    if (h === PW_HASH) this.setState({ unlocked: true, pw: "", pwErr: false }); else this.setState({ pwErr: true });
+  }
+  onFile(ev) {
+    const f = ev.target.files && ev.target.files[0]; if (!f) return;
+    const rd = new FileReader();
+    rd.onload = () => { try { const n = this.applyImport(String(rd.result), f.name); const n2 = n; const sk = this.skipped || []; this.setState({ impMsg: "Imported " + n2 + " rows from " + f.name + "." + (sk.length ? " Skipped " + sk.length + " with unknown location: " + Array.from(new Set(sk)).join(", ") + "." : ""), impOk: true }); } catch (err) { this.setState({ impMsg: "Could not import: " + err.message, impOk: false }); } ev.target.value = ""; };
+    rd.readAsText(f);
+  }
+  applyImport(text, name) {
+    const D = window.FLEET_DATA;
+    if (/\.json$/i.test(name) || /^\s*[\[{]/.test(text)) {
+      const j = JSON.parse(text);
+      if (Array.isArray(j)) D.fleet = j; else { if (!j.fleet) throw new Error("JSON needs a fleet array"); Object.assign(D, j); }
+    } else {
+      const rows = parseCsv(text); if (rows.length < 2) throw new Error("no data rows");
+      const AL = { "#": "id", "no": "id", "use_case": "use_case", "usecase": "use_case", "site": "location", "asset": "location", "status": "tracker_status", "update": "latest_update", "latest_update": "latest_update", "description": "scope", "funded": "funded_by", "funding": "funded_by", "next_step": "next_steps", "units": "units_stated", "robot_count": "units_stated", "type": "robot_type" };
+      const h = rows[0].map((x) => { const k = x.trim().toLowerCase().replace(/[^a-z0-9#]+/g, "_").replace(/^_|_$/g, ""); return AL[k] || k; }), col = (r, k) => { const i = h.indexOf(k); return i < 0 ? "" : (r[i] || "").trim(); };
+      if (h.indexOf("location") < 0 || h.indexOf("tracker_status") < 0) throw new Error("missing location or tracker_status column");
+      const ST = { "tested": "pilot", "testing in progress": "pilot", "tested and contracted": "deployed", "tested and launched": "deployed", "contracted": "deployed", "launched": "deployed", "test pending": "planned" };
+      const fleet = [], skipped = [];
+      rows.slice(1).filter((r) => r.some((c) => c.trim())).forEach((r, i) => {
+        const loc = col(r, "location"); let a = D.assets.find((x) => x.name.toLowerCase() === loc.toLowerCase() || x.id === loc.toLowerCase());
+        if (!a) { skipped.push(loc || "(blank)"); return; }
+        const rt = col(r, "robot_type").toLowerCase(), uc = col(r, "use_case").toLowerCase();
+        const guess = /fa[cç]ade/.test(uc) ? "facade" : /inspect|cavity|drone insp/.test(uc) ? "inspection" : /secur|patrol/.test(uc) ? "security" : /deliver/.test(uc) ? "delivery" : /engag|concierge|visitor|guest|humanoid/.test(uc) ? "engagement" : "cleaning";
+        const ty = D.robot_types.find((x) => x.id === rt || x.label.toLowerCase() === rt) || D.robot_types.find((x) => x.id === guess);
+        const ts = /^tested\s*(and|&|\+)\s*launched$/i.test(col(r, "tracker_status").trim()) ? "Launched" : col(r, "tracker_status"), u = col(r, "units_stated");
+        fleet.push({ id: col(r, "id") || String(i + 1), category: col(r, "category"), use_case: col(r, "use_case"), robot_type: ty.id, vendor: col(r, "vendor"), model: col(r, "model"), asset_id: a.id, owner: col(r, "owner"), tracker_status: ts, status: ST[ts.toLowerCase()] || "planned", stage: col(r, "stage"), entity: col(r, "entity"), funded_by: col(r, "funded_by"), units: u === "" ? null : Number(u), update: col(r, "latest_update"), description: col(r, "scope"), next_steps: col(r, "next_steps") });
+      });
+      if (!fleet.length) throw new Error("no rows matched a known location");
+      D.fleet = fleet; this.skipped = skipped;
+    }
+    this.idxDone = false; this.idx(D); this.sig = null; this.syncMap(); this.goPortfolio();
+    return D.fleet.length;
+  }
+  exportCsv() {
+    const s = this.state, D = window.FLEET_DATA, A = this.A, T = this.T, rows = this.rows();
+    let head, body, name;
+    if (s.level === 0) {
+      head = ["district", "total", "launched", "trialled", "pending", "dominant_type", "note"];
+      body = D.districts.filter((d) => !s.dists.length || s.dists.includes(d.id)).map((d) => { const g = this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)), dm = this.dom(g); return [d.name, g.total, g.deployed, g.pilot, g.planned, dm ? T[dm].label : "", "counts are initiatives"]; });
+      name = "fleet-portfolio";
+    } else if (s.level === 1) {
+      head = ["location", "district", "asset_type", "initiatives", "total", "launched", "trialled", "pending", "note"];
+      body = D.assets.filter((a) => a.district_id === s.d).map((a) => { const g = this.agg(rows.filter((f) => f.asset_id === a.id)); return [a.name, this.DI[a.district_id].name, a.asset_type, D.fleet.filter((f) => f.asset_id === a.id).length, g.total, g.deployed, g.pilot, g.planned, "counts are initiatives"]; });
+      name = "fleet-" + s.d;
+    } else {
+      head = ["id", "location", "category", "use_case", "robot_type", "vendor", "model", "units_stated", "tracker_status", "stage", "owner", "entity", "funded_by", "latest_update", "scope", "next_steps"];
+      body = rows.filter((f) => f.asset_id === s.a).map((f) => [f.id, A[f.asset_id].name, f.category, f.use_case, T[f.robot_type].label, f.vendor, f.model, f.units == null ? "" : f.units, f.tracker_status, f.stage, f.owner, f.entity, f.funded_by, f.update, f.description, f.next_steps]);
+      name = "fleet-" + s.a;
+    }
+    const csv = [head].concat(body).map((r) => r.map((v) => '"' + String(v).replace(/"/g, '""') + '"').join(",")).join("\n");
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([csv], { type: "text/csv" })); a.download = name + ".csv";
+    document.body.appendChild(a); a.click(); a.remove();
+  }
+
+  renderVals() {
+    try { const v = this.renderVals0(); this.lastVals = v; return v; }
+    catch (err) { console.warn("[fleet] render recovered:", err && err.stack ? err.stack.split("\n").slice(0, 4).join(" | ") : err); clearTimeout(this.rvRetry); this.rvRetry = setTimeout(() => this.forceUpdate(), 120); return this.lastVals || { rootRef: this.rootRef, mapRef: this.mapRef, tickRef: this.tickRef, curRef: this.curRef, zRef: this.zRef, loading: true, isMap: true, crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [] }, hero: {}, glyph: {}, tabs: [], mTypes: [], mStatus: [], mDists: [], mapSplit: [], mResults: [], sortOpts: [] }; }
+  }
+  renderVals0() {
+    if (!window.FLEET_DATA || !window.FLEET_DATA.fleet) { clearTimeout(this.dataWait); this.dataWait = setTimeout(() => this.forceUpdate(), 50); throw new Error("data not ready"); }
+    const uT = (window.FLEET_DATA.fleet || []).reduce((o, f) => { const key = f.init || f.id; if (f.units == null || isNaN(f.units)) { if (!o.su.has(key)) { o.su.add(key); o.unk++; } } else { o.n += Number(f.units); if (!o.sk.has(key)) { o.sk.add(key); o.k++; } } return o; }, { n: 0, k: 0, unk: 0, sk: new Set(), su: new Set() });
+    const s = this.state, D = window.FLEET_DATA;
+    const refs = { rootRef: this.rootRef, mapRef: this.mapRef, tickRef: this.tickRef, curRef: this.curRef, zRef: this.zRef,
+      rootH: s.narrow ? "auto" : "100vh", rootOv: s.narrow ? "visible" : "hidden", cols: s.narrow ? "minmax(0,1fr)" : "minmax(0,3fr) minmax(400px,2fr)", rowsT: s.narrow ? "auto auto" : "minmax(0,1fr)", mapH: s.narrow ? "70vh" : "auto", mapMin: s.narrow ? "460px" : "0", panelOv: s.narrow ? "visible" : "auto", loading: !s.mapReady };
+    if (!D) return refs;
+    this.idx(D);
+    const A = this.A, DI = this.DI, T = this.T, rows = this.rows(), e = 1 - Math.pow(1 - s.anim, 3), cnt = (v) => pad(Math.round(v * e));
+    if ((s.d && !DI[s.d]) || (s.a && !A[s.a]) || (s.level === 1 && !s.d) || (s.level === 2 && !s.a)) { clearTimeout(this.navFix); this.navFix = setTimeout(() => this.goPortfolio(), 0); }
+    const hasA = (id) => rows.some((f) => f.asset_id === id), hasD = (id) => rows.some((f) => A[f.asset_id].district_id === id);
+    let lvl = (s.level === 2 && !A[s.a]) || (s.level === 1 && !DI[s.d]) ? 0 : s.level;
+    if (rows.length && lvl === 2 && !hasA(s.a)) lvl = hasD(s.d) ? 1 : 0;
+    if (rows.length && lvl === 1 && !hasD(s.d)) lvl = 0;
+    if (lvl !== s.level) { clearTimeout(this.navFix); const to = lvl, dd = s.d; this.navFix = setTimeout(() => { if (to === 1) this.goDistrict(dd); else if (to === 0) this.goPortfolio(); }, 0); }
+    const dist = lvl > 0 && s.d && DI[s.d] ? DI[s.d] : null, ast = lvl === 2 && s.a && A[s.a] ? A[s.a] : null;
+    const scope = lvl === 0 ? rows : lvl === 1 ? rows.filter((f) => A[f.asset_id].district_id === s.d) : rows.filter((f) => f.asset_id === s.a);
+    const g = this.agg(scope), INK = "#12102A";
+    const G = { deployed: this.nodeU("deployed", INK), pilot: this.nodeU("pilot", INK), planned: this.nodeU("planned", INK) };
+    const GL = { deployed: this.nodeU("deployed", "#DCE7F6"), pilot: this.nodeU("pilot", "#DCE7F6"), planned: this.nodeU("planned", "#DCE7F6") };
+    const LBL = { deployed: "Launched", pilot: "Trialled", planned: "Pending" };
+    const nInit = (id) => { const u = (L) => new Set(L.filter((f) => f.asset_id === id).map((f) => f.init || f.id)).size; const all = u(D.fleet), n = u(rows); return (n === all ? n : n + " of " + all) + (all === 1 ? " initiative" : " initiatives"); };
+    const mt = (l, v, gl) => ({ l, v: cnt(v), g: gl || "", hasG: !!gl });
+    const actD = new Set(rows.map((f) => A[f.asset_id].district_id)), actA = new Set(rows.map((f) => f.asset_id));
+    const typesIn = D.robot_types.filter((t) => g.by[t.id].total > 0).length;
+    let hero;
+    if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
+    else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d && hasA(a.id)).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? " · OpenStreetMap boundary" : " · no fixed map location"), metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Assets", nA)] }; }
+    else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Types", typesIn)] };
+    hero.big = cnt(g.total);
+
+    const typeRows = D.robot_types.filter((t) => !s.types.length || s.types.includes(t.id)).map((t) => {
+      const b = g.by[t.id], nodes = [];
+      ["deployed", "pilot", "planned"].forEach((k) => { for (let i = 0; i < b[k]; i++) nodes.push(this.nodeU(k, t.ink)); });
+      const tf = scope.filter((f) => f.robot_type === t.id), vm = {}, mm = {}, sr = {};
+      tf.forEach((f) => { const v = (f.vendor || "").trim() || "Vendor TBC"; vm[v] = (vm[v] || 0) + (f.units == null ? 0 : Number(f.units)); mm[v] = mm[v] || new Set(); const rk = { deployed: 0, pilot: 1, planned: 2 }[f.status] ?? 3; sr[v] = Math.min(sr[v] ?? 9, rk); String(f.model || "").split(/,| and /).map((x) => x.replace(/^\s*\d+\s*×\s*/, "").trim()).filter(Boolean).forEach((x) => mm[v].add(x)); });
+      const vs = Object.keys(vm).sort((a, b) => vm[b] - vm[a] || sr[a] - sr[b] || a.localeCompare(b)), cap = s.types.length ? vs.length : 2;
+      const models = vs.length ? vs.slice(0, cap).map((v) => v + (vm[v] > 1 ? " " + vm[v] : "")).join(" · ") + (vs.length > cap ? " · +" + (vs.length - cap) : "") : "No units in view";
+      const modelTip = vs.map((v) => v + (mm[v].size ? ": " + Array.from(mm[v]).join(" / ") : "")).join("\n");
+      const on = s.types.includes(t.id);
+      return { detail: on ? modelTip : "", hasDetail: on && !!modelTip, label: t.label, icon: this.iconU(t.id, t.ink), nodes, total: pad(b.total), split: b.deployed + " · " + b.pilot + " · " + b.planned, models, toggle: () => this.toggleType(t.id), pressed: String(on), bg: on ? "var(--pF2F5FA,#F2F5FA)" : "transparent", tip: (on ? "Remove " + t.label + " filter" : "Filter map and panel to " + t.label) + (modelTip ? "\n\n" + modelTip : "") };
+    });
+
+    const COLS = [["name", "District", "flex-start"], ["total", "Total", "flex-end"], ["deployed", "Launched", "flex-end"], ["pilot", "Trialled", "flex-end"], ["planned", "Pending", "flex-end"], ["dom", "Dominant", "flex-start"]];
+    const sortCols = COLS.map((c) => ({ label: c[1], jc: c[2], arrow: s.sort.k === c[0] ? (s.sort.dir > 0 ? "▲" : "▼") : "", color: s.sort.k === c[0] ? "var(--p12102A,#12102A)" : "var(--p515150,#515150)", sort: () => this.setState((st) => ({ sort: { k: c[0], dir: st.sort.k === c[0] ? -st.sort.dir : c[0] === "name" || c[0] === "dom" ? 1 : -1 } })) }));
+    let league = D.districts.filter((d) => !s.dists.length || s.dists.includes(d.id)).map((d) => {
+      const gg = this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)), dm = this.dom(gg), nA = D.assets.filter((a) => a.district_id === d.id && hasA(a.id)).length;
+      return { name: d.name, nA: nA + (nA === 1 ? " asset" : " assets"), t: gg.total, dp: gg.deployed, pi: gg.pilot, pl: gg.planned, domL: dm ? T[dm].label : "None", domI: dm ? this.iconU(dm, T[dm].ink) : this.nodeU("planned", "#B5B5B3"), go: () => this.goDistrict(d.id) };
+    });
+    const K = { total: "t", deployed: "dp", pilot: "pi", planned: "pl", name: "name", dom: "domL" }[s.sort.k];
+    league.sort((x, y) => (x[K] > y[K] ? 1 : x[K] < y[K] ? -1 : 0) * s.sort.dir);
+    league = league.filter((r) => r.t > 0);
+    league = league.map((r) => Object.assign(r, { total: cnt(r.t), deployed: cnt(r.dp), pilot: cnt(r.pi), planned: cnt(r.pl) }));
+
+    const distAssets = lvl > 0 ? D.assets.filter((a) => a.district_id === s.d && hasA(a.id)) : [];
+    const assetRows = distAssets.map((a) => {
+      const gg = this.agg(rows.filter((f) => f.asset_id === a.id)), st = gg.deployed ? "deployed" : gg.pilot ? "pilot" : gg.total ? "planned" : null;
+      return { name: a.name, type: a.asset_type, wave: nInit(a.id), ring: this.ringU(gg, 56, 23, 3), total: cnt(gg.total), status: st ? LBL[st] : "None in view", sg: st ? G[st] : "", hasSg: !!st, types: D.robot_types.filter((t) => gg.by[t.id].total).map((t) => ({ icon: this.iconU(t.id, t.ink), n: gg.by[t.id].total, label: t.label })), go: () => this.goAsset(a.id) };
+    });
+
+    const fleetRows = lvl === 2 ? scope.map((f) => ({ icon: this.iconU(f.robot_type, T[f.robot_type].ink), type: T[f.robot_type].label, vendor: f.vendor, model: f.model, cs: false, count: f.units == null ? "—" : f.units, tstatus: f.tracker_status, sg: G[f.status], owner: f.owner || "—" })) : [];
+    const splitLegend = [["deployed", "Launched", "var(--p12102A,#12102A)"], ["pilot", "Trialled", "var(--p3F6FAE,#3F6FAE)"], ["planned", "Pending", "#B5C6DE"]].map((x) => ({ g: G[x[0]], l: x[1], n: cnt(g[x[0]]), pct: g.total ? Math.round((100 * g[x[0]]) / g.total) + "%" : "0%", w: (g.total ? (100 * g[x[0]] * e) / g.total : 0) + "%", bar: x[2] }));
+    const inits = lvl === 2 ? scope.map((f) => { const fx = [["Owner", f.owner], ["Entity", f.entity], ["Units", f.units == null ? "" : String(f.units)], ["Funded by", f.funded_by]].filter((x) => x[1]).map((x) => ({ k: x[0], v: x[1] })); return { id: f.id, category: f.category, useCase: f.use_case, vm: [f.vendor, f.model].filter(Boolean).join(" · ") || "Vendor and model not yet recorded", icon: this.iconU(f.robot_type, T[f.robot_type].ink), tstatus: f.tracker_status, sg: G[f.status], stage: f.stage, hasStage: !!f.stage, stageBg: f.stage === "Scaling" ? "var(--p12102A,#12102A)" : "var(--pEDEDEA,#EDEDEA)", stageFg: f.stage === "Scaling" ? "var(--pFFFFFF,#FFFFFF)" : "var(--p12102A,#12102A)", facts: fx, update: f.update, hasUpdate: !!f.update, desc: f.description, hasDesc: !!f.description, next: f.next_steps, hasNext: !!f.next_steps, empty: !f.update && !f.description }; }) : [];
+    const meta = lvl === 2 ? [{ k: "District", v: dist.name }, { k: "Asset type", v: ast.asset_type }, { k: "Initiatives", v: nInit(ast.id) }] : [];
+
+    const crumbs = [{ label: "Portfolio", go: () => this.goPortfolio() }];
+    if (dist) crumbs.push({ label: dist.name, go: () => this.goDistrict(dist.id) });
+    if (ast) crumbs.push({ label: ast.name, go: () => {} });
+    crumbs.forEach((c, i) => { const last = i === crumbs.length - 1; c.sep = i > 0; c.fw = last ? "600" : "400"; c.color = last ? "var(--p12102A,#12102A)" : "var(--p515150,#515150)"; c.cur = last ? "page" : "false"; });
+    const pickOpts = lvl === 0 ? D.districts.filter((d) => hasD(d.id)).map((d) => ({ id: d.id, label: d.name + "  (" + this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)).total + ")" }))
+      : D.assets.filter((a) => a.district_id === s.d && hasA(a.id)).map((a) => ({ id: a.id, label: a.name + "  (" + this.agg(rows.filter((f) => f.asset_id === a.id)).total + ")" }));
+    const picker = { show: lvl < 2 || pickOpts.length > 1, ph: lvl === 0 ? "Choose district" : lvl === 1 ? "Choose location" : "Switch location", val: lvl === 2 ? s.a : "", opts: pickOpts,
+      change: (ev) => { const v = ev.target.value; if (!v) return; if (lvl === 0) this.goDistrict(v); else this.goAsset(v); } };
+    const stepNo = ["1", "2", "3"][lvl], stepTxt = ["Portfolio overview", "District view", "Location detail"][lvl];
+    const fChips = [];
+    s.types.forEach((id) => fChips.push({ label: T[id].label, kind: "Type", x: () => this.toggleType(id) }));
+    if (s.status !== "all") fChips.push({ label: LBL[s.status], kind: "Status", x: () => { this.setState({ status: "all" }); this.kick(); } });
+    s.dists.forEach((id) => fChips.push({ label: DI[id].name, kind: "District", x: () => this.toggleDist(id) }));
+    const nAll = D.fleet.filter((f) => lvl === 0 || (lvl === 1 ? A[f.asset_id].district_id === s.d : f.asset_id === s.a));
+    const fInfo = { on: fChips.length > 0, chips: fChips, count: "Showing " + this.agg(scope).total + " of " + this.agg(nAll).total + " initiatives" };
+
+    const ql = s.q.trim().toLowerCase();
+    const results = !ql ? [] : D.districts.filter((d) => hasD(d.id) && d.name.toLowerCase().includes(ql)).map((d) => ({ label: d.name, sub: D.assets.filter((a) => a.district_id === d.id && hasA(a.id)).length + " assets", kind: "District", go: (ev) => { ev && ev.preventDefault && ev.preventDefault(); this.goDistrict(d.id); } }))
+      .concat(D.assets.filter((a) => hasA(a.id) && (a.name + " " + DI[a.district_id].name).toLowerCase().includes(ql)).map((a) => ({ label: a.name, sub: DI[a.district_id].name + " · " + a.asset_type, kind: "Asset", go: (ev) => { ev && ev.preventDefault && ev.preventDefault(); this.goAsset(a.id); } }))).slice(0, 7);
+
+    const tab = s.tab || "map", setTab = (k) => this.setState({ tab: k, legend: false });
+    const TI = { map: '<path d="M9 4L3 6.5v13L9 17l6 2.5 6-2.5v-13L15 7 9 4z"/><path d="M9 4v13M15 7v12.5"/>', details: '<path d="M4 6h16M4 12h16M4 18h10"/>', filters: '<path d="M4 6h16M7 12h10M10 18h4"/>', menu: '<circle cx="12" cy="12" r="8.5"/><path d="M8 10h8M8 14h8"/>' };
+    const tabIcon = (k, c) => this.u("tab" + k + c, () => '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="' + c + '" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' + TI[k] + "</svg>");
+    const nF = s.types.length + (s.status !== "all" ? 1 : 0) + s.dists.length;
+    const tabs = [["map", "Map"], ["details", "Details"], ["filters", "Filters"], ["menu", "Menu"]].map((x) => { const on = tab === x[0]; return { label: x[1], go: () => setTab(x[0]), cur: on ? "page" : "false", icon: tabIcon(x[0], on ? "#FFFFFF" : "#9DB9E0"), fg: on ? "#FFFFFF" : "#9DB9E0", bg: on ? "rgba(118,156,210,0.16)" : "transparent", ind: on ? "#769CD2" : "transparent", hasBadge: x[0] === "filters" && nF > 0, badge: nF }; });
+    const selB = (on) => ({ bd: on ? "#769CD2" : "rgba(var(--pInk,11,11,11),0.18)", bg: on ? "var(--pF2F5FA,#F2F5FA)" : "transparent", fw: on ? "500" : "400", check: on ? "✓" : "", pressed: String(on) });
+    const mTypes = D.robot_types.map((t) => Object.assign({ label: t.label, icon: this.iconU(t.id, t.ink), toggle: () => this.toggleType(t.id) }, selB(s.types.includes(t.id))));
+    const mStatus = [["all", "All", "All statuses"], ["deployed", "Launched", "Solid · launched, or tested and launched"], ["pilot", "Trialled", "Broken · tested or testing in progress"], ["planned", "Pending", "Outline · test pending"]].map((o) => Object.assign({ label: o[1], tip: o[2], g: o[0] === "all" ? "" : G[o[0]], hasG: o[0] !== "all", go: () => { this.setState({ status: o[0] }); this.kick(); } }, selB(s.status === o[0])));
+    const mDists = D.districts.map((d) => Object.assign({ label: d.name, toggle: () => this.toggleDist(d.id) }, selB(s.dists.includes(d.id))));
+    const nShow = this.agg(scope).total;
+    const mapSplit = ["deployed", "pilot", "planned"].map((k) => ({ g: GL[k], n: g[k], l: LBL[k] }));
+    const mResults = results.map((x) => Object.assign({}, x, { go: (ev) => { x.go(ev); setTab("details"); } }));
+    const dkT = this.theme() === "dark";
+    const isEmpty = g.total === 0;
+    const hv = s.hov;
+    return Object.assign(refs, {
+      q: s.q, results, showResults: !!ql && s.qFocus, noResults: !!ql && !results.length,
+      onQ: (ev) => this.setState({ q: ev.target.value }),
+      onQFocus: () => this.setState({ qFocus: true }), onQBlur: () => setTimeout(() => this.setState({ qFocus: false }), 120),
+      onQKey: (ev) => { if (ev.key === "Enter" && results[0]) results[0].go(); if (ev.key === "Escape") this.setState({ q: "" }); },
+      asOf: D.meta.data_as_of, source: D.meta.source, sampleNote: D.meta.sample_note,
+      resetAll: () => { this.setState({ types: [], status: "all", dists: [], q: "", tab: "map" }); this.goPortfolio(); },
+      clearFilters: () => { this.setState({ types: [], status: "all", dists: [] }); this.kick(); },
+      typeChips: D.robot_types.map((t) => { const on = s.types.includes(t.id); return { label: t.label, icon: this.iconU(t.id, on ? t.color : "#C9D6EA"), toggle: () => this.toggleType(t.id), pressed: String(on), bd: on ? t.color : "rgba(255,255,255,0.18)", bg: on ? "rgba(118,156,210,0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
+      statusOpts: [["all", "All", "All statuses"], ["deployed", "Launched", "Solid · launched, or tested and launched"], ["pilot", "Trialled", "Broken · tested or testing in progress"], ["planned", "Pending", "Outline · test pending"]].map((o) => { const on = s.status === o[0]; return { label: o[1], tip: o[2], g: o[0] === "all" ? "" : on ? this.nodeU(o[0], INK) : GL[o[0]], hasG: o[0] !== "all", pressed: String(on), bg: on ? "#DCE7F6" : "transparent", fg: on ? "#12102A" : "rgba(255,255,255,0.8)", go: () => { this.setState({ status: o[0] }); this.kick(); } }; }),
+      distChips: D.districts.map((d) => { const on = s.dists.includes(d.id); return { label: d.name, toggle: () => this.toggleDist(d.id), pressed: String(on), bd: on ? "#9DB9E0" : "rgba(255,255,255,0.18)", bg: on ? "rgba(118,156,210,0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
+      legendTypes: D.robot_types.map((t) => ({ label: t.label, icon: this.iconU(t.id, t.color) })),
+      legendOpen: s.legend, legendOpenS: String(s.legend), legendSign: s.legend ? "−" : "+", toggleLegend: () => this.setState((st) => ({ legend: !st.legend })),
+      lvlTag: ["Lvl 01 · Portfolio", "Lvl 02 · District", "Lvl 03 · Asset"][lvl],
+      mapTitle: lvl === 0 ? "Abu Dhabi" : lvl === 1 ? dist.name : ast.name,
+      mapSub: lvl === 0 ? "Select a district to drill in" : lvl === 1 ? (dist.geometry ? "Select a location node" : "These items have no fixed map location") : (ast.lat == null ? "No fixed map location" : dist.name + " · " + ast.lat.toFixed(4) + "°N " + ast.lng.toFixed(4) + "°E"),
+      tab, isMap: tab === "map", isDetails: tab === "details", isFilters: tab === "filters", isMenu: tab === "menu", tabs, mTypes, mStatus, mDists, mapSplit, mResults, showMRes: !!ql,
+      goMap: () => setTab("map"), goDetails: () => setTab("details"), goMenu: () => setTab("menu"),
+      showLbl: "Show " + nShow + (nShow === 1 ? " initiative" : " initiatives"),
+      sortK: s.sort.k, sortOpts: COLS.map((c) => ({ k: c[0], label: c[1] })), onSortK: (ev) => { const k = ev.target.value; this.setState({ sort: { k, dir: k === "name" || k === "dom" ? 1 : -1 } }); },
+      flipSort: () => this.setState((st) => ({ sort: { k: st.sort.k, dir: -st.sort.dir } })), sortArrow: s.sort.dir > 0 ? "▲" : "▼", sortDirLbl: s.sort.dir > 0 ? "Ascending, tap for descending" : "Descending, tap for ascending",
+      unitsAria: uT.n + " robotic units. " + (uT.unk ? "+ " + uT.unk + " initiatives uncounted" : "All initiatives counted") + ". Open menu",
+      mDkBg: dkT ? "var(--p12102A,#12102A)" : "transparent", mDkFg: dkT ? "var(--pFFFFFF,#FFFFFF)" : "var(--p12102A,#12102A)", mLtBg: !dkT ? "var(--p12102A,#12102A)" : "transparent", mLtFg: !dkT ? "var(--pFFFFFF,#FFFFFF)" : "var(--p12102A,#12102A)",
+      canBack: lvl > 0, back: () => this.back(), crumbs, picker, stepNo, stepTxt, fInfo, unitsTotal: uT.n, unitsSub: uT.unk ? "+ " + uT.unk + " initiatives uncounted" : "All initiatives counted", unitsTip: "Sum of stated units across " + uT.k + " initiatives. " + uT.unk + " initiatives have no unit count in the tracker yet.",
+      isDark: this.theme() === "dark", isLight: this.theme() === "light", setDark: () => this.setTheme("dark"), setLight: () => this.setTheme("light"),
+      dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
+      openImport: () => this.setState({ impOpen: true, pw: "", pwErr: false, impMsg: "" }),
+      closeImport: () => this.setState({ impOpen: false, pw: "" }), stop: (ev) => ev.stopPropagation(),
+      impOpen: !!s.impOpen, impLocked: !s.unlocked, impUnlocked: !!s.unlocked, pw: s.pw || "", pwErr: !!s.pwErr, pwBd: s.pwErr ? "#B0501E" : "rgba(11,11,11,0.2)",
+      onPw: (ev) => this.setState({ pw: ev.target.value, pwErr: false }), onPwKey: (ev) => { if (ev.key === "Enter") this.unlock(); }, unlock: () => this.unlock(),
+      fileRef: this.fileRef, pickFile: () => this.fileEl && this.fileEl.click(), onFile: (ev) => this.onFile(ev),
+      impHasMsg: !!s.impMsg, impMsg: s.impMsg || "", impMsgColor: s.impOk ? "#2F7F72" : "#B0501E",
+      hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
+      typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
+      fleetRows, splitLegend, ringBig: this.ringU(g, 76, 33, 4), hasAny: !isEmpty, inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
+      scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,
+      hoverScan: hv ? React.createElement("div", { key: "hs" + hv.k, style: { position: "absolute", left: hv.x, top: hv.y, width: hv.w, height: hv.h, clipPath: hv.clip, WebkitClipPath: hv.clip, zIndex: 1, pointerEvents: "none", overflow: "hidden" } }, React.createElement("div", { style: { position: "absolute", left: 0, right: 0, height: "45%", top: "-45%", background: "linear-gradient(180deg,rgba(118,156,210,0) 0%,rgba(118,156,210,0.2) 85%,rgba(220,231,246,0.85) 100%)", animation: "rrSweep 1.1s cubic-bezier(.4,0,.2,1) forwards" } })) : null
+    });
+  }
+}
+
+const ICON = {
+  cleaning: '<rect x="4.5" y="5" width="15" height="10.5" rx="2"/><path d="M8 9.5h8"/><circle cx="8" cy="18.5" r="1.8"/><circle cx="16" cy="18.5" r="1.8"/>',
+  sweeping: '<path d="M3 20.5h18"/><path d="M15.5 3.5l-3.5 9"/><path d="M8.5 12.5h7l1.8 5.2H6.7z"/><path d="M10.3 17.7l.4-2.4M13.7 17.7l-.3-2.4"/>',
+  security: '<path d="M12 3l7 2.8v5.4c0 4.6-3 7.9-7 9.8-4-1.9-7-5.2-7-9.8V5.8z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16"/>',
+  delivery: '<path d="M4 7.8L12 4l8 3.8v8.4L12 20l-8-3.8z"/><path d="M4 7.8l8 3.8 8-3.8M12 11.6V20"/><path d="M8 5.9l8 3.8"/>',
+  facade: '<rect x="5" y="3" width="14" height="18"/><path d="M5 8h14M5 13h14M5 18h14M12 3v18"/><rect x="13.5" y="9.5" width="4" height="2.5"/>',
+  inspection: '<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/><path d="M7.5 10.5h6M10.5 7.5v6"/>',
+  engagement: '<rect x="4" y="4.5" width="16" height="11" rx="2"/><circle cx="9.5" cy="10" r="1.1"/><circle cx="14.5" cy="10" r="1.1"/><path d="M9 19.5l3-4 3 4"/>'
+};
+const PW_HASH = "4d600654f8f69ea00d9cbee12c9b38eb07c04702b2694c994faf4f9c43a8bf62";
+function parseCsv(s) {
+  const out = []; let row = [], f = "", q = false;
+  for (let i = 0; i < s.length; i++) {
+    const c = s[i];
+    if (q) { if (c === '"') { if (s[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
+    else if (c === '"') q = true; else if (c === ",") { row.push(f); f = ""; } else if (c === "\n" || c === "\r") { if (c === "\r" && s[i + 1] === "\n") i++; row.push(f); out.push(row); row = []; f = ""; } else f += c;
+  }
+  if (f || row.length) { row.push(f); out.push(row); }
+  return out;
+}
+function pad(n) { return (n < 10 ? "0" : "") + n; }
+function nodeSvg(st, c) {
+  const o = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">';
+  if (st === "deployed") return o + '<circle cx="6" cy="6" r="5" fill="' + c + '"/></svg>';
+  if (st === "pilot") return o + '<defs><pattern id="h" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="1.2" height="2.6" fill="' + c + '"/></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#h)" stroke="' + c + '" stroke-width="1.2"/></svg>';
+  return o + '<circle cx="6" cy="6" r="4.6" fill="none" stroke="' + c + '" stroke-width="1.2"/></svg>';
+}
+function arcPath(c, R, a0, a1) {
+  const p = (a) => [c + R * Math.sin(a), c - R * Math.cos(a)], s = p(a0), e = p(a1);
+  return "M" + s[0].toFixed(2) + " " + s[1].toFixed(2) + " A" + R + " " + R + " 0 " + (a1 - a0 > Math.PI ? 1 : 0) + " 1 " + e[0].toFixed(2) + " " + e[1].toFixed(2);
+}
+function ringSvg(g, S, R, dark, sw) {
+  const c = S / 2, ink = dark ? "#DCE7F6" : "#12102A", t = g.total;
+  let o = '<svg xmlns="http://www.w3.org/2000/svg" width="' + S + '" height="' + S + '" viewBox="0 0 ' + S + " " + S + '" style="position:absolute;left:0;top:0;overflow:visible">';
+  if (!t) return o + '<circle cx="' + c + '" cy="' + c + '" r="' + R + '" fill="none" stroke="' + ink + '" stroke-opacity="0.35" stroke-width="1" stroke-dasharray="1 3"/></svg>';
+  const segs = [["deployed", g.deployed], ["pilot", g.pilot], ["planned", g.planned]].filter((x) => x[1] > 0);
+  const gap = segs.length > 1 ? Math.min(0.14, 3.5 / R) : 0; let a = 0;
+  segs.forEach((x) => {
+    const span = (2 * Math.PI * x[1]) / t, a0 = a + gap / 2, a1 = a + span - gap / 2; a += span;
+    const st = x[0] === "deployed" ? 'stroke-width="' + sw + '"' : x[0] === "pilot" ? 'stroke-width="' + sw + '" stroke-dasharray="' + (sw * 0.55).toFixed(2) + " " + (sw * 0.55).toFixed(2) + '"' : 'stroke-width="' + Math.max(1, sw * 0.28).toFixed(2) + '" stroke-opacity="0.75"';
+    o += segs.length === 1 ? '<circle cx="' + c + '" cy="' + c + '" r="' + R + '" fill="none" stroke="' + ink + '" ' + st + "/>" : '<path d="' + arcPath(c, R, a0, a1) + '" fill="none" stroke="' + ink + '" ' + st + "/>";
+  });
+  return o + "</svg>";
+}
+function glyphHtml(st) { return '<img alt="" src="data:image/svg+xml;utf8,' + encodeURIComponent(nodeSvg(st, "#DCE7F6")) + '" style="width:9px;height:9px;display:block">'; }
+function splitHtml(g) {
+  return '<span style="display:flex;gap:10px;font-size:10px;color:rgba(255,255,255,0.82);font-variant-numeric:tabular-nums">' +
+    [["deployed", "launched"], ["pilot", "trial"], ["planned", "pend."]].map((x) => '<span style="display:flex;align-items:center;gap:4px">' + glyphHtml(x[0]) + g[x[0]] + " " + x[1] + "</span>").join("") + "</span>";
+}
+function miniTip(label, hint) {
+  return '<div style="display:flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:0.02em">' + label + (hint ? '<span style="width:1px;height:10px;background:rgba(157,185,224,0.4)"></span><span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0">' + hint + ' →</span>' : "") + "</div>";
+}
+function tipHtml(title, g, hint) {
+  return '<div style="display:flex;flex-direction:column;gap:5px"><b style="font-size:12px;font-weight:500">' + title + '</b><span style="font-size:11px;color:rgba(255,255,255,0.82)">' + g.total + ' robots' + (g.sample ? ' <span style="color:#F2A27C;font-size:8.5px;letter-spacing:0.14em">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g) + '<i style="font-style:normal;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0">' + hint + "</i></div>";
+}
+function badgeHtml(d, g, compact, dim) {
+  const tk = (p) => '<span style="position:absolute;' + p + ';width:6px;height:6px;border-color:#DCE7F6;border-style:solid;border-width:0"></span>';
+  return '<div style="position:absolute;left:0;top:0;transform:' + ({ right: "translate(calc(-100% - 8px),-50%)", left: "translate(8px,-50%)", top: "translate(-50%,calc(-100% - 8px))", bottom: "translate(-50%,8px)" }[d.badge_align] || "translate(-50%,-50%)") + ';white-space:nowrap;background:rgba(18,16,42,0.9);border:1px solid rgba(118,156,210,0.55);padding:' + (compact ? "6px 9px" : "9px 12px 10px") + ";display:flex;flex-direction:column;gap:4px;font-family:Poppins,sans-serif;color:#fff;cursor:pointer;opacity:" + (dim ? 0.5 : 1) + ';transition:opacity .4s;">' +
+    tk("left:-1px;top:-1px;border-left-width:1px;border-top-width:1px") + tk("right:-1px;bottom:-1px;border-right-width:1px;border-bottom-width:1px") +
+    '<span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0">' + d.name + "</span>" +
+    (compact ? '<span style="font-size:15px;font-weight:300;line-height:1">' + pad(g.total) + ' <span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.7)">INITIATIVES</span></span>'
+      : '<span style="display:flex;align-items:baseline;gap:8px"><b style="font-size:28px;font-weight:200;line-height:1;letter-spacing:-0.02em">' + pad(g.total) + '</b><span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.72)">INITIATIVES</span>' + (g.sample ? '<span style="font-size:8px;font-weight:600;letter-spacing:0.14em;color:#F2A27C">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g)) +
+    "</div>";
+}
+function markerHtml(a, g, on, dim, ly, sc) {
+  sc = sc || 1;
+  const n = g.total, r = Math.round((10 + Math.sqrt(Math.min(n, 12)) * 4.5) * sc), S = 2 * r + Math.round(16 * sc), c = S / 2, R = r + Math.round(4 * sc), side = ly.side || "right", dx = Math.round(ly.dx), dy = Math.round(ly.dy), moved = Math.hypot(dx, dy) > 2;
+  const lead = moved ? '<svg width="' + S + '" height="' + S + '" style="position:absolute;left:0;top:0;overflow:visible;pointer-events:none"><line x1="' + c + '" y1="' + c + '" x2="' + (c - dx) + '" y2="' + (c - dy) + '" stroke="#9DB9E0" stroke-opacity="0.75" stroke-width="1" stroke-dasharray="2 3"/><circle cx="' + (c - dx) + '" cy="' + (c - dy) + '" r="2.5" fill="#12102A" stroke="#DCE7F6" stroke-width="1"/></svg>' : "";
+  const fs = Math.max(11, Math.round(13 * sc)), gp = Math.round(3 * sc);
+  const pos = side === "left" ? "right:" + (S - (S / 2 - r) + gp) + "px;top:50%;transform:translateY(-50%);" : side === "top" ? "left:50%;bottom:" + (S - (S / 2 - r) + gp) + "px;transform:translateX(-50%);" : side === "bottom" ? "left:50%;top:" + (S - (S / 2 - r) + gp) + "px;transform:translateX(-50%);" : "left:" + (S - (S / 2 - r) + gp) + "px;top:50%;transform:translateY(-50%);";
+  const html = '<div style="position:relative;width:' + S + "px;height:" + S + "px;opacity:" + (dim ? 0.4 : n ? 1 : 0.45) + ';transition:opacity .4s;font-family:Poppins,sans-serif;cursor:pointer">' +
+    lead + (on ? '<span style="position:absolute;inset:0;border-radius:50%;border:1px solid #DCE7F6;animation:rrPulse 1.9s ease-out infinite"></span>' : "") +
+    ringSvg(g, S, R, true, Math.max(2, 2.6 * sc)) +
+    '<span style="position:absolute;left:' + (c - r + 3) + "px;top:" + (c - r + 3) + "px;width:" + (2 * r - 6) + "px;height:" + (2 * r - 6) + "px;border-radius:50%;background:" + (on ? "#DCE7F6" : "#12102A") + ";border:1px solid rgba(157,185,224,0.85);box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:" + Math.max(9, Math.round(11 * sc)) + "px;font-weight:500;color:" + (on ? "#12102A" : "#fff") + ';font-variant-numeric:tabular-nums">' + pad(n) + "</span>" +
+    (ly.hide ? "" : '<span style="position:absolute;' + pos + 'white-space:nowrap;font-size:' + fs + 'px;line-height:1.2;font-weight:500;letter-spacing:0.01em;color:' + (on ? "#12102A" : "#fff") + ';padding:5px 9px;background:' + (on ? "#DCE7F6" : "rgba(18,16,42,0.96)") + ';border:1px solid ' + (on ? "#DCE7F6" : "rgba(157,185,224,0.55)") + ';box-shadow:0 4px 14px rgba(0,0,0,0.45)">' + a.short + "</span>") + "</div>";
+  return { html, S, dx, dy };
+}
+</script>
+
+
+</body></html>

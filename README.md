@@ -27,3 +27,7 @@ Every push to `main` redeploys automatically.
 
 ## Run locally
 `python3 -m http.server` in this folder, then open http://localhost:8000.
+
+## Phone app (home screen)
+The site installs like an app. On iPhone, open it in Safari, tap **Share → Add to Home Screen**. It gets the Aldar logo as its icon, is named "Aldar Robotics", and opens full screen without the browser bar.
+Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`.

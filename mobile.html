@@ -1246,8 +1246,6 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
           <section style="display:flex;flex-direction:column;gap:8px">
             <button sc-camel-on-click="{{ resetAll }}" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.2);color:var(--p12102A,#12102A);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;cursor:pointer" style-active="background:var(--pF2F5FA,#F2F5FA)"><svg sc-camel-view-box="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"></path><path d="M4 4v4h4"></path></svg>Reset to portfolio</button>
-            <button sc-camel-on-click="{{ openImport }}" style="display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;background:var(--p12102A,#12102A);border:0;color:var(--pFFFFFF,#FFFFFF);font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;cursor:pointer"><svg sc-camel-view-box="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 15V4M7 9l5-5 5 5M5 20h14"></path></svg>Import</button>
-            <span style="font-size:13px;color:var(--p515150,#515150)">Import tracker data (password required)</span>
           </section>
 
           <div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);font-size:13px;line-height:1.5;color:var(--p515150,#515150)">
@@ -1267,35 +1265,6 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
     </sc-for>
   </nav>
 
-  <sc-if value="{{ impOpen }}" hint-placeholder-val="{{ false }}">
-    <div sc-camel-on-click="{{ closeImport }}" style="position:fixed;inset:0;z-index:3000;background:rgba(11,10,31,0.62);display:flex;align-items:flex-end;justify-content:center">
-      <div role="dialog" aria-modal="true" aria-label="Import data" sc-camel-on-click="{{ stop }}" style="position:relative;width:100%;max-height:90dvh;overflow-y:auto;box-sizing:border-box;background:#FFFFFF;padding:22px calc(env(safe-area-inset-right) + 16px) calc(env(safe-area-inset-bottom) + 22px) calc(env(safe-area-inset-left) + 16px);display:flex;flex-direction:column;gap:16px;font-family:Poppins,sans-serif">
-        <span style="position:absolute;left:0;top:0;width:14px;height:14px;border-left:2px solid #769CD2;border-top:2px solid #769CD2"></span>
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px">
-          <span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;color:#3F6FAE">Import tracker data</span>
-          <button sc-camel-on-click="{{ closeImport }}" aria-label="Close" style="width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(11,11,11,0.14);cursor:pointer;color:#12102A;font-size:20px;line-height:1">×</button>
-        </div>
-        <sc-if value="{{ impLocked }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <span style="font-size:22px;font-weight:300;color:#12102A;letter-spacing:-0.01em">Enter password</span>
-            <span style="font-size:15px;line-height:1.55;color:#515150">Importing replaces the fleet data shown on the map and in the panel.</span>
-            <input type="password" value="{{ pw }}" sc-camel-on-change="{{ onPw }}" sc-camel-on-key-down="{{ onPwKey }}" aria-label="Password" placeholder="Password" enterkeyhint="go" style="width:100%;min-height:48px;box-sizing:border-box;border:1px solid {{ pwBd }};border-radius:0;background:#FAFAF8;padding:0 14px;font-family:Poppins,sans-serif;font-size:16px;color:#12102A;outline:none;-webkit-appearance:none">
-            <sc-if value="{{ pwErr }}" hint-placeholder-val="{{ false }}"><span style="font-size:14px;color:#B0501E">Incorrect password. Try again.</span></sc-if>
-            <button sc-camel-on-click="{{ unlock }}" style="min-height:48px;background:#12102A;border:0;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;padding:0 20px;cursor:pointer">Unlock</button>
-          </div>
-        </sc-if>
-        <sc-if value="{{ impUnlocked }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;flex-direction:column;gap:12px">
-            <span style="font-size:22px;font-weight:300;color:#12102A;letter-spacing:-0.01em">Choose a file</span>
-            <span style="font-size:15px;line-height:1.55;color:#515150">Export the tracker sheet from Excel as CSV and select it here. Columns are matched by header: #, Category, Use Case, Vendor, Model, Location, Owner, Status, Latest Update, Description, Entity, Funded By, Stage, Next Steps. Robot type is read from the use case. Locations are matched by name; rows with an unknown location are skipped and listed. Changes apply to this session only.</span>
-            <input ref="{{ fileRef }}" type="file" accept=".csv,.json,text/csv,application/json" sc-camel-on-change="{{ onFile }}" style="display:none">
-            <button sc-camel-on-click="{{ pickFile }}" style="min-height:48px;background:#12102A;border:0;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:12px;padding:0 20px;cursor:pointer">Select file</button>
-            <sc-if value="{{ impHasMsg }}" hint-placeholder-val="{{ false }}"><span style="font-size:15px;line-height:1.5;color:{{ impMsgColor }}">{{ impMsg }}</span></sc-if>
-          </div>
-        </sc-if>
-      </div>
-    </div>
-  </sc-if>
 </div>
 </x-dc>
 <script type="text/x-dc" data-dc-script="" data-props="{&quot;$preview&quot;:{&quot;width&quot;:390,&quot;height&quot;:844}}">
@@ -1598,45 +1567,6 @@ class Component extends DCLogic {
     }, ms == null ? 250 : ms);
   }
   mapOk() { const m = this.map; return !!(m && m._loaded && m._mapPane && m.getContainer && m.getContainer().isConnected); }
-  fileRef = (n) => { if (n) this.fileEl = n; };
-  async unlock() {
-    const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(this.state.pw || ""));
-    const h = Array.from(new Uint8Array(b)).map((x) => x.toString(16).padStart(2, "0")).join("");
-    if (h === PW_HASH) this.setState({ unlocked: true, pw: "", pwErr: false }); else this.setState({ pwErr: true });
-  }
-  onFile(ev) {
-    const f = ev.target.files && ev.target.files[0]; if (!f) return;
-    const rd = new FileReader();
-    rd.onload = () => { try { const n = this.applyImport(String(rd.result), f.name); const n2 = n; const sk = this.skipped || []; this.setState({ impMsg: "Imported " + n2 + " rows from " + f.name + "." + (sk.length ? " Skipped " + sk.length + " with unknown location: " + Array.from(new Set(sk)).join(", ") + "." : ""), impOk: true }); } catch (err) { this.setState({ impMsg: "Could not import: " + err.message, impOk: false }); } ev.target.value = ""; };
-    rd.readAsText(f);
-  }
-  applyImport(text, name) {
-    const D = window.FLEET_DATA;
-    if (/\.json$/i.test(name) || /^\s*[\[{]/.test(text)) {
-      const j = JSON.parse(text);
-      if (Array.isArray(j)) D.fleet = j; else { if (!j.fleet) throw new Error("JSON needs a fleet array"); Object.assign(D, j); }
-    } else {
-      const rows = parseCsv(text); if (rows.length < 2) throw new Error("no data rows");
-      const AL = { "#": "id", "no": "id", "use_case": "use_case", "usecase": "use_case", "site": "location", "asset": "location", "status": "tracker_status", "update": "latest_update", "latest_update": "latest_update", "description": "scope", "funded": "funded_by", "funding": "funded_by", "next_step": "next_steps", "units": "units_stated", "robot_count": "units_stated", "type": "robot_type" };
-      const h = rows[0].map((x) => { const k = x.trim().toLowerCase().replace(/[^a-z0-9#]+/g, "_").replace(/^_|_$/g, ""); return AL[k] || k; }), col = (r, k) => { const i = h.indexOf(k); return i < 0 ? "" : (r[i] || "").trim(); };
-      if (h.indexOf("location") < 0 || h.indexOf("tracker_status") < 0) throw new Error("missing location or tracker_status column");
-      const ST = { "tested": "pilot", "testing in progress": "pilot", "tested and contracted": "deployed", "tested and launched": "deployed", "contracted": "deployed", "launched": "deployed", "test pending": "planned" };
-      const fleet = [], skipped = [];
-      rows.slice(1).filter((r) => r.some((c) => c.trim())).forEach((r, i) => {
-        const loc = col(r, "location"); let a = D.assets.find((x) => x.name.toLowerCase() === loc.toLowerCase() || x.id === loc.toLowerCase());
-        if (!a) { skipped.push(loc || "(blank)"); return; }
-        const rt = col(r, "robot_type").toLowerCase(), uc = col(r, "use_case").toLowerCase();
-        const guess = /fa[cç]ade/.test(uc) ? "facade" : /inspect|cavity|drone insp/.test(uc) ? "inspection" : /secur|patrol/.test(uc) ? "security" : /deliver/.test(uc) ? "delivery" : /engag|concierge|visitor|guest|humanoid/.test(uc) ? "engagement" : "cleaning";
-        const ty = D.robot_types.find((x) => x.id === rt || x.label.toLowerCase() === rt) || D.robot_types.find((x) => x.id === guess);
-        const ts = /^tested\s*(and|&|\+)\s*launched$/i.test(col(r, "tracker_status").trim()) ? "Launched" : col(r, "tracker_status"), u = col(r, "units_stated");
-        fleet.push({ id: col(r, "id") || String(i + 1), category: col(r, "category"), use_case: col(r, "use_case"), robot_type: ty.id, vendor: col(r, "vendor"), model: col(r, "model"), asset_id: a.id, owner: col(r, "owner"), tracker_status: ts, status: ST[ts.toLowerCase()] || "planned", stage: col(r, "stage"), entity: col(r, "entity"), funded_by: col(r, "funded_by"), units: u === "" ? null : Number(u), update: col(r, "latest_update"), description: col(r, "scope"), next_steps: col(r, "next_steps") });
-      });
-      if (!fleet.length) throw new Error("no rows matched a known location");
-      D.fleet = fleet; this.skipped = skipped;
-    }
-    this.idxDone = false; this.idx(D); this.sig = null; this.syncMap(); this.goPortfolio();
-    return D.fleet.length;
-  }
   exportCsv() {
     const s = this.state, D = window.FLEET_DATA, A = this.A, T = this.T, rows = this.rows();
     let head, body, name;
@@ -1788,12 +1718,6 @@ class Component extends DCLogic {
       canBack: lvl > 0, back: () => this.back(), crumbs, picker, stepNo, stepTxt, fInfo, unitsTotal: uT.n, unitsSub: uT.unk ? "+ " + uT.unk + " initiatives uncounted" : "All initiatives counted", unitsTip: "Sum of stated units across " + uT.k + " initiatives. " + uT.unk + " initiatives have no unit count in the tracker yet.",
       isDark: this.theme() === "dark", isLight: this.theme() === "light", setDark: () => this.setTheme("dark"), setLight: () => this.setTheme("light"),
       dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
-      openImport: () => this.setState({ impOpen: true, pw: "", pwErr: false, impMsg: "" }),
-      closeImport: () => this.setState({ impOpen: false, pw: "" }), stop: (ev) => ev.stopPropagation(),
-      impOpen: !!s.impOpen, impLocked: !s.unlocked, impUnlocked: !!s.unlocked, pw: s.pw || "", pwErr: !!s.pwErr, pwBd: s.pwErr ? "#B0501E" : "rgba(11,11,11,0.2)",
-      onPw: (ev) => this.setState({ pw: ev.target.value, pwErr: false }), onPwKey: (ev) => { if (ev.key === "Enter") this.unlock(); }, unlock: () => this.unlock(),
-      fileRef: this.fileRef, pickFile: () => this.fileEl && this.fileEl.click(), onFile: (ev) => this.onFile(ev),
-      impHasMsg: !!s.impMsg, impMsg: s.impMsg || "", impMsgColor: s.impOk ? "#2F7F72" : "#B0501E",
       hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: this.ringU(g, 76, 33, 4), hasAny: !isEmpty, inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
@@ -1812,17 +1736,6 @@ const ICON = {
   inspection: '<circle cx="10.5" cy="10.5" r="6"/><path d="M15 15l5 5"/><path d="M7.5 10.5h6M10.5 7.5v6"/>',
   engagement: '<rect x="4" y="4.5" width="16" height="11" rx="2"/><circle cx="9.5" cy="10" r="1.1"/><circle cx="14.5" cy="10" r="1.1"/><path d="M9 19.5l3-4 3 4"/>'
 };
-const PW_HASH = "4d600654f8f69ea00d9cbee12c9b38eb07c04702b2694c994faf4f9c43a8bf62";
-function parseCsv(s) {
-  const out = []; let row = [], f = "", q = false;
-  for (let i = 0; i < s.length; i++) {
-    const c = s[i];
-    if (q) { if (c === '"') { if (s[i + 1] === '"') { f += '"'; i++; } else q = false; } else f += c; }
-    else if (c === '"') q = true; else if (c === ",") { row.push(f); f = ""; } else if (c === "\n" || c === "\r") { if (c === "\r" && s[i + 1] === "\n") i++; row.push(f); out.push(row); row = []; f = ""; } else f += c;
-  }
-  if (f || row.length) { row.push(f); out.push(row); }
-  return out;
-}
 function pad(n) { return (n < 10 ? "0" : "") + n; }
 function nodeSvg(st, c) {
   const o = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12">';

@@ -16,6 +16,10 @@
      robot_types, units.
      For a hand-entered figure use {"label": "...", "value": "..."} instead.
      Remove an item to hide it; reorder to change its position.
+   videos = optional list of footage for a deployment, shown on its card,
+     in the player and in the "Watch deployments" gallery. Each item:
+     {"src": "assets/video/<file>.mp4", "poster": "assets/video/<file>.jpg",
+      "title": "Short caption", "duration": seconds}
    coord_approx = true -> map point estimated, confirm location.
    Districts: OpenStreetMap outlines (Nominatim, ODbL), lightly simplified.
    ========================================================================== */
@@ -1159,7 +1163,12 @@ window.FLEET_DATA = {
    "update": "• PoC at Yas Park Gate validated 360° capture, thermal imaging and manoeuvrability\n• Live field trial at Noya 4 Townhouse (3 Sep): visual and thermal checks, incl. MDB/SMDB panels\n• Side-by-side comparison with traditional snagging completed\n• Report shared with Analog; vendor reviewing to improve outputs",
    "description": "Deploy a Boston Dynamics Spot quadruped robot at Yas Park Gate, operated by Analog, to conduct handover inspections using RGB and thermal imaging. Designed to assess whether a ground-based robotic platform could enhance defect detection and documentation quality during unit handover. Captured data to be analysed by AI for defects and snags.",
    "next_steps": "Awaiting review",
-   "units": 1
+   "units": 1,
+   "videos": [
+    {"src": "assets/video/07-analog-spot-01.mp4", "poster": "assets/video/07-analog-spot-01.jpg", "title": "Climbing stairs", "duration": 7},
+    {"src": "assets/video/07-analog-spot-02.mp4", "poster": "assets/video/07-analog-spot-02.jpg", "title": "Exterior walk-round", "duration": 8},
+    {"src": "assets/video/07-analog-spot-03.mp4", "poster": "assets/video/07-analog-spot-03.jpg", "title": "Interior inspection", "duration": 19}
+   ]
   },
   {
    "id": "08",

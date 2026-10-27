@@ -57,7 +57,7 @@ TYPE_PATTERNS = [
 MONEY = r"\$\s?(\d+(?:\.\d+)?)\s?(m|mn|million|bn|b|billion)\b"
 
 # Market-size press releases and similar filler, dropped before curation.
-NOISE_TITLE = r"surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
+NOISE_TITLE = r"round-?up|recap|week in review|this week in|industry insights|newsletter|digest|robotic raises|video friday|surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
 NOISE_SOURCES = {"openpr.com", "ein presswire", "einpresswire", "marketsandmarkets", "taiwannews", "barchart", "benzinga", "seeking alpha", "the globe and mail", "fool.com", "the motley fool", "insidermonkey"}
 # When several outlets cover the same story, show the one from the best-known outlet.
 TRUSTED_SOURCES = ["reuters", "bloomberg", "financial times", "the wall street journal", "techcrunch", "the robot report",
@@ -256,27 +256,37 @@ def enrich(item: dict, config: dict) -> None:
             break
     item["amount_usd_m"] = None
     item["money"] = money_values(title)
+    item["money_all"] = money_values(title, include_valuations=True)
     is_fund = re.search(r"\bfund\b|venture fund", title) and not re.search(r"\braise|\bfunding\b|series", title)
     if item["type"] in ("investment", "deployment") and item["money"] and not is_fund:
         item["amount_usd_m"] = item["money"][0]
 
 
-def money_values(text: str) -> list[float]:
-    """Dollar figures in a headline, leaving out valuations (they are not money raised)."""
+def money_values(text: str, include_valuations: bool = False) -> list[float]:
+    """Dollar figures in a headline. Valuations are left out unless asked for (they are not money raised)."""
     values = []
     for m in re.finditer(MONEY, text):
-        before, after = text[max(0, m.start() - 12):m.start()], text[m.end():m.end() + 14]
-        if "valuation" in after or "valued" in before or "valuation" in before:
+        before, after = text[max(0, m.start() - 18):m.start()], text[m.end():m.end() + 14]
+        if not include_valuations and ("valuation" in after or "valued" in before or "valuation" in before):
             continue
         v = float(m.group(1))
         values.append(round(v * 1000 if m.group(2) in ("bn", "b", "billion") else v, 1))
     return values
 
 
+COMMON_NAMES = {"nvidia", "nvidia-backed", "google", "alphabet", "amazon", "microsoft", "openai", "meta", "apple",
+                "softbank", "tesla", "musk", "elon", "boston", "dynamics", "silicon", "valley", "california", "texas",
+                "new", "york", "london", "europe", "india", "japan", "korea", "germany", "series", "a16z", "andreessen"}
+
+
 def name_words(title: str) -> set[str]:
-    """Distinctive capitalised words in a headline, usually company or place names."""
+    """Distinctive capitalised words in a headline, usually company names.
+
+    Names that turn up across many unrelated stories (big backers, places) are ignored,
+    otherwise "Nvidia-backed X" and "Nvidia-backed Y" would look like the same story.
+    """
     words = re.findall(r"\b[A-Z][A-Za-z0-9&'’.-]{2,}\b", title)
-    return {w.lower().strip("'’.") for w in words} - GENERIC_WORDS
+    return {w.lower().strip("'’.") for w in words} - GENERIC_WORDS - COMMON_NAMES
 
 
 def word_set(title: str) -> set[str]:
@@ -284,19 +294,22 @@ def word_set(title: str) -> set[str]:
 
 
 def same_story(a: dict, b: dict) -> bool:
+    """Conservative test: grouping wrongly hides news, which is worse than a duplicate."""
     wa, wb = a["_words"], b["_words"]
     overlap = len(wa & wb) / max(1, len(wa | wb))
     shared_names = a["_names"] & b["_names"]
-    shared_money = set(a["money"]) & set(b["money"])
-    if overlap >= 0.45:
+    if overlap >= 0.5:
         return True
-    if shared_names and (shared_money or overlap >= 0.2):
+    if shared_names and (set(a["money_all"]) & set(b["money_all"]) or overlap >= 0.3):
         return True
-    # A company rarely has two separate funding events in one week.
+    # Two funding stories naming the same (non-generic) company in one week.
     if shared_names and a["type"] == b["type"] == "investment":
         return True
-    # The same dollar figure on the same kind of story in one week is almost always the same event.
-    return bool(shared_money) and a["type"] == b["type"] and a["type"] in ("investment", "deployment")
+    # Same headline dollar figure, same kind of story, same category: one event told two ways
+    # (e.g. "Bedrock raises $600M" and "self-driving excavators dig up $600M").
+    return (bool(a["money"]) and a["money"][:1] == b["money"][:1] and a["money"][0] >= 10
+            and a["type"] == b["type"] and a["type"] in ("investment", "deployment")
+            and a["category"] == b["category"] and overlap >= 0.25)
 
 
 def source_rank(item: dict) -> int:
@@ -345,6 +358,8 @@ def group_same_story(items: list[dict]) -> list[dict]:
         dates = [o["published"] for o in group if o["published"]]
         lead["published"] = min(dates) if dates else None
         lead["coverage"] = len(sources)
+        if len(group) > 40:
+            log(f"  note: {len(group)} articles grouped under '{lead['title'][:60]}'")
         lead["also_covered_by"] = sources[1:4]
         merged.append(lead)
     return merged

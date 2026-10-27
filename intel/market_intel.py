@@ -57,7 +57,7 @@ TYPE_PATTERNS = [
 MONEY = r"\$\s?(\d+(?:\.\d+)?)\s?(m|mn|million|bn|b|billion)\b"
 
 # Market-size press releases and similar filler, dropped before curation.
-NOISE_TITLE = r"round-?up|recap|week in review|this week in|industry insights|newsletter|digest|robotic raises|video friday|surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
+NOISE_TITLE = r"\b(jumps|surges|soars|slumps|plunges|tumbles|rallies|skyrockets) (over |nearly |more than )?\d+(\.\d+)?%|(shares?|stock)\b.{0,30}\b(rise|rises|fall|falls|drop|drops|gain|gains|climb|climbs)\b|stock market|hk stock|stock movement|round-?up|recap|week in review|this week in|industry insights|newsletter|digest|robotic raises|video friday|surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
 NOISE_SOURCES = {"openpr.com", "ein presswire", "einpresswire", "marketsandmarkets", "taiwannews", "barchart", "benzinga", "seeking alpha", "the globe and mail", "fool.com", "the motley fool", "insidermonkey"}
 # When several outlets cover the same story, show the one from the best-known outlet.
 TRUSTED_SOURCES = ["reuters", "bloomberg", "financial times", "the wall street journal", "techcrunch", "the robot report",
@@ -276,7 +276,14 @@ def money_values(text: str, include_valuations: bool = False) -> list[float]:
 
 COMMON_NAMES = {"nvidia", "nvidia-backed", "google", "alphabet", "amazon", "microsoft", "openai", "meta", "apple",
                 "softbank", "tesla", "musk", "elon", "boston", "dynamics", "silicon", "valley", "california", "texas",
-                "new", "york", "london", "europe", "india", "japan", "korea", "germany", "series", "a16z", "andreessen"}
+                "new", "york", "london", "europe", "india", "japan", "korea", "germany", "series", "a16z", "andreessen",
+                # Words that are part of many company names, so on their own they say nothing.
+                "intelligence", "artificial", "labs", "lab", "systems", "technologies", "technology", "dynamics",
+                "industries", "motors", "automation", "robotics", "machines", "innovation", "innovations", "solutions",
+                "ventures", "capital", "partners", "holdings", "international", "global", "group", "corp", "inc",
+                "first", "world", "national", "university", "institute", "research", "science", "sciences", "general",
+                "hong", "kong", "south", "north", "east", "west", "city", "state", "government", "ministry", "police",
+                "army", "navy", "force", "air", "space", "data", "cloud", "smart", "future", "next", "open", "one"}
 
 
 def name_words(title: str) -> set[str]:
@@ -286,11 +293,13 @@ def name_words(title: str) -> set[str]:
     otherwise "Nvidia-backed X" and "Nvidia-backed Y" would look like the same story.
     """
     words = re.findall(r"\b[A-Z][A-Za-z0-9&'’.-]{2,}\b", title)
-    return {w.lower().strip("'’.") for w in words} - GENERIC_WORDS - COMMON_NAMES
+    names = {re.sub(r"['’]s$", "", w.lower()).strip("'’.") for w in words}
+    return names - GENERIC_WORDS - COMMON_NAMES
 
 
 def word_set(title: str) -> set[str]:
-    return {w for w in re.findall(r"[a-z0-9]+", title.lower()) if len(w) >= 4} - GENERIC_WORDS
+    words = {w for w in re.findall(r"[a-z0-9]+", title.lower()) if len(w) >= 4} - GENERIC_WORDS
+    return {w[:-1] if len(w) > 4 and w.endswith("s") else w for w in words}  # excavators ~ excavator
 
 
 def same_story(a: dict, b: dict) -> bool:
@@ -300,7 +309,11 @@ def same_story(a: dict, b: dict) -> bool:
     shared_names = a["_names"] & b["_names"]
     if overlap >= 0.5:
         return True
-    if shared_names and (set(a["money_all"]) & set(b["money_all"]) or overlap >= 0.3):
+    # Words other than the shared names, so "Agility deploys at GXO" and "Agility deploys at AGCO"
+    # are not matched just because both say Agility.
+    ca, cb = wa - a["_names"], wb - b["_names"]
+    content = len(ca & cb) / max(1, len(ca | cb))
+    if shared_names and (set(a["money_all"]) & set(b["money_all"]) or content >= 0.1):
         return True
     # Two funding stories naming the same (non-generic) company in one week.
     if shared_names and a["type"] == b["type"] == "investment":
@@ -326,25 +339,31 @@ def group_same_story(items: list[dict]) -> list[dict]:
     The best-known outlet's version is kept, and the number of outlets is kept
     as 'coverage', which is a useful signal of how big the story is.
     """
-    # Compare every pair and join linked stories, so A~B and B~C end up in one group.
+    # Each group forms around a lead story (best-known outlet first), and an article joins only
+    # if it matches the lead or one of the first two members. That stops chains such as
+    # A~B, B~C, C~D pulling unrelated stories into one group.
     for item in items:
         item["_words"], item["_names"] = word_set(item["title"]), name_words(item["title"])
-    parent = list(range(len(items)))
-
-    def root(i):
-        while parent[i] != i:
-            parent[i] = parent[parent[i]]
-            i = parent[i]
-        return i
-
-    for i in range(len(items)):
-        for j in range(i + 1, len(items)):
-            if root(i) != root(j) and same_story(items[i], items[j]):
-                parent[root(j)] = root(i)
-    by_root: dict[int, list[dict]] = {}
-    for i, item in enumerate(items):
-        by_root.setdefault(root(i), []).append(item)
-    groups = list(by_root.values())
+    groups: list[list[dict]] = []
+    for item in sorted(items, key=source_rank):
+        for group in groups:
+            if any(same_story(item, member) for member in group[:3]):
+                group.append(item)
+                break
+        else:
+            groups.append([item])
+    # Second pass: small groups that match an early member of a bigger group join it.
+    groups.sort(key=len, reverse=True)
+    for small in sorted(groups, key=len):
+        if len(small) > 2 or small not in groups:
+            continue
+        for big in groups:
+            if big is small or len(big) < len(small):
+                continue
+            if any(same_story(small[0], member) for member in big[:5]):
+                big.extend(small)
+                groups.remove(small)
+                break
     merged = []
     for group in groups:
         group.sort(key=source_rank)

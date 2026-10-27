@@ -1,0 +1,90 @@
+{
+  "_readme": "Settings for intel/market_intel.py. Edit categories here: label, colours and search terms. 'queries' are Google News searches (global, last 7 days). 'keywords' decide which category a story belongs to.",
+  "timezone": "Asia/Dubai",
+  "lookback_days": 7,
+  "max_posts": 24,
+  "max_editions_kept": 12,
+  "max_candidates_for_ai": 150,
+  "model": "claude-opus-5-5",
+  "audience": "the executive management team of Aldar Properties, a real estate developer and asset manager in Abu Dhabi that runs robotics trials and deployments across its communities, malls, offices and construction sites",
+  "categories": [
+    {
+      "id": "construction",
+      "label": "Construction & site robotics",
+      "color": "#4FA3A5",
+      "ink": "#2C6E70",
+      "queries": ["construction robotics", "construction robot site autonomous", "autonomous excavator OR bricklaying robot OR layout robot OR rebar robot", "3D printing construction robot"],
+      "keywords": ["construction", "jobsite", "job site", "excavator", "bricklay", "brick-lay", "rebar", "drywall", "layout robot", "3d print", "earthmoving", "earthwork", "demolition", "homebuild", "prefab", "modular", "site survey"]
+    },
+    {
+      "id": "facade",
+      "label": "Façade & building maintenance",
+      "color": "#A9BC6E",
+      "ink": "#5E6E32",
+      "queries": ["facade cleaning robot", "window cleaning drone OR robot", "building maintenance robot"],
+      "keywords": ["facade", "façade", "window clean", "window-clean", "high-rise", "high rise", "cleaning drone", "soft wash", "exterior clean", "glass clean", "gondola"]
+    },
+    {
+      "id": "inspection",
+      "label": "Inspection & drones",
+      "color": "#C9A27A",
+      "ink": "#8A6236",
+      "queries": ["inspection robot", "quadruped inspection robot", "drone inspection building OR infrastructure", "robot digital twin inspection"],
+      "keywords": ["inspection", "inspect", "quadruped", "robot dog", "spot ", "survey", "mapping", "digital twin", "lidar", "thermal", "drone"]
+    },
+    {
+      "id": "cleaning",
+      "label": "Floor cleaning",
+      "color": "#769CD2",
+      "ink": "#3F6FAE",
+      "queries": ["commercial cleaning robot", "floor scrubber robot", "autonomous cleaning robot mall OR office OR airport"],
+      "keywords": ["floor clean", "scrubber", "scrubbing", "sweeper", "sweeping", "vacuum", "cleaning robot", "janitorial", "mopping"]
+    },
+    {
+      "id": "security",
+      "label": "Security & patrol",
+      "color": "#E0703C",
+      "ink": "#B0501E",
+      "queries": ["security robot", "patrol robot", "security drone autonomous"],
+      "keywords": ["security", "patrol", "surveillance", "guard", "police", "policing", "perimeter"]
+    },
+    {
+      "id": "delivery",
+      "label": "Delivery & autonomous mobility",
+      "color": "#D9A441",
+      "ink": "#94681A",
+      "queries": ["delivery robot", "autonomous delivery vehicle", "sidewalk robot delivery", "robotaxi OR autonomous shuttle launch"],
+      "keywords": ["delivery", "last-mile", "last mile", "parcel", "courier", "robotaxi", "autonomous vehicle", "self-driving", "shuttle", "robovan", "logistics", "warehouse", "amr"]
+    },
+    {
+      "id": "humanoids",
+      "label": "Humanoids & guest engagement",
+      "color": "#A99BE0",
+      "ink": "#5B4A9E",
+      "queries": ["humanoid robot", "service robot hospitality OR retail OR concierge", "humanoid robot deployment"],
+      "keywords": ["humanoid", "concierge", "receptionist", "guest", "hospitality", "retail robot", "service robot", "companion", "engagement", "biped"]
+    },
+    {
+      "id": "physical_ai",
+      "label": "Physical AI & platforms",
+      "color": "#D684A8",
+      "ink": "#A04C74",
+      "queries": ["physical AI robotics", "robot foundation model", "robotics AI startup funding"],
+      "keywords": ["physical ai", "foundation model", "robot brain", "embodied", "robot learning", "simulation", "robotics platform", "vla", "world model", "dexter", "gripper", "manipulation"]
+    }
+  ],
+  "general_queries": [
+    "robotics startup raises",
+    "robotics funding round Series",
+    "robotics acquisition",
+    "robot UAE OR \"Abu Dhabi\" OR Dubai OR Saudi"
+  ],
+  "feeds": [
+    {"name": "The Robot Report", "url": "https://www.therobotreport.com/feed/"},
+    {"name": "IEEE Spectrum Robotics", "url": "https://spectrum.ieee.org/feeds/topic/robotics.rss"},
+    {"name": "TechCrunch Robotics", "url": "https://techcrunch.com/category/robotics/feed/"},
+    {"name": "Robotics 24/7", "url": "https://www.robotics247.com/rss"},
+    {"name": "Construction Dive", "url": "https://www.constructiondive.com/feeds/news/"},
+    {"name": "DroneLife", "url": "https://dronelife.com/feed/"}
+  ]
+}

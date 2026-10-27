@@ -1048,26 +1048,33 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         <span style="font-size:11px;color:var(--p515150,#515150);font-variant-numeric:tabular-nums">{{ fInfo.count }}</span>
       </div>
 
-      <div style="padding:26px 28px 44px;display:flex;flex-direction:column;gap:34px">
+      <div style="padding:20px 28px 44px;display:flex;flex-direction:column;gap:26px">
 
-        <div style="display:flex;flex-direction:column;gap:16px">
-          <div style="display:flex;align-items:center;gap:12px"><span style="width:28px;height:2px;background:#769CD2"></span><span style="font-size:10px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--p3F6FAE,#3F6FAE)">{{ hero.over }}</span></div>
-          <div style="display:flex;flex-direction:column;gap:6px">
-            <h1 style="margin:0;font-size:clamp(26px,2.3vw,38px);font-weight:300;letter-spacing:-0.02em;line-height:1.08;color:var(--p12102A,#12102A);text-wrap:pretty">{{ hero.title }}</h1>
-            <span style="font-size:13px;color:var(--p515150,#515150)">{{ hero.sub }}</span>
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div style="display:flex;flex-direction:column;gap:5px">
+            <span style="display:flex;align-items:center;gap:10px;font-size:9.5px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p3F6FAE,#3F6FAE)"><span style="width:20px;height:2px;background:#769CD2"></span>{{ hero.over }}</span>
+            <h1 style="margin:0;font-size:22px;font-weight:400;letter-spacing:-0.01em;line-height:1.2;color:var(--p12102A,#12102A);text-wrap:pretty">{{ hero.title }}</h1>
+            <span style="font-size:12px;color:var(--p515150,#515150)">{{ hero.sub }}</span>
           </div>
-          <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);padding-top:20px">
-            <div style="display:flex;flex-direction:column;gap:14px">
-              <span style="font-size:clamp(76px,7.2vw,124px);font-weight:200;line-height:0.92;letter-spacing:-0.05em;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ hero.big }}</span>
-              <span style="display:flex;align-items:center;gap:8px;font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--p515150,#515150)">Deployments<sc-if value="{{ heroSample }}" hint-placeholder-val="{{ false }}"><span style="font-size:8.5px;font-weight:600;letter-spacing:0.16em;padding:2px 5px;border:1px solid #E0703C;color:#B0501E">INCL. SAMPLE</span></sc-if></span>
+          <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;padding:14px 0;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.1)">
+            <div style="display:flex;flex-direction:column;gap:3px">
+              <span style="font-size:34px;font-weight:600;line-height:1;letter-spacing:-0.02em;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ hero.big }}</span>
+              <span style="display:flex;align-items:center;gap:6px;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">Deployments<sc-if value="{{ heroSample }}" hint-placeholder-val="{{ false }}"><span style="font-size:8px;font-weight:600;letter-spacing:0.14em;padding:1px 4px;border:1px solid #E0703C;color:#B0501E">SAMPLE</span></sc-if></span>
             </div>
-            <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(74px,1fr));gap:16px 14px">
-              <sc-for list="{{ hero.metrics }}" as="m" hint-placeholder-count="0">
-                <div style="display:flex;flex-direction:column;gap:7px;padding-left:12px;border-left:1px solid rgba(var(--pInk,11,11,11),0.14)">
-                  <span style="font-size:clamp(24px,2vw,34px);font-weight:300;line-height:1;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ m.v }}</span>
-                  <span style="display:flex;align-items:center;gap:6px;font-size:9.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--p515150,#515150)"><sc-if value="{{ m.hasG }}" hint-placeholder-val="{{ false }}"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;;background-image:url('{{ m.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span></sc-if>{{ m.l }}</span>
-                </div>
-              </sc-for>
+            <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
+              <div role="img" aria-label="{{ hero.barAria }}" style="display:flex;gap:2px;height:6px">
+                <sc-for list="{{ hero.bar }}" as="b" hint-placeholder-count="3">
+                  <span style="display:block;height:6px;width:{{ b.w }};background:{{ b.bg }};transition:width .7s cubic-bezier(.2,.7,.2,1)"></span>
+                </sc-for>
+              </div>
+              <div style="display:flex;align-items:center;flex-wrap:wrap;gap:6px 18px">
+                <sc-for list="{{ hero.bar }}" as="b" hint-placeholder-count="3">
+                  <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--p515150,#515150);white-space:nowrap"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ b.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span><span style="font-size:15px;font-weight:600;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ b.n }}</span>{{ b.l }}</span>
+                </sc-for>
+                <sc-for list="{{ hero.extra }}" as="x" hint-placeholder-count="0">
+                  <span style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--p515150,#515150);white-space:nowrap;padding-left:16px;border-left:1px solid rgba(var(--pInk,11,11,11),0.14)"><span style="font-size:15px;font-weight:600;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ x.v }}</span>{{ x.l }}</span>
+                </sc-for>
+              </div>
             </div>
           </div>
         </div>
@@ -1158,25 +1165,6 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         </sc-if>
 
         <sc-if value="{{ showL2 }}" hint-placeholder-val="{{ false }}">
-          <section style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:26px;align-items:center;padding:18px 0;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.1)">
-            <div style="position:relative;width:150px;height:150px">
-              <span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:150px;height:150px;;background-image:url('{{ ringBig }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>
-              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font-size:34px;font-weight:200;line-height:1;color:var(--p12102A,#12102A)">{{ hero.big }}</span><span style="font-size:8.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">Deployments</span></div>
-            </div>
-            <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
-              <sc-for list="{{ splitLegend }}" as="l" hint-placeholder-count="0">
-                <div style="display:flex;flex-direction:column;gap:5px">
-                  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px"><span style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--p12102A,#12102A)"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:11px;height:11px;;background-image:url('{{ l.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ l.l }}</span><span style="font-size:12px;color:var(--p515150,#515150);font-variant-numeric:tabular-nums">{{ l.n }} · {{ l.pct }}</span></div>
-                  <div style="height:3px;background:var(--pEDEDEA,#EDEDEA)"><div style="height:3px;width:{{ l.w }};background:{{ l.bar }};transition:width .7s cubic-bezier(.2,.7,.2,1)"></div></div>
-                </div>
-              </sc-for>
-            </div>
-          </section>
-          <section style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:14px">
-            <sc-for list="{{ meta }}" as="m" hint-placeholder-count="4">
-              <div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid rgba(var(--pInk,11,11,11),0.12)"><span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">{{ m.k }}</span><span style="font-size:13px;color:var(--p12102A,#12102A)">{{ m.v }}</span></div>
-            </sc-for>
-          </section>
           <section style="display:flex;flex-direction:column">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px">
               <span style="font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p12102A,#12102A)">Robots by deployment</span>
@@ -1633,12 +1621,12 @@ class Component extends DCLogic {
 
   renderVals() {
     try { const v = this.renderVals0(); this.lastVals = v; return v; }
-    catch (err) { console.warn("[fleet] render recovered:", err && err.stack ? err.stack.split("\n").slice(0, 4).join(" | ") : err); clearTimeout(this.rvRetry); this.rvRetry = setTimeout(() => this.forceUpdate(), 120); return this.lastVals || { crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [] }, hero: {}, glyph: {} }; }
+    catch (err) { console.warn("[fleet] render recovered:", err && err.stack ? err.stack.split("\n").slice(0, 4).join(" | ") : err); clearTimeout(this.rvRetry); this.rvRetry = setTimeout(() => this.forceUpdate(), 120); return this.lastVals || { crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [] }, hero: { bar: [], extra: [] }, glyph: {} }; }
   }
   renderVals0() {
     if (!window.FLEET_DATA || !window.FLEET_DATA.fleet) {
       clearTimeout(this.dataWait); this.dataWait = setTimeout(() => this.forceUpdate(), 50);
-      return { sumTag: "", sumItems: [], asOf: "", unitsTotal: "", unitsSub: "", mapSub: "", hero: { big: "", label: "", sub: "" }, crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [], count: "" }, glyph: {} };
+      return { sumTag: "", sumItems: [], asOf: "", unitsTotal: "", unitsSub: "", mapSub: "", hero: { big: "", label: "", sub: "", bar: [], extra: [] }, crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [], count: "" }, glyph: {} };
     }
     const uT = (window.FLEET_DATA.fleet || []).reduce((o, f) => { if (f.units == null || isNaN(f.units)) o.unk++; else { o.n += Number(f.units); o.k++; } return o; }, { n: 0, k: 0, unk: 0 });
     const s = this.state, D = window.FLEET_DATA;
@@ -1665,7 +1653,10 @@ class Component extends DCLogic {
     if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
     else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? " · OpenStreetMap boundary" : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
     else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Types", typesIn)] };
-    hero.big = cnt(g.total);
+    hero.big = String(Math.round(g.total * e));
+    hero.bar = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "#769CD2"], ["planned", "Planned", "rgba(var(--pInk,11,11,11),0.22)"]].map((x) => ({ l: x[1], n: String(Math.round(g[x[0]] * e)), w: g.total ? (g[x[0]] / g.total * 100).toFixed(2) + "%" : "0%", bg: x[2], g: G[x[0]] }));
+    hero.barAria = g.deployed + " live, " + g.pilot + " testing, " + g.planned + " planned";
+    hero.extra = lvl === 0 ? [] : (hero.metrics || []).slice(3).map((m) => ({ v: String(Number(m.v)), l: m.l }));
 
     const typeRows = D.robot_types.filter((t) => (!s.types.length || s.types.includes(t.id)) && scope.some((f) => f.robot_type === t.id)).map((t) => {
       const b = g.by[t.id], nodes = [];

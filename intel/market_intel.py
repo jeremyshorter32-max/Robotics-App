@@ -74,7 +74,7 @@ GENERIC_WORDS = {
     "ai", "us", "u.s.", "uk", "china", "chinese", "dubai", "abu", "dhabi", "uae", "saudi", "robotaxi", "robotaxis",
 }
 REGION_PATTERNS = [
-    ("GCC", r"\buae\b|abu dhabi|dubai|sharjah|ras al khaimah|saudi|riyadh|jeddah|neom|qatar|doha|kuwait|bahrain|oman|muscat|\bgcc\b|gulf|middle east"),
+    ("GCC", r"\buae\b|emirat|abu dhabi|dubai|sharjah|ajman|fujairah|ras al khaimah|saudi|riyadh|jeddah|dammam|neom|qatar|doha|kuwait|bahrain|manama|\boman\b|muscat|\bgcc\b|gulf|middle east|masdar|mubadala|adnoc|aramco|\bg42\b|mbzuai|khalifa university|aldar|emaar|\bmeraas\b"),
     ("China", r"china|chinese|shenzhen|beijing|shanghai|hangzhou|unitree|ubtech|agibot"),
     ("Asia-Pacific", r"japan|korea|singapore|india|australia|taiwan|seoul|tokyo"),
     ("Europe", r"\buk\b|britain|london|germany|france|netherlands|norway|sweden|swiss|switzerland|europe|spain|italy|denmark|finland"),
@@ -189,7 +189,7 @@ def collect(config: dict) -> tuple[list[dict], int]:
     for cat in config["categories"]:
         for q in cat["queries"]:
             jobs.append((google_news_url(q, days), "Google News", cat["id"]))
-    for q in config.get("general_queries", []):
+    for q in config.get("general_queries", []) + config.get("gcc_queries", []):
         jobs.append((google_news_url(q, days), "Google News", None))
     for feed in config.get("feeds", []):
         jobs.append((feed["url"], feed["name"], None))
@@ -477,6 +477,9 @@ def curate_with_claude(items: list[dict], config: dict, history: list[dict], mov
         "opinion pieces, listicles, market-size press releases, stock-price stories and stories already "
         "covered by another item you picked.\n"
         "- Cover as many categories as the news supports, but do not pad a category with weak stories.\n"
+        f"- The readers are based in Abu Dhabi and can filter the feed to GCC news, so include every significant "
+        f"GCC story (aim for at least {config.get('gcc_min_posts', 6)} if that many are worth reading); GCC stories "
+        "may go beyond the story limit. region is GCC for anything in or about the six Gulf states.\n"
         "- headline: at most 90 characters, plain and factual. summary: one or two sentences, at most 40 words. "
         "why_it_matters: one sentence, at most 25 words, on the implication for a real estate developer and "
         "operator running robots in communities, malls, offices and construction sites. Be concrete, avoid hype.\n"
@@ -600,13 +603,22 @@ def curate_with_rules(items: list[dict], config: dict, history: list[dict], move
     labels = {c["id"]: c["label"] for c in config["categories"]}
     per_cat: dict[str, int] = {}
     posts = []
-    for i in sorted(items, key=score, reverse=True):
-        if per_cat.get(i["category"], 0) >= 4:
+    ranked = sorted(items, key=score, reverse=True)
+    # GCC stories first (up to gcc_min_posts), so the GCC filter always has something to show.
+    gcc_first = [i for i in ranked if i["region"] == "GCC"][: config.get("gcc_min_posts", 6)]
+    chosen = set()
+    for i in gcc_first + ranked:
+        if id(i) in chosen:
             continue
+        if i not in gcc_first and per_cat.get(i["category"], 0) >= 4:
+            continue
+        chosen.add(id(i))
         per_cat[i["category"]] = per_cat.get(i["category"], 0) + 1
-        posts.append(make_post(i, {"headline": i["title"], "summary": i["snippet"], "why_it_matters": "", "company": ""}))
+        posts.append(i)
         if len(posts) >= config["max_posts"]:
             break
+    posts.sort(key=ranked.index)  # show in order of importance, not GCC first
+    posts = [make_post(i, {"headline": i["title"], "summary": i["snippet"], "why_it_matters": "", "company": ""}) for i in posts]
 
     inv = [p for p in posts if p["type"] == "investment"]
     total = sum(p["amount_usd_m"] or 0 for p in inv)

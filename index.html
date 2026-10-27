@@ -1274,7 +1274,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
   <sc-if value="{{ player.open }}" hint-placeholder-val="{{ false }}">
     <div sc-camel-on-click="{{ player.close }}" style="position:fixed;inset:0;z-index:4000;background:rgba(6,5,18,0.92);display:flex;align-items:center;justify-content:center;padding:24px;font-family:Poppins,sans-serif">
       <div role="dialog" aria-modal="true" aria-label="Deployment footage" sc-camel-on-click="{{ vstop }}" style="display:flex;align-items:stretch;max-width:100%;max-height:100%;background:#12102A;border:1px solid rgba(118,156,210,0.35);box-shadow:0 30px 80px rgba(0,0,0,0.55);color:#FFFFFF">
-        <video ref="{{ vidRef }}" src="{{ player.src }}" poster="{{ player.poster }}" controls="{{ true }}" sc-camel-auto-play="{{ true }}" sc-camel-plays-inline="{{ true }}" preload="auto" style="display:block;height:min(82vh,780px);aspect-ratio:9/16;max-width:55vw;background:#000;object-fit:contain"></video>
+        <video ref="{{ vidRef }}" src="{{ player.src }}" poster="{{ player.poster }}" controls="{{ true }}" sc-camel-auto-play="{{ true }}" sc-camel-plays-inline="{{ true }}" preload="auto" style="display:block;aspect-ratio:{{ player.ar }};height:{{ player.vh }};width:{{ player.vw }};max-width:{{ player.vmw }};max-height:82vh;background:#000;object-fit:contain"></video>
         <div style="width:320px;max-width:40vw;padding:22px 22px 24px;display:flex;flex-direction:column;gap:12px;overflow-y:auto">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
             <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#9DB9E0;padding-top:4px">{{ player.over }}</span>
@@ -1717,7 +1717,8 @@ class Component extends DCLogic {
     const isEmpty = g.total === 0;
     const hv = s.hov;
     const plS = s.pl, plV = plS ? plS.list[plS.i] : null, plF = plV ? plV.f : null;
-    const player = plV ? { open: true, src: plV.src, poster: plV.poster || "", caption: plV.title || "", over: "#" + plF.id + " · " + LBL[plF.status], heading: plF.use_case, vm: [plF.vendor, plF.model].filter(Boolean).join(" · "), site: (A[plF.asset_id] ? A[plF.asset_id].name + " · " + DI[A[plF.asset_id].district_id].name : ""),
+    const plW = Number(plV && plV.width) || 9, plH = Number(plV && plV.height) || 16, plWide = plW > plH;
+    const player = plV ? { open: true, ar: plW + " / " + plH, vh: plWide ? "auto" : "min(82vh,780px)", vw: plWide ? "min(62vw,1040px)" : "auto", vmw: plWide ? "62vw" : "55vw", src: plV.src, poster: plV.poster || "", caption: plV.title || "", over: "#" + plF.id + " · " + LBL[plF.status], heading: plF.use_case, vm: [plF.vendor, plF.model].filter(Boolean).join(" · "), site: (A[plF.asset_id] ? A[plF.asset_id].name + " · " + DI[A[plF.asset_id].district_id].name : ""),
       clip: plS.list.length > 1 ? "Clip " + (plS.i + 1) + " of " + plS.list.length : "", multi: plS.list.length > 1, prev: () => this.stepPlayer(-1), next: () => this.stepPlayer(1), close: () => this.closePlayer(),
       canOpen: !(lvl === 2 && s.a === plF.asset_id), openDep: () => { const aid = plF.asset_id; this.setState({ pl: null, gal: false }); this.goAsset(aid); },
       thumbs: plS.list.length > 1 ? plS.list.map((v, k) => ({ poster: v.poster || "", label: "Play " + (v.title || "clip " + (k + 1)), go: () => this.setState({ pl: { list: plS.list, i: k } }), bd: k === plS.i ? "#DCE7F6" : "transparent", op: k === plS.i ? "1" : "0.6" })) : [] } : { open: false, thumbs: [] };

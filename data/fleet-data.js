@@ -19,7 +19,8 @@
    videos = optional list of footage for a deployment, shown on its card,
      in the player and in the "Watch deployments" gallery. Each item:
      {"src": "assets/video/<file>.mp4", "poster": "assets/video/<file>.jpg",
-      "title": "Short caption", "duration": seconds}
+      "title": "Short caption", "duration": seconds,
+     "width": pixels, "height": pixels}  (width/height set the player shape)
    coord_approx = true -> map point estimated, confirm location.
    Districts: OpenStreetMap outlines (Nominatim, ODbL), lightly simplified.
    ========================================================================== */
@@ -1165,9 +1166,9 @@ window.FLEET_DATA = {
    "next_steps": "Awaiting review",
    "units": 1,
    "videos": [
-    {"src": "assets/video/07-analog-spot-01.mp4", "poster": "assets/video/07-analog-spot-01.jpg", "title": "Climbing stairs", "duration": 7},
-    {"src": "assets/video/07-analog-spot-02.mp4", "poster": "assets/video/07-analog-spot-02.jpg", "title": "Exterior walk-round", "duration": 8},
-    {"src": "assets/video/07-analog-spot-03.mp4", "poster": "assets/video/07-analog-spot-03.jpg", "title": "Interior inspection", "duration": 19}
+    {"src": "assets/video/07-analog-spot-01.mp4", "poster": "assets/video/07-analog-spot-01.jpg", "width": 464, "height": 832, "title": "Climbing stairs", "duration": 7},
+    {"src": "assets/video/07-analog-spot-02.mp4", "poster": "assets/video/07-analog-spot-02.jpg", "width": 464, "height": 832, "title": "Exterior walk-round", "duration": 8},
+    {"src": "assets/video/07-analog-spot-03.mp4", "poster": "assets/video/07-analog-spot-03.jpg", "width": 464, "height": 832, "title": "Interior inspection", "duration": 19}
    ]
   },
   {
@@ -1306,7 +1307,10 @@ window.FLEET_DATA = {
    "update": "• POC completed 15 Sep at Yas Mall Fashion Lobby\n• Autonomous navigation, scrubbing and mopping confirmed\n• Yas Mall requested an extended 4-week POC; scoping with Sindan",
    "description": "Two autonomous cleaning units: NOVA-02, a compact all-in-one robot for sweeping, scrubbing and dust-mopping at 700 m²/h; and NOVA-05, an industrial-grade autonomous scrubber with self-service workstation at 1,980 m²/h for high-footfall venues. Coordinated with the Khidmah Soft Services team to evaluate autonomous cleaning across Aldar's retail portfolio.",
    "next_steps": "",
-   "units": 2
+   "units": 2,
+   "videos": [
+    {"src": "assets/video/10-sindan-yas-mall-01.mp4", "poster": "assets/video/10-sindan-yas-mall-01.jpg", "width": 960, "height": 536, "title": "Floor scrubbing at Yas Mall", "duration": 12}
+   ]
   },
   {
    "id": "11",

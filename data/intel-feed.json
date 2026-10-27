@@ -51,95 +51,95 @@
     "ink": "#A04C74"
    }
   ],
-  "updated_at": "2026-10-27T21:18+04:00"
+  "updated_at": "2026-10-27T21:20+04:00"
  },
  "editions": [
   {
    "id": "2026-W44",
    "label": "Week 44 · 27 Oct 2026",
-   "published_at": "2026-10-27T21:18+04:00",
+   "published_at": "2026-10-27T21:20+04:00",
    "period": {
     "from": "2026-10-20",
     "to": "2026-10-27"
    },
-   "stories_scanned": 592,
-   "distinct_events": 401,
+   "stories_scanned": 607,
+   "distinct_events": 355,
    "signals": {
     "volume": {
-     "construction": 33,
-     "facade": 7,
-     "inspection": 65,
-     "cleaning": 16,
-     "security": 35,
-     "delivery": 48,
-     "humanoids": 100,
-     "physical_ai": 97
+     "construction": 27,
+     "facade": 10,
+     "inspection": 61,
+     "cleaning": 17,
+     "security": 33,
+     "delivery": 51,
+     "humanoids": 76,
+     "physical_ai": 80
     },
     "deals": {
-     "construction": 3,
+     "construction": 1,
      "facade": 0,
-     "inspection": 1,
+     "inspection": 0,
      "cleaning": 1,
      "security": 0,
      "delivery": 1,
-     "humanoids": 4,
-     "physical_ai": 14
+     "humanoids": 0,
+     "physical_ai": 5
     }
    },
    "momentum": [
     {
      "category": "construction",
-     "volume": 33,
-     "deals": 3,
+     "volume": 27,
+     "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "facade",
-     "volume": 7,
+     "volume": 10,
      "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "inspection",
-     "volume": 65,
-     "deals": 1,
+     "volume": 61,
+     "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "cleaning",
-     "volume": 16,
+     "volume": 17,
      "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "security",
-     "volume": 35,
+     "volume": 33,
      "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "delivery",
-     "volume": 48,
+     "volume": 51,
      "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "humanoids",
-     "volume": 100,
-     "deals": 4,
+     "volume": 76,
+     "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "physical_ai",
-     "volume": 97,
-     "deals": 14,
+     "volume": 80,
+     "deals": 5,
      "avg_prev": null,
      "change_pct": null
     }
@@ -147,30 +147,30 @@
    "generated_by": "rules",
    "headline": "Autonomous Construction Firm Bedrock Hits $4.1 Billion Valuation",
    "takeaways": [
-    "10 funding stories in the feed, about $7,570M disclosed; largest: Autonomous Construction Firm Bedrock Hits $4.1 Billion Valuation",
-    "Most news this week: Humanoids & guest engagement (100 distinct stories).",
-    "2 stories from the GCC, led by: Dubai is building the world’s first villa using robots"
+    "3 funding stories in the feed, about $690M disclosed; largest: Autonomous Construction Firm Bedrock Hits $4.1 Billion Valuation",
+    "Most news this week: Physical AI & platforms (80 distinct stories).",
+    "2 stories from the GCC, led by: Ubtech Robotics Jumps 7.9% as Gulf Deal and Global Distribution Push Lift Sentiment"
    ],
    "trend_watch": [
     {
-     "trend": "News flow in Humanoids & guest engagement",
-     "status": "new",
-     "evidence": "100 storys and 4 funding deals this week; first week tracked."
-    },
-    {
      "trend": "News flow in Physical AI & platforms",
      "status": "new",
-     "evidence": "97 storys and 14 funding deals this week; first week tracked."
+     "evidence": "80 stories and 5 funding deals this week; first week tracked."
+    },
+    {
+     "trend": "News flow in Humanoids & guest engagement",
+     "status": "new",
+     "evidence": "76 stories and 0 funding deals this week; first week tracked."
     },
     {
      "trend": "News flow in Inspection & drones",
      "status": "new",
-     "evidence": "65 storys and 1 funding deal this week; first week tracked."
+     "evidence": "61 stories and 0 funding deals this week; first week tracked."
     },
     {
      "trend": "News flow in Delivery & autonomous mobility",
      "status": "new",
-     "evidence": "48 storys and 1 funding deal this week; first week tracked."
+     "evidence": "51 stories and 1 funding deal this week; first week tracked."
     }
    ],
    "posts": [
@@ -180,138 +180,18 @@
      "type": "investment",
      "region": "Global",
      "company": "",
-     "amount_usd_m": 4100.0,
+     "amount_usd_m": 600.0,
      "headline": "Autonomous Construction Firm Bedrock Hits $4.1 Billion Valuation",
      "summary": "",
      "why_it_matters": "",
      "source": "Bloomberg.com",
      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTkxFc2s2Q1hQYk5pS1ViUFFyU2tIazRnakE5TFZhb2F4aTdiQVR6VHZYczBGTGFaQXpCbXFrd1VuUi1YaU9POTdkYUxKeXZaX2VOTWdKd2J6clhjZ3JoanUyckxqSXNCN2U5X0k2UVNmOXRrVUNaTkRoM04tM3ptSzRBZWVIUXRiLUxjUDl0bE9EdU9wbExjNDZjd1pNUTladWhITGlzMmtGdjdwWGdUeVRrc3c?oc=5",
      "published": "2026-10-20",
-     "coverage": 8,
+     "coverage": 84,
      "also_covered_by": [
-      "Convergence Now",
-      "citybiz",
-      "Tech Funding News"
-     ]
-    },
-    {
-     "id": "thisstartupsselfdrivingexcavatorshelpdig",
-     "category": "construction",
-     "type": "investment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": 600.0,
-     "headline": "This startup’s self-driving excavators help dig up $600M in new funding",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "TechCrunch",
-     "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNNmpvY1pGQzRtcWpnV1JBQXNwUGowRmNUcEFfV3NBX3BFR3ptTjl1UUpDZm5ackljOE1Kb1FrOWtKdEk0V1FzVE5VNUdUc01rQkgtcGFuQkltZThqMTM5NGpQc2lJeW5MYnRsY041dzMySzdONWJGRWYwV2ZqRE9CTDlrZnd5WFFSMl9FdUliTEZzQUJXZk5paExQZEQzSVVOLV84alNFdw?oc=5",
-     "published": "2026-10-20",
-     "coverage": 27,
-     "also_covered_by": [
+      "TechCrunch",
       "The Robot Report",
-      "SiliconANGLE",
-      "GeekWire"
-     ]
-    },
-    {
-     "id": "an11personstartupraised40milliontochalle",
-     "category": "humanoids",
-     "type": "investment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": 40.0,
-     "headline": "An 11-person startup raised $40 million to challenge robotics' data-hungry giants",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Business Insider",
-     "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQYjB2SG9VZUt0LVctTXpQU2Jod0t6a3BFbGZuNFJicGVQT1BJdWlUbzZuYnRuOHE1UWxKS2lUcVlVY2w0SVU2bWtXakNyMVRXZDBOYkxwUm1xanY4QTZPRnI5VFJfNzVhYWQ4aW4xUEdaeWh5RVVON1Y3VElxWk1NT2djZVBDSU8tU0hJeUtmZUM2YjB1elhiV1cwM0JhZ1IzX3FCN2tKZ0cxNzgz?oc=5",
-     "published": "2026-10-27",
-     "coverage": 7,
-     "also_covered_by": [
-      "AI Insider",
-      "Unite.AI",
-      "Imperial College London"
-     ]
-    },
-    {
-     "id": "roboticsstartupenactintelligencenabs30mf",
-     "category": "physical_ai",
-     "type": "investment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": 30.0,
-     "headline": "Robotics startup Enact Intelligence nabs $30M funding round",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "SiliconANGLE",
-     "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNZHB2TjN5V3VIQklQblpIUVdSX21Xa2w4YjZ4WFF4dFFMZVplRXlQWGVvZWU3YlkwMW5MM3ZHYXBHODFYWDQzZnFDdlhXcHg1bHlJNGVsUGJnVElkT3JOMVgtY2ctZWRVUkZpN0xvdlBGYnNLSV9tSXB1ZmM0b0s2TlJMQWtfMmhOeHF3Ml9vbGZfRUU0akxmZzFQcw?oc=5",
-     "published": "2026-10-22",
-     "coverage": 11,
-     "also_covered_by": [
-      "The Next Web",
-      "Startupticker.ch",
-      "HPCwire"
-     ]
-    },
-    {
-     "id": "formicraises50milliontoexpandphysicalaia",
-     "category": "physical_ai",
-     "type": "investment",
-     "region": "North America",
-     "company": "",
-     "amount_usd_m": 50.0,
-     "headline": "Formic Raises $50 Million To Expand Physical AI And General-Purpose Robotics Across U.S. Manufacturing",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Pulse 2.0",
-     "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQb0VMNnFEdk5VQnVsOS1xanlIdXZyallSR0J3blk5eEd3Z3JVYzFaZXNXMFB1SFlJZHY3ZTg1d3NIeC1yMVdLcmRRX0gtbjdiS3dWRUpyeElSZGtuSUhXbWE2c0dZQlotcDRlaDVlSG9lZDdFYmIzcGFpMG85Um85b2VybGtUZlNFb2NMX1FSTDF3eGd5akJWOGROQWIyOFNKZUpKNWs4aFl0TDZRempudWxZSVFvbUprZmx6Sw?oc=5",
-     "published": "2026-10-22",
-     "coverage": 8,
-     "also_covered_by": [
-      "Business Wire",
-      "citybiz",
-      "Industrial Equipment News"
-     ]
-    },
-    {
-     "id": "ffeairoboticsecosystemcompleteditsacquis",
-     "category": "humanoids",
-     "type": "investment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "FF EAI Robotics Ecosystem Completed its Acquisition of the Robotics Business of Faraday Future, Establish Nasdaq-Listed Humanoid and Bionic Robotics Platform",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Finviz",
-     "url": "https://news.google.com/rss/articles/CBMilgJBVV95cUxPREQxZGlMZ0tpeVRHRklPZUZFVm9MbTdyVFVQclBJeUtZNGxjbUJwQXg0ZFRpMWozNzRhMkZUSU5Xb2JZZ1B0aGUwcERZZmlZamNCcnEwemNaYm9MRy0wSXRSQkU1c1lweWc4RlFldWU5YnJvUzM0Mmpib1JPT25falgzcVBTR3IyY2FPcnkybHM3bGhvYlBRRFJLeFg4WTVuMnJRQUc1NUoyZmZ2TE1Ed3dCZ1Y5UExoT2FxVk9ZaVQ0eTNXVXEwUUxPRGdjSXg2UGpnOW4wYkViSnMyOWFBcTFWOGttRlJVaHkwb0xqMTVEbk1VZkZXVnAwLUprdW5NeGJESVRPM0tselpTOU8tQlVRc1Nkdw?oc=5",
-     "published": "2026-10-26",
-     "coverage": 6,
-     "also_covered_by": [
-      "StreetInsider",
-      "巴士的報",
-      "News-Press NOW"
-     ]
-    },
-    {
-     "id": "ekaroboticsraises150mtoscaleitsvisionfor",
-     "category": "physical_ai",
-     "type": "investment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": 150.0,
-     "headline": "Eka Robotics raises $150M to scale its vision-force-action model for robots",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "The Robot Report",
-     "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNelB5RGp4MWRYbXM5d3ctdS1MTkJQaUktaVZmZW50UC03N0Yxb0lfUXNwNjJ0SFljanVhbTR3NFFGOFBxWjNaNmNPWHBwVmZFUXBvcjBLbkpaQXg2ZklkTmhUcWVLekJzY3kybkZjU2thQjFJYzAxMDd6bjhxNWZ0bjFHSlpYeXFPRlhFcEpTcDNLOFY5d0xNMEJDQQ?oc=5",
-     "published": "2026-10-20",
-     "coverage": 4,
-     "also_covered_by": [
-      "Konsulteer",
-      "BigGo Finance",
-      "AI Insider"
+      "SiliconANGLE"
      ]
     },
     {
@@ -326,104 +206,32 @@
      "why_it_matters": "",
      "source": "The Robot Report",
      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxQbWpiUXJwT2FfNGY1Mk5WWGFIakJkdUhNcER4ZWw4VjZ2S2liVmo2MVZHYWZoaFdXZVVGaUJXeElEWHV2ajlyMHFqOG9nSmNKaEwyUk9OcEZTZkQ2REFwUDIwMUdJSm9ZY095MU9yemhhaWUxeXEtXy14a0FHOGZqbkdHX2FMZC1vQzdiU0ZVX1RtLWoyOXY4Zw?oc=5",
-     "published": "2026-10-26",
-     "coverage": 7,
-     "also_covered_by": [
-      "The Manila Times",
-      "DC Velocity",
-      "Container News"
-     ]
-    },
-    {
-     "id": "agcotodeployagilitydigithumanoidinkansas",
-     "category": "humanoids",
-     "type": "deployment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "AGCO to deploy Agility Digit humanoid in Kansas factory",
-     "summary": "The Agility pilot, which is expected to begin in 2027, will begin at an AGCO production facility for agricultural equipment. The post AGCO to deploy Agility Digit humanoid in Kansas factory appeared first on The Robot Report .",
-     "why_it_matters": "",
-     "source": "The Robot Report",
-     "url": "https://www.therobotreport.com/agco-to-deploy-agility-digit-humanoid-in-kansas-factory/",
      "published": "2026-10-21",
-     "coverage": 7,
+     "coverage": 14,
      "also_covered_by": [
       "citybiz",
-      "AI Insider",
-      "Unite.AI"
+      "Investing News Network",
+      "Pennsylvania Business Report -"
      ]
     },
     {
-     "id": "a16zrebrandscryptofundasfrontierexpandsi",
+     "id": "yyforcelaunchesworkforceosroboticsplatfo",
      "category": "physical_ai",
-     "type": "investment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": 2200.0,
-     "headline": "a16z Rebrands Crypto Fund as 'Frontier,' Expands Into AI and Robotics",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "BigGo Finance",
-     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1MWDV4YVpnMEEtRV9WNmJnSzFIdlo5Ni1xRENUS2xwTnpqZFZnTERKbG5LWmhWaDhDdnVhSzVPVWx4bGlOWXlabEFRb0ozMGQ4M1lCSzdwZERVTEF0bHhZQXgxbzRsVTJWNTgxS2llM0JrZHZETHc?oc=5",
-     "published": "2026-10-23",
-     "coverage": 1,
-     "also_covered_by": []
-    },
-    {
-     "id": "teradyneroboticspartnerswithsereacttosca",
-     "category": "delivery",
-     "type": "deployment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "Teradyne Robotics partners with Sereact to scale physical AI in retail and logistics",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "The Robot Report",
-     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxORHBmbFFOZ0dZVGNLQmdLMUlQMXhJZ1U2TDF1RGVhdDVKdlFTeUxJWHkycXZZWDNKTjd2dDF1SWx4MEZGMFRncVZDUzZYaUZxcU5PMk9VbldJWHF6TXBLWnF6d2xzU05vSTREOFM2R1Vza3BubVptTXZMVjJuSjl4VnBMb2ZBMDJOQTQ5dDR0QWxnclZKeDN5VzFlYjdjZTJNdEpN?oc=5",
-     "published": "2026-10-21",
-     "coverage": 5,
-     "also_covered_by": [
-      "Supply Chain Digital",
-      "AOL.com",
-      "AI Magazine"
-     ]
-    },
-    {
-     "id": "seedsneolixclosesnearly400millionseriese",
-     "category": "delivery",
-     "type": "investment",
-     "region": "China",
-     "company": "",
-     "amount_usd_m": 400.0,
-     "headline": "Seeds: Neolix Closes Nearly $400 Million Series E Round, Largest Single Autonomous-Driving Fundraising in China This Year",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Gasgoo",
-     "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxPWWlsMGR5UmJUeW9pTlBTOTd4Q3VubDJTWWdwaWk3cW9uMkw3Qi1USnduN0tpZ1NGUkRsdlR6amtBRVMxVEJsN1F6WFhaUi1qSjQ3MFROV29mbkt6dlpDLWM3RGNTRmdEc0Y4SnQxYTBNazd4SkhfZlVSUGRnZEtZUzVyYUMyd1FlMk9JdWh4dDQ5OHUyenYzV2VKY0o0YW5wVDcxMUM4MWxlQWs4YlZ1UXd1SkRtTjZRSDFVX3JId3VJNEpJWFNZdThzc0Rld25ta2h6WFVJNmNTVnZ6TXE2Mk13UHIyRnEweGNDNm1pcG83TEhYN2JxRWxCLUJMN0ZYZmM4Q1o2NU1tX2xE?oc=5",
-     "published": "2026-10-22",
-     "coverage": 1,
-     "also_covered_by": []
-    },
-    {
-     "id": "unitreeunveilsh2xsecurityrobotthatfights",
-     "category": "security",
      "type": "product",
-     "region": "China",
+     "region": "Global",
      "company": "",
      "amount_usd_m": null,
-     "headline": "Unitree unveils H2-X security robot that fights like a kung fu master",
+     "headline": "YYForce launches Workforce OS robotics platform using NVIDIA chips",
      "summary": "",
      "why_it_matters": "",
-     "source": "Startup Fortune",
-     "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPVkRNX2FUM2dnay1IYnBUZGhqWHJYOTVGeDhFSVR5aEJfdW5DTFY5cVpFY2NhbVR3MDhPeDJuMjZQamV4WTVaQmRPQWhKQ3U2QVExQ2NXU0U1SDZ1NGpZNlc5dHBGMEs2ak9wQzJLNjBUR1RUNjBka3N1eDRtbWVNSnc3ak9nNlhtY21fcExwNUVDdi1DLVB1UHJ3NmVqZw?oc=5",
+     "source": "Vietnam Investment Review - VIR",
+     "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxOOGZKQ2tVTnhUQTJHMVBORTVUT2w5MEtFd3VLVXlINzZwQ3I5clk0azJZbTgzeW5tMlo3T0xYTjlva0FUQWJ6MUdwZ2swRnF4QVhhYzlGVDZTRkhiSGFlSkxGcmhuVTZqUDlVOG1LN0R3NGhDaVlCVFVuZV9Kb19obnBYZEtJeHlnaVJKUllFR2NrMmRDdGJmUHlsQzg0UQ?oc=5",
      "published": "2026-10-21",
-     "coverage": 5,
+     "coverage": 13,
      "also_covered_by": [
-      "TechRepublic",
-      "Techiexpert.com",
-      "Interesting Engineering"
+      "NTB Kommunikasjon",
+      "MIXED News",
+      "Yahoo Finance"
      ]
     },
     {
@@ -439,31 +247,31 @@
      "source": "Billy Penn at WHYY",
      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxOSHFDVWdDRUlTY0JITU1XamYwLXY0MHI0WUNHNHlvVkxJcUlZNzVZdE5xUUIzaERjR0hwRkpYYnlzbEx0ZS1ER3ZMcEIwRTBnVkcycW5sb29yZ2h4cGZCTVl6SnFsZENUcWZhRXVPUmFFZk84ejFTVmZ5OGxqNFozTE14bS1relFZYV9BY1lERFhSNlNibndfZUxB?oc=5",
      "published": "2026-10-21",
-     "coverage": 5,
+     "coverage": 7,
      "also_covered_by": [
       "Chain Store Age",
-      "NJBIZ",
-      "Inquirer.com"
+      "Inquirer.com",
+      "ROI-NJ"
      ]
     },
     {
-     "id": "faradayfuturerobotspottedinbrooklynbridg",
-     "category": "humanoids",
-     "type": "trend",
-     "region": "Global",
+     "id": "generativebionicstolaunchphysicalaidataf",
+     "category": "physical_ai",
+     "type": "product",
+     "region": "Europe",
      "company": "",
      "amount_usd_m": null,
-     "headline": "Faraday Future Robot Spotted in Brooklyn Bridge Park, NYC",
+     "headline": "Generative Bionics to launch Physical AI Data Factory in Italy",
      "summary": "",
      "why_it_matters": "",
-     "source": "Hoodline",
-     "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQTnFXM01Wa0hteUFneHJDUFFCNVJKUUJtLU1mcVQ5Y1d5ek9BRG9wSGNvUkNhRTBmTlFiMVFKZW9rcXdzRGpkOGNqdDJJQVFMcnVQUXdCSHktV2VWQ2sxS2FnVl8wbEh2bUtTdUZUOGVteGdjYUlRWU1iVy1ld1NCOEFGSVRncWdVTy01ZURvdTlKcTYzbVF3YXJnbUkxc3BOVnc?oc=5",
-     "published": "2026-10-26",
-     "coverage": 8,
+     "source": "The Robot Report",
+     "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQSy1MS0dYWUt1MkVGZUh4WkFKREVGeVFDczlRNHo4ZDlVdzVVMjhINnBFWHU4VGI1d1p1NXAxcDJnU2JtendfUzI2WkJ2R3NQMzdnZUNkOWZPWWNWbUJlek42MG1xdXpQUGtZR09yLThYZDBSZndsXzEwb2J6amRpZjF1dk9GbHBLSC1XVk9tZUlrWGVzNFBGbE5B?oc=5",
+     "published": "2026-10-22",
+     "coverage": 5,
      "also_covered_by": [
-      "Unite.AI",
-      "marketscreener.com",
-      "TradingView"
+      "Data Center Dynamics",
+      "Robotics & Automation News",
+      "W.Media"
      ]
     },
     {
@@ -479,51 +287,185 @@
      "source": "The Robot Report",
      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNdzVlTy1BQzBGcm9LWDVUSjU4d3FjMW5lQTFQZy1iMzNkQjNBUDNFSFNtLS1MY0xVQVJ5UWp3ZjZvWHpLQk5Gc1UzMVpLWE90d2NTWGtONkVoME1SZnE1eGI1d3IwQWhOQlgwVi01VXVmN3RHZUFHWVBCQi1kcFZTNUpxTkZub3hJUnlzVmtQYi1jWmI4QjAzUE9EYUNkZFJ2SVBIdm53?oc=5",
      "published": "2026-10-27",
-     "coverage": 5,
+     "coverage": 6,
      "also_covered_by": [
       "SiliconANGLE",
-      "Offshore Engineer Magazine",
-      "TradeArabia"
+      "Marine News Magazine",
+      "Offshore Engineer Magazine"
      ]
     },
     {
-     "id": "hyundaiautoevertargetskoreaspublicsecuri",
-     "category": "security",
+     "id": "teslastartsoptimusrobotproductionincalif",
+     "category": "humanoids",
      "type": "trend",
-     "region": "Asia-Pacific",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "Hyundai AutoEver targets Korea’s public security with MobED patrol robots",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Chosunbiz",
-     "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE5jLU5ZUDVGS2pwY0JQRG1JV2VVeWV1ZXBHYnhTa0hmLVMxM2RMTkZvUEg5elJKVkdwazJZa3V6RUxkRkFQT0NzYWJrM0dsdXRUNS1uTEc4azEteGhkYWdQd1BKcWo3WEpNa2U1VkRENUxfRDVqWC0xMVJn0gGOAUFVX3lxTE9zX0xES1hpUm5QcVdvYmtHZ25pRE82bmctNklyNHRpRDJrTEdWLXFvZ1pvUzhiZi1LZEwxNUc3OW5xSXhzUDc4Wjg1ZjRxeGpWNHRRcjJWX09iOVVCMXpUVzAtWk5acHhibnlxaDByV2tYMGpRaVZWX0dTZjE5b01fS3NsSndPT1ZSNS1iTmc?oc=5",
-     "published": "2026-10-21",
-     "coverage": 5,
-     "also_covered_by": [
-      "BigGo Finance",
-      "조선일보",
-      "아시아경제"
-     ]
-    },
-    {
-     "id": "bostondynamicsworkersurgedhalttoicerobot",
-     "category": "inspection",
-     "type": "deployment",
      "region": "North America",
      "company": "",
-     "amount_usd_m": 1.3,
-     "headline": "Boston Dynamics Workers Urged Halt to ICE Robot Deal Before $1.3 Million Award",
+     "amount_usd_m": null,
+     "headline": "Tesla starts Optimus robot production in California as profit falls 43%",
      "summary": "",
      "why_it_matters": "",
-     "source": "TOKENPOST",
-     "url": "https://news.google.com/rss/articles/CBMiWEFVX3lxTE1NYWhpYm84UU1qTkVEU3RuenR4VTlvdjFLVkxwQjlBYm9haHZtMDdMUTBsU2x3Wl9wVHdmVHY5QmFhZmg3RzdtaXJ5VURfYTZWU0hMNXpnLVk?oc=5",
-     "published": "2026-10-23",
+     "source": "TechCrunch",
+     "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOR3JTc1VMOXpkNFdBam10d21hV2doQmZwNk1LSEU1UjVDQThjY1h0T3BuUGdXSlZTVHZiYVgybWFuS0l2d3RGZERCdUxoREVCazQ2QUdqZ082UWdjcV9xakNxX2ZXX3pHamlNU1Q2blhTTHdHS0xkbjAxX3paQWRqZ3FnMVFKNUU2bGxnQjdleWw3Mlg0Mm4yYzhaWjlsVXBpVE56OWFDMA?oc=5",
+     "published": "2026-10-21",
+     "coverage": 12,
+     "also_covered_by": [
+      "Business Insider",
+      "wahanariau.com",
+      "Quiver Quantitative"
+     ]
+    },
+    {
+     "id": "watchbostondynamicsfounderonphysicalaiou",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "North America",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Watch Boston Dynamics Founder On Physical AI Outlook",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "Bloomberg.com",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOamRRQmRTZzdLOURaSmEwcWVWcENESFhmNXpocG1lWjBLTTVHQjZ4S2xUWU5vdDhHMFRPUWN3ZDZjSDM0Umw3b256MlM5eE1kZXZpTEdLRlNBTGhCR0RieDF5cURNUlBfSG1NN3oxR2gyQkJfSVVabHk2V050VEgzbmdRMU9LR25hanNhcVBYRVI1d1RwYzFjaE1menktUjB2MVhz?oc=5",
+     "published": "2026-10-21",
+     "coverage": 13,
+     "also_covered_by": [
+      "Financial Times",
+      "TOKENPOST",
+      "Tech Times"
+     ]
+    },
+    {
+     "id": "partkungfulegendpartbodyguardmeetunitree",
+     "category": "security",
+     "type": "trend",
+     "region": "China",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Part Kung Fu legend, part bodyguard: Meet Unitree’s new humanoid robot | Watch",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "CNBC TV18",
+     "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQVk9oY1J5M1RIbFRKRTF1a2hzYXUtd0lnVWVEN2JpNGNzN19ILXJCRUVwbGhSLWh6djZEaWZaRHp5blY0LUhyVk5INi1ablQwN1NHeG94M3JxSkVPM1lXSmYybTdkOWVRa2hLRmNHbmV0YUNmWU85MEJmVTI4a0p6UUhyU2pUVzNjYzNtaEkydHJNS0VxTzlnZ3dqWUNjWU1sTkFFWFp3cmNMcWp0YlJldGYyb2k0VGtkbjNBbkVuY9IBxAFBVV95cUxNT1BPRnF3S0lZa2tTVEZuRkpQQlgyWEtBSU9Fd0U5RDZxbGRJcW9xUHFZUnZ5WF9NN0k3aDFKT2R4SlBjcVNmaEk1dGVhMVEzMXozT19XOF9uX1hDRWsxblJnNHUtVy03cXYyU01uZ3BzZTNVaGg2LV9RUXlReUphSTlSZlJpZmUwV25FWnR0eFM4b241czZNTW45dDl4RVYtNDBWSWJDdWFLSEFMZ0xzQ2swS2hVNWNzbEJIdEtQZmNfUk5z?oc=5",
+     "published": "2026-10-21",
+     "coverage": 10,
+     "also_covered_by": [
+      "Startup Fortune",
+      "South China Morning Post",
+      "Global Times"
+     ]
+    },
+    {
+     "id": "dreamlabsraises90mandlaunchesdreamapi",
+     "category": "physical_ai",
+     "type": "investment",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": 90.0,
+     "headline": "Dream Labs raises $90M and launches Dream API",
+     "summary": "Dream Labs says its Dream-1 AI model works across robots from different manufacturers and will allow robots to transfer their learning. The post Dream Labs raises $90M and launches Dream API appeared first on The Robot Report .",
+     "why_it_matters": "",
+     "source": "The Robot Report",
+     "url": "https://www.therobotreport.com/dream-labs-raises-90m-and-launches-dream-api/",
+     "published": "2026-10-22",
+     "coverage": 2,
+     "also_covered_by": [
+      "The Business Journals"
+     ]
+    },
+    {
+     "id": "omodajaecooadvancesitsglobalintelligente",
+     "category": "facade",
+     "type": "deployment",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "OMODA & JAECOO Advances Its Global Intelligent Ecosystem: Partner AiMOGA Robotics Opens Global Pre-Orders for Mobo",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "FinancialContent",
+     "url": "https://news.google.com/rss/articles/CBMijwJBVV95cUxPMkZfUUN6YkVrVHNlNnJWNFZ5d1c5VWZDZ3VxUzBJMlJsOV9tNkpoNFQ0d1VvTnBXa2IwZE9GWEdJX1p2dDU1T01XN0g1c3Q5V3ZxOTQyVmFpb2lqMGJlaUs1NTdyd05PUkhRY0lYS0tXMm9hNTNDcWZJSXdHSEs2VjE5LVZZYnpZTWdSYkZ5Q2NmbHVVSUkybnhJTm1KZjE4LVhEdkFXb01Kd3ZaTXNWNlo1MFI1U1F1SmpyLWgxT2dvUUtBZFN4YlhIR0pqeVY5VnhxZGpPUWJKZFpoVll5R1dkNEg0eWVDa0ZJMXUtanU3TWJKV1hxcl9mQkxoMURyakRxNnpEdHFDUE5xMF9F?oc=5",
+     "published": "2026-10-21",
+     "coverage": 4,
+     "also_covered_by": [
+      "KrASIA",
+      "NTB Kommunikasjon",
+      "Newswav"
+     ]
+    },
+    {
+     "id": "hyundaiautoeveraddsaitopatrolrobotmobedu",
+     "category": "security",
+     "type": "product",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Hyundai AutoEver Adds AI to Patrol Robot 'MobED,' Unveils Integrated Control Solution to Fill Security Gaps",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "BigGo Finance",
+     "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE5iLTlVcFFfZVdsU3BZdk1qSWJMMkFGTkY3TTdJMWEwS0hpN0N1ZTdlSExiZWhpeFRTNVM5ZmJpU2lGNjA1R2FwMzg2QTJ6WlZiZ0ZOOTl0dm05V01MNlVSZzRiLUxFU2JKNUs3M3hac3VhQ0pvbGc?oc=5",
+     "published": "2026-10-21",
+     "coverage": 4,
+     "also_covered_by": [
+      "Chosunbiz",
+      "아시아경제",
+      "조선일보"
+     ]
+    },
+    {
+     "id": "retireduniversityofpennsylvaniaprofessor",
+     "category": "delivery",
+     "type": "trend",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Retired University of Pennsylvania professor arrested for blocking delivery robot to protest job losses",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "VnExpress International",
+     "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxPYjhkQjNlZS0xNkhFS24zWmM2bk9nakN6WEdhd1cyZWtsWnZpelQtaGk3U3EwU3Njc3pPY2FXRzd5bFJ4eWI4RnphX3UzUzJUem1XQ0NLSk10MzY5YmVGM1VrSV9IbnhiZzVraU9mWlh0dU94TGpVaHBjZjhfSHU0RkplcDVrVWZWY0dCLVAzVnh5ZWhlSl9BMUVtZmpPY2FLX3dQQ2g4dzF3R241QWlNOE9vQjViTjQ2M19KMWZ1eFkxc3MxWERSOTVMTV9GMDNkb0x5TVdWMlVPeGsyRmd4QzROLWVhQW44SlNPdTdZbXRyX24zZEVV?oc=5",
+     "published": "2026-10-20",
+     "coverage": 5,
+     "also_covered_by": [
+      "VISTA.Today",
+      "The Cool Down",
+      "Wide Open Country"
+     ]
+    },
+    {
+     "id": "teradyneroboticspartnerswithsereacttosca",
+     "category": "delivery",
+     "type": "deployment",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Teradyne Robotics partners with Sereact to scale physical AI in retail and logistics",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "The Robot Report",
+     "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxORHBmbFFOZ0dZVGNLQmdLMUlQMXhJZ1U2TDF1RGVhdDVKdlFTeUxJWHkycXZZWDNKTjd2dDF1SWx4MEZGMFRncVZDUzZYaUZxcU5PMk9VbldJWHF6TXBLWnF6d2xzU05vSTREOFM2R1Vza3BubVptTXZMVjJuSjl4VnBMb2ZBMDJOQTQ5dDR0QWxnclZKeDN5VzFlYjdjZTJNdEpN?oc=5",
+     "published": "2026-10-21",
      "coverage": 3,
      "also_covered_by": [
-      "MassLive",
-      "AIM Media House"
+      "Supply Chain Digital",
+      "AOL.com"
      ]
+    },
+    {
+     "id": "ubtechroboticsjumps79asgulfdealandglobal",
+     "category": "humanoids",
+     "type": "deployment",
+     "region": "GCC",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Ubtech Robotics Jumps 7.9% as Gulf Deal and Global Distribution Push Lift Sentiment",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "ad-hoc-news.de",
+     "url": "https://news.google.com/rss/articles/CBMi9AFBVV95cUxNaEE3ZWdubzlQRFRMX0g2ZlU0RU13bGc2LWd2RDZNMC1tZEh5TjFDSVdpMldsVkthS25YMjJpSEdRR29DMDNoVURKV2Y5NEZxXzNtcEF3Y2MxRXF1T3ljZF9qa2hyUXJqSVdNTWFYdHpQY0ZwVDR1ZklQV0F1WTBOekF3NzJxY05iNXZhNVhoaVlvSjduOEpYZ3Q0b2x3SHFQekR4X3dTbXNQbWR2YVBnemhPSDFnTm1ZNjI4NnB0cjNpZkxGdENrVjF1RzZCTEFBaE56WHpvZWJWR3FwakYtcTJVRjhQZ292MUZGdXEwTXBmTFpu?oc=5",
+     "published": "2026-10-25",
+     "coverage": 1,
+     "also_covered_by": []
     },
     {
      "id": "dubaiisbuildingtheworldsfirstvillausingr",
@@ -578,6 +520,24 @@
      ]
     },
     {
+     "id": "unitreeroboticsunveilsabodyguardrobotcap",
+     "category": "security",
+     "type": "product",
+     "region": "China",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Unitree Robotics unveils a bodyguard robot capable of lifting the front of a car",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "South China Morning Post",
+     "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNbVpVSHVtUVBwWDFQT1F5RXhSXzdjTGV1bk91OVVDRHJadV82bnd1bnBQcWE1UEdqbmJ3TERyMGJVTkN1Zks3cFpuYlhlRWpFdk9yODNueWtBMzhiNmJOUWlyLVAweDFJWXFQQ2VyQk1KcW5WdUt4REdUWldnTzMtdGt4dmZnaklBc0NRME5vVFFuS3FUbTNfcmJ4WUtLenlGd3VQYVpZbXNYWmM?oc=5",
+     "published": "2026-10-21",
+     "coverage": 2,
+     "also_covered_by": [
+      "Futurism"
+     ]
+    },
+    {
      "id": "videofridayquadrupedrobotsolvesgiantrubi",
      "category": "inspection",
      "type": "trend",
@@ -597,36 +557,76 @@
      ]
     },
     {
-     "id": "securityforceshospitalinriyadhfirstinsau",
-     "category": "security",
+     "id": "nvidiashuanghailseuropesaipotentialflank",
+     "category": "humanoids",
      "type": "trend",
-     "region": "GCC",
+     "region": "Europe",
      "company": "",
      "amount_usd_m": null,
-     "headline": "Security Forces Hospital in Riyadh First in Saudi Arabia to Adopt da Vinci 5 Robotic Surgery System",
+     "headline": "Nvidia's Huang hails Europe's AI potential, flanked by robot ducks",
      "summary": "",
      "why_it_matters": "",
-     "source": "وكالة الأنباء السعودية",
-     "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE5xbG9vOU1sM244eWxKWFBlaWt2aVFCbWUwWHVxYk9EM2VpVnVCRExEdUZsV0NxcGlERjAxZ1NtYlhpOUtpMTdkbVB3?oc=5",
-     "published": "2026-10-27",
-     "coverage": 1,
-     "also_covered_by": []
+     "source": "Reuters",
+     "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOdUI3QU5iX211d3BmcjFoa3dpWXROZjd4bm5rZ0ZaVkRQaEtlVmdUdkhoWlVTQzd4NkJ3Y1NBQWF0WXBtRklveXBhNzRuUHlsdnVCXzNGVzR4MG9TRU5QMUoyTzUtc0UtZEZJdVl6VGpKY05ZV2tBbEJwc0o2M2VnUHVaR1dlOE5pcU5pNWUweHZHMFkweDNXTUpzUWtJUDkwTmhqZ2dqRjZ2blhTMlE?oc=5",
+     "published": "2026-10-21",
+     "coverage": 3,
+     "also_covered_by": [
+      "The Register",
+      "CXOToday.com"
+     ]
     },
     {
-     "id": "industryinsightsroboticraises120ftdreaml",
-     "category": "construction",
+     "id": "chinashumanoidrobotsgojobhuntinginsouthk",
+     "category": "humanoids",
+     "type": "trend",
+     "region": "China",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "China’s humanoid robots go job hunting in South Korea",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "South China Morning Post",
+     "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQOHlGRzNRTHZtUUtJTWFCeENQLWNwZHFVZDZPWjlfZ2dXZjZGNTE1NUtDQ2F4NU15QmdkRlRKeExHb3R2cXdrYVRJWHdFN1dfcHdKcGx3M3ZEUXJOMThUVHpLbW1pcGVfWUNtUmdxMy1nV3ZDR2lSYk1KWGI5aTIxR3E2ZDRZZDZ0dzVVX0tRLU1lZkgxVC1KeTczQjluX2p4Zl8wWmV0cFdaX3Y1bWxscTVlU3hLLWd4M09IWXdGSGhOYmFITHl3YWRqdWZfMVHSAb4BQVVfeXFMTlpCeWE1Nm1aX3RZZlU1ZUpJS0RrRjk5MU5STFdwSkFOQXJsbk41YlFUY0V6Vk9lTTFjRmFCdElLY2hBY1R2RHJFVGFQV05tVzh5MVplWXFSZFNLdHNUbW5MMko1LTlTYjVQTDMwY2x3WVdrNklSaHl3VV9iV0JSdFlGcFBEYVVZcU1hZm9VV3NsLW10TUV2S1luUC1vT1pzMWxmMnhkVjgwMzBBTjQxUGdRQnZOcXJVVFF3QmZYUQ?oc=5",
+     "published": "2026-10-20",
+     "coverage": 3,
+     "also_covered_by": [
+      "Qazinform",
+      "Aju Press"
+     ]
+    },
+    {
+     "id": "cleaningroboticsstartupjingjiintelligent",
+     "category": "cleaning",
      "type": "investment",
      "region": "Global",
      "company": "",
      "amount_usd_m": null,
-     "headline": "Industry Insights: Robotic Raises: 120ft, Dream Labs, Eka Robotics, Origin, ZAP Surgical Systems",
+     "headline": "Cleaning robotics startup Jingji Intelligent raises tens of millions of RMB in seed funding",
      "summary": "",
      "why_it_matters": "",
-     "source": "A3 Association for Advancing Automation",
-     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQYk9TN2U1Q0d3NDVOMzA3S0pIVmJTNC13YXN3eWNZLVptcGFxRlVMcnhSb3JjQkFqS0k4a0tWbUJHMGk2dEFLS2VvNlk4UTJvN3dqbHh2Q01URWtlRnFwcWRVSl85czcwX3pGc3dfSUFkcGZjY0o0Tm5QQl93Ni1BT19Xd2p6RjRDV0ZmeC04enM2VGRjc2hlbkVEZjdPcnI3dHA1N1Y1VnhDUTFJeU5WYnp4bUsxN1lNdFl2VksxTDkyUQ?oc=5",
+     "source": "TechNode",
+     "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNanlSNVRFMjVpMmFqN1phYVMweUZBVXR3TlNmb1BDa3BHUXFQSkJERm1lWXlZc3FHSFhTcVIwT0hHLTV3empjWVJEZEZWb2tjbkRSQ3ZCNzZsNThjbjRLQ0RCNDFZVG56SkVhMllmU0xVN3hiNlZ4RXVlTTF3QlJ1X3YyTEdIRHNNMGN2OGJQbFBYeUhsSXptZDJsZnNQUEVHVVJwMmFiMWE2blY0QjA1bXk3THRWSlNTVThrNzkwd1FQUQ?oc=5",
      "published": "2026-10-21",
      "coverage": 1,
      "also_covered_by": []
+    },
+    {
+     "id": "perceptolaunchesaxionahardwareagnosticai",
+     "category": "inspection",
+     "type": "product",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Percepto Launches Axion, a Hardware-Agnostic AI Platform for Drone Inspection Data",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "Commercial UAV News",
+     "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQeHFsREZpeTgyLWkxM2hwbGxPeVlIVU1RMHRiVGloZlBhSnBwb0dlSnpjZ1JvcUJveDhDUjJOc2I4b1dJRi1OdUQ1cDdkOVJTam9NdTR6V3JVZFlkWDdPZE1tMl9pellDN0NCMHVQWVYxMTBsamtGS1ZtbWdjWlM3SWlFMzhEZmo2UjhkamVNUU8?oc=5",
+     "published": "2026-10-27",
+     "coverage": 2,
+     "also_covered_by": [
+      "Unite.AI"
+     ]
     }
    ]
   }

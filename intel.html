@@ -138,6 +138,18 @@ button,select{font-family:inherit}
 .mrow .bar i{position:absolute;left:0;top:0;bottom:0}
 .mrow .dl{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
 .up{color:#1F7A4D}.down{color:#B0501E}.flat{color:var(--muted)}
+.feedhead{flex-wrap:wrap;align-items:center}
+.feedhead .fl{display:flex;align-items:baseline;gap:12px}
+.seg{display:inline-flex;border:1px solid var(--line-2);background:#fff}
+.seg button{border:0;background:transparent;padding:7px 12px;font-size:11px;font-weight:500;color:var(--ink);cursor:pointer;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.seg button+button{border-left:1px solid var(--line-2)}
+.seg button:hover{color:var(--accent-ink)}
+.seg button[aria-pressed="true"]{background:var(--navy);color:#fff}
+.seg .n{font-size:10px;opacity:.7;font-variant-numeric:tabular-nums}
+.seg .flag{width:7px;height:7px;border-radius:50%;background:var(--accent)}
+button.stat{background:transparent;border:0;border-left:1px solid rgba(118,156,210,0.28);color:#fff;text-align:left;font-family:inherit;cursor:pointer}
+button.stat:hover span,button.stat[aria-pressed="true"] span{color:#fff}
+button.stat[aria-pressed="true"]{background:rgba(118,156,210,0.18)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;font-size:12px;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.on{opacity:1}
 
@@ -220,7 +232,10 @@ button,select{font-family:inherit}
   </aside>
 
   <section class="feed" aria-label="Stories">
-    <div class="feedhead"><b id="feedTitle">All stories</b><span id="feedCount"></span></div>
+    <div class="feedhead">
+      <span class="fl"><b id="feedTitle">All stories</b><span id="feedCount"></span></span>
+      <span class="seg" id="region" role="group" aria-label="Filter by region"></span>
+    </div>
     <div id="posts" style="display:flex;flex-direction:column;gap:14px"></div>
   </section>
 </main>
@@ -250,7 +265,8 @@ button,select{font-family:inherit}
     physical_ai: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 10h4v4h-4z"/><path d="M9.5 4v3M14.5 4v3M9.5 17v3M14.5 17v3M4 9.5h3M4 14.5h3M17 9.5h3M17 14.5h3"/>'
   };
 
-  var state = { ed: 0, cat: "all", type: "all" };
+  var state = { ed: 0, cat: "all", type: "all", region: /(^|#|&)gcc\b/i.test(location.hash) ? "gcc" : "all" };
+  function inRegion(p) { return state.region === "all" || p.region === "GCC"; }
   var $ = function (id) { return document.getElementById(id); };
 
   function esc(s) {
@@ -305,7 +321,10 @@ button,select{font-family:inherit}
     $("headline").textContent = e.headline || "";
     $("period").textContent = e.period ? "Covering " + fmtDate(e.period.from) + " to " + fmtDate(e.period.to) + (e.stories_scanned ? " · " + e.stories_scanned + " articles scanned" + (e.distinct_events ? " (" + e.distinct_events + " distinct stories)" : "") : "") : "";
     var stats = [[posts.length, "Stories"], [inv.length, "Deals"], [money(total) || "–", "Capital disclosed"], [gcc, "GCC stories"]];
-    $("stats").innerHTML = stats.map(function (s) { return '<div class="stat"><b>' + esc(s[0]) + "</b><span>" + esc(s[1]) + "</span></div>"; }).join("");
+    $("stats").innerHTML = stats.map(function (s, i) {
+      if (i === 3) return '<button class="stat" type="button" data-region="toggle" aria-pressed="' + (state.region === "gcc") + '" title="Show only GCC stories"><b>' + esc(s[0]) + "</b><span>" + esc(s[1]) + "</span></button>";
+      return '<div class="stat"><b>' + esc(s[0]) + "</b><span>" + esc(s[1]) + "</span></div>";
+    }).join("");
   }
 
   function renderTakeaways(e) {
@@ -334,12 +353,16 @@ button,select{font-family:inherit}
   }
 
   function renderFilters(e) {
-    var posts = e.posts || [], counts = {};
+    var all = e.posts || [], posts = all.filter(inRegion), counts = {};
+    var gccN = all.filter(function (p) { return p.region === "GCC"; }).length;
+    $("region").innerHTML =
+      '<button type="button" data-region="all" aria-pressed="' + (state.region === "all") + '">All regions<span class="n">' + all.length + "</span></button>" +
+      '<button type="button" data-region="gcc" aria-pressed="' + (state.region === "gcc") + '"><span class="flag"></span>GCC<span class="n">' + gccN + "</span></button>";
     posts.forEach(function (p) { counts[p.category] = (counts[p.category] || 0) + 1; });
     var list = [{ id: "all", label: "All categories", color: "#12102A" }].concat(FEED.meta.categories || []);
     $("cats").innerHTML = list.map(function (c) {
       var n = c.id === "all" ? posts.length : (counts[c.id] || 0);
-      return '<button class="cat" type="button" data-cat="' + esc(c.id) + '" aria-pressed="' + (state.cat === c.id) + '"' + (n ? "" : " disabled") + '><span class="sw" style="background:' + esc(c.color) + '"></span>' + esc(c.label) + '<span class="n">' + n + "</span></button>";
+      return '<button class="cat" type="button" data-cat="' + esc(c.id) + '" aria-pressed="' + (state.cat === c.id) + '"' + (n || state.cat === c.id ? "" : " disabled") + '><span class="sw" style="background:' + esc(c.color) + '"></span>' + esc(c.label) + '<span class="n">' + n + "</span></button>";
     }).join("");
     $("types").innerHTML = TYPES.map(function (t) {
       return '<button class="chip" type="button" data-type="' + t[0] + '" aria-pressed="' + (state.type === t[0]) + '">' + t[1] + "</button>";
@@ -367,14 +390,15 @@ button,select{font-family:inherit}
 
   function renderPosts(e) {
     var posts = (e.posts || []).filter(function (p) {
-      return (state.cat === "all" || p.category === state.cat) && (state.type === "all" || p.type === state.type);
+      return inRegion(p) && (state.cat === "all" || p.category === state.cat) && (state.type === "all" || p.type === state.type);
     });
     var title = state.cat === "all" ? "All stories" : catOf(state.cat).label;
+    if (state.region === "gcc") title = "GCC · " + title;
     if (state.type !== "all") title += " · " + TYPE_LABEL[state.type];
     $("feedTitle").textContent = title;
     $("feedCount").textContent = posts.length + (posts.length === 1 ? " story" : " stories");
     $("posts").innerHTML = posts.length ? posts.map(postHtml).join("") :
-      '<div class="empty">No stories match these filters this week.</div>';
+      '<div class="empty">' + (state.region === "gcc" ? "No GCC stories match these filters this week." : "No stories match these filters this week.") + "</div>";
   }
 
   function render() {
@@ -394,6 +418,17 @@ button,select{font-family:inherit}
     var b = ev.target.closest("[data-cat]"); if (!b || b.disabled) return;
     state.cat = b.getAttribute("data-cat"); renderFilters(edition()); renderPosts(edition());
   });
+  function setRegion(r) {
+    state.region = r;
+    try { history.replaceState(null, "", r === "gcc" ? "#gcc" : location.pathname + location.search); } catch (err) {}
+    var e = edition(); renderHero(e); renderFilters(e); renderPosts(e);
+  }
+  $("region").addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-region]"); if (b) setRegion(b.getAttribute("data-region"));
+  });
+  $("stats").addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-region]"); if (b) setRegion(state.region === "gcc" ? "all" : "gcc");
+  });
   $("types").addEventListener("click", function (ev) {
     var b = ev.target.closest("[data-type]"); if (!b) return;
     state.type = b.getAttribute("data-type"); renderFilters(edition()); renderPosts(edition());
@@ -409,10 +444,11 @@ button,select{font-family:inherit}
       e.trend_watch.forEach(function (t) { lines.push("• " + t.trend + " [" + t.status + "]: " + t.evidence); });
     }
     lines.push("", "Top stories:");
-    (e.posts || []).slice(0, 8).forEach(function (p) {
+    if (state.region === "gcc") lines[0] += " · GCC";
+    (e.posts || []).filter(inRegion).slice(0, 8).forEach(function (p) {
       lines.push("• " + p.headline + (p.amount_usd_m ? " (" + money(p.amount_usd_m) + ")" : "") + " · " + p.url);
     });
-    lines.push("", "Full feed: " + location.href.split("#")[0]);
+    lines.push("", "Full feed: " + location.href.split("#")[0] + (state.region === "gcc" ? "#gcc" : ""));
     var text = lines.join("\n");
     var done = function () { var t = $("toast"); t.textContent = "Brief copied"; t.classList.add("on"); setTimeout(function () { t.classList.remove("on"); }, 1800); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });

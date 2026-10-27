@@ -21,6 +21,7 @@
 })();
 </script>
 <script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react-18.3.1.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom-18.3.1.production.min.js"};</script>
+<script src="assets/js/summary.js"></script>
 <script src="assets/vendor/dc-runtime.js"></script>
 </head>
 <body>
@@ -906,6 +907,18 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
     </div>
   </header>
 
+  <section aria-label="About this platform and key figures" style="position:relative;z-index:1050;display:flex;align-items:center;gap:12px 32px;padding:12px 24px;background:#100E28;border-bottom:1px solid rgba(118,156,210,0.16);flex-wrap:wrap">
+    <p style="margin:0;flex:1 1 340px;min-width:0;font-size:13px;font-weight:300;line-height:1.5;color:rgba(255,255,255,0.84)">{{ sumTag }}</p>
+    <div style="display:flex;align-items:center;flex-wrap:wrap;row-gap:8px">
+      <sc-for list="{{ sumItems }}" as="m" hint-placeholder-count="6">
+        <div title="{{ m.hint }}" style="display:flex;align-items:baseline;gap:8px;padding:2px 18px 2px {{ m.pl }};border-left:{{ m.bl }}">
+          <span style="font-size:24px;font-weight:300;line-height:1;color:#FFFFFF;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">{{ m.value }}</span>
+          <span style="font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0;white-space:nowrap">{{ m.label }}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
   <div style="position:relative;z-index:1000;display:flex;align-items:center;gap:22px;padding:10px 24px;background:#0E0C24;border-bottom:1px solid rgba(118,156,210,0.16);flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
       <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0;margin-right:4px">Type</span>
@@ -1528,7 +1541,7 @@ class Component extends DCLogic {
   renderVals0() {
     if (!window.FLEET_DATA || !window.FLEET_DATA.fleet) {
       clearTimeout(this.dataWait); this.dataWait = setTimeout(() => this.forceUpdate(), 50);
-      return { asOf: "", unitsTotal: "", unitsSub: "", mapSub: "", hero: { big: "", label: "", sub: "" }, crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [], count: "" }, glyph: {} };
+      return { sumTag: "", sumItems: [], asOf: "", unitsTotal: "", unitsSub: "", mapSub: "", hero: { big: "", label: "", sub: "" }, crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [], count: "" }, glyph: {} };
     }
     const uT = (window.FLEET_DATA.fleet || []).reduce((o, f) => { if (f.units == null || isNaN(f.units)) o.unk++; else { o.n += Number(f.units); o.k++; } return o; }, { n: 0, k: 0, unk: 0 });
     const s = this.state, D = window.FLEET_DATA;
@@ -1548,6 +1561,8 @@ class Component extends DCLogic {
     const mt = (l, v, gl) => ({ l, v: cnt(v), g: gl || "", hasG: !!gl });
     const actD = new Set(rows.map((f) => A[f.asset_id].district_id)), actA = new Set(rows.map((f) => f.asset_id));
     const typesIn = D.robot_types.filter((t) => g.by[t.id].total > 0).length;
+    const SUM = window.RR_SUMMARY ? window.RR_SUMMARY(D) : { tagline: "", items: [] };
+    const sumItems = SUM.items.map((m, i) => Object.assign({}, m, { bl: i ? "1px solid rgba(118,156,210,0.25)" : "0", pl: i ? "18px" : "0" }));
     let hero;
     if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
     else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? " · OpenStreetMap boundary" : " · no fixed map location"), metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Assets", nA)] }; }
@@ -1629,7 +1644,7 @@ class Component extends DCLogic {
       asideRef: this.asideRef || (this.asideRef = (el) => { this.asideEl = el; }), canBack: lvl > 0, back: () => this.back(), crumbs, picker, stepNo, stepTxt, fInfo, unitsTotal: uT.n, unitsSub: uT.unk ? "+ " + uT.unk + " initiatives uncounted" : "All initiatives counted", unitsTip: "Sum of stated units across " + uT.k + " initiatives. " + uT.unk + " initiatives have no unit count in the tracker yet.",
       isDark: this.theme() === "dark", isLight: this.theme() === "light", setDark: () => this.setTheme("dark"), setLight: () => this.setTheme("light"),
       dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
-      hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
+      sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: lvl === 2 ? this.ringU(g, 150, 66, 7) : "", inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
       scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,

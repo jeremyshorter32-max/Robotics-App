@@ -6,11 +6,27 @@
    tracker_status keeps the tracker wording verbatim.
    units = robot count stated in tracker text, null when not stated.
    Totals count initiatives (one per tracker row).
+   meta.tagline = one-line description shown at the top of the page.
+   meta.metrics = the key-figures bar, in display order. Each item is
+     {"key": ..., "label": ...}. Keys (calculated from fleet automatically):
+     deployments, initiatives, assets, districts, launched, trialled,
+     pending, partners, robot_types, units.
+     For a hand-entered figure use {"label": "...", "value": "..."} instead.
+     Remove an item to hide it; reorder to change its position.
    coord_approx = true -> map point estimated, confirm location.
    Districts: OpenStreetMap outlines (Nominatim, ODbL), lightly simplified.
    ========================================================================== */
 window.FLEET_DATA = {
  "meta": {
+  "tagline": "Aldar's live view of robotics across its Abu Dhabi portfolio: what's launched, in trial and planned, asset by asset.",
+  "metrics": [
+   {"key": "deployments", "label": "Deployments"},
+   {"key": "initiatives", "label": "Initiatives"},
+   {"key": "assets", "label": "Aldar assets"},
+   {"key": "launched", "label": "Live"},
+   {"key": "partners", "label": "Tech partners"},
+   {"key": "districts", "label": "Districts"}
+  ],
   "data_as_of": "5 Oct 2026",
   "source": "Aldar robotics initiative tracker, items 07 to 23"
  },

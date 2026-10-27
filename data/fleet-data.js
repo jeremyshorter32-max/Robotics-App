@@ -1,16 +1,19 @@
 /* ==========================================================================
    FLEET DATA. Edit this object only; every total is calculated from fleet.
    Source: Aldar robotics initiative tracker (items 07 to 23).
-   status (drives ring/nodes): "deployed" = Launched,
-     "pilot" = Tested / Testing in Progress, "planned" = Test Pending.
+   Each row in fleet is one DEPLOYMENT: one robot use case at one site.
+   All totals count deployments. "init" marks rows that are the same
+   tracker item rolled out at several sites (reference only).
+   status (drives ring/nodes): "deployed" = Live (tracker: Launched),
+     "pilot" = Testing (tracker: Tested / Testing in Progress),
+     "planned" = Planned (tracker: Test Pending).
    tracker_status keeps the tracker wording verbatim.
    units = robot count stated in tracker text, null when not stated.
-   Totals count initiatives (one per tracker row).
    meta.tagline = one-line description shown at the top of the page.
    meta.metrics = the key-figures bar, in display order. Each item is
      {"key": ..., "label": ...}. Keys (calculated from fleet automatically):
-     deployments, initiatives, assets, districts, launched, trialled,
-     pending, partners, robot_types, units.
+     deployments, live, testing, planned, assets, districts, partners,
+     robot_types, units.
      For a hand-entered figure use {"label": "...", "value": "..."} instead.
      Remove an item to hide it; reorder to change its position.
    coord_approx = true -> map point estimated, confirm location.
@@ -18,14 +21,14 @@
    ========================================================================== */
 window.FLEET_DATA = {
  "meta": {
-  "tagline": "Aldar's live view of robotics across its Abu Dhabi portfolio: what's launched, in trial and planned, asset by asset.",
+  "tagline": "Aldar's view of robotics across its Abu Dhabi portfolio: what's live, in testing and planned, asset by asset.",
   "metrics": [
    {"key": "deployments", "label": "Deployments"},
-   {"key": "initiatives", "label": "Initiatives"},
+   {"key": "live", "label": "Live"},
+   {"key": "testing", "label": "Testing"},
+   {"key": "planned", "label": "Planned"},
    {"key": "assets", "label": "Aldar assets"},
-   {"key": "launched", "label": "Live"},
-   {"key": "partners", "label": "Tech partners"},
-   {"key": "districts", "label": "Districts"}
+   {"key": "partners", "label": "Tech partners"}
   ],
   "data_as_of": "5 Oct 2026",
   "source": "Aldar robotics initiative tracker, items 07 to 23"

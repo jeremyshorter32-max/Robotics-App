@@ -1,0 +1,61 @@
+# Robotics Market Pulse: builds the weekly feed shown on intel.html.
+#
+# Runs every Monday at 10:00 Abu Dhabi time (06:00 UTC). If that run fails or
+# GitHub delays it, the hourly runs after it try again until the week's edition
+# is published; once it exists, they stop straight away without changing anything.
+# Pushing the new data to main makes Netlify redeploy the site.
+#
+# Optional: add an ANTHROPIC_API_KEY repository secret (Settings > Secrets and
+# variables > Actions) so Claude writes the summaries. Without it, a simple
+# rule picks the stories and uses the headlines as they are.
+
+name: Robotics Market Pulse
+
+on:
+  schedule:
+    - cron: "0 6-23 * * 1"   # Monday 10:00 to 03:00 (Tue) Abu Dhabi, hourly
+    - cron: "0 0-14 * * 2"   # Tuesday hourly retries, until 18:00 Abu Dhabi
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild this week's edition even if it already exists"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: market-intel
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install -r intel/requirements.txt
+
+      - name: Build this week's edition
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python intel/market_intel.py ${{ inputs.force && '--force' || '' }}
+
+      - name: Publish
+        run: |
+          git config user.name "market-pulse-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/intel-feed.json data/intel-feed.js
+          if git diff --cached --quiet; then
+            echo "No new edition to publish."
+          else
+            git commit -m "Market Pulse: weekly robotics edition"
+            git push
+          fi

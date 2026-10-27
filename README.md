@@ -48,3 +48,11 @@ Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`
 **Change the categories or sources.** Edit `intel/config.json`: each category has a label, colours, `queries` (news searches) and `keywords` (used to sort stories). You can also change the number of stories, the model, and the trade-press feeds there.
 
 **Run it by hand.** In GitHub: Actions → Robotics Market Pulse → Run workflow (tick "force" to rebuild this week). Locally: `pip install -r intel/requirements.txt`, then `python intel/market_intel.py` (`--dry-run` prints without saving, `--force` rebuilds this week).
+
+## Deployment videos
+Footage appears on each deployment's card, in a full-screen player, and in the **Watch deployments** gallery (header on desktop, Menu tab on phones). The **Has video** filter shows only deployments with footage.
+
+To add a video:
+1. Put the web-ready file and a preview image in `assets/video/` (e.g. `07-analog-spot-01.mp4` and `.jpg`). Keep clips short, silent, H.264 MP4 with "faststart", about 1–2 MB each.
+2. In `data/fleet-data.js`, add it to that deployment's `videos` list:
+   `{"src": "assets/video/<file>.mp4", "poster": "assets/video/<file>.jpg", "title": "Short caption", "duration": 12}`

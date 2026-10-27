@@ -47,10 +47,31 @@ USER_AGENT = "Mozilla/5.0 (compatible; AldarRoboticsMarketPulse/1.0)"
 POST_TYPES = ["investment", "product", "deployment", "trend"]
 REGIONS = ["GCC", "North America", "Europe", "China", "Asia-Pacific", "Global"]
 
-TYPE_PATTERNS = {
-    "investment": r"\braises?\b|\braised\b|funding|series [a-f]\b|seed round|pre-seed|valuation|\bipo\b|acquir|acquisition|invest|backed|\$\s?\d+(\.\d+)?\s?(m|bn|b|million|billion)\b",
-    "product": r"launch|unveil|introduc|debut|releases?\b|new robot|next-gen|announces? (the )?new|rolls out",
-    "deployment": r"deploy|partner|pilot|trial|contract|\bmou\b|rollout|roll out|signs?\b|order|fleet|expands? to|goes live|commission",
+# Checked in this order; the first match sets the story type. Contracts and deals
+# count as deployments, not investments, so "capital disclosed" means funding only.
+TYPE_PATTERNS = [
+    ("investment", r"\braises?\b|\braised\b|\braising\b|funding round|\bfunding\b|series [a-f]\b|\bseed\b|pre-seed|valuation|\bipo\b|\bacquir|acquisition|venture fund|\bfund\b|invests? in|investment in|closes? .{0,30}round"),
+    ("deployment", r"deploy|partner|pilot|trial|contract|\bdeal\b|\bmou\b|rollout|roll out|\bsigns?\b|\border\b|fleet|expands? to|goes live|commission|testing"),
+    ("product", r"launch|unveil|introduc|debut|\breleases?\b|new robot|next-gen|announces? (the )?new|rolls out"),
+]
+MONEY = r"\$\s?(\d+(?:\.\d+)?)\s?(m|mn|million|bn|b|billion)\b"
+
+# Market-size press releases and similar filler, dropped before curation.
+NOISE_TITLE = r"market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
+NOISE_SOURCES = {"openpr.com", "ein presswire", "einpresswire", "marketsandmarkets", "taiwannews", "barchart", "benzinga", "seeking alpha", "the globe and mail", "fool.com", "the motley fool", "insidermonkey"}
+# When several outlets cover the same story, show the one from the best-known outlet.
+TRUSTED_SOURCES = ["reuters", "bloomberg", "financial times", "the wall street journal", "techcrunch", "the robot report",
+                   "ieee spectrum", "the national", "gulf news", "khaleej times", "arab news", "zawya", "siliconangle",
+                   "forbes", "cnbc", "axios", "fortune", "the verge", "wired", "business insider", "geekwire",
+                   "construction dive", "dronelife", "the next web", "nikkei asia", "south china morning post", "the information"]
+GENERIC_WORDS = {
+    "robotics", "robotic", "robot", "robots", "startup", "startups", "million", "billion", "series", "funding", "raises",
+    "raised", "the", "this", "that", "new", "with", "for", "and", "how", "why", "what", "from", "into", "after", "self-driving",
+    "autonomous", "humanoid", "humanoids", "drone", "drones", "delivery", "security", "construction", "market", "physical",
+    "tech", "technology", "launches", "unveils", "announces", "company", "group", "global", "world", "year", "week", "inc",
+    "ltd", "deal", "round", "valuation", "seed", "report", "news", "first", "its", "will", "more", "than", "over", "about",
+    "says", "said", "could", "can", "are", "has", "have", "be", "is", "to", "of", "in", "on", "at", "by", "as", "an", "a",
+    "ai", "us", "u.s.", "uk", "china", "chinese", "dubai", "abu", "dhabi", "uae", "saudi", "robotaxi", "robotaxis",
 }
 REGION_PATTERNS = [
     ("GCC", r"\buae\b|abu dhabi|dubai|sharjah|ras al khaimah|saudi|riyadh|jeddah|neom|qatar|doha|kuwait|bahrain|oman|muscat|\bgcc\b|gulf|middle east"),
@@ -161,7 +182,8 @@ def parse_feed(data: bytes, default_source: str) -> list[dict]:
     return items
 
 
-def collect(config: dict) -> list[dict]:
+def collect(config: dict) -> tuple[list[dict], int]:
+    """Returns the distinct stories and how many relevant articles they came from."""
     days = config["lookback_days"]
     jobs: list[tuple[str, str, str | None]] = []  # (url, source name, category hint)
     for cat in config["categories"]:
@@ -196,13 +218,21 @@ def collect(config: dict) -> list[dict]:
                 continue
             seen[key] = item
     items = list(seen.values())
+    # Keep only robotics-relevant stories, and drop market-size press releases.
+    items = [i for i in items if re.search(r"robot|drone|autonom|humanoid|automat|self-driving|robotaxi|physical ai|cobot|\bamr\b", (i["title"] + " " + i["snippet"]).lower())]
+    items = [i for i in items if not is_noise(i)]
     for item in items:
         enrich(item, config)
-    # Keep only robotics-relevant stories.
-    items = [i for i in items if re.search(r"robot|drone|autonom|humanoid|automat|self-driving|robotaxi|physical ai|cobot|\bamr\b", (i["title"] + " " + i["snippet"]).lower())]
+    raw = len(items)
+    items = group_same_story(items)
     items.sort(key=lambda i: i["published"] or cutoff, reverse=True)
-    log(f"Kept {len(items)} unique stories from the last {days} days.")
-    return items
+    log(f"Kept {raw} relevant stories from the last {days} days, about {len(items)} distinct events.")
+    return items, raw
+
+
+def is_noise(item: dict) -> bool:
+    source = item["source"].lower()
+    return bool(re.search(NOISE_TITLE, item["title"].lower())) or any(s in source for s in NOISE_SOURCES)
 
 
 def enrich(item: dict, config: dict) -> None:
@@ -213,9 +243,10 @@ def enrich(item: dict, config: dict) -> None:
         if score > best_score:
             best, best_score = cat["id"], score
     item["category"] = best or "physical_ai"
+    title = item["title"].lower()
     item["type"] = "trend"
-    for t in ("investment", "product", "deployment"):
-        if re.search(TYPE_PATTERNS[t], text):
+    for t, pattern in TYPE_PATTERNS:
+        if re.search(pattern, title):  # the headline is a more reliable guide than the snippet
             item["type"] = t
             break
     item["region"] = "Global"
@@ -223,17 +254,136 @@ def enrich(item: dict, config: dict) -> None:
         if re.search(pattern, text):
             item["region"] = region
             break
-    m = re.search(r"\$\s?(\d+(?:\.\d+)?)\s?(m|million|bn|b|billion)\b", text)
     item["amount_usd_m"] = None
-    if m:
-        value = float(m.group(1))
-        item["amount_usd_m"] = value * 1000 if m.group(2) in ("bn", "b", "billion") else value
+    item["money"] = money_values(title)
+    if item["type"] in ("investment", "deployment") and item["money"]:
+        item["amount_usd_m"] = item["money"][0]
+
+
+def money_values(text: str) -> list[float]:
+    values = []
+    for m in re.finditer(MONEY, text):
+        v = float(m.group(1))
+        values.append(round(v * 1000 if m.group(2) in ("bn", "b", "billion") else v, 1))
+    return values
+
+
+def name_words(title: str) -> set[str]:
+    """Distinctive capitalised words in a headline, usually company or place names."""
+    words = re.findall(r"\b[A-Z][A-Za-z0-9&'’.-]{2,}\b", title)
+    return {w.lower().strip("'’.") for w in words} - GENERIC_WORDS
+
+
+def word_set(title: str) -> set[str]:
+    return {w for w in re.findall(r"[a-z0-9]+", title.lower()) if len(w) >= 4} - GENERIC_WORDS
+
+
+def same_story(a: dict, b: dict) -> bool:
+    wa, wb = word_set(a["title"]), word_set(b["title"])
+    overlap = len(wa & wb) / max(1, len(wa | wb))
+    shared_names = name_words(a["title"]) & name_words(b["title"])
+    shared_money = set(a["money"]) & set(b["money"])
+    if overlap >= 0.45:
+        return True
+    if shared_names and (shared_money or overlap >= 0.2):
+        return True
+    # The same dollar figure on the same kind of story in one week is almost always the same event.
+    return bool(shared_money) and a["type"] == b["type"] and a["type"] in ("investment", "deployment")
+
+
+def source_rank(item: dict) -> int:
+    source = item["source"].lower()
+    for n, name in enumerate(TRUSTED_SOURCES):
+        if name in source:
+            return n
+    return len(TRUSTED_SOURCES) + (0 if item["snippet"] else 1)
+
+
+def group_same_story(items: list[dict]) -> list[dict]:
+    """Merge stories that several outlets wrote about the same event.
+
+    The best-known outlet's version is kept, and the number of outlets is kept
+    as 'coverage', which is a useful signal of how big the story is.
+    """
+    groups: list[list[dict]] = []
+    for item in items:
+        for group in groups:
+            if any(same_story(item, other) for other in group):
+                group.append(item)
+                break
+        else:
+            groups.append([item])
+    merged = []
+    for group in groups:
+        group.sort(key=source_rank)
+        lead = dict(group[0])
+        sources = []
+        for other in group:
+            if other["source"] not in sources:
+                sources.append(other["source"])
+            if lead["amount_usd_m"] is None and other["amount_usd_m"] is not None and other["type"] == lead["type"]:
+                lead["amount_usd_m"] = other["amount_usd_m"]
+        dates = [o["published"] for o in group if o["published"]]
+        lead["published"] = min(dates) if dates else None
+        lead["coverage"] = len(sources)
+        lead["also_covered_by"] = sources[1:4]
+        merged.append(lead)
+    return merged
+
+
+def category_signals(items: list[dict], config: dict) -> dict:
+    """How many distinct stories and funding deals each category had this week."""
+    volume = {c["id"]: 0 for c in config["categories"]}
+    deals = {c["id"]: 0 for c in config["categories"]}
+    for i in items:
+        if i["category"] in volume:
+            volume[i["category"]] += 1
+            if i["type"] == "investment":
+                deals[i["category"]] += 1
+    return {"volume": volume, "deals": deals}
+
+
+def momentum(signals: dict, history: list[dict], config: dict) -> list[dict]:
+    """Compare this week's story volume per category with the average of earlier weeks."""
+    past = [e["signals"]["volume"] for e in history if e.get("signals")]
+    rows = []
+    for c in config["categories"]:
+        cid = c["id"]
+        now = signals["volume"].get(cid, 0)
+        avg = round(sum(p.get(cid, 0) for p in past) / len(past), 1) if past else None
+        change = round((now - avg) / avg * 100) if avg else None
+        rows.append({"category": cid, "volume": now, "deals": signals["deals"].get(cid, 0), "avg_prev": avg, "change_pct": change})
+    return rows
 
 
 # --------------------------------------------------------------------------- curate
 
-def curate_with_claude(items: list[dict], config: dict) -> dict | None:
-    """Ask Claude to pick and write up the stories. Returns None on any failure."""
+TREND_STATUSES = ["new", "rising", "steady", "cooling"]
+
+
+def history_brief(history: list[dict], moves: list[dict], config: dict) -> str:
+    """Text summary of earlier editions and this week's momentum, for Claude."""
+    labels = {c["id"]: c["label"] for c in config["categories"]}
+    lines = []
+    if history:
+        lines.append("Earlier editions (most recent first):")
+        for e in history:
+            lines.append(f"- {e['id']}: {e.get('headline', '')}")
+            for t in e.get("takeaways", []):
+                lines.append(f"    takeaway: {t}")
+            for t in e.get("trend_watch", []):
+                lines.append(f"    trend: {t['trend']} [{t['status']}]")
+    else:
+        lines.append("This is the first tracked week, so there is no history yet. Mark trends as new.")
+    lines.append("\nNews volume by category this week (distinct stories, with average of earlier weeks):")
+    for m in moves:
+        avg = "no history" if m["avg_prev"] is None else f"avg {m['avg_prev']}, change {m['change_pct'] if m['change_pct'] is not None else 'n/a'}%"
+        lines.append(f"- {labels[m['category']]}: {m['volume']} stories, {m['deals']} funding deals ({avg})")
+    return "\n".join(lines)
+
+
+def curate_with_claude(items: list[dict], config: dict, history: list[dict], moves: list[dict]) -> dict | None:
+    """Ask Claude to pick and write up the stories and track trends. Returns None on any failure."""
     if not os.environ.get("ANTHROPIC_API_KEY"):
         log("No ANTHROPIC_API_KEY set; using the rule-based picker.")
         return None
@@ -243,11 +393,12 @@ def curate_with_claude(items: list[dict], config: dict) -> dict | None:
         log("The anthropic package is not installed; using the rule-based picker.")
         return None
 
-    candidates = items[: config["max_candidates_for_ai"]]
+    candidates = sorted(items, key=lambda i: (-i.get("coverage", 1), source_rank(i)))[: config["max_candidates_for_ai"]]
     cat_ids = [c["id"] for c in config["categories"]]
     cat_lines = "\n".join(f"- {c['id']}: {c['label']}" for c in config["categories"])
     listing = "\n".join(
-        f"[{n}] {i['title']} | source: {i['source']} | date: {i['published'].date() if i['published'] else 'unknown'}"
+        f"[{n}] {i['title']} | source: {i['source']} | outlets covering it: {i.get('coverage', 1)}"
+        f" | date: {i['published'].date() if i['published'] else 'unknown'}"
         f" | guess: {i['category']}/{i['type']}/{i['region']}" + (f" | snippet: {i['snippet']}" if i["snippet"] else "")
         for n, i in enumerate(candidates)
     )
@@ -257,21 +408,31 @@ def curate_with_claude(items: list[dict], config: dict) -> dict | None:
         f"{config['audience']}.\n\n"
         "Your readers are busy executives. They want to know, in seconds, what moved in robotics "
         "this week worldwide: emerging trends, notable product launches, major investments, and real "
-        "deployments, plus what each means for a property developer and operator.\n\n"
+        "deployments, plus what each means for a property developer and operator. You write a new edition "
+        "every week and keep a running view of the trends, so say how this week fits what came before.\n\n"
         f"Categories:\n{cat_lines}\n\n"
         "Rules:\n"
         "- Use only the numbered stories provided. Refer to each by its number in item_index. "
         "Never invent stories, companies, figures or dates.\n"
         "- State a figure (money, units, valuation) only when it appears in that story's title or snippet. "
-        "amount_usd_m is the disclosed amount in millions of US dollars, or null.\n"
-        "- Prefer significance over volume: large funding rounds, launches from major players, "
-        "deployments at scale, regulation, and anything in the GCC. Skip opinion pieces, listicles, "
-        "market-size press releases and near-duplicates covering the same event.\n"
+        "amount_usd_m is the money raised (type investment) or the contract value (type deployment), in millions "
+        "of US dollars, or null. Market-size forecasts and company spending plans are not investments.\n"
+        "- type: investment = funding rounds, acquisitions, new funds; product = launches and new models; "
+        "deployment = contracts, pilots, partnerships, rollouts; trend = policy, research, analysis and everything else.\n"
+        "- Prefer significance over volume: large funding rounds, launches from major players, deployments at "
+        "scale, regulation, and anything in the GCC. A story covered by many outlets is usually bigger. Skip "
+        "opinion pieces, listicles, market-size press releases, stock-price stories and stories already "
+        "covered by another item you picked.\n"
         "- Cover as many categories as the news supports, but do not pad a category with weak stories.\n"
         "- headline: at most 90 characters, plain and factual. summary: one or two sentences, at most 40 words. "
         "why_it_matters: one sentence, at most 25 words, on the implication for a real estate developer and "
         "operator running robots in communities, malls, offices and construction sites. Be concrete, avoid hype.\n"
-        "- takeaways: the three most important patterns across this week's stories, one sentence each.\n"
+        "- takeaways: the three most important patterns this week, one sentence each. Where it applies, say how "
+        "this compares with earlier weeks.\n"
+        "- trend_watch: three to five running themes in robotics that matter to this audience, carried over "
+        "from earlier editions where they continue. status: new (first appeared this week), rising (more or "
+        "bigger evidence than before), steady, or cooling (less evidence than before). evidence: at most 25 "
+        "words, citing this week's stories or the volume figures.\n"
         "- edition_headline: the single most important development, at most 80 characters."
     )
     schema = {
@@ -279,6 +440,19 @@ def curate_with_claude(items: list[dict], config: dict) -> dict | None:
         "properties": {
             "edition_headline": {"type": "string"},
             "takeaways": {"type": "array", "items": {"type": "string"}},
+            "trend_watch": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "trend": {"type": "string"},
+                        "status": {"type": "string", "enum": TREND_STATUSES},
+                        "evidence": {"type": "string"},
+                    },
+                    "required": ["trend", "status", "evidence"],
+                    "additionalProperties": False,
+                },
+            },
             "posts": {
                 "type": "array",
                 "items": {
@@ -299,7 +473,7 @@ def curate_with_claude(items: list[dict], config: dict) -> dict | None:
                 },
             },
         },
-        "required": ["edition_headline", "takeaways", "posts"],
+        "required": ["edition_headline", "takeaways", "trend_watch", "posts"],
         "additionalProperties": False,
     }
 
@@ -315,7 +489,10 @@ def curate_with_claude(items: list[dict], config: dict) -> dict | None:
             system=system,
             messages=[{
                 "role": "user",
-                "content": f"Pick up to {config['max_posts']} stories for this week's briefing.\n\nStories:\n{listing}",
+                "content": (
+                    f"{history_brief(history, moves, config)}\n\n"
+                    f"Pick up to {config['max_posts']} stories for this week's briefing.\n\nStories:\n{listing}"
+                ),
             }],
         )
     except anthropic.APIConnectionError as exc:
@@ -341,28 +518,30 @@ def curate_with_claude(items: list[dict], config: dict) -> dict | None:
         if not 0 <= idx < len(candidates) or idx in used:
             continue
         used.add(idx)
-        src = candidates[idx]
-        posts.append(make_post(src, p))
+        posts.append(make_post(candidates[idx], p))
     if not posts:
         return None
     return {
         "generated_by": "claude",
         "headline": result["edition_headline"],
         "takeaways": result["takeaways"][:3],
+        "trend_watch": result["trend_watch"][:5],
         "posts": posts,
     }
 
 
-def curate_with_rules(items: list[dict], config: dict) -> dict:
-    """Fallback picker: favour funding with amounts, GCC news, launches, then recency."""
+def curate_with_rules(items: list[dict], config: dict, history: list[dict], moves: list[dict]) -> dict:
+    """Fallback picker: favour widely covered stories, funding, GCC news and launches."""
     weight = {"investment": 3, "deployment": 2, "product": 2, "trend": 1}
 
     def score(i):
-        s = weight[i["type"]]
-        if i["amount_usd_m"]:
-            s += min(i["amount_usd_m"] / 100, 4)
+        s = weight[i["type"]] + min(i.get("coverage", 1) - 1, 5) * 0.8
+        if i["type"] == "investment" and i["amount_usd_m"]:
+            s += min(i["amount_usd_m"] / 150, 3)
         if i["region"] == "GCC":
             s += 2
+        if i["source"].lower().startswith(tuple(TRUSTED_SOURCES)):
+            s += 0.5
         return s
 
     labels = {c["id"]: c["label"] for c in config["categories"]}
@@ -372,30 +551,46 @@ def curate_with_rules(items: list[dict], config: dict) -> dict:
         if per_cat.get(i["category"], 0) >= 4:
             continue
         per_cat[i["category"]] = per_cat.get(i["category"], 0) + 1
-        posts.append(make_post(i, {
-            "headline": i["title"],
-            "summary": i["snippet"],
-            "why_it_matters": "",
-            "company": "",
-        }))
+        posts.append(make_post(i, {"headline": i["title"], "summary": i["snippet"], "why_it_matters": "", "company": ""}))
         if len(posts) >= config["max_posts"]:
             break
 
     inv = [p for p in posts if p["type"] == "investment"]
     total = sum(p["amount_usd_m"] or 0 for p in inv)
-    busiest = max(per_cat, key=per_cat.get) if per_cat else None
     takeaways = []
     if inv:
-        takeaways.append(f"{len(inv)} funding or deal {'story' if len(inv) == 1 else 'stories'} tracked" + (f", with about ${total:,.0f}M disclosed." if total else "."))
-    if busiest:
-        takeaways.append(f"Most activity this week: {labels.get(busiest, busiest)}.")
+        top = max(inv, key=lambda p: p["amount_usd_m"] or 0)
+        takeaways.append(f"{len(inv)} funding {'story' if len(inv) == 1 else 'stories'} in the feed"
+                         + (f", about ${total:,.0f}M disclosed; largest: {top['headline']}" if total else "."))
+    ranked = sorted(moves, key=lambda m: m["volume"], reverse=True)
+    if ranked and ranked[0]["volume"]:
+        n = ranked[0]["volume"]
+        takeaways.append(f"Most news this week: {labels[ranked[0]['category']]} ({n} distinct {'story' if n == 1 else 'stories'}).")
     gcc = [p for p in posts if p["region"] == "GCC"]
     if gcc:
         takeaways.append(f"{len(gcc)} {'story' if len(gcc) == 1 else 'stories'} from the GCC, led by: {gcc[0]['headline']}")
+
+    # Trend watch from volume changes against earlier weeks: rising and cooling first.
+    plural = lambda n, word: f"{n} {word}{'' if n == 1 else 's'}"
+    rows = []
+    for m in moves:
+        if not m["volume"] and not m["avg_prev"]:
+            continue
+        if m["avg_prev"] is None:
+            status = "new"
+            evidence = f"{plural(m['volume'], 'story')} and {plural(m['deals'], 'funding deal')} this week; first week tracked."
+        else:
+            c = m["change_pct"] if m["change_pct"] is not None else 100
+            status = "rising" if c >= 25 else "cooling" if c <= -25 else "steady"
+            evidence = f"{plural(m['volume'], 'story')} this week against a {m['avg_prev']:g} weekly average; {plural(m['deals'], 'funding deal')}."
+        rows.append((["rising", "new", "cooling", "steady"].index(status), -m["volume"],
+                     {"trend": f"News flow in {labels[m['category']]}", "status": status, "evidence": evidence}))
+    trend_watch = [r[2] for r in sorted(rows, key=lambda r: r[:2])[:4]]
     return {
         "generated_by": "rules",
         "headline": posts[0]["headline"] if posts else "No major robotics news this week",
         "takeaways": takeaways,
+        "trend_watch": trend_watch,
         "posts": posts,
     }
 
@@ -414,6 +609,8 @@ def make_post(src: dict, ai: dict) -> dict:
         "source": src["source"],
         "url": src["url"],
         "published": src["published"].strftime("%Y-%m-%d") if src["published"] else None,
+        "coverage": src.get("coverage", 1),
+        "also_covered_by": src.get("also_covered_by", []),
     }
 
 
@@ -456,12 +653,16 @@ def main() -> int:
         log(f"Edition {edition_id} is already published. Nothing to do (use --force to rebuild).")
         return 0
 
-    items = collect(config)
+    items, raw = collect(config)
     if not items:
         log("No stories could be fetched. Nothing written; try again later.")
         return 1
 
-    curated = curate_with_claude(items, config) or curate_with_rules(items, config)
+    # Earlier editions (up to 4 weeks) give the trend view its memory.
+    history = [e for e in feed["editions"] if e["id"] != edition_id and e.get("generated_by") != "seed"][:4]
+    signals = category_signals(items, config)
+    moves = momentum(signals, history, config)
+    curated = curate_with_claude(items, config, history, moves) or curate_with_rules(items, config, history, moves)
     edition = {
         "id": edition_id,
         "label": f"Week {iso.week} · {now.strftime('%-d %b %Y')}",
@@ -470,7 +671,10 @@ def main() -> int:
             "from": (now - timedelta(days=config["lookback_days"])).strftime("%Y-%m-%d"),
             "to": now.strftime("%Y-%m-%d"),
         },
-        "stories_scanned": len(items),
+        "stories_scanned": raw,
+        "distinct_events": len(items),
+        "signals": signals,
+        "momentum": moves,
         **curated,
     }
 

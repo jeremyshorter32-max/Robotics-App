@@ -57,7 +57,7 @@ TYPE_PATTERNS = [
 MONEY = r"\$\s?(\d+(?:\.\d+)?)\s?(m|mn|million|bn|b|billion)\b"
 
 # Market-size press releases and similar filler, dropped before curation.
-NOISE_TITLE = r"market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
+NOISE_TITLE = r"surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
 NOISE_SOURCES = {"openpr.com", "ein presswire", "einpresswire", "marketsandmarkets", "taiwannews", "barchart", "benzinga", "seeking alpha", "the globe and mail", "fool.com", "the motley fool", "insidermonkey"}
 # When several outlets cover the same story, show the one from the best-known outlet.
 TRUSTED_SOURCES = ["reuters", "bloomberg", "financial times", "the wall street journal", "techcrunch", "the robot report",
@@ -256,13 +256,18 @@ def enrich(item: dict, config: dict) -> None:
             break
     item["amount_usd_m"] = None
     item["money"] = money_values(title)
-    if item["type"] in ("investment", "deployment") and item["money"]:
+    is_fund = re.search(r"\bfund\b|venture fund", title) and not re.search(r"\braise|\bfunding\b|series", title)
+    if item["type"] in ("investment", "deployment") and item["money"] and not is_fund:
         item["amount_usd_m"] = item["money"][0]
 
 
 def money_values(text: str) -> list[float]:
+    """Dollar figures in a headline, leaving out valuations (they are not money raised)."""
     values = []
     for m in re.finditer(MONEY, text):
+        before, after = text[max(0, m.start() - 12):m.start()], text[m.end():m.end() + 14]
+        if "valuation" in after or "valued" in before or "valuation" in before:
+            continue
         v = float(m.group(1))
         values.append(round(v * 1000 if m.group(2) in ("bn", "b", "billion") else v, 1))
     return values
@@ -279,13 +284,16 @@ def word_set(title: str) -> set[str]:
 
 
 def same_story(a: dict, b: dict) -> bool:
-    wa, wb = word_set(a["title"]), word_set(b["title"])
+    wa, wb = a["_words"], b["_words"]
     overlap = len(wa & wb) / max(1, len(wa | wb))
-    shared_names = name_words(a["title"]) & name_words(b["title"])
+    shared_names = a["_names"] & b["_names"]
     shared_money = set(a["money"]) & set(b["money"])
     if overlap >= 0.45:
         return True
     if shared_names and (shared_money or overlap >= 0.2):
+        return True
+    # A company rarely has two separate funding events in one week.
+    if shared_names and a["type"] == b["type"] == "investment":
         return True
     # The same dollar figure on the same kind of story in one week is almost always the same event.
     return bool(shared_money) and a["type"] == b["type"] and a["type"] in ("investment", "deployment")
@@ -305,18 +313,29 @@ def group_same_story(items: list[dict]) -> list[dict]:
     The best-known outlet's version is kept, and the number of outlets is kept
     as 'coverage', which is a useful signal of how big the story is.
     """
-    groups: list[list[dict]] = []
+    # Compare every pair and join linked stories, so A~B and B~C end up in one group.
     for item in items:
-        for group in groups:
-            if any(same_story(item, other) for other in group):
-                group.append(item)
-                break
-        else:
-            groups.append([item])
+        item["_words"], item["_names"] = word_set(item["title"]), name_words(item["title"])
+    parent = list(range(len(items)))
+
+    def root(i):
+        while parent[i] != i:
+            parent[i] = parent[parent[i]]
+            i = parent[i]
+        return i
+
+    for i in range(len(items)):
+        for j in range(i + 1, len(items)):
+            if root(i) != root(j) and same_story(items[i], items[j]):
+                parent[root(j)] = root(i)
+    by_root: dict[int, list[dict]] = {}
+    for i, item in enumerate(items):
+        by_root.setdefault(root(i), []).append(item)
+    groups = list(by_root.values())
     merged = []
     for group in groups:
         group.sort(key=source_rank)
-        lead = dict(group[0])
+        lead = {k: v for k, v in group[0].items() if not k.startswith("_")}
         sources = []
         for other in group:
             if other["source"] not in sources:
@@ -571,7 +590,7 @@ def curate_with_rules(items: list[dict], config: dict, history: list[dict], move
         takeaways.append(f"{len(gcc)} {'story' if len(gcc) == 1 else 'stories'} from the GCC, led by: {gcc[0]['headline']}")
 
     # Trend watch from volume changes against earlier weeks: rising and cooling first.
-    plural = lambda n, word: f"{n} {word}{'' if n == 1 else 's'}"
+    plural = lambda n, word: f"{n} {word if n == 1 else ('stories' if word == 'story' else word + 's')}"
     rows = []
     for m in moves:
         if not m["volume"] and not m["avg_prev"]:

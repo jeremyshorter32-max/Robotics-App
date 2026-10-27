@@ -41,6 +41,8 @@ Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`
 
 **How it updates.** Every Monday at 10:00 Abu Dhabi time a GitHub Action runs `intel/market_intel.py`. It collects the last 7 days of news from Google News searches and trade-press feeds, picks the most important stories, and commits the new edition to `data/`. Netlify then redeploys. If the run fails or GitHub delays it, it retries every hour through Tuesday afternoon; once the week's edition exists, the retries do nothing. The last 12 weeks stay available in the edition picker.
 
+**Trend memory.** Each edition records how much news each category had and compares it with the previous four weeks. The **Trend radar** panel shows running themes (new, rising, steady or cooling) and each category's news volume against its recent average. With AI summaries on, Claude also reads the last four editions' takeaways and trends, so it carries themes forward week to week rather than starting fresh. Stories covered by several outlets are merged into one, with a "Covered by N outlets" tag.
+
 **Turn on AI summaries (recommended).** Add a repository secret named `ANTHROPIC_API_KEY` (GitHub: Settings → Secrets and variables → Actions → New repository secret). Claude then chooses the stories and writes the summaries, takeaways and "why it matters" lines. Without a key, the job still runs but uses a simple rule to pick stories and shows the original headlines.
 
 **Change the categories or sources.** Edit `intel/config.json`: each category has a label, colours, `queries` (news searches) and `keywords` (used to sort stories). You can also change the number of stories, the model, and the trade-press feeds there.

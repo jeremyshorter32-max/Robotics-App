@@ -122,6 +122,22 @@ button,select{font-family:inherit}
 .pf a.src:hover{text-decoration:underline}
 .empty{background:var(--card);border:1px dashed var(--line-2);padding:32px;text-align:center;color:var(--muted)}
 .foot{max-width:1180px;margin:0 auto;padding:0 24px 40px;font-size:11.5px;color:var(--muted)}
+.trends{list-style:none;margin:0;padding:6px 16px 4px}
+.trends li{padding:9px 0;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:3px}
+.trends li:first-child{border-top:0}
+.trends .tt{display:flex;align-items:flex-start;gap:8px;font-size:13px;font-weight:500;color:var(--ink);line-height:1.35}
+.trends .ev{font-size:12px;color:var(--muted);padding-left:0}
+.st{flex:none;margin-top:1px;font-size:8.5px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;padding:3px 6px;white-space:nowrap}
+.st-new{background:#EEEAF9;color:#5B4A9E}.st-rising{background:#E3F3EA;color:#1F7A4D}
+.st-steady{background:#EDEDEA;color:#515150}.st-cooling{background:#FBE9E1;color:#B0501E}
+.mom{padding:4px 16px 14px;display:flex;flex-direction:column;gap:7px}
+.mom .sub{font-size:10.5px;color:var(--muted);margin:6px 0 2px}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) 64px 58px;align-items:center;gap:8px;font-size:11.5px}
+.mrow .lb{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink-2)}
+.mrow .bar{height:6px;background:#EEF1F6;position:relative}
+.mrow .bar i{position:absolute;left:0;top:0;bottom:0}
+.mrow .dl{text-align:right;font-variant-numeric:tabular-nums;font-weight:500}
+.up{color:#1F7A4D}.down{color:#B0501E}.flat{color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;font-size:12px;opacity:0;transition:opacity .2s;pointer-events:none}
 .toast.on{opacity:1}
 
@@ -189,6 +205,11 @@ button,select{font-family:inherit}
       <button class="btn copy" id="copy" type="button">
         <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="8" y="8" width="12" height="12"/><path d="M16 8V4H4v12h4"/></svg>Copy brief for email
       </button>
+    </section>
+    <section class="panel" aria-labelledby="trH" id="trendPanel" hidden>
+      <h2 id="trH">Trend radar</h2>
+      <ul class="trends" id="trends"></ul>
+      <div class="mom" id="mom"></div>
     </section>
     <section class="panel" aria-labelledby="catH">
       <h2 id="catH">Categories</h2>
@@ -282,13 +303,34 @@ button,select{font-family:inherit}
     var gcc = posts.filter(function (p) { return p.region === "GCC"; }).length;
     $("edLabel").textContent = (state.ed === 0 ? "Latest · " : "Archive · ") + (e.label || e.id);
     $("headline").textContent = e.headline || "";
-    $("period").textContent = e.period ? "Covering " + fmtDate(e.period.from) + " to " + fmtDate(e.period.to) + (e.stories_scanned ? " · " + e.stories_scanned + " stories scanned" : "") : "";
+    $("period").textContent = e.period ? "Covering " + fmtDate(e.period.from) + " to " + fmtDate(e.period.to) + (e.stories_scanned ? " · " + e.stories_scanned + " articles scanned" + (e.distinct_events ? " (" + e.distinct_events + " distinct stories)" : "") : "") : "";
     var stats = [[posts.length, "Stories"], [inv.length, "Deals"], [money(total) || "–", "Capital disclosed"], [gcc, "GCC stories"]];
     $("stats").innerHTML = stats.map(function (s) { return '<div class="stat"><b>' + esc(s[0]) + "</b><span>" + esc(s[1]) + "</span></div>"; }).join("");
   }
 
   function renderTakeaways(e) {
     $("takeaways").innerHTML = (e.takeaways || []).map(function (t) { return "<li><span>" + esc(t) + "</span></li>"; }).join("");
+  }
+
+  var STATUS = { "new": "New", rising: "▲ Rising", steady: "Steady", cooling: "▼ Cooling" };
+  function renderTrends(e) {
+    var tw = e.trend_watch || [], mo = e.momentum || [];
+    $("trendPanel").hidden = !tw.length && !mo.length;
+    $("trends").innerHTML = tw.map(function (t) {
+      var st = STATUS[t.status] ? t.status : "steady";
+      return '<li><span class="tt"><span class="st st-' + st + '">' + STATUS[st] + "</span><span>" + esc(t.trend) + '</span></span><span class="ev">' + esc(t.evidence) + "</span></li>";
+    }).join("");
+    var rows = mo.filter(function (m) { return m.volume || m.avg_prev; });
+    var max = Math.max.apply(null, rows.map(function (m) { return m.volume; }).concat([1]));
+    var hasHist = rows.some(function (m) { return m.avg_prev != null; });
+    $("mom").innerHTML = rows.length ? '<div class="sub">News volume this week' + (hasHist ? ", against the average of earlier weeks" : " (first week tracked; comparisons start next week)") + "</div>" +
+      rows.map(function (m) {
+        var c = catOf(m.category), d, cls;
+        if (m.avg_prev == null) { d = String(m.volume); cls = "flat"; }
+        else if (!m.avg_prev) { d = m.volume ? "new" : "–"; cls = m.volume ? "up" : "flat"; }
+        else { var pct = m.change_pct || 0; d = (pct > 0 ? "▲ " : pct < 0 ? "▼ " : "") + Math.abs(pct) + "%"; cls = pct >= 10 ? "up" : pct <= -10 ? "down" : "flat"; }
+        return '<div class="mrow" title="' + esc(c.label) + ": " + m.volume + " stories" + (m.avg_prev != null ? ", weekly average " + m.avg_prev : "") + ", " + m.deals + ' funding deals"><span class="lb">' + esc(c.label) + '</span><span class="bar"><i style="width:' + Math.round(m.volume / max * 100) + "%;background:" + esc(c.color) + '"></i></span><span class="dl ' + cls + '">' + d + "</span></div>";
+      }).join("") : "";
   }
 
   function renderFilters(e) {
@@ -310,6 +352,7 @@ button,select{font-family:inherit}
     var tags = [];
     if (p.region) tags.push('<span class="tag' + (p.region === "GCC" ? " gcc" : "") + '">' + esc(p.region) + "</span>");
     if (p.company) tags.push('<span class="tag">' + esc(p.company) + "</span>");
+    if (p.coverage > 1) tags.push('<span class="tag" title="Also covered by ' + esc((p.also_covered_by || []).join(", ")) + '">Covered by ' + p.coverage + " outlets</span>");
     return '<article class="post" style="--k:' + esc(c.color) + '">' +
       '<div class="ph"><span class="av" style="background:' + tint(c.color, 0.18) + '">' + icon(c.id, c.ink) + "</span>" +
       '<span class="who"><span class="c">' + esc(c.label) + '</span><span class="m">' + meta + "</span></span>" +
@@ -342,7 +385,7 @@ button,select{font-family:inherit}
       $("posts").innerHTML = '<div class="empty">No stories yet.</div>';
       return;
     }
-    renderHero(e); renderTakeaways(e); renderFilters(e); renderPosts(e);
+    renderHero(e); renderTakeaways(e); renderTrends(e); renderFilters(e); renderPosts(e);
     var by = { claude: "Stories selected and summarised by Claude from public news sources.", rules: "Stories selected automatically from public news sources; headlines shown as published.", seed: "Launch edition compiled by Claude from public news sources." }[e.generated_by] || "";
     $("foot").textContent = "Market Pulse updates every Monday at 10:00 Abu Dhabi time. " + by + " Check the source before quoting figures.";
   }
@@ -361,6 +404,10 @@ button,select{font-family:inherit}
     var e = edition(); if (!e) return;
     var lines = ["Robotics Market Pulse · " + (e.label || e.id), "", e.headline, "", "Key takeaways:"];
     (e.takeaways || []).forEach(function (t, i) { lines.push((i + 1) + ". " + t); });
+    if ((e.trend_watch || []).length) {
+      lines.push("", "Trend radar:");
+      e.trend_watch.forEach(function (t) { lines.push("• " + t.trend + " [" + t.status + "]: " + t.evidence); });
+    }
     lines.push("", "Top stories:");
     (e.posts || []).slice(0, 8).forEach(function (p) {
       lines.push("• " + p.headline + (p.amount_usd_m ? " (" + money(p.amount_usd_m) + ")" : "") + " · " + p.url);

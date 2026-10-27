@@ -948,7 +948,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
       </sc-for>
     </div>
     <div style="margin-left:auto;display:flex;align-items:center;gap:8px">
-      <span style="font-size:11px;color:rgba(255,255,255,0.72)">Totals count initiatives</span>
+      <span style="font-size:11px;color:rgba(255,255,255,0.72)">Totals count deployments</span>
     </div>
   </div>
 
@@ -977,7 +977,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         <sc-if value="{{ legendOpen }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;flex-direction:column;gap:12px;padding:0 14px 14px">
             <div style="display:flex;flex-direction:column;gap:6px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
-              <span style="font-size:10px;color:rgba(255,255,255,0.7)">Node size · initiatives at location</span>
+              <span style="font-size:10px;color:rgba(255,255,255,0.7)">Node size · deployments at location</span>
               <div style="display:flex;align-items:flex-end;gap:14px">
                 <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="18" height="18" sc-camel-view-box="0 0 18 18"><circle cx="9" cy="9" r="7" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">1</span></span>
                 <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="26" height="26" sc-camel-view-box="0 0 26 26"><circle cx="13" cy="13" r="11" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">4</span></span>
@@ -986,9 +986,9 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
             </div>
             <div style="display:flex;flex-direction:column;gap:7px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
               <span style="font-size:10px;color:rgba(255,255,255,0.7)">Status · ring split and nodes</span>
-              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#DCE7F6"></circle></svg>Launched · solid</span>
-              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3" stroke-dasharray="2 2"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><defs><pattern id="lgH" width="2.6" height="2.6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.2" height="2.6" fill="#DCE7F6"></rect></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#lgH)" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Trialled · broken</span>
-              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="1" stroke-opacity="0.75"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Pending · outline</span>
+              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#DCE7F6"></circle></svg>Live · solid</span>
+              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3" stroke-dasharray="2 2"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><defs><pattern id="lgH" width="2.6" height="2.6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.2" height="2.6" fill="#DCE7F6"></rect></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#lgH)" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Testing · broken</span>
+              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="1" stroke-opacity="0.75"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Planned · outline</span>
             </div>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
               <sc-for list="{{ legendTypes }}" as="t" hint-placeholder-count="0">
@@ -1058,7 +1058,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
           <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:28px;align-items:end;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);padding-top:20px">
             <div style="display:flex;flex-direction:column;gap:14px">
               <span style="font-size:clamp(76px,7.2vw,124px);font-weight:200;line-height:0.92;letter-spacing:-0.05em;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ hero.big }}</span>
-              <span style="display:flex;align-items:center;gap:8px;font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--p515150,#515150)">Initiatives<sc-if value="{{ heroSample }}" hint-placeholder-val="{{ false }}"><span style="font-size:8.5px;font-weight:600;letter-spacing:0.16em;padding:2px 5px;border:1px solid #E0703C;color:#B0501E">INCL. SAMPLE</span></sc-if></span>
+              <span style="display:flex;align-items:center;gap:8px;font-size:10px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--p515150,#515150)">Deployments<sc-if value="{{ heroSample }}" hint-placeholder-val="{{ false }}"><span style="font-size:8.5px;font-weight:600;letter-spacing:0.16em;padding:2px 5px;border:1px solid #E0703C;color:#B0501E">INCL. SAMPLE</span></sc-if></span>
             </div>
             <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(74px,1fr));gap:16px 14px">
               <sc-for list="{{ hero.metrics }}" as="m" hint-placeholder-count="0">
@@ -1085,9 +1085,9 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px;flex-wrap:wrap">
               <span style="font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p12102A,#12102A)">Fleet by robot type</span>
               <span style="display:flex;align-items:center;gap:12px;font-size:10px;color:var(--p515150,#515150)">
-                <span style="display:flex;align-items:center;gap:5px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.deployed }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Launched</span>
-                <span style="display:flex;align-items:center;gap:5px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.pilot }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Trialled</span>
-                <span style="display:flex;align-items:center;gap:5px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.planned }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Pending</span>
+                <span style="display:flex;align-items:center;gap:5px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.deployed }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Live</span>
+                <span style="display:flex;align-items:center;gap:5px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.pilot }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Testing</span>
+                <span style="display:flex;align-items:center;gap:5px"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:10px;height:10px;background-image:url('{{ glyph.planned }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>Planned</span>
               </span>
             </div>
             <sc-for list="{{ typeRows }}" as="t" hint-placeholder-count="0">
@@ -1159,7 +1159,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
           <section style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:26px;align-items:center;padding:18px 0;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.1)">
             <div style="position:relative;width:150px;height:150px">
               <span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:150px;height:150px;;background-image:url('{{ ringBig }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>
-              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font-size:34px;font-weight:200;line-height:1;color:var(--p12102A,#12102A)">{{ hero.big }}</span><span style="font-size:8.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">Initiatives</span></div>
+              <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px"><span style="font-size:34px;font-weight:200;line-height:1;color:var(--p12102A,#12102A)">{{ hero.big }}</span><span style="font-size:8.5px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">Deployments</span></div>
             </div>
             <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
               <sc-for list="{{ splitLegend }}" as="l" hint-placeholder-count="0">
@@ -1177,7 +1177,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
           </section>
           <section style="display:flex;flex-direction:column">
             <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding-bottom:12px">
-              <span style="font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p12102A,#12102A)">Robots by initiative</span>
+              <span style="font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p12102A,#12102A)">Robots by deployment</span>
               <span style="font-size:10px;color:var(--p515150,#515150)">{{ initCount }}</span>
             </div>
             <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.4fr) 48px minmax(0,1fr) minmax(0,0.9fr);gap:8px;padding:8px 0;border-top:1px solid var(--p12102A,#12102A);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.1);font-size:9px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:var(--p515150,#515150)">
@@ -1194,7 +1194,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
             </sc-for>
           </section>
           <section style="display:flex;flex-direction:column">
-            <span style="font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p12102A,#12102A);padding-bottom:12px">Initiatives</span>
+            <span style="font-size:10px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p12102A,#12102A);padding-bottom:12px">Deployments</span>
             <sc-for list="{{ inits }}" as="i" hint-placeholder-count="0">
               <article style="display:flex;flex-direction:column;gap:14px;padding:18px 0 22px;border-top:1px solid var(--p12102A,#12102A)">
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
@@ -1288,7 +1288,7 @@ class Component extends DCLogic {
     const g = { total: 0, deployed: 0, pilot: 0, planned: 0, by: {}, sample: false };
     window.FLEET_DATA.robot_types.forEach((t) => (g.by[t.id] = { total: 0, deployed: 0, pilot: 0, planned: 0 }));
     const seen = new Set();
-    rows.forEach((f) => { const k = f.init || f.id; if (seen.has(k)) return; seen.add(k); g.total += 1; g[f.status] += 1; g.by[f.robot_type].total += 1; g.by[f.robot_type][f.status] += 1; });
+    rows.forEach((f) => { const k = f.id; if (seen.has(k)) return; seen.add(k); g.total += 1; g[f.status] += 1; g.by[f.robot_type].total += 1; g.by[f.robot_type][f.status] += 1; });
     return g;
   }
   dom(g) { let b = null, v = 0; window.FLEET_DATA.robot_types.forEach((t) => { if (g.by[t.id].total > v) { v = g.by[t.id].total; b = t.id; } }); return b; }
@@ -1459,7 +1459,7 @@ class Component extends DCLogic {
       m.setIcon(L.divIcon({ className: "", html: mk.html, iconSize: [mk.S, mk.S], iconAnchor: [mk.S / 2 - mk.dx, mk.S / 2 - mk.dy] })); m.setZIndexOffset(ly.z || 800);
       m._rrNoTip = on;
       if (on) m.closeTooltip();
-      else { const tt = m.getTooltip(); if (tt) { tt.options.offset = [Math.round(mk.dx), Math.round(mk.dy - mk.S / 2 - 4)]; m.setTooltipContent(miniTip("<b style=\"font-weight:600\">" + a.short + "</b>&nbsp;·&nbsp;" + a.asset_type + " · " + g.total + (g.total === 1 ? " initiative" : " initiatives"), "Click for details")); } }
+      else { const tt = m.getTooltip(); if (tt) { tt.options.offset = [Math.round(mk.dx), Math.round(mk.dy - mk.S / 2 - 4)]; m.setTooltipContent(miniTip("<b style=\"font-weight:600\">" + a.short + "</b>&nbsp;·&nbsp;" + a.asset_type + " · " + g.total + (g.total === 1 ? " deployment" : " deployments"), "Click for details")); } }
       m.setZIndexOffset(on ? 1200 : 800);
       if (!map.hasLayer(m)) m.addTo(map);
     });
@@ -1520,12 +1520,12 @@ class Component extends DCLogic {
     const s = this.state, D = window.FLEET_DATA, A = this.A, T = this.T, rows = this.rows();
     let head, body, name;
     if (s.level === 0) {
-      head = ["district", "total", "launched", "trialled", "pending", "dominant_type", "note"];
-      body = D.districts.filter((d) => !s.dists.length || s.dists.includes(d.id)).map((d) => { const g = this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)), dm = this.dom(g); return [d.name, g.total, g.deployed, g.pilot, g.planned, dm ? T[dm].label : "", "counts are initiatives"]; });
+      head = ["district", "total", "live", "testing", "planned", "dominant_type", "note"];
+      body = D.districts.filter((d) => !s.dists.length || s.dists.includes(d.id)).map((d) => { const g = this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)), dm = this.dom(g); return [d.name, g.total, g.deployed, g.pilot, g.planned, dm ? T[dm].label : "", "counts are deployments"]; });
       name = "fleet-portfolio";
     } else if (s.level === 1) {
-      head = ["location", "district", "asset_type", "initiatives", "total", "launched", "trialled", "pending", "note"];
-      body = D.assets.filter((a) => a.district_id === s.d).map((a) => { const g = this.agg(rows.filter((f) => f.asset_id === a.id)); return [a.name, this.DI[a.district_id].name, a.asset_type, D.fleet.filter((f) => f.asset_id === a.id).length, g.total, g.deployed, g.pilot, g.planned, "counts are initiatives"]; });
+      head = ["location", "district", "asset_type", "deployments", "total", "live", "testing", "planned", "note"];
+      body = D.assets.filter((a) => a.district_id === s.d).map((a) => { const g = this.agg(rows.filter((f) => f.asset_id === a.id)); return [a.name, this.DI[a.district_id].name, a.asset_type, D.fleet.filter((f) => f.asset_id === a.id).length, g.total, g.deployed, g.pilot, g.planned, "counts are deployments"]; });
       name = "fleet-" + s.d;
     } else {
       head = ["id", "location", "category", "use_case", "robot_type", "vendor", "model", "units_stated", "tracker_status", "stage", "owner", "entity", "funded_by", "latest_update", "scope", "next_steps"];
@@ -1559,17 +1559,17 @@ class Component extends DCLogic {
     const g = this.agg(scope), INK = "#12102A";
     const G = { deployed: this.nodeU("deployed", INK), pilot: this.nodeU("pilot", INK), planned: this.nodeU("planned", INK) };
     const GL = { deployed: this.nodeU("deployed", "#DCE7F6"), pilot: this.nodeU("pilot", "#DCE7F6"), planned: this.nodeU("planned", "#DCE7F6") };
-    const LBL = { deployed: "Launched", pilot: "Trialled", planned: "Pending" };
-    const nInit = (id) => { const u = (L) => new Set(L.filter((f) => f.asset_id === id).map((f) => f.init || f.id)).size; const all = u(D.fleet), n = u(rows); return (n === all ? n : n + " of " + all) + (all === 1 ? " initiative" : " initiatives"); };
+    const LBL = { deployed: "Live", pilot: "Testing", planned: "Planned" };
+    const nInit = (id) => { const u = (L) => new Set(L.filter((f) => f.asset_id === id).map((f) => f.id)).size; const all = u(D.fleet), n = u(rows); return (n === all ? n : n + " of " + all) + (all === 1 ? " deployment" : " deployments"); };
     const mt = (l, v, gl) => ({ l, v: cnt(v), g: gl || "", hasG: !!gl });
     const actD = new Set(rows.map((f) => A[f.asset_id].district_id)), actA = new Set(rows.map((f) => f.asset_id));
     const typesIn = D.robot_types.filter((t) => g.by[t.id].total > 0).length;
     const SUM = window.RR_SUMMARY ? window.RR_SUMMARY(D) : { tagline: "", items: [] };
     const sumItems = SUM.items.map((m, i) => Object.assign({}, m, { bl: i ? "1px solid rgba(118,156,210,0.25)" : "0", pl: i ? "18px" : "0" }));
     let hero;
-    if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
-    else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? " · OpenStreetMap boundary" : " · no fixed map location"), metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Assets", nA)] }; }
-    else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Launched", g.deployed, G.deployed), mt("Trialled", g.pilot, G.pilot), mt("Pending", g.planned, G.planned), mt("Types", typesIn)] };
+    if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
+    else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? " · OpenStreetMap boundary" : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
+    else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Types", typesIn)] };
     hero.big = cnt(g.total);
 
     const typeRows = D.robot_types.filter((t) => (!s.types.length || s.types.includes(t.id)) && scope.some((f) => f.robot_type === t.id)).map((t) => {
@@ -1584,7 +1584,7 @@ class Component extends DCLogic {
       return { label: t.label, icon: this.iconU(t.id, t.ink), nodes, total: pad(b.total), split: b.deployed + " · " + b.pilot + " · " + b.planned, models, toggle: () => this.toggleType(t.id), pressed: String(on), bg: on ? "var(--pF2F5FA,#F2F5FA)" : "transparent", tip: (on ? "Remove " + t.label + " filter" : "Filter map and panel to " + t.label) + (modelTip ? "\n\n" + modelTip : "") };
     });
 
-    const COLS = [["name", "District", "flex-start"], ["total", "Total", "flex-end"], ["deployed", "Launched", "flex-end"], ["pilot", "Trialled", "flex-end"], ["planned", "Pending", "flex-end"], ["dom", "Dominant", "flex-start"]];
+    const COLS = [["name", "District", "flex-start"], ["total", "Total", "flex-end"], ["deployed", "Live", "flex-end"], ["pilot", "Testing", "flex-end"], ["planned", "Planned", "flex-end"], ["dom", "Dominant", "flex-start"]];
     const sortCols = COLS.map((c) => ({ label: c[1], jc: c[2], arrow: s.sort.k === c[0] ? (s.sort.dir > 0 ? "▲" : "▼") : "", color: s.sort.k === c[0] ? "var(--p12102A,#12102A)" : "var(--p515150,#515150)", sort: () => this.setState((st) => ({ sort: { k: c[0], dir: st.sort.k === c[0] ? -st.sort.dir : c[0] === "name" || c[0] === "dom" ? 1 : -1 } })) }));
     let league = D.districts.filter((d) => !s.dists.length || s.dists.includes(d.id)).map((d) => {
       const gg = this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)), dm = this.dom(gg), nA = D.assets.filter((a) => a.district_id === d.id).length;
@@ -1601,10 +1601,10 @@ class Component extends DCLogic {
       return { name: a.name, type: a.asset_type, wave: nInit(a.id), ring: this.ringU(gg, 56, 23, 3), total: cnt(gg.total), status: st ? LBL[st] : "None in view", sg: st ? G[st] : "", hasSg: !!st, types: D.robot_types.filter((t) => gg.by[t.id].total).map((t) => ({ icon: this.iconU(t.id, t.ink), n: gg.by[t.id].total, label: t.label })), go: () => this.goAsset(a.id) };
     });
 
-    const fleetRows = lvl === 2 ? scope.map((f) => ({ icon: this.iconU(f.robot_type, T[f.robot_type].ink), type: T[f.robot_type].label, vendor: f.vendor, model: f.model, cs: false, count: f.units == null ? "—" : f.units, tstatus: f.tracker_status, sg: G[f.status], owner: f.owner || "—" })) : [];
-    const splitLegend = [["deployed", "Launched", "var(--p12102A,#12102A)"], ["pilot", "Trialled", "var(--p3F6FAE,#3F6FAE)"], ["planned", "Pending", "#B5C6DE"]].map((x) => ({ g: G[x[0]], l: x[1], n: cnt(g[x[0]]), pct: g.total ? Math.round((100 * g[x[0]]) / g.total) + "%" : "0%", w: (g.total ? (100 * g[x[0]] * e) / g.total : 0) + "%", bar: x[2] }));
-    const inits = lvl === 2 ? scope.map((f) => { const fx = [["Owner", f.owner], ["Entity", f.entity], ["Units", f.units == null ? "" : String(f.units)], ["Funded by", f.funded_by]].filter((x) => x[1]).map((x) => ({ k: x[0], v: x[1] })); return { id: f.id, category: f.category, useCase: f.use_case, vm: [f.vendor, f.model].filter(Boolean).join(" · ") || "Vendor and model not yet recorded", icon: this.iconU(f.robot_type, T[f.robot_type].ink), tstatus: f.tracker_status, sg: G[f.status], stage: f.stage, hasStage: !!f.stage, stageBg: f.stage === "Scaling" ? "var(--p12102A,#12102A)" : "var(--pEDEDEA,#EDEDEA)", stageFg: f.stage === "Scaling" ? "var(--pFFFFFF,#FFFFFF)" : "var(--p12102A,#12102A)", facts: fx, update: this.bullets(f.update), hasUpdate: !!(f.update || "").trim(), desc: f.description, hasDesc: !!f.description, next: f.next_steps, hasNext: !!f.next_steps, empty: !f.update && !f.description }; }) : [];
-    const meta = lvl === 2 ? [{ k: "District", v: dist.name }, { k: "Asset type", v: ast.asset_type }, { k: "Initiatives", v: nInit(ast.id) }] : [];
+    const fleetRows = lvl === 2 ? scope.map((f) => ({ icon: this.iconU(f.robot_type, T[f.robot_type].ink), type: T[f.robot_type].label, vendor: f.vendor, model: f.model, cs: false, count: f.units == null ? "—" : f.units, tstatus: LBL[f.status], sg: G[f.status], owner: f.owner || "—" })) : [];
+    const splitLegend = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "var(--p3F6FAE,#3F6FAE)"], ["planned", "Planned", "#B5C6DE"]].map((x) => ({ g: G[x[0]], l: x[1], n: cnt(g[x[0]]), pct: g.total ? Math.round((100 * g[x[0]]) / g.total) + "%" : "0%", w: (g.total ? (100 * g[x[0]] * e) / g.total : 0) + "%", bar: x[2] }));
+    const inits = lvl === 2 ? scope.map((f) => { const fx = [["Tracker status", f.tracker_status], ["Owner", f.owner], ["Entity", f.entity], ["Units", f.units == null ? "" : String(f.units)], ["Funded by", f.funded_by]].filter((x) => x[1]).map((x) => ({ k: x[0], v: x[1] })); return { id: f.id, category: f.category, useCase: f.use_case, vm: [f.vendor, f.model].filter(Boolean).join(" · ") || "Vendor and model not yet recorded", icon: this.iconU(f.robot_type, T[f.robot_type].ink), tstatus: LBL[f.status], sg: G[f.status], stage: f.stage, hasStage: !!f.stage, stageBg: f.stage === "Scaling" ? "var(--p12102A,#12102A)" : "var(--pEDEDEA,#EDEDEA)", stageFg: f.stage === "Scaling" ? "var(--pFFFFFF,#FFFFFF)" : "var(--p12102A,#12102A)", facts: fx, update: this.bullets(f.update), hasUpdate: !!(f.update || "").trim(), desc: f.description, hasDesc: !!f.description, next: f.next_steps, hasNext: !!f.next_steps, empty: !f.update && !f.description }; }) : [];
+    const meta = lvl === 2 ? [{ k: "District", v: dist.name }, { k: "Asset type", v: ast.asset_type }, { k: "Deployments", v: nInit(ast.id) }] : [];
 
     const crumbs = [{ label: "Portfolio", go: () => this.goPortfolio() }];
     if (dist) crumbs.push({ label: dist.name, go: () => this.goDistrict(dist.id) });
@@ -1620,7 +1620,7 @@ class Component extends DCLogic {
     if (s.status !== "all") fChips.push({ label: LBL[s.status], kind: "Status", x: () => { this.setState({ status: "all" }); this.kick(); } });
     s.dists.forEach((id) => fChips.push({ label: DI[id].name, kind: "District", x: () => this.toggleDist(id) }));
     const nAll = D.fleet.filter((f) => lvl === 0 || (lvl === 1 ? A[f.asset_id].district_id === s.d : f.asset_id === s.a));
-    const fInfo = { on: fChips.length > 0, chips: fChips, count: "Showing " + this.agg(scope).total + " of " + this.agg(nAll).total + " initiatives" };
+    const fInfo = { on: fChips.length > 0, chips: fChips, count: "Showing " + this.agg(scope).total + " of " + this.agg(nAll).total + " deployments" };
 
     const ql = s.q.trim().toLowerCase();
     const results = !ql ? [] : D.districts.filter((d) => d.name.toLowerCase().includes(ql)).map((d) => ({ label: d.name, sub: D.assets.filter((a) => a.district_id === d.id).length + " assets", kind: "District", go: (ev) => { ev && ev.preventDefault && ev.preventDefault(); this.goDistrict(d.id); } }))
@@ -1637,14 +1637,14 @@ class Component extends DCLogic {
       resetAll: () => { this.setState({ types: [], status: "all", dists: [], q: "" }); this.goPortfolio(); },
       clearFilters: () => { this.setState({ types: [], status: "all", dists: [] }); this.kick(); },
       typeChips: D.robot_types.map((t) => { const on = s.types.includes(t.id); return { label: t.label, icon: this.iconU(t.id, on ? t.color : "#C9D6EA"), toggle: () => this.toggleType(t.id), pressed: String(on), bd: on ? t.color : "rgba(255,255,255,0.18)", bg: on ? "rgba(118,156,210,0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
-      statusOpts: [["all", "All", "All statuses"], ["deployed", "Launched", "Solid · launched"], ["pilot", "Trialled", "Broken · tested or testing in progress"], ["planned", "Pending", "Outline · test pending"]].map((o) => { const on = s.status === o[0]; return { label: o[1], tip: o[2], g: o[0] === "all" ? "" : on ? this.nodeU(o[0], INK) : GL[o[0]], hasG: o[0] !== "all", pressed: String(on), bg: on ? "#DCE7F6" : "transparent", fg: on ? "#12102A" : "rgba(255,255,255,0.8)", go: () => { this.setState({ status: o[0] }); this.kick(); } }; }),
+      statusOpts: [["all", "All", "All statuses"], ["deployed", "Live", "Solid · launched"], ["pilot", "Testing", "Broken · tested or testing in progress"], ["planned", "Planned", "Outline · test pending"]].map((o) => { const on = s.status === o[0]; return { label: o[1], tip: o[2], g: o[0] === "all" ? "" : on ? this.nodeU(o[0], INK) : GL[o[0]], hasG: o[0] !== "all", pressed: String(on), bg: on ? "#DCE7F6" : "transparent", fg: on ? "#12102A" : "rgba(255,255,255,0.8)", go: () => { this.setState({ status: o[0] }); this.kick(); } }; }),
       distChips: D.districts.map((d) => { const on = s.dists.includes(d.id); return { label: d.name, toggle: () => this.toggleDist(d.id), pressed: String(on), bd: on ? "#9DB9E0" : "rgba(255,255,255,0.18)", bg: on ? "rgba(118,156,210,0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
       legendTypes: D.robot_types.map((t) => ({ label: t.label, icon: this.iconU(t.id, t.color) })),
       legendOpen: s.legend, legendOpenS: String(s.legend), legendSign: s.legend ? "−" : "+", toggleLegend: () => this.setState((st) => ({ legend: !st.legend })),
       lvlTag: ["Lvl 01 · Portfolio", "Lvl 02 · District", "Lvl 03 · Asset"][lvl],
       mapTitle: lvl === 0 ? "Abu Dhabi" : lvl === 1 ? dist.name : ast.name,
       mapSub: lvl === 0 ? "Select a district to drill in" : lvl === 1 ? (dist.geometry ? "Select a location node" : "These items have no fixed map location") : (ast.lat == null ? "No fixed map location" : dist.name + " · " + ast.lat.toFixed(4) + "°N " + ast.lng.toFixed(4) + "°E"),
-      asideRef: this.asideRef || (this.asideRef = (el) => { this.asideEl = el; }), canBack: lvl > 0, back: () => this.back(), crumbs, picker, stepNo, stepTxt, fInfo, unitsTotal: uT.n, unitsSub: uT.unk ? "+ " + uT.unk + " initiatives uncounted" : "All initiatives counted", unitsTip: "Sum of stated units across " + uT.k + " initiatives. " + uT.unk + " initiatives have no unit count in the tracker yet.",
+      asideRef: this.asideRef || (this.asideRef = (el) => { this.asideEl = el; }), canBack: lvl > 0, back: () => this.back(), crumbs, picker, stepNo, stepTxt, fInfo, unitsTotal: uT.n, unitsSub: uT.unk ? "+ " + uT.unk + " deployments uncounted" : "All deployments counted", unitsTip: "Sum of stated units across " + uT.k + " deployments. " + uT.unk + " deployments have no unit count in the tracker yet.",
       isDark: this.theme() === "dark", isLight: this.theme() === "light", setDark: () => this.setTheme("dark"), setLight: () => this.setTheme("light"),
       dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
       sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
@@ -1692,7 +1692,7 @@ function ringSvg(g, S, R, dark, sw) {
 function glyphHtml(st) { return '<img alt="" src="data:image/svg+xml;utf8,' + encodeURIComponent(nodeSvg(st, "#DCE7F6")) + '" style="width:9px;height:9px;display:block">'; }
 function splitHtml(g) {
   return '<span style="display:flex;gap:10px;font-size:10px;color:rgba(255,255,255,0.82);font-variant-numeric:tabular-nums">' +
-    [["deployed", "launched"], ["pilot", "trial"], ["planned", "pend."]].map((x) => '<span style="display:flex;align-items:center;gap:4px">' + glyphHtml(x[0]) + g[x[0]] + " " + x[1] + "</span>").join("") + "</span>";
+    [["deployed", "live"], ["pilot", "testing"], ["planned", "planned"]].map((x) => '<span style="display:flex;align-items:center;gap:4px">' + glyphHtml(x[0]) + g[x[0]] + " " + x[1] + "</span>").join("") + "</span>";
 }
 function miniTip(label, hint) {
   return '<div style="display:flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:0.02em">' + label + (hint ? '<span style="width:1px;height:10px;background:rgba(157,185,224,0.4)"></span><span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0">' + hint + ' →</span>' : "") + "</div>";
@@ -1705,8 +1705,8 @@ function badgeHtml(d, g, compact, dim) {
   return '<div style="position:absolute;left:0;top:0;transform:' + ({ right: "translate(calc(-100% - 8px),-50%)", left: "translate(8px,-50%)", top: "translate(-50%,calc(-100% - 8px))", bottom: "translate(-50%,8px)" }[d.badge_align] || "translate(-50%,-50%)") + ';white-space:nowrap;background:rgba(18,16,42,0.9);border:1px solid rgba(118,156,210,0.55);padding:' + (compact ? "6px 9px" : "9px 12px 10px") + ";display:flex;flex-direction:column;gap:4px;font-family:Poppins,sans-serif;color:#fff;cursor:pointer;opacity:" + (dim ? 0.5 : 1) + ';transition:opacity .4s;box-shadow:0 10px 30px rgba(0,0,0,0.4)">' +
     tk("left:-1px;top:-1px;border-left-width:1px;border-top-width:1px") + tk("right:-1px;bottom:-1px;border-right-width:1px;border-bottom-width:1px") +
     '<span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0">' + d.name + "</span>" +
-    (compact ? '<span style="font-size:15px;font-weight:300;line-height:1">' + pad(g.total) + ' <span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.7)">INITIATIVES</span></span>'
-      : '<span style="display:flex;align-items:baseline;gap:8px"><b style="font-size:28px;font-weight:200;line-height:1;letter-spacing:-0.02em">' + pad(g.total) + '</b><span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.72)">INITIATIVES</span>' + (g.sample ? '<span style="font-size:8px;font-weight:600;letter-spacing:0.14em;color:#F2A27C">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g)) +
+    (compact ? '<span style="font-size:15px;font-weight:300;line-height:1">' + pad(g.total) + ' <span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.7)">DEPLOYMENTS</span></span>'
+      : '<span style="display:flex;align-items:baseline;gap:8px"><b style="font-size:28px;font-weight:200;line-height:1;letter-spacing:-0.02em">' + pad(g.total) + '</b><span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.72)">DEPLOYMENTS</span>' + (g.sample ? '<span style="font-size:8px;font-weight:600;letter-spacing:0.14em;color:#F2A27C">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g)) +
     "</div>";
 }
 function markerHtml(a, g, on, dim, ly, sc) {

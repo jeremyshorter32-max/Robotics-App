@@ -960,7 +960,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
 
     <sc-if value="{{ isDetails }}" hint-placeholder-val="{{ false }}">
       <div style="position:absolute;inset:0;z-index:1200;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;background:var(--pFFFFFF,#FFFFFF)">
-        <div style="position:sticky;top:0;z-index:5;background:rgba(var(--pPaper,255,255,255),0.97);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.08);padding:6px calc(env(safe-area-inset-right) + 10px) 6px calc(env(safe-area-inset-left) + 10px);display:flex;align-items:center;gap:6px;min-height:56px;box-sizing:border-box">
+        <div style="position:sticky;top:0;z-index:5;background:rgb(var(--pPaper,255,255,255));border-bottom:1px solid rgba(var(--pInk,11,11,11),0.08);padding:6px calc(env(safe-area-inset-right) + 10px) 6px calc(env(safe-area-inset-left) + 10px);display:flex;align-items:center;gap:6px;min-height:56px;box-sizing:border-box">
           <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
             <button sc-camel-on-click="{{ back }}" aria-label="Back one level" style="flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.16);cursor:pointer;color:var(--p12102A,#12102A)" style-active="background:var(--pF2F5FA,#F2F5FA)"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
           </sc-if>

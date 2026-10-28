@@ -1,0 +1,411 @@
+{
+ "preview-desktop": {
+  "posts": 24,
+  "thumbs": 24,
+  "hasImg": 20,
+  "imgs": [
+   {
+    "src": "https://static.stocktitan.net/filing-covers/ffr_8-K.webp",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://www.therobotreport.com/wp-content/uploads/2026/10/ekarobotics-featured.jpg",
+    "w": 1540,
+    "done": true
+   },
+   {
+    "src": "https://www.therobotreport.com/wp-content/uploads/2026/10/GXO_Agility_Digit_02.jpg",
+    "w": 770,
+    "done": true
+   },
+   {
+    "src": "https://img.36krcdn.com/hsossms/20261023/v2_0505e48d46c44d2faa4bbaaf00476083@5091053@ai_os",
+    "w": 600,
+    "done": true
+   },
+   {
+    "src": "https://securitytoday.com/-/media/SEC/Security-Products/Images/2026/10/1027-Cybersecurity.",
+    "w": 600,
+    "done": true
+   },
+   {
+    "src": "https://techcrunch.com/wp-content/uploads/2026/04/tesla-opitmus-Getty.jpg?resize=1200,800",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://www.therobotreport.com/wp-content/uploads/2026/10/ANYmal_X_inspection.jpg",
+    "w": 770,
+    "done": true
+   },
+   {
+    "src": "https://dronelife.com/wp-content/uploads/2026/10/3-scaled-e1792587845609.png",
+    "w": 600,
+    "done": true
+   },
+   {
+    "src": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-25/slzrag3f/road.avif?widt",
+    "w": 945,
+    "done": true
+   },
+   {
+    "src": "https://billypenn.com/wp-content/uploads/2026/09/Screenshot-2026-09-16-at-8.13.38-AM.png",
+    "w": 834,
+    "done": true
+   },
+   {
+    "src": "https://cdn.shopify.com/s/files/1/0746/3999/9151/articles/eufy-robot-vacuum_a4237767-5e18-",
+    "w": 900,
+    "done": true
+   },
+   {
+    "src": "https://s.yimg.com/lo/mysterio/api/ba4c2e832602e2953a6de8320637586a708c96021815289ce08ddcd",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://console.kr-asia.com/wp-content/uploads/2026/10/Dubai-Coastline-Unsplash.jpg",
+    "w": 1920,
+    "done": true
+   },
+   {
+    "src": "https://shabiba.eu-central-1.linodeobjects.com/2026/10/1792946284-1792946284-alq7x2illeeu-",
+    "w": 700,
+    "done": true
+   },
+   {
+    "src": "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-75",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-26/7uabw1wu/WhatsApp-Image",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://www.thenationalnews.com/resizer/v2/VSSDYQDNTRB3LJD4E6FADFJW2A.jpg?auth=7606b706fb0",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-21/dk8bzvys/DM-villa-robot",
+    "w": 945,
+    "done": true
+   },
+   {
+    "src": "https://img.biggo.com/bUO8Rd75AM7_IkTxjXB7FpRmKvUHgixzQmsNeeljqNo/fit/1200/0/sm/0/aHR0cHM6",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://themachinemaker.com/wp-content/uploads/2026/10/DEWALT.jpg",
+    "w": 1000,
+    "done": true
+   }
+  ],
+  "dataImages": 20,
+  "failed": [],
+  "errors": [],
+  "image_responses": [
+   [
+    "https://techcrunch.com/wp-content/uploads/2026/04/tesla-opitmus-Getty.jpg?resize=1200,800",
+    200
+   ],
+   [
+    "https://securitytoday.com/-/media/SEC/Security-Products/Images/2026/10/1027-Cybersecurity.jpg",
+    301
+   ],
+   [
+    "https://billypenn.com/wp-content/uploads/2026/09/Screenshot-2026-09-16-at-8.13.38-AM.png",
+    200
+   ],
+   [
+    "https://dronelife.com/wp-content/uploads/2026/10/3-scaled-e1792587845609.png",
+    200
+   ],
+   [
+    "https://cdn.shopify.com/s/files/1/0746/3999/9151/articles/eufy-robot-vacuum_a4237767-5e18-40ec-bd02-9b141a6cf5dc.jpg?v=1",
+    200
+   ],
+   [
+    "https://static.stocktitan.net/filing-covers/ffr_8-K.webp",
+    200
+   ],
+   [
+    "https://securitytoday.com/-/media/sec/security-products/images/2026/10/1027-cybersecurity.jpg",
+    200
+   ],
+   [
+    "https://www.therobotreport.com/wp-content/uploads/2026/10/GXO_Agility_Digit_02.jpg",
+    200
+   ],
+   [
+    "https://www.therobotreport.com/wp-content/uploads/2026/10/ekarobotics-featured.jpg",
+    200
+   ],
+   [
+    "https://www.therobotreport.com/wp-content/uploads/2026/10/ANYmal_X_inspection.jpg",
+    200
+   ],
+   [
+    "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-25/slzrag3f/road.avif?width=1200&height=630&q=60&format=",
+    200
+   ],
+   [
+    "https://img.36krcdn.com/hsossms/20261023/v2_0505e48d46c44d2faa4bbaaf00476083@5091053@ai_oswg840312oswg1053oswg495_img_pn",
+    200
+   ],
+   [
+    "https://console.kr-asia.com/wp-content/uploads/2026/10/Dubai-Coastline-Unsplash.jpg",
+    200
+   ],
+   [
+    "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-21/dk8bzvys/DM-villa-robotics.jpg?width=1200&height=630&",
+    200
+   ],
+   [
+    "https://s.yimg.com/lo/mysterio/api/ba4c2e832602e2953a6de8320637586a708c96021815289ce08ddcd3d8816554/lightyear_networkapi",
+    200
+   ],
+   [
+    "https://shabiba.eu-central-1.linodeobjects.com/2026/10/1792946284-1792946284-alq7x2illeeu-700x400.jpg",
+    200
+   ],
+   [
+    "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-759abf8efb3a.jpeg",
+    200
+   ],
+   [
+    "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-26/7uabw1wu/WhatsApp-Image-2026-10-26-at-14.36.50-2.jpeg",
+    200
+   ],
+   [
+    "https://www.thenationalnews.com/resizer/v2/VSSDYQDNTRB3LJD4E6FADFJW2A.jpg?auth=7606b706fb0b47577b97ade60cb8af5cc778b0ff6",
+    200
+   ],
+   [
+    "https://img.biggo.com/bUO8Rd75AM7_IkTxjXB7FpRmKvUHgixzQmsNeeljqNo/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYW",
+    200
+   ],
+   [
+    "https://themachinemaker.com/wp-content/uploads/2026/10/DEWALT.jpg",
+    200
+   ]
+  ]
+ },
+ "preview-mobile": {
+  "posts": 24,
+  "thumbs": 24,
+  "hasImg": 20,
+  "imgs": [
+   {
+    "src": "https://static.stocktitan.net/filing-covers/ffr_8-K.webp",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://www.therobotreport.com/wp-content/uploads/2026/10/ekarobotics-featured.jpg",
+    "w": 1540,
+    "done": true
+   },
+   {
+    "src": "https://www.therobotreport.com/wp-content/uploads/2026/10/GXO_Agility_Digit_02.jpg",
+    "w": 770,
+    "done": true
+   },
+   {
+    "src": "https://img.36krcdn.com/hsossms/20261023/v2_0505e48d46c44d2faa4bbaaf00476083@5091053@ai_os",
+    "w": 600,
+    "done": true
+   },
+   {
+    "src": "https://securitytoday.com/-/media/SEC/Security-Products/Images/2026/10/1027-Cybersecurity.",
+    "w": 600,
+    "done": true
+   },
+   {
+    "src": "https://techcrunch.com/wp-content/uploads/2026/04/tesla-opitmus-Getty.jpg?resize=1200,800",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://www.therobotreport.com/wp-content/uploads/2026/10/ANYmal_X_inspection.jpg",
+    "w": 770,
+    "done": true
+   },
+   {
+    "src": "https://dronelife.com/wp-content/uploads/2026/10/3-scaled-e1792587845609.png",
+    "w": 600,
+    "done": true
+   },
+   {
+    "src": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-25/slzrag3f/road.avif?widt",
+    "w": 0,
+    "done": false
+   },
+   {
+    "src": "https://billypenn.com/wp-content/uploads/2026/09/Screenshot-2026-09-16-at-8.13.38-AM.png",
+    "w": 0,
+    "done": false
+   },
+   {
+    "src": "https://cdn.shopify.com/s/files/1/0746/3999/9151/articles/eufy-robot-vacuum_a4237767-5e18-",
+    "w": 0,
+    "done": false
+   },
+   {
+    "src": "https://s.yimg.com/lo/mysterio/api/ba4c2e832602e2953a6de8320637586a708c96021815289ce08ddcd",
+    "w": 0,
+    "done": false
+   },
+   {
+    "src": "https://console.kr-asia.com/wp-content/uploads/2026/10/Dubai-Coastline-Unsplash.jpg",
+    "w": 1920,
+    "done": true
+   },
+   {
+    "src": "https://shabiba.eu-central-1.linodeobjects.com/2026/10/1792946284-1792946284-alq7x2illeeu-",
+    "w": 700,
+    "done": true
+   },
+   {
+    "src": "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-75",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-26/7uabw1wu/WhatsApp-Image",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://www.thenationalnews.com/resizer/v2/VSSDYQDNTRB3LJD4E6FADFJW2A.jpg?auth=7606b706fb0",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-21/dk8bzvys/DM-villa-robot",
+    "w": 945,
+    "done": true
+   },
+   {
+    "src": "https://img.biggo.com/bUO8Rd75AM7_IkTxjXB7FpRmKvUHgixzQmsNeeljqNo/fit/1200/0/sm/0/aHR0cHM6",
+    "w": 1200,
+    "done": true
+   },
+   {
+    "src": "https://themachinemaker.com/wp-content/uploads/2026/10/DEWALT.jpg",
+    "w": 1000,
+    "done": true
+   }
+  ],
+  "dataImages": 20,
+  "failed": [
+   [
+    "https://app.netlify.com/cdp/video/deploy-previews-workflow-v2.mp4",
+    "net::ERR_ABORTED"
+   ],
+   [
+    "https://app.netlify.com/cdp/video/deploy-previews-feedback-v2.mp4",
+    "net::ERR_ABORTED"
+   ],
+   [
+    "https://app.netlify.com/cdp/video/deploy-previews-notifications-v2.mp4",
+    "net::ERR_ABORTED"
+   ]
+  ],
+  "errors": [],
+  "image_responses": [
+   [
+    "https://static.stocktitan.net/filing-covers/ffr_8-K.webp",
+    200
+   ],
+   [
+    "https://www.therobotreport.com/wp-content/uploads/2026/10/ekarobotics-featured.jpg",
+    200
+   ],
+   [
+    "https://img.36krcdn.com/hsossms/20261023/v2_0505e48d46c44d2faa4bbaaf00476083@5091053@ai_oswg840312oswg1053oswg495_img_pn",
+    200
+   ],
+   [
+    "https://www.therobotreport.com/wp-content/uploads/2026/10/GXO_Agility_Digit_02.jpg",
+    200
+   ],
+   [
+    "https://themachinemaker.com/wp-content/uploads/2026/10/DEWALT.jpg",
+    200
+   ],
+   [
+    "https://www.thenationalnews.com/resizer/v2/VSSDYQDNTRB3LJD4E6FADFJW2A.jpg?auth=7606b706fb0b47577b97ade60cb8af5cc778b0ff6",
+    200
+   ],
+   [
+    "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-21/dk8bzvys/DM-villa-robotics.jpg?width=1200&height=630&",
+    200
+   ],
+   [
+    "https://console.kr-asia.com/wp-content/uploads/2026/10/Dubai-Coastline-Unsplash.jpg",
+    200
+   ],
+   [
+    "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-26/7uabw1wu/WhatsApp-Image-2026-10-26-at-14.36.50-2.jpeg",
+    200
+   ],
+   [
+    "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-759abf8efb3a.jpeg",
+    200
+   ],
+   [
+    "https://shabiba.eu-central-1.linodeobjects.com/2026/10/1792946284-1792946284-alq7x2illeeu-700x400.jpg",
+    200
+   ],
+   [
+    "https://img.biggo.com/bUO8Rd75AM7_IkTxjXB7FpRmKvUHgixzQmsNeeljqNo/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYW",
+    200
+   ],
+   [
+    "https://techcrunch.com/wp-content/uploads/2026/04/tesla-opitmus-Getty.jpg?resize=1200,800",
+    200
+   ],
+   [
+    "https://securitytoday.com/-/media/SEC/Security-Products/Images/2026/10/1027-Cybersecurity.jpg",
+    301
+   ],
+   [
+    "https://www.therobotreport.com/wp-content/uploads/2026/10/ANYmal_X_inspection.jpg",
+    200
+   ],
+   [
+    "https://dronelife.com/wp-content/uploads/2026/10/3-scaled-e1792587845609.png",
+    200
+   ],
+   [
+    "https://securitytoday.com/-/media/sec/security-products/images/2026/10/1027-cybersecurity.jpg",
+    200
+   ]
+  ]
+ },
+ "live-desktop": {
+  "posts": 24,
+  "thumbs": 0,
+  "hasImg": 0,
+  "imgs": [],
+  "dataImages": 0,
+  "failed": [],
+  "errors": [],
+  "image_responses": []
+ },
+ "live-mobile": {
+  "posts": 24,
+  "thumbs": 0,
+  "hasImg": 0,
+  "imgs": [],
+  "dataImages": 0,
+  "failed": [],
+  "errors": [],
+  "image_responses": []
+ }
+}

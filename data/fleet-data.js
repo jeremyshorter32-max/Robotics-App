@@ -1228,7 +1228,12 @@ window.FLEET_DATA = {
    "update": "• No outstanding blockers\n• Contract terms agreed; aligned with payback period\n• Plan: scale all cleaning robots across multiple assets",
    "description": "Deploy autonomous floor cleaning robots across five Aldar commercial towers (ADGM Square, International Tower, Al Maryah Tower, Aldar HQ and Yas Place), with an initial plan of 43 units scaled down to 21 after semi-autonomous robots were removed from scope. Total programme CAPEX is approximately AED 3.49M, with an expected redeployment of 15 FTEs from manual cleaning tasks.",
    "next_steps": "",
-   "units": 8
+   "units": 8,
+   "videos": [
+    {"src": "assets/video/09b-pudu-adgm-01.mp4", "poster": "assets/video/09b-pudu-adgm-01.jpg", "width": 848, "height": 474, "title": "Car park scrubbing run", "duration": 70},
+    {"src": "assets/video/09b-pudu-adgm-02.mp4", "poster": "assets/video/09b-pudu-adgm-02.jpg", "width": 478, "height": 850, "title": "Ramp and lane cleaning", "duration": 29},
+    {"src": "assets/video/09b-pudu-adgm-03.mp4", "poster": "assets/video/09b-pudu-adgm-03.jpg", "width": 848, "height": 474, "title": "One-way lane pass", "duration": 10}
+   ]
   },
   {
    "id": "09c",
@@ -1367,7 +1372,10 @@ window.FLEET_DATA = {
    "update": "• 5 Oct: Subdivo site visit at Gate, Arc, Sun and Sky; both suitable\n• Full building feasibility underway (coverage and cost)\n• Yas Place POC complete; delivered to requirements, payment initiated (PO7160)",
    "description": "Trial the X-Human robotic façade cleaning system on an Aldar asset, with Yas Place selected after feasibility assessments across multiple properties. Designed for flat glass façades and operated via rope-access anchorage, demonstrating automated window and façade cleaning as a replacement or supplement to manual methods.",
    "next_steps": "",
-   "units": 1
+   "units": 1,
+   "videos": [
+    {"src": "assets/video/13-xhuman-yas-place-01.mp4", "poster": "assets/video/13-xhuman-yas-place-01.jpg", "width": 540, "height": 960, "title": "Crawler cleaning the glass façade", "duration": 16}
+   ]
   },
   {
    "id": "14",
@@ -1595,7 +1603,10 @@ window.FLEET_DATA = {
    "update": "• Unit deployed on site\n• Reception and lobby area of the Aldar Estates office mapped",
    "description": "General concierge, wayfinding and meeting room navigation.",
    "next_steps": "",
-   "units": 1
+   "units": 1,
+   "videos": [
+    {"src": "assets/video/23-pudu-concierge-01.mp4", "poster": "assets/video/23-pudu-concierge-01.jpg", "width": 640, "height": 360, "title": "Concierge and wayfinding", "duration": 16}
+   ]
   },
   {
    "id": "WTC",

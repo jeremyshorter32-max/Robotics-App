@@ -48,15 +48,11 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python intel/market_intel.py ${{ inputs.force && '--force' || '' }}
 
-      - name: TEMP diagnostic
-        if: github.ref_name == 'market-pulse-thumbnails'
-        run: python intel/diag_tmp.py || true
-
       - name: Publish
         run: |
           git config user.name "market-pulse-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/intel-feed.json data/intel-feed.js; [ -f data/intel-debug.json ] && git add data/intel-debug.json
+          git add data/intel-feed.json data/intel-feed.js
           if git diff --cached --quiet; then
             echo "No new edition to publish."
           else

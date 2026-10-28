@@ -112,6 +112,17 @@ button,select{font-family:inherit}
 .post h3 a{text-decoration:none}
 .post h3 a:hover{color:var(--accent-ink)}
 .post p{margin:0;color:var(--ink-2);font-size:14px}
+/* Story body: text on the left, the news site's preview image on the right */
+.pb{display:grid;grid-template-columns:minmax(0,1fr) 176px;gap:16px;align-items:start}
+.pb .tx{display:flex;flex-direction:column;gap:8px;min-width:0}
+.thumb{display:block;position:relative;width:176px;aspect-ratio:3/2;overflow:hidden;background:var(--tint,#EEF1F6);border:1px solid var(--line)}
+.thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;transition:transform .3s ease}
+.post:hover .thumb img{transform:scale(1.03)}
+.thumb .ph-ic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.thumb .ph-ic svg{width:34px;height:34px;opacity:.85}
+.thumb.has-img .ph-ic{display:none}
+.thumb .src-chip{position:absolute;left:6px;bottom:6px;max-width:calc(100% - 12px);padding:2px 6px;background:rgba(18,16,42,0.78);color:#fff;font-size:9px;font-weight:500;letter-spacing:0.06em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.thumb:not(.has-img) .src-chip{display:none}
 .why{border-left:3px solid var(--k,#769CD2);background:#F6F8FB;padding:9px 12px}
 .why span{display:block;font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
 .why div{font-size:13px;color:var(--ink)}
@@ -167,6 +178,11 @@ button.stat[aria-pressed="true"]{background:rgba(118,156,210,0.18)}
   .stat b{font-size:21px}
   .top{padding:10px 16px;gap:10px}
   .foot{padding:0 16px 32px}
+}
+@media (max-width: 600px){
+  .pb{grid-template-columns:1fr;gap:10px}
+  .thumb{order:-1;width:100%;aspect-ratio:16/9}
+  .thumb:not(.has-img){display:none}  /* no empty tiles on phones */
 }
 @media (max-width: 520px){
   .brand .t2{display:none}
@@ -369,6 +385,15 @@ button.stat[aria-pressed="true"]{background:rgba(118,156,210,0.18)}
     }).join("");
   }
 
+  /* Thumbnail from the news site's preview image; a branded tile when there is none
+     or it fails to load. No referrer is sent, as with any link preview. */
+  function thumbHtml(p, c) {
+    var img = /^https:\/\//i.test(p.image || "") ?
+      '<img src="' + esc(p.image) + '" alt="" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.classList.remove(\'has-img\');this.remove()">' : "";
+    return '<a class="thumb' + (img ? " has-img" : "") + '" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" style="--tint:' + tint(c.color, 0.16) + '">' +
+      '<span class="ph-ic">' + icon(c.id, c.ink) + "</span>" + img + '<span class="src-chip">' + esc(p.source || "") + "</span></a>";
+  }
+
   function postHtml(p) {
     var c = catOf(p.category);
     var meta = [p.source, ago(p.published)].filter(Boolean).map(esc).join(" · ");
@@ -381,8 +406,9 @@ button.stat[aria-pressed="true"]{background:rgba(118,156,210,0.18)}
       '<span class="who"><span class="c">' + esc(c.label) + '</span><span class="m">' + meta + "</span></span>" +
       '<span class="badges">' + (p.amount_usd_m ? '<span class="amt">' + money(p.amount_usd_m) + "</span>" : "") +
       '<span class="badge b-' + esc(p.type) + '">' + esc(TYPE_LABEL[p.type] || p.type) + "</span></span></div>" +
+      '<div class="pb"><div class="tx">' +
       '<h3><a href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">' + esc(p.headline) + "</a></h3>" +
-      (p.summary ? "<p>" + esc(p.summary) + "</p>" : "") +
+      (p.summary ? "<p>" + esc(p.summary) + "</p>" : "") + "</div>" + thumbHtml(p, c) + "</div>" +
       (p.why_it_matters ? '<div class="why"><span>Why it matters for Aldar</span><div>' + esc(p.why_it_matters) + "</div></div>" : "") +
       '<div class="pf">' + tags.join("") + '<a class="src" href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">Read source<svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 17L17 7M9 7h8v8"/></svg></a></div>' +
       "</article>";

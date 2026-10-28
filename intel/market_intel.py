@@ -679,6 +679,145 @@ def make_post(src: dict, ai: dict) -> dict:
     }
 
 
+# --------------------------------------------------------------------------- article previews
+#
+# For each story that made the edition, find the real article address (Google News
+# links are redirects) and read the preview image and description that the news
+# site publishes for social media (og:image / og:description). The page shows the
+# image as the story's thumbnail.
+
+BROWSER_UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+              "(KHTML, like Gecko) Chrome/130.0 Safari/537.36")
+BAD_IMAGE = r"logo|favicon|placeholder|default[-_]?(image|thumb|og)|blank\.|spacer|sprite|avatar|/icons?/|\.svg(\?|$)|1x1"
+
+
+def http_get(url: str, timeout: int = 15, limit: int = 600_000, headers: dict | None = None,
+             data: bytes | None = None) -> tuple[str, bytes, dict] | None:
+    """Returns (final url, body, headers) or None. Reads at most `limit` bytes."""
+    h = {"User-Agent": BROWSER_UA, "Accept-Language": "en-US,en;q=0.9"}
+    h.update(headers or {})
+    req = urllib.request.Request(url, headers=h, data=data)
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            return resp.geturl(), resp.read(limit), dict(resp.headers)
+    except Exception as exc:
+        log(f"  ! preview fetch failed for {url[:80]}: {exc}")
+        return None
+
+
+def google_article_id(url: str) -> str | None:
+    m = re.match(r"https://news\.google\.com/(?:rss/)?articles/([^?/#]+)", url)
+    return m.group(1) if m else None
+
+
+def resolve_google_news(url: str) -> str | None:
+    """Turn a news.google.com article link into the publisher's own URL."""
+    gid = google_article_id(url)
+    if not gid:
+        return url
+    # Older links carry the URL inside the base64 id.
+    try:
+        import base64
+        raw = base64.urlsafe_b64decode(gid + "=" * (-len(gid) % 4))
+        m = re.search(rb"https?://[^\x00-\x20\x7f-\xff\"']+", raw)
+        if m and b"news.google" not in m.group(0):
+            return m.group(0).decode("ascii", "ignore")
+    except Exception:
+        pass
+    # Newer links: read the signature from the article page, then ask Google's own
+    # decoding endpoint (the same call the Google News web page makes).
+    # The page is large (about 600 KB) and the signature sits near the end, so read all of it.
+    page = http_get(f"https://news.google.com/rss/articles/{gid}", limit=2_500_000)
+    if not page:
+        return None
+    text = page[1].decode("utf-8", "ignore")
+    sig = re.search(r'data-n-a-sg="([^"]+)"', text)
+    ts = re.search(r'data-n-a-ts="([^"]+)"', text)
+    if not (sig and ts):
+        return None
+    inner = json.dumps(["garturlreq", [["X", "X", ["X", "X"], None, None, 1, 1, "US:en", None, 1, None, None, None,
+                                        None, None, 0, 1], "X", "X", 1, [1, 1, 1], 1, 1, None, 0, 0, None, 0],
+                        gid, int(ts.group(1)), sig.group(1)], separators=(",", ":"))
+    body = urllib.parse.urlencode({"f.req": json.dumps([[["Fbv4je", inner, None, "generic"]]], separators=(",", ":"))})
+    resp = http_get("https://news.google.com/_/DotsSplashUi/data/batchexecute", limit=200_000, data=body.encode(),
+                    headers={"Content-Type": "application/x-www-form-urlencoded;charset=UTF-8"})
+    if not resp:
+        return None
+    try:
+        payload = resp[1].decode("utf-8", "ignore").split("\n\n", 1)[1]
+        rows = json.loads(payload)
+        return json.loads(rows[0][2])[1]
+    except Exception:
+        m = re.search(r'https?://[^"\\]+', resp[1].decode("utf-8", "ignore").replace("\\/", "/"))
+        return m.group(0) if m and "google.com" not in m.group(0) else None
+
+
+def meta_content(page: str, *names: str) -> str | None:
+    for name in names:
+        for pattern in (
+            rf'<meta[^>]+(?:property|name)\s*=\s*["\']{re.escape(name)}["\'][^>]*content\s*=\s*["\']([^"\']+)["\']',
+            rf'<meta[^>]+content\s*=\s*["\']([^"\']+)["\'][^>]*(?:property|name)\s*=\s*["\']{re.escape(name)}["\']',
+        ):
+            m = re.search(pattern, page, re.I)
+            if m:
+                return html.unescape(m.group(1)).strip()
+    return None
+
+
+def page_preview(page: str, base_url: str) -> dict:
+    head = page[:250_000]
+    image = meta_content(head, "og:image:secure_url", "og:image", "og:image:url", "twitter:image", "twitter:image:src")
+    if not image:
+        m = re.search(r'<link[^>]+rel=["\']image_src["\'][^>]*href=["\']([^"\']+)', head, re.I)
+        image = html.unescape(m.group(1)) if m else None
+    if image:
+        image = urllib.parse.urljoin(base_url, image)
+        if not image.startswith(("https://", "http://")) or re.search(BAD_IMAGE, image, re.I):
+            image = None
+        elif image.startswith("http://"):
+            image = "https://" + image[len("http://"):]  # the site is served over https
+    description = meta_content(head, "og:description", "twitter:description", "description")
+    return {"image": image, "description": clean_text(description, 300) if description else None}
+
+
+def image_works(url: str) -> bool:
+    """Quick check that the image address returns an actual image of reasonable size."""
+    resp = http_get(url, timeout=10, limit=4096, headers={"Range": "bytes=0-4095", "Accept": "image/*"})
+    if not resp:
+        return False
+    headers = {k.lower(): v for k, v in resp[2].items()}
+    if not headers.get("content-type", "").lower().startswith("image/") or "svg" in headers.get("content-type", ""):
+        return False
+    total = headers.get("content-range", "").rpartition("/")[2] or headers.get("content-length", "")
+    return not (total.isdigit() and int(total) < 6000)  # skip tiny icons
+
+
+def add_preview(post: dict) -> None:
+    real = resolve_google_news(post["url"])
+    if real and real != post["url"]:
+        post["url"] = real
+    if google_article_id(post["url"]):
+        return  # could not resolve; keep the Google link, no preview
+    page = http_get(post["url"])
+    if not page:
+        return
+    final_url, body, _ = page
+    if final_url and final_url.startswith("https://") and "consent." not in final_url:
+        post["url"] = final_url
+    preview = page_preview(body.decode("utf-8", "ignore"), final_url or post["url"])
+    if preview["image"] and image_works(preview["image"]):
+        post["image"] = preview["image"]
+    if not post.get("summary") and preview["description"] and norm_key(preview["description"]) != norm_key(post["headline"]):
+        post["summary"] = preview["description"]
+
+
+def add_previews(posts: list[dict]) -> None:
+    log(f"Reading article previews for {len(posts)} stories…")
+    with ThreadPoolExecutor(max_workers=6) as pool:
+        list(pool.map(add_preview, posts))
+    log(f"  {sum(1 for p in posts if p.get('image'))} of {len(posts)} stories have a thumbnail.")
+
+
 # --------------------------------------------------------------------------- write
 
 def load_feed(config: dict) -> dict:
@@ -728,6 +867,7 @@ def main() -> int:
     signals = category_signals(items, config)
     moves = momentum(signals, history, config)
     curated = curate_with_claude(items, config, history, moves) or curate_with_rules(items, config, history, moves)
+    add_previews(curated["posts"])
     edition = {
         "id": edition_id,
         "label": f"Week {iso.week} · {now.strftime('%-d %b %Y')}",

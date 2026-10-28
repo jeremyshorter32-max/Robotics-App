@@ -15,9 +15,17 @@ for u in urls:
                     "sg": bool(re.search(r'data-n-a-sg="', body)), "ts": bool(re.search(r'data-n-a-ts="', body)), "attrs": re.findall(r'data-n-a-[a-z]+="[^"]{0,40}', body)[:6]}
         except Exception as exc:
             r[key] = {"error": repr(exc)[:300]}
+    orig = mi.http_get
+    def spy(url, **kw):
+        res = orig(url, **kw)
+        if "batchexecute" in url:
+            r["batch"] = None if res is None else res[1][:600].decode("utf-8", "ignore")
+        return res
+    mi.http_get = spy
     try:
         r["resolved"] = mi.resolve_google_news(u)
     except Exception as exc:
         r["resolved_error"] = repr(exc)[:300]
+    mi.http_get = orig
     out.append(r)
 json.dump(out, open("data/intel-debug.json", "w"), indent=1)

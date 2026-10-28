@@ -726,7 +726,8 @@ def resolve_google_news(url: str) -> str | None:
         pass
     # Newer links: read the signature from the article page, then ask Google's own
     # decoding endpoint (the same call the Google News web page makes).
-    page = http_get(f"https://news.google.com/articles/{gid}", limit=300_000)
+    # The page is large (about 600 KB) and the signature sits near the end, so read all of it.
+    page = http_get(f"https://news.google.com/rss/articles/{gid}", limit=2_500_000)
     if not page:
         return None
     text = page[1].decode("utf-8", "ignore")

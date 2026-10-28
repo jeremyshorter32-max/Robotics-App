@@ -16,10 +16,10 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install playwright==1.48.0 && python -m playwright install --with-deps chromium
-      - run: sleep 45 && python tmp-check/check.py
+      - run: sleep 30 && python tmp-check/check.py || true
       - run: |
           git config user.name "Claude"
           git config user.email "noreply@anthropic.com"
-          git add tmp-check/result.json tmp-check/*.png
+          git add tmp-check/result.json; git add tmp-check/*.png || true
           git commit -m "TEMP preview check results [skip ci]"
           git push

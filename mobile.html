@@ -900,52 +900,64 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
       <span style="position:absolute;right:10px;bottom:10px;z-index:2;width:16px;height:16px;border-right:1px solid #769CD2;border-bottom:1px solid #769CD2;pointer-events:none"></span>
       {{ scanLine }}
       <sc-if value="{{ isMap }}" hint-placeholder-val="{{ true }}">
-        <div style="position:absolute;left:calc(env(safe-area-inset-left) + 10px);right:calc(env(safe-area-inset-right) + 10px);bottom:22px;z-index:5;background:rgba(14,12,36,0.95);border:1px solid rgba(118,156,210,0.38);color:#FFFFFF;display:flex;flex-direction:column;gap:12px;padding:14px;max-height:calc(100% - 90px);overflow-y:auto;box-sizing:border-box">
-          <div style="display:flex;align-items:flex-start;gap:12px;min-width:0">
-            <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
-              <button sc-camel-on-click="{{ back }}" aria-label="Back one level" style="flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.3);color:#FFFFFF;cursor:pointer" style-active="background:#2F245C"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
-            </sc-if>
-            <div style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1">
-              <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:10px;color:#9DB9E0"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2s infinite"></span>{{ lvlTag }}</span>
-              <span style="font-size:clamp(20px,5.6vw,24px);font-weight:300;line-height:1.2;letter-spacing:-0.01em;text-wrap:pretty">{{ mapTitle }}</span>
-              <span style="font-size:13px;line-height:1.45;color:rgba(255,255,255,0.75)">{{ mapSub }}</span>
-            </div>
-            <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px">
-              <span style="font-size:34px;font-weight:200;line-height:1;letter-spacing:-0.03em;font-variant-numeric:tabular-nums">{{ hero.big }}</span>
-              <span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:10px;color:#9DB9E0">Deployments</span>
-            </div>
-          </div>
-          <div style="display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:rgba(255,255,255,0.85);font-variant-numeric:tabular-nums">
-            <sc-for list="{{ mapSplit }}" as="m" hint-placeholder-count="3">
-              <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="display:block;width:10px;height:10px;background-image:url('{{ m.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ m.n }} {{ m.l }}</span>
-            </sc-for>
-          </div>
-          <sc-if value="{{ legendOpen }}" hint-placeholder-val="{{ false }}">
-            <div style="display:flex;flex-direction:column;gap:12px;padding-top:12px;border-top:1px solid rgba(118,156,210,0.22)">
-              <div style="display:flex;flex-direction:column;gap:6px">
-                <span style="font-size:12px;color:rgba(255,255,255,0.72)">Node size · deployments at location</span>
-                <div style="display:flex;align-items:flex-end;gap:16px">
-                  <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="18" height="18" sc-camel-view-box="0 0 18 18"><circle cx="9" cy="9" r="7" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">1</span></span>
-                  <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="26" height="26" sc-camel-view-box="0 0 26 26"><circle cx="13" cy="13" r="11" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">4</span></span>
-                  <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="34" height="34" sc-camel-view-box="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">9</span></span>
-                </div>
-              </div>
-              <div style="display:flex;flex-direction:column;gap:7px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
-                <span style="font-size:12px;color:rgba(255,255,255,0.72)">Status · ring split and nodes</span>
-                <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#DCE7F6"></circle></svg>Live · solid</span>
-                <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3" stroke-dasharray="2 2"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><defs><pattern id="lgH" width="2.6" height="2.6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.2" height="2.6" fill="#DCE7F6"></rect></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#lgH)" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Testing · broken</span>
-                <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="1" stroke-opacity="0.75"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Planned · outline</span>
-              </div>
-              <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
-                <sc-for list="{{ legendTypes }}" as="t" hint-placeholder-count="0">
-                  <span style="display:flex;align-items:center;gap:8px;font-size:13px;min-width:0"><span aria-hidden="true" style="flex:none;display:block;width:16px;height:16px;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ t.label }}</span>
-                </sc-for>
-              </div>
+        <div style="position:absolute;left:calc(env(safe-area-inset-left) + 10px);right:calc(env(safe-area-inset-right) + 10px);bottom:22px;z-index:5;display:flex;flex-direction:column;gap:10px;max-height:calc(100% - 90px);pointer-events:none">
+          <sc-if value="{{ remote.show }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;justify-content:center;flex:none;pointer-events:auto">
+              <sc-for list="{{ remote.items }}" as="r" hint-placeholder-count="0">
+                <button sc-camel-on-click="{{ r.go }}" aria-label="{{ r.tip }}" style="display:flex;align-items:center;gap:12px;min-height:44px;padding:6px 14px 6px 16px;background:rgba(14,12,36,0.95);border:1px solid #769CD2;color:#FFFFFF;font-family:Poppins,sans-serif;text-align:left;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.35)">
+                  <span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:9.5px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#9DB9E0">{{ r.over }}</span><span style="font-size:14px">{{ r.label }}</span></span>
+                  <svg sc-camel-view-box="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;transform:rotate({{ r.rot }}deg)"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+                </button>
+              </sc-for>
             </div>
           </sc-if>
-          <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px">
-            <button sc-camel-on-click="{{ toggleLegend }}" aria-expanded="{{ legendOpenS }}" style="min-height:44px;padding:0 14px;display:flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(118,156,210,0.45);color:#DCE7F6;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;cursor:pointer" style-active="background:#2F245C">Legend<span style="font-size:16px;letter-spacing:0;color:#FFFFFF">{{ legendSign }}</span></button>
-            <button sc-camel-on-click="{{ goDetails }}" style="min-height:44px;padding:0 14px;display:flex;align-items:center;justify-content:center;gap:8px;background:#769CD2;border:0;color:#12102A;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;font-weight:600;cursor:pointer" style-active="background:#DCE7F6">View details<svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+        <div style="pointer-events:auto;flex:0 1 auto;min-height:0;background:rgba(14,12,36,0.95);border:1px solid rgba(118,156,210,0.38);color:#FFFFFF;display:flex;flex-direction:column;gap:12px;padding:14px;overflow-y:auto;box-sizing:border-box">
+            <div style="display:flex;align-items:flex-start;gap:12px;min-width:0">
+              <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
+                <button sc-camel-on-click="{{ back }}" aria-label="Back one level" style="flex:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.3);color:#FFFFFF;cursor:pointer" style-active="background:#2F245C"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+              </sc-if>
+              <div style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1">
+                <span style="display:flex;align-items:center;gap:8px;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:10px;color:#9DB9E0"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2s infinite"></span>{{ lvlTag }}</span>
+                <span style="font-size:clamp(20px,5.6vw,24px);font-weight:300;line-height:1.2;letter-spacing:-0.01em;text-wrap:pretty">{{ mapTitle }}</span>
+                <span style="font-size:13px;line-height:1.45;color:rgba(255,255,255,0.75)">{{ mapSub }}</span>
+              </div>
+              <div style="flex:none;display:flex;flex-direction:column;align-items:flex-end;gap:2px">
+                <span style="font-size:34px;font-weight:200;line-height:1;letter-spacing:-0.03em;font-variant-numeric:tabular-nums">{{ hero.big }}</span>
+                <span style="font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:10px;color:#9DB9E0">Deployments</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:rgba(255,255,255,0.85);font-variant-numeric:tabular-nums">
+              <sc-for list="{{ mapSplit }}" as="m" hint-placeholder-count="3">
+                <span style="display:flex;align-items:center;gap:6px"><span aria-hidden="true" style="display:block;width:10px;height:10px;background-image:url('{{ m.g }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ m.n }} {{ m.l }}</span>
+              </sc-for>
+            </div>
+            <sc-if value="{{ legendOpen }}" hint-placeholder-val="{{ false }}">
+              <div style="display:flex;flex-direction:column;gap:12px;padding-top:12px;border-top:1px solid rgba(118,156,210,0.22)">
+                <div style="display:flex;flex-direction:column;gap:6px">
+                  <span style="font-size:12px;color:rgba(255,255,255,0.72)">Node size · deployments at location</span>
+                  <div style="display:flex;align-items:flex-end;gap:16px">
+                    <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="18" height="18" sc-camel-view-box="0 0 18 18"><circle cx="9" cy="9" r="7" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">1</span></span>
+                    <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="26" height="26" sc-camel-view-box="0 0 26 26"><circle cx="13" cy="13" r="11" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">4</span></span>
+                    <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="34" height="34" sc-camel-view-box="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:11px;color:rgba(255,255,255,0.72)">9</span></span>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:7px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
+                  <span style="font-size:12px;color:rgba(255,255,255,0.72)">Status · ring split and nodes</span>
+                  <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#DCE7F6"></circle></svg>Live · solid</span>
+                  <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3" stroke-dasharray="2 2"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><defs><pattern id="lgH" width="2.6" height="2.6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.2" height="2.6" fill="#DCE7F6"></rect></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#lgH)" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Testing · broken</span>
+                  <span style="display:flex;align-items:center;gap:9px;font-size:13px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="1" stroke-opacity="0.75"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Planned · outline</span>
+                </div>
+                <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 12px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
+                  <sc-for list="{{ legendTypes }}" as="t" hint-placeholder-count="0">
+                    <span style="display:flex;align-items:center;gap:8px;font-size:13px;min-width:0"><span aria-hidden="true" style="flex:none;display:block;width:16px;height:16px;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ t.label }}</span>
+                  </sc-for>
+                </div>
+              </div>
+            </sc-if>
+            <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px">
+              <button sc-camel-on-click="{{ toggleLegend }}" aria-expanded="{{ legendOpenS }}" style="min-height:44px;padding:0 14px;display:flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(118,156,210,0.45);color:#DCE7F6;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;cursor:pointer" style-active="background:#2F245C">Legend<span style="font-size:16px;letter-spacing:0;color:#FFFFFF">{{ legendSign }}</span></button>
+              <button sc-camel-on-click="{{ goDetails }}" style="min-height:44px;padding:0 14px;display:flex;align-items:center;justify-content:center;gap:8px;background:#769CD2;border:0;color:#12102A;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;font-size:11px;font-weight:600;cursor:pointer" style-active="background:#DCE7F6">View details<svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></button>
+            </div>
           </div>
         </div>
       </sc-if>
@@ -1196,7 +1208,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
           </sc-if>
 
           <div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);font-size:13px;line-height:1.5;color:var(--p515150,#515150)">
-            <span>District boundaries from OpenStreetMap. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
+            <span>District boundaries from OpenStreetMap; Al Reem Island, Al Raha Beach and Al Ain are shown as approximate areas around their sites. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
           </div>
         </div>
       </div>
@@ -1292,7 +1304,7 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
           </section>
 
           <div style="display:flex;flex-direction:column;gap:6px;padding-top:14px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);font-size:13px;line-height:1.5;color:var(--p515150,#515150)">
-            <span>District boundaries from OpenStreetMap. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
+            <span>District boundaries from OpenStreetMap; Al Reem Island, Al Raha Beach and Al Ain are shown as approximate areas around their sites. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
           </div>
         </div>
       </div>
@@ -1463,7 +1475,7 @@ class Component extends DCLogic {
       p.on("tooltipopen", (e) => { const el = e.tooltip.getElement(); if (el) el.style.display = p._rrNoTip ? "none" : ""; });
       p.on("click", () => { const s = this.state; if (!(s.level === 1 && s.d === d.id)) this.goDistrict(d.id); });
       this.polys[d.id] = p;
-      all = all ? all.extend(p.getBounds()) : L.latLngBounds(p.getBounds().getSouthWest(), p.getBounds().getNorthEast());
+      if (!d.remote) all = all ? all.extend(p.getBounds()) : L.latLngBounds(p.getBounds().getSouthWest(), p.getBounds().getNorthEast());
       const b = L.marker(d.centroid, { icon: L.divIcon({ className: "", html: "", iconSize: [0, 0] }), keyboard: true, title: "Open " + d.name, zIndexOffset: 400 });
       b.on("click", () => this.goDistrict(d.id));
       this.badges[d.id] = b;
@@ -1501,7 +1513,7 @@ class Component extends DCLogic {
     if (!isFinite(z)) o = { padding: [40, 40] };
     if (anim) m.flyToBounds(this.allB, Object.assign(o, { duration: 1.15, easeLinearity: 0.2 })); else m.fitBounds(this.allB, o);
   }
-  cardH() { return 230; }
+  cardH() { return window.FLEET_DATA && window.FLEET_DATA.districts.some((d) => d.remote) && this.state.level === 0 ? 290 : 230; }
   clampBadges() {
     if (!this.mapOk() || !this.badges) return;
     const c = this.map.getContainer().getBoundingClientRect(), pad = 6, bot = c.bottom - (this.state.tab && this.state.tab !== "map" ? 0 : this.cardH() - 18);
@@ -1575,7 +1587,7 @@ class Component extends DCLogic {
       const selD = s.level > 0 && s.d === d.id;
       p._rrNoTip = selD; if (selD) p.closeTooltip(); else p.setTooltipContent(miniTip(d.name, "Click for details"));
       const b = this.badges[d.id], vH = map.getSize().y - this.cardH(), cp = map.latLngToContainerPoint(d.centroid), inView = cp.x > 20 && cp.x < map.getSize().x - 20 && cp.y > 20 && cp.y < vH - 20;
-      const show = (s.level === 0 || (d.id !== s.d && inView)) && g.total > 0;
+      const show = (s.level === 0 ? !d.remote : (d.id !== s.d && inView)) && g.total > 0;
       if (show) { b.setIcon(L.divIcon({ className: "", html: badgeHtml(d, g, true, !focus), iconSize: [0, 0] })); if (!map.hasLayer(b)) b.addTo(map); setTimeout(() => this.clampBadges(), 0); }
       else if (map.hasLayer(b)) map.removeLayer(b);
     });
@@ -1734,7 +1746,7 @@ class Component extends DCLogic {
     const sumItems = SUM.items.map((m, i) => Object.assign({}, m, { bl: i ? "1px solid rgba(118,156,210,0.25)" : "0", pl: i ? "14px" : "0" }));
     let hero;
     if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
-    else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d && hasA(a.id)).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? " · OpenStreetMap boundary" : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
+    else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d && hasA(a.id)).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? (dist.zone ? " · approximate area" : " · OpenStreetMap boundary") : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
     else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Types", typesIn)] };
     hero.big = String(Math.round(g.total * e));
     hero.bar = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "#769CD2"], ["planned", "Planned", "rgba(var(--pInk,11,11,11),0.22)"]].map((x) => ({ l: x[1], n: String(Math.round(g[x[0]] * e)), w: g.total ? (g[x[0]] / g.total * 100).toFixed(2) + "%" : "0%", bg: x[2], g: G[x[0]] }));
@@ -1822,6 +1834,14 @@ class Component extends DCLogic {
       sub: galList.length + (galList.length === 1 ? " video" : " videos") + " · " + galDeps + (galDeps === 1 ? " deployment" : " deployments") + (fChipsOn ? " · matching your filters" : ""),
       items: galList.map((v, k) => ({ poster: v.poster || "", dur: this.fmtDur(v.duration), heading: v.f.use_case, caption: v.title || "", site: A[v.f.asset_id].name, status: LBL[v.f.status], label: "Play " + (v.title || "") + ", " + v.f.use_case + " at " + A[v.f.asset_id].name, play: () => this.openPlayer(galList, k) })) };
     const watchN = galList.length;
+    const remoteDs = D.districts.filter((d) => d.remote);
+    const inRemote = !!(dist && dist.remote);
+    const kmTo = (c) => { const R = 6371, t = Math.PI / 180, b = [24.47, 54.47], dLa = (c[0] - b[0]) * t, dLo = (c[1] - b[1]) * t, h = Math.sin(dLa / 2) ** 2 + Math.cos(b[0] * t) * Math.cos(c[0] * t) * Math.sin(dLo / 2) ** 2; return Math.round(2 * R * Math.asin(Math.sqrt(h)) / 10) * 10; };
+    const bearing = (c) => { const t = Math.PI / 180, b = [24.47, 54.47], y = Math.sin((c[1] - b[1]) * t) * Math.cos(c[0] * t), x = Math.cos(b[0] * t) * Math.sin(c[0] * t) - Math.sin(b[0] * t) * Math.cos(c[0] * t) * Math.cos((c[1] - b[1]) * t); return (Math.atan2(y, x) / t + 360) % 360; };
+    const compass = (deg) => ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"][Math.round(deg / 45) % 8];
+    const remote = { show: remoteDs.length > 0 && (lvl === 0 || inRemote) && tab === "map", items: inRemote
+      ? [{ over: dist.name, label: "Back to Abu Dhabi", tip: "Zoom back to the main Abu Dhabi districts", rot: 180, go: () => this.goPortfolio() }]
+      : remoteDs.map((d) => { const n = rows.filter((f) => A[f.asset_id] && A[f.asset_id].district_id === d.id).length; return { over: "~" + kmTo(d.centroid) + " km " + compass(bearing(d.centroid)), label: d.name + " · " + n + (n === 1 ? " deployment" : " deployments"), tip: "Zoom to " + d.name, rot: Math.round(bearing(d.centroid) - 90), go: () => this.goDistrict(d.id) }; }) };
     return Object.assign(refs, {
       q: s.q, results, showResults: !!ql && s.qFocus, noResults: !!ql && !results.length,
       onQ: (ev) => this.setState({ q: ev.target.value }),
@@ -1850,7 +1870,7 @@ class Component extends DCLogic {
       dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
       player, gallery, watchN, openGallery: () => this.setState({ gal: true }), vstop: (ev) => ev.stopPropagation(), vidRef: this.vidRef,
       vidOn: !!s.vid, vidBg: s.vid ? "var(--pF2F5FA,#F2F5FA)" : "transparent", vidBd: s.vid ? "#769CD2" : "rgba(var(--pInk,11,11,11),0.18)", vidPressed: String(!!s.vid), toggleVid: () => { this.setState({ vid: !s.vid }); this.kick(); },
-      sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
+      remote, sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: this.ringU(g, 76, 33, 4), hasAny: !isEmpty, inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
       scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,

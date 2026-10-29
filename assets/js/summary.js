@@ -16,7 +16,7 @@ window.RR_SUMMARY = function (D) {
     planned: byStatus("planned"),
     assets: uniq(function (f) { return f.asset_id; }),
     districts: uniq(function (f) { return assetById[f.asset_id].district_id; }),
-    partners: uniq(function (f) { return (f.vendor || "").trim().toLowerCase(); }),
+    partners: (function () { var s = {}; rows.forEach(function (f) { String(f.vendor || "").split("+").forEach(function (v) { v = v.trim().toLowerCase(); if (v && v !== "other" && v !== "tbc") s[v] = 1; }); }); return Object.keys(s).length; })(),
     robot_types: uniq(function (f) { return f.robot_type; }),
     units: rows.reduce(function (n, f) { return n + (f.units == null || isNaN(Number(f.units)) ? 0 : Number(f.units)); }, 0)
   };

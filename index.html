@@ -973,6 +973,16 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         <span ref="{{ curRef }}">Cursor · —</span>
         <span ref="{{ zRef }}">Z —</span>
       </div>
+      <sc-if value="{{ remote.show }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:4;display:flex;gap:8px">
+          <sc-for list="{{ remote.items }}" as="r" hint-placeholder-count="0">
+            <button sc-camel-on-click="{{ r.go }}" title="{{ r.tip }}" style="display:flex;align-items:center;gap:14px;padding:9px 14px 9px 16px;background:rgba(14,12,36,0.94);border:1px solid #769CD2;color:#FFFFFF;font-family:Poppins,sans-serif;text-align:left;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.35);white-space:nowrap" style-hover="background:#2F245C">
+              <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#9DB9E0">{{ r.over }}</span><span style="font-size:13px">{{ r.label }}</span></span>
+              <svg sc-camel-view-box="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;transform:rotate({{ r.rot }}deg)"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
+            </button>
+          </sc-for>
+        </div>
+      </sc-if>
       <div style="position:absolute;left:24px;bottom:24px;z-index:3;background:rgba(14,12,36,0.92);border:1px solid rgba(118,156,210,0.32);color:#FFFFFF;display:flex;flex-direction:column;min-width:208px;max-height:calc(100% - 130px);overflow:auto">
         <button sc-camel-on-click="{{ toggleLegend }}" aria-expanded="{{ legendOpenS }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:transparent;border:0;color:#9DB9E0;font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;cursor:pointer">Legend<span style="font-size:13px;letter-spacing:0;color:#FFFFFF">{{ legendSign }}</span></button>
         <sc-if value="{{ legendOpen }}" hint-placeholder-val="{{ false }}">
@@ -1236,7 +1246,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         </sc-if>
 
         <div style="display:flex;flex-direction:column;gap:4px;padding-top:14px;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);font-size:10.5px;line-height:1.5;color:var(--p515150,#515150)">
-          <span>District boundaries from OpenStreetMap. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
+          <span>District boundaries from OpenStreetMap; Al Reem Island, Al Raha Beach and Al Ain are shown as approximate areas around their sites. Map tiles © Esri, HERE, Garmin, OpenStreetMap contributors.</span>
         </div>
       </div>
     </aside>
@@ -1413,7 +1423,7 @@ class Component extends DCLogic {
       p.on("tooltipopen", (e) => { const el = e.tooltip.getElement(); if (el) el.style.display = p._rrNoTip ? "none" : ""; });
       p.on("click", () => { const s = this.state; if (!(s.level === 1 && s.d === d.id)) this.goDistrict(d.id); });
       this.polys[d.id] = p;
-      all = all ? all.extend(p.getBounds()) : L.latLngBounds(p.getBounds().getSouthWest(), p.getBounds().getNorthEast());
+      if (!d.remote) all = all ? all.extend(p.getBounds()) : L.latLngBounds(p.getBounds().getSouthWest(), p.getBounds().getNorthEast());
       const b = L.marker(d.centroid, { icon: L.divIcon({ className: "", html: "", iconSize: [0, 0] }), keyboard: true, title: "Open " + d.name, zIndexOffset: 400 });
       b.on("click", () => this.goDistrict(d.id));
       this.badges[d.id] = b;
@@ -1445,7 +1455,8 @@ class Component extends DCLogic {
     const m = this.map; if (!this.mapOk() || !this.allB) return;
     const sz = m.getSize(); if (!sz || !sz.x || !sz.y) return;
     const px = (v, f) => Math.round(Math.min(v, sz.x * f)), py = (v, f) => Math.round(Math.min(v, sz.y * f));
-    let o = { paddingTopLeft: [px(190, 0.2), py(150, 0.2)], paddingBottomRight: [px(200, 0.2), py(120, 0.16)] };
+    const hasRemote = window.FLEET_DATA.districts.some((d) => d.remote);
+    let o = { paddingTopLeft: [px(190, 0.2), py(150, 0.2)], paddingBottomRight: [px(200, 0.2), py(hasRemote ? 175 : 120, hasRemote ? 0.22 : 0.16)] };
     const z = m.getBoundsZoom(this.allB, false, window.L.point(o.paddingTopLeft[0] + o.paddingBottomRight[0], o.paddingTopLeft[1] + o.paddingBottomRight[1]));
     if (!isFinite(z)) o = { padding: [40, 40] };
     if (anim) m.flyToBounds(this.allB, Object.assign(o, { duration: 1.15, easeLinearity: 0.2 })); else m.fitBounds(this.allB, o);
@@ -1495,7 +1506,7 @@ class Component extends DCLogic {
       p.setStyle(focus ? { opacity: 0.95, weight: s.level ? 1.8 : 1.3, fillOpacity: 0.07 + 0.28 * (g.total / max), color: this.theme() === "light" ? "#3F6FAE" : "#9DB9E0", fillColor: this.theme() === "light" ? "#3F6FAE" : "#769CD2" } : { opacity: this.theme() === "light" ? 0.5 : 0.3, weight: 1, fillOpacity: 0.025, color: this.theme() === "light" ? "#5B7FB5" : "#769CD2" });
       const selD = s.level > 0 && s.d === d.id;
       p._rrNoTip = selD; if (selD) p.closeTooltip(); else p.setTooltipContent(miniTip(d.name, "Click for details"));
-      const b = this.badges[d.id], show = s.level === 0 || d.id !== s.d;
+      const b = this.badges[d.id], show = s.level === 0 ? !d.remote : d.id !== s.d;
       if (show) { b.setIcon(L.divIcon({ className: "", html: badgeHtml(d, g, s.level > 0 || this.compactB, !focus), iconSize: [0, 0] })); if (!map.hasLayer(b)) b.addTo(map); }
       else if (map.hasLayer(b)) map.removeLayer(b);
     });
@@ -1651,7 +1662,7 @@ class Component extends DCLogic {
     const sumItems = SUM.items.map((m, i) => Object.assign({}, m, { bl: i ? "1px solid rgba(118,156,210,0.25)" : "0", pl: i ? "18px" : "0" }));
     let hero;
     if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
-    else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? " · OpenStreetMap boundary" : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
+    else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? (dist.zone ? " · approximate area" : " · OpenStreetMap boundary") : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
     else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Types", typesIn)] };
     hero.big = String(Math.round(g.total * e));
     hero.bar = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "#769CD2"], ["planned", "Planned", "rgba(var(--pInk,11,11,11),0.22)"]].map((x) => ({ l: x[1], n: String(Math.round(g[x[0]] * e)), w: g.total ? (g[x[0]] / g.total * 100).toFixed(2) + "%" : "0%", bg: x[2], g: G[x[0]] }));
@@ -1728,6 +1739,14 @@ class Component extends DCLogic {
       sub: galList.length + (galList.length === 1 ? " video" : " videos") + " · " + galDeps + (galDeps === 1 ? " deployment" : " deployments") + (fChipsOn ? " · matching your filters" : ""),
       items: galList.map((v, k) => ({ poster: v.poster || "", dur: this.fmtDur(v.duration), heading: v.f.use_case, caption: v.title || "", site: A[v.f.asset_id].name, status: LBL[v.f.status], label: "Play " + (v.title || "") + ", " + v.f.use_case + " at " + A[v.f.asset_id].name, play: () => this.openPlayer(galList, k) })) };
     const watchN = galList.length;
+    const remoteDs = D.districts.filter((d) => d.remote);
+    const inRemote = !!(dist && dist.remote);
+    const kmTo = (c) => { const R = 6371, t = Math.PI / 180, b = [24.47, 54.47], dLa = (c[0] - b[0]) * t, dLo = (c[1] - b[1]) * t, h = Math.sin(dLa / 2) ** 2 + Math.cos(b[0] * t) * Math.cos(c[0] * t) * Math.sin(dLo / 2) ** 2; return Math.round(2 * R * Math.asin(Math.sqrt(h)) / 10) * 10; };
+    const bearing = (c) => { const t = Math.PI / 180, b = [24.47, 54.47], y = Math.sin((c[1] - b[1]) * t) * Math.cos(c[0] * t), x = Math.cos(b[0] * t) * Math.sin(c[0] * t) - Math.sin(b[0] * t) * Math.cos(c[0] * t) * Math.cos((c[1] - b[1]) * t); return (Math.atan2(y, x) / t + 360) % 360; };
+    const compass = (deg) => ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"][Math.round(deg / 45) % 8];
+    const remote = { show: remoteDs.length > 0 && (lvl === 0 || inRemote), items: inRemote
+      ? [{ over: dist.name, label: "Back to Abu Dhabi", tip: "Zoom back to the main Abu Dhabi districts", rot: 180, go: () => this.goPortfolio() }]
+      : remoteDs.map((d) => { const n = rows.filter((f) => A[f.asset_id] && A[f.asset_id].district_id === d.id).length; return { over: "~" + kmTo(d.centroid) + " km " + compass(bearing(d.centroid)), label: d.name + " · " + n + (n === 1 ? " deployment" : " deployments"), tip: "Zoom to " + d.name, rot: Math.round(bearing(d.centroid) - 90), go: () => this.goDistrict(d.id) }; }) };
     return Object.assign(refs, {
       q: s.q, results, showResults: !!ql && s.qFocus, noResults: !!ql && !results.length,
       onQ: (ev) => this.setState({ q: ev.target.value }),
@@ -1749,7 +1768,7 @@ class Component extends DCLogic {
       dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
       player, gallery, watchN, openGallery: () => this.setState({ gal: true }), vstop: (ev) => ev.stopPropagation(), vidRef: this.vidRef,
       vidOn: !!s.vid, vidBg: s.vid ? "rgba(118,156,210,0.16)" : "transparent", vidBd: s.vid ? "#9DB9E0" : "rgba(255,255,255,0.18)", vidPressed: String(!!s.vid), toggleVid: () => { this.setState({ vid: !s.vid }); this.kick(); },
-      sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
+      remote, sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: lvl === 2 ? this.ringU(g, 150, 66, 7) : "", inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
       scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,

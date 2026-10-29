@@ -279,8 +279,9 @@ def money_values(text: str, include_valuations: bool = False) -> list[float]:
     """Dollar figures in a headline. Valuations are left out unless asked for (they are not money raised)."""
     values = []
     for m in re.finditer(MONEY, text):
-        before, after = text[max(0, m.start() - 18):m.start()], text[m.end():m.end() + 14]
-        if not include_valuations and ("valuation" in after or "valued" in before or "valuation" in before):
+        # A valuation is named right next to its figure: "valued at $X", "valuation of about $X", "$X valuation".
+        before, after = text[:m.start()].split()[-3:], text[m.end():].split()[:1]
+        if not include_valuations and (any("valu" in w or w == "worth" for w in before) or any("valu" in w for w in after)):
             continue
         v = float(m.group(1))
         values.append(round(v * 1000 if m.group(2) in ("bn", "b", "billion") else v, 1))

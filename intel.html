@@ -553,7 +553,8 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
       return "<li><button type=\"button\" data-vendor=\"" + esc(w.vendor) + "\" aria-pressed=\"" + sel + "\"" + (n ? "" : " disabled") + " title=\"" + esc(SIGNAL[w.signal]) + (w.oem ? " · equipment by " + esc(w.oem) : "") + "\">" +
         '<span class="sig ' + esc(w.signal) + '" aria-label="' + esc(SIGNAL[w.signal]) + '"></span><span class="vn">' + esc(w.vendor) + "</span>" +
         '<span class="stl s-' + esc(w.status) + '">' + esc(w.status_label) + '</span><span class="vc">' + (n ? plural(n, "story", "stories") : "mentioned") + "</span></button>" +
-        (w.note ? '<div class="vnote">' + esc(w.note) + "</div>" : "") + "</li>";
+        (w.note ? '<div class="vnote">' + esc(w.note) + "</div>" : "") +
+        (!n && w.article && /^https:\/\//.test(w.article.url || "") ? '<div class="vnote"><a href="' + esc(w.article.url) + '" target="_blank" rel="noopener" style="color:var(--accent-ink)">' + esc(w.article.title) + "</a> · " + esc(w.article.source) + "</div>" : "") + "</li>";
     }).join("") : '<li style="padding:10px 8px;color:var(--muted);font-size:13.5px">No news about our vendors this week.</li>';
     $("vwRest").textContent = quiet.length ? "No news: " + quiet.map(function (w) { return w.vendor; }).join(", ") + "." : "";
     var byHeadline = news.some(function (w) { return w.signal_by === "headlines"; });

@@ -172,6 +172,9 @@ def vendor_watch(portfolio: dict, items: list[dict], posts: list[dict], ai_signa
             "signal": signal,
             "note": note,
             "signal_by": by,
+            # When none of the vendor's stories made the edition, point to the article that mentions it.
+            "article": ({"title": mentioned[0]["title"], "url": mentioned[0]["url"], "source": mentioned[0]["source"]}
+                        if mentioned and not linked_posts else None),
         })
     order = {"risk": 0, "mixed": 1, "positive": 2, "mention": 3, "none": 4}
     rows.sort(key=lambda r: (order[r["signal"]], -r["mentions"], STATUS_RANK.get(r["status"], 3)))

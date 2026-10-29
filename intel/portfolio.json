@@ -1,0 +1,175 @@
+{
+  "_readme": "How Market Pulse recognises our own vendors in the news. Vendors, sites and statuses come from data/fleet-data.js (the fleet map); this file only says which names to look for. 'terms' are names that mean this vendor; 'oem' is the maker of the equipment the vendor uses for us, so news about the maker is linked too. A term is matched as a whole word with the same capitals, unless 'any_case' is true. 'context' (on 'terms' or 'oem_terms') means the term only counts when one of those words is also in the story (for names that are also ordinary words). 'queries' are extra weekly news searches so no vendor news is missed.",
+  "min_posts": 6,
+  "vendors": {
+    "Analog": {
+      "terms": [],
+      "oem": "Boston Dynamics",
+      "oem_terms": [
+        {
+          "term": "Boston Dynamics",
+          "context": "\\bSpot\\b|quadruped|robot dog|inspection|layoff|lay off|CEO|Hyundai|price|ban|security|UAE|Abu Dhabi|Dubai|Gulf"
+        }
+      ]
+    },
+    "AirTech": {
+      "terms": [
+        {
+          "term": "AirTech",
+          "context": "drone|inspection|UAE|Abu Dhabi|Dubai"
+        }
+      ],
+      "oem": "DJI",
+      "oem_terms": [
+        {
+          "term": "DJI",
+          "context": "\\bban|FCC|restrict|sanction|tariff|blacklist|entity list|court|lawsuit|regulat|national security|Commerce|enterprise|inspection|Matrice|M30|M300|M350|M400|\\bDock\\b|thermal|UAE|Abu Dhabi|Dubai|Gulf"
+        }
+      ]
+    },
+    "Pudu": {
+      "terms": [
+        {
+          "term": "Pudu"
+        },
+        {
+          "term": "BellaBot",
+          "any_case": true
+        }
+      ]
+    },
+    "SINDAN": {
+      "terms": [
+        {
+          "term": "SINDAN",
+          "any_case": true
+        }
+      ]
+    },
+    "Falcon Tech Robotics": {
+      "terms": [
+        {
+          "term": "Falcon Tech Robotics",
+          "any_case": true
+        },
+        {
+          "term": "Falcon Tech",
+          "context": "robot"
+        }
+      ]
+    },
+    "BarqAir": {
+      "terms": [
+        {
+          "term": "BarqAir",
+          "any_case": true
+        },
+        {
+          "term": "Barq Air",
+          "any_case": true
+        }
+      ]
+    },
+    "X-Human": {
+      "terms": [
+        {
+          "term": "X-Human",
+          "any_case": true
+        },
+        {
+          "term": "Lingkong",
+          "any_case": true
+        }
+      ]
+    },
+    "Thub Technologies": {
+      "terms": [
+        {
+          "term": "Thub Technologies",
+          "any_case": true
+        },
+        {
+          "term": "TowerCraft",
+          "any_case": true
+        }
+      ]
+    },
+    "AD Robotics": {
+      "terms": [
+        {
+          "term": "AD Robotics"
+        }
+      ]
+    },
+    "Cargo X / Noon": {
+      "terms": [
+        {
+          "term": "Cargo X",
+          "any_case": true
+        },
+        {
+          "term": "CargoX",
+          "any_case": true
+        },
+        {
+          "term": "Noon",
+          "context": "deliver|autonomous|courier|logistics|\\bvans?\\b|last.mile"
+        }
+      ],
+      "oem": "Neolix",
+      "oem_terms": [
+        {
+          "term": "Neolix",
+          "any_case": true
+        }
+      ]
+    },
+    "Deep Robotics": {
+      "terms": [
+        {
+          "term": "Deep Robotics",
+          "any_case": true
+        },
+        {
+          "term": "DeepRobotics",
+          "any_case": true
+        }
+      ]
+    },
+    "Solinas": {
+      "terms": [
+        {
+          "term": "Solinas",
+          "context": "robot"
+        },
+        {
+          "term": "Endobot",
+          "any_case": true
+        }
+      ]
+    },
+    "Subdivo": {
+      "terms": [
+        {
+          "term": "Subdivo",
+          "any_case": true
+        }
+      ]
+    }
+  },
+  "queries": [
+    "Pudu Robotics",
+    "Boston Dynamics",
+    "DJI drone",
+    "Neolix",
+    "Deep Robotics",
+    "SINDAN robot",
+    "BarqAir",
+    "Thub Technologies TowerCraft",
+    "Solinas robotics",
+    "Falcon Tech Robotics",
+    "X-Human robot",
+    "AD Robotics UAE",
+    "Noon delivery robot UAE"
+  ]
+}

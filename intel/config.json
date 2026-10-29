@@ -1,5 +1,5 @@
 {
-  "_readme": "Settings for intel/market_intel.py. Edit categories here: label, colours and search terms. 'queries' are Google News searches (global, last 7 days). 'keywords' decide which category a story belongs to. 'gcc_queries' are extra Gulf-focused searches; 'gcc_min_posts' is how many GCC stories each edition tries to include.",
+  "_readme": "Settings for intel/market_intel.py. Edit categories here: label, colours and search terms. 'queries' are Google News searches (global, last 7 days). 'keywords' decide which category a story belongs to. 'gcc_queries' are extra Gulf-focused searches; 'gcc_min_posts' is how many GCC stories each edition tries to include. 'research' controls the weekly web research by Claude (viral watch, new vendors, category map); it only runs when ANTHROPIC_API_KEY is set.",
   "timezone": "Asia/Dubai",
   "lookback_days": 7,
   "max_posts": 24,
@@ -7,6 +7,12 @@
   "max_editions_kept": 12,
   "max_candidates_for_ai": 150,
   "model": "claude-opus-5-5",
+  "research": {
+    "enabled": true,
+    "max_searches": 15,
+    "max_fetches": 8,
+    "effort": "high"
+  },
   "audience": "the executive management team of Aldar Properties, a real estate developer and asset manager in Abu Dhabi that runs robotics trials and deployments across its communities, malls, offices and construction sites",
   "categories": [
     {

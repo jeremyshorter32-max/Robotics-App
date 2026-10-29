@@ -38,12 +38,18 @@ from email.utils import parsedate_to_datetime
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import portfolio as pf  # noqa: E402  (our vendors, from the fleet map)
+import research  # noqa: E402  (weekly web research by Claude)
+
 ROOT = Path(__file__).resolve().parent.parent
 CONFIG_PATH = ROOT / "intel" / "config.json"
 FEED_JSON = ROOT / "data" / "intel-feed.json"
 FEED_JS = ROOT / "data" / "intel-feed.js"
 
 USER_AGENT = "Mozilla/5.0 (compatible; AldarRoboticsMarketPulse/1.0)"
+PORTFOLIO: dict = {"vendors": [], "queries": [], "min_posts": 0}  # set in main()
+ARTICLES: list[dict] = []  # every relevant article before grouping, for counting vendor mentions
 POST_TYPES = ["investment", "product", "deployment", "trend"]
 REGIONS = ["GCC", "North America", "Europe", "China", "Asia-Pacific", "Global"]
 
@@ -57,7 +63,7 @@ TYPE_PATTERNS = [
 MONEY = r"\$\s?(\d+(?:\.\d+)?)\s?(m|mn|million|bn|b|billion)\b"
 
 # Market-size press releases and similar filler, dropped before curation.
-NOISE_TITLE = r"houthi|airstrike|air strike|drone strikes?|missile|warplane|troops|battlefield|frontline|front line|kamikaze|drone attack|shot down|\bkilled\b|ukraine war|\b(jumps|surges|soars|slumps|plunges|tumbles|rallies|skyrockets) (over |nearly |more than )?\d+(\.\d+)?%|(shares?|stock)\b.{0,30}\b(rise|rises|fall|falls|drop|drops|gain|gains|climb|climbs)\b|stock market|hk stock|stock movement|round-?up|recap|week in review|this week in|industry insights|newsletter|digest|robotic raises|video friday|surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
+NOISE_TITLE = r"all-time low|lowest price|\bsave \$|\d+% off|\bdeals?\b.{0,20}(today|now|alert)|black friday|cyber monday|prime day|coupon|gift guide|best .{0,30} to buy|hands-on review|\breview:|houthi|airstrike|air strike|drone strikes?|missile|warplane|troops|battlefield|frontline|front line|kamikaze|drone attack|shot down|\bkilled\b|ukraine war|\b(jumps|surges|soars|slumps|plunges|tumbles|rallies|skyrockets) (over |nearly |more than )?\d+(\.\d+)?%|(shares?|stock)\b.{0,30}\b(rise|rises|fall|falls|drop|drops|gain|gains|climb|climbs)\b|stock market|hk stock|stock movement|round-?up|recap|week in review|this week in|industry insights|newsletter|digest|robotic raises|video friday|surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
 NOISE_SOURCES = {"openpr.com", "ein presswire", "einpresswire", "marketsandmarkets", "taiwannews", "barchart", "benzinga", "seeking alpha", "the globe and mail", "fool.com", "the motley fool", "insidermonkey"}
 # When several outlets cover the same story, show the one from the best-known outlet.
 TRUSTED_SOURCES = ["reuters", "bloomberg", "financial times", "the wall street journal", "techcrunch", "the robot report",
@@ -189,7 +195,7 @@ def collect(config: dict) -> tuple[list[dict], int]:
     for cat in config["categories"]:
         for q in cat["queries"]:
             jobs.append((google_news_url(q, days), "Google News", cat["id"]))
-    for q in config.get("general_queries", []) + config.get("gcc_queries", []):
+    for q in config.get("general_queries", []) + config.get("gcc_queries", []) + PORTFOLIO.get("queries", []):
         jobs.append((google_news_url(q, days), "Google News", None))
     for feed in config.get("feeds", []):
         jobs.append((feed["url"], feed["name"], None))
@@ -224,7 +230,14 @@ def collect(config: dict) -> tuple[list[dict], int]:
     for item in items:
         enrich(item, config)
     raw = len(items)
+    pf.link_items(items, PORTFOLIO)
+    ARTICLES[:] = [i for i in items if i["portfolio"]]
     items = group_same_story(items)
+    # A story is linked only to vendors that its own headline or summary names.
+    pf.link_items(items, PORTFOLIO)
+    linked = sum(1 for i in items if i.get("portfolio"))
+    if linked:
+        log(f"{linked} stories mention a vendor we work with (or the maker of their equipment).")
     items.sort(key=lambda i: i["published"] or cutoff, reverse=True)
     log(f"Kept {raw} relevant stories from the last {days} days, about {len(items)} distinct events.")
     return items, raw
@@ -266,8 +279,9 @@ def money_values(text: str, include_valuations: bool = False) -> list[float]:
     """Dollar figures in a headline. Valuations are left out unless asked for (they are not money raised)."""
     values = []
     for m in re.finditer(MONEY, text):
-        before, after = text[max(0, m.start() - 18):m.start()], text[m.end():m.end() + 14]
-        if not include_valuations and ("valuation" in after or "valued" in before or "valuation" in before):
+        # A valuation is named right next to its figure: "valued at $X", "valuation of about $X", "$X valuation".
+        before, after = text[:m.start()].split()[-3:], text[m.end():].split()[:1]
+        if not include_valuations and (any("valu" in w or w == "worth" for w in before) or any("valu" in w for w in after)):
             continue
         v = float(m.group(1))
         values.append(round(v * 1000 if m.group(2) in ("bn", "b", "billion") else v, 1))
@@ -446,13 +460,16 @@ def curate_with_claude(items: list[dict], config: dict, history: list[dict], mov
         log("The anthropic package is not installed; using the rule-based picker.")
         return None
 
-    candidates = sorted(items, key=lambda i: (-i.get("coverage", 1), source_rank(i)))[: config["max_candidates_for_ai"]]
+    # Stories about our own vendors always go to Claude, then the most widely covered.
+    candidates = sorted(items, key=lambda i: (not i.get("portfolio"), -i.get("coverage", 1), source_rank(i)))[: config["max_candidates_for_ai"]]
     cat_ids = [c["id"] for c in config["categories"]]
     cat_lines = "\n".join(f"- {c['id']}: {c['label']}" for c in config["categories"])
     listing = "\n".join(
         f"[{n}] {i['title']} | source: {i['source']} | outlets covering it: {i.get('coverage', 1)}"
         f" | date: {i['published'].date() if i['published'] else 'unknown'}"
-        f" | guess: {i['category']}/{i['type']}/{i['region']}" + (f" | snippet: {i['snippet']}" if i["snippet"] else "")
+        f" | guess: {i['category']}/{i['type']}/{i['region']}"
+        + "".join(f" | OUR VENDOR: {l['vendor']}" + (f" (via maker {l['oem']})" if l["via"] == "oem" else "") for l in i.get("portfolio", []))
+        + (f" | snippet: {i['snippet']}" if i["snippet"] else "")
         for n, i in enumerate(candidates)
     )
 
@@ -464,6 +481,8 @@ def curate_with_claude(items: list[dict], config: dict, history: list[dict], mov
         "deployments, plus what each means for a property developer and operator. You write a new edition "
         "every week and keep a running view of the trends, so say how this week fits what came before.\n\n"
         f"Categories:\n{cat_lines}\n\n"
+        "Aldar's own robotics portfolio (vendors it works with, the maker of their equipment, and each site's stage):\n"
+        f"{pf.prompt_lines(PORTFOLIO)}\n\n"
         "Rules:\n"
         "- Use only the numbered stories provided. Refer to each by its number in item_index. "
         "Never invent stories, companies, figures or dates.\n"
@@ -489,6 +508,13 @@ def curate_with_claude(items: list[dict], config: dict, history: list[dict], mov
         "from earlier editions where they continue. status: new (first appeared this week), rising (more or "
         "bigger evidence than before), steady, or cooling (less evidence than before). evidence: at most 25 "
         "words, citing this week's stories or the volume figures.\n"
+        "- Stories marked OUR VENDOR are about a vendor Aldar works with, or the maker of its equipment. Include "
+        "each one unless it is trivial, and fill portfolio_note with one sentence (at most 30 words) on what it "
+        "means for that vendor's work with Aldar, naming the site or pilot where it helps. Leave portfolio_note "
+        "empty for other stories.\n"
+        "- vendor_signals: one entry for each of our vendors with news this week. signal is positive (good for "
+        "our work with them), risk (could disrupt it: regulation, supply, finances, safety) or mixed; note is "
+        "one sentence, at most 25 words.\n"
         "- edition_headline: the single most important development, at most 80 characters."
     )
     schema = {
@@ -523,13 +549,27 @@ def curate_with_claude(items: list[dict], config: dict, history: list[dict], mov
                         "headline": {"type": "string"},
                         "summary": {"type": "string"},
                         "why_it_matters": {"type": "string"},
+                        "portfolio_note": {"type": "string"},
                     },
-                    "required": ["item_index", "category", "type", "region", "company", "amount_usd_m", "headline", "summary", "why_it_matters"],
+                    "required": ["item_index", "category", "type", "region", "company", "amount_usd_m", "headline", "summary", "why_it_matters", "portfolio_note"],
+                    "additionalProperties": False,
+                },
+            },
+            "vendor_signals": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "vendor": {"type": "string", "enum": [v["name"] for v in PORTFOLIO["vendors"]] or ["none"]},
+                        "signal": {"type": "string", "enum": ["positive", "risk", "mixed"]},
+                        "note": {"type": "string"},
+                    },
+                    "required": ["vendor", "signal", "note"],
                     "additionalProperties": False,
                 },
             },
         },
-        "required": ["edition_headline", "takeaways", "trend_watch", "posts"],
+        "required": ["edition_headline", "takeaways", "trend_watch", "posts", "vendor_signals"],
         "additionalProperties": False,
     }
 
@@ -583,6 +623,7 @@ def curate_with_claude(items: list[dict], config: dict, history: list[dict], mov
         "takeaways": result["takeaways"][:3],
         "trend_watch": result["trend_watch"][:5],
         "posts": posts,
+        "vendor_signals": {v["vendor"]: v for v in result.get("vendor_signals", [])},
     }
 
 
@@ -604,13 +645,21 @@ def curate_with_rules(items: list[dict], config: dict, history: list[dict], move
     per_cat: dict[str, int] = {}
     posts = []
     ranked = sorted(items, key=score, reverse=True)
-    # GCC stories first (up to gcc_min_posts), so the GCC filter always has something to show.
-    gcc_first = [i for i in ranked if i["region"] == "GCC"][: config.get("gcc_min_posts", 6)]
+    # Stories about our own vendors first, then GCC stories, so those views always have news to show.
+    ours_first, covered = [], set()
+    for i in ranked:  # the best story for each vendor in the news, then their next best
+        new = {l["vendor"] for l in i.get("portfolio", [])} - covered
+        if new:
+            ours_first.append(i); covered |= new
+    ours_first += [i for i in ranked if i.get("portfolio") and i not in ours_first]
+    ours_first = ours_first[: max(PORTFOLIO.get("min_posts", 6), len(covered))]
+    gcc_first = [i for i in ranked if i["region"] == "GCC" and i not in ours_first][: config.get("gcc_min_posts", 6)]
+    reserved = ours_first + gcc_first
     chosen = set()
-    for i in gcc_first + ranked:
+    for i in reserved + ranked:
         if id(i) in chosen:
             continue
-        if i not in gcc_first and per_cat.get(i["category"], 0) >= 4:
+        if i not in reserved and per_cat.get(i["category"], 0) >= 4:
             continue
         chosen.add(id(i))
         per_cat[i["category"]] = per_cat.get(i["category"], 0) + 1
@@ -676,6 +725,8 @@ def make_post(src: dict, ai: dict) -> dict:
         "published": src["published"].strftime("%Y-%m-%d") if src["published"] else None,
         "coverage": src.get("coverage", 1),
         "also_covered_by": src.get("also_covered_by", []),
+        "portfolio": [pf.describe(l, PORTFOLIO) for l in src.get("portfolio", [])],
+        "portfolio_note": ai.get("portfolio_note", ""),
     }
 
 
@@ -848,6 +899,8 @@ def main() -> int:
     args = parser.parse_args()
 
     config = load_config()
+    global PORTFOLIO
+    PORTFOLIO = pf.load_portfolio()
     now = datetime.now(ZoneInfo(config["timezone"]))
     iso = now.isocalendar()
     edition_id = f"{iso.year}-W{iso.week:02d}"
@@ -868,6 +921,21 @@ def main() -> int:
     moves = momentum(signals, history, config)
     curated = curate_with_claude(items, config, history, moves) or curate_with_rules(items, config, history, moves)
     add_previews(curated["posts"])
+    pf.relink_posts(curated["posts"], PORTFOLIO)
+    watch = pf.vendor_watch(PORTFOLIO, ARTICLES, curated["posts"], curated.pop("vendor_signals", None))
+    log(f"Vendor watch: {sum(1 for w in watch if w['signal'] != 'none')} of {len(watch)} vendors in the news.")
+
+    # Web research by Claude: viral watch, new vendors, category map. Never blocks the edition.
+    period_from = (now - timedelta(days=config["lookback_days"])).strftime("%Y-%m-%d")
+    try:
+        found = research.run_research(
+            config, pf.prompt_lines(PORTFOLIO), [v["name"] for v in PORTFOLIO["vendors"]],
+            [p["headline"] for p in curated["posts"]],
+            next((e for e in history if e.get("challengers")), None), (period_from, now.strftime("%Y-%m-%d")),
+        ) or {}
+    except Exception as exc:  # a failed research run must not stop the weekly edition
+        log(f"Research step failed ({exc!r}); publishing without it.")
+        found = {}
     edition = {
         "id": edition_id,
         "label": f"Week {iso.week} · {now.strftime('%-d %b %Y')}",
@@ -881,6 +949,8 @@ def main() -> int:
         "signals": signals,
         "momentum": moves,
         **curated,
+        "vendor_watch": watch,
+        **found,
     }
 
     if args.dry_run:

@@ -19,7 +19,7 @@ Add `?view=desktop` to the address to force the desktop layout on a phone, or `?
 | `netlify.toml` | Netlify settings (no build step). |
 | `intel.html` | **Market Pulse**: weekly robotics market intelligence feed (works on desktop and phone). |
 | `data/intel-feed.json`, `data/intel-feed.js` | Market Pulse editions. Written by the weekly job; don't edit by hand. |
-| `intel/` | The weekly job: `market_intel.py` and its settings, `config.json`. |
+| `intel/` | The weekly job: `market_intel.py`, with `portfolio.py` (our vendors in the news) and `research.py` (Claude's web research), and their settings `config.json` and `portfolio.json`. |
 | `.github/workflows/market-intel.yml` | Runs the weekly job on GitHub. |
 
 ## Deploy on Netlify
@@ -44,6 +44,15 @@ Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`
 **Trend memory.** Each edition records how much news each category had and compares it with the previous four weeks. The **Trend radar** panel shows running themes (new, rising, steady or cooling) and each category's news volume against its recent average. With AI summaries on, Claude also reads the last four editions' takeaways and trends, so it carries themes forward week to week rather than starting fresh. Stories covered by several outlets are merged into one, with a "Covered by N outlets" tag.
 
 **Turn on AI summaries (recommended).** Add a repository secret named `ANTHROPIC_API_KEY` (GitHub: Settings → Secrets and variables → Actions → New repository secret). Claude then chooses the stories and writes the summaries, takeaways and "why it matters" lines. Without a key, the job still runs but uses a simple rule to pick stories and shows the original headlines.
+
+**Our portfolio.** Pulse reads our vendors, what they run for us, where and at what stage from `data/fleet-data.js` (the fleet map's data), so the two never disagree. Each week it also searches for news about those vendors and the makers of their equipment (Neolix for Cargo X / Noon, DJI for AirTech, Boston Dynamics for Analog). Stories about them get an "Our vendor" line, the **Our vendors** filter shows just those stories, and the **Our vendors this week** card marks each vendor as good news, risk or mixed. The names to look for are in `intel/portfolio.json`; add a vendor there when it joins the fleet with a name that differs from the fleet map.
+
+**Research tabs (needs the API key).** With `ANTHROPIC_API_KEY` set, Claude also searches the web itself each week, and the page gains two tabs and a chart:
+- **Viral watch:** the week's most-watched robot videos, each checked (real footage, autonomous, confirmed, deployed, fits GCC), with a verdict and a line for leadership.
+- **New vendors:** challengers in our categories, scored 0–4 on funding, deployments, scale, partners and GCC route. 14+ with named deployments: consider adding; 8–13: watch; under 8: ignore.
+- **Category map** (in the Trend radar): readiness against relevance for each category.
+
+Only links Claude actually opened during its research are kept, so the page never shows a made-up source. This step uses web search, so web search must be enabled for the organisation in the Claude Console; settings (number of searches) are under `research` in `intel/config.json`. If it fails, the edition is published without it.
 
 **Change the categories or sources.** Edit `intel/config.json`: each category has a label, colours, `queries` (news searches) and `keywords` (used to sort stories). You can also change the number of stories, the model, and the trade-press feeds there.
 

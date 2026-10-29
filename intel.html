@@ -189,6 +189,94 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
 .post.lead.noimg .body{padding-top:12px}
 
 .empty{background:var(--card);border:1px dashed var(--line-2);padding:36px;text-align:center;color:var(--muted)}
+
+/* ---------- Our portfolio ---------- */
+:root{--good:#2E7D4F;--risk:#D9622B;--mention:#769CD2;--none:#C9CCD3}
+.ours{display:flex;flex-direction:column;gap:4px;padding:9px 12px;background:#F2F5FA;border-left:3px solid var(--navy);font-size:13px;color:var(--ink-2)}
+.ours .ol{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 8px}
+.ours b{font-size:11.5px;font-weight:600;color:var(--navy)}
+.ours .via{color:var(--muted)}
+.ours .note{color:var(--ink);font-size:14px;line-height:1.5}
+.stl{display:inline-block;padding:0 6px;font-size:11px;font-weight:600;line-height:1.6}
+.s-deployed{background:#E3F3EA;color:#1F7A4D}.s-pilot{background:#E6EEF8;color:#3F6FAE}.s-planned{background:#EFEFEC;color:#55555F}
+.vw{list-style:none;margin:0;padding:6px 12px 4px}
+.vw li{border-top:1px solid var(--line)}
+.vw li:first-child{border-top:0}
+.vw button{display:grid;grid-template-columns:12px minmax(0,1fr) auto auto;align-items:center;gap:9px;width:100%;padding:10px 8px;border:0;background:none;text-align:left;cursor:pointer;color:var(--ink);font-size:14px}
+.vw button:hover{background:#F2F5FA}
+.vw button[aria-pressed="true"]{background:#EAF0F9}
+.vw button[disabled]{cursor:default}
+.vw button[disabled]:hover{background:none}
+.vw .vn{font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vw .vc{font-size:12px;color:var(--muted);white-space:nowrap}
+.vw .vnote{padding:0 8px 10px 29px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.sig{width:10px;height:10px;border-radius:50%;background:var(--none)}
+.sig.positive{background:var(--good)}.sig.risk{background:var(--risk)}.sig.mention{background:var(--mention)}
+.sig.mixed{background:linear-gradient(90deg,var(--good) 50%,var(--risk) 50%)}
+.vw-rest{margin:0;padding:4px 20px 6px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.vw-leg{display:flex;flex-wrap:wrap;gap:4px 12px;padding:8px 20px 16px;font-size:11.5px;color:var(--muted)}
+.vw-leg span{display:inline-flex;align-items:center;gap:5px}
+.vw-leg .sig{width:8px;height:8px}
+
+/* ---------- Tabs: Stories · Viral watch · New vendors ---------- */
+.tabs{display:flex;gap:4px;margin:0 0 14px;border-bottom:1px solid var(--line-2)}
+.tabs button{border:0;background:none;padding:10px 14px 11px;font-size:14px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--navy);font-weight:600}
+.tabs .n{font-size:12px;color:var(--muted);font-weight:500}
+.intro{margin:0 2px 14px;font-size:13.5px;color:var(--muted);line-height:1.55;max-width:720px}
+
+/* Viral watch */
+.vcard{display:grid;grid-template-columns:200px minmax(0,1fr);background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);margin-bottom:14px}
+.vleft{background:var(--navy);color:#fff;padding:20px 18px;display:flex;flex-direction:column;gap:4px}
+.vleft .plat{font-size:12px;color:var(--accent-soft);font-weight:500}
+.vleft .vnum{font-size:44px;font-weight:200;line-height:1.05;letter-spacing:-0.02em;margin-top:12px;overflow-wrap:anywhere}
+.vleft .vnum.sm{font-size:24px;font-weight:300}
+.vleft .vt{font-size:12px;color:rgba(255,255,255,0.75)}
+.vleft .vs{font-size:11.5px;color:rgba(255,255,255,0.6);margin-top:10px;line-height:1.45;overflow-wrap:anywhere}
+.vright{padding:18px 22px 18px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.vright h3{margin:0;font-size:18px;font-weight:600;line-height:1.35}
+.vright p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.55}
+.vright p b{color:var(--ink);font-weight:600}
+.checks{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:2px 0 0;padding:0}
+.checks li{display:inline-flex;align-items:center;gap:6px;padding:4px 9px;font-size:12px;border:1px solid var(--line-2);background:#fff}
+.checks li i{font-style:normal;font-weight:700;font-size:11px;width:14px;text-align:center}
+.checks .y{background:#EEF7EF;border-color:#BFE0C8}.checks .y i{color:#1F7A4D}
+.checks .n{background:#FCEEE7;border-color:#F2C6B0}.checks .n i{color:#B0501E}
+.checks .q i{color:var(--muted)}
+.vrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12.5px;color:var(--muted)}
+.verdict{padding:3px 10px;font-size:12px;font-weight:600}
+.verdict.hype{background:#FBE3CF;color:#8A4A14}.verdict.watch{background:#EFEFEC;color:#3B3B4A}.verdict.real{background:#E3F3EA;color:#1F7A4D}
+.act{font-weight:600;color:var(--ink)}
+.say{background:#F2F5FA;border-left:3px solid var(--navy);padding:10px 13px}
+.say b{display:block;font-size:11.5px;font-weight:600;color:var(--navy);margin-bottom:2px}
+.say span{font-size:14px;color:var(--ink);line-height:1.5}
+.vfoot{font-size:12px;color:var(--muted);line-height:1.6;overflow-wrap:anywhere}
+.vfoot a{color:var(--accent-ink);font-weight:500}
+
+/* New vendors */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.ccard{background:var(--card);border:1px solid var(--line);box-shadow:var(--shadow);padding:18px 20px;display:flex;flex-direction:column;gap:9px}
+.ccard .chd{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.ccard h3{margin:4px 0 0;font-size:17px;font-weight:600;line-height:1.3}
+.ccard p{margin:0;font-size:14px;color:var(--ink-2);line-height:1.55}
+.ccard p b{color:var(--ink);font-weight:600}
+.cv{flex:none;padding:3px 10px;font-size:12px;font-weight:600}
+.cv.add{background:#E3F3EA;color:#1F7A4D}.cv.watch{background:#E6EEF8;color:#3F6FAE}.cv.ignore{background:#EFEFEC;color:#55555F}
+.scores{display:grid;grid-template-columns:auto 1fr;gap:5px 12px;align-items:center;font-size:12.5px;color:var(--ink-2);margin-top:2px}
+.pips{display:inline-flex;gap:3px}.pips i{width:16px;height:7px;background:#E4E7EE}.pips i.f{background:var(--navy)}
+.ctotal{font-size:12.5px;color:var(--muted)}
+.ctotal b{color:var(--ink)}
+.ccard .src{margin-left:0;margin-top:auto}
+
+/* Category map, inside the Trend radar */
+.map{padding:4px 14px 0}
+.map svg{width:100%;height:auto;display:block}
+.map svg text{font-family:Poppins,system-ui,sans-serif}
+.map .cap{font-size:11.5px;color:var(--muted);padding:0 6px 6px;line-height:1.45}
+.mkey{display:grid;grid-template-columns:1fr 1fr;gap:4px 10px;padding:2px 6px 8px;font-size:12px;color:var(--ink-2)}
+.mkey span{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mkey i{flex:none;width:10px;height:10px;border-radius:50%;border:2px solid}
 .foot{max-width:1200px;margin:0 auto;padding:18px 24px 44px;font-size:12.5px;color:var(--muted)}
 .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:40}
 .toast.on{opacity:1}
@@ -216,8 +304,19 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
   .frow.scroll::-webkit-scrollbar{display:none}
   .foot{padding:12px 16px 32px}
 }
+@media (max-width: 760px){
+  .vcard{grid-template-columns:1fr}
+  .vleft{flex-direction:row;flex-wrap:wrap;align-items:baseline;gap:4px 10px;padding:14px 16px}
+  .vleft .plat{width:100%}
+  .vleft .vnum{font-size:32px;margin-top:0}
+  .vleft .vs{width:100%;margin-top:2px}
+  .cgrid{grid-template-columns:1fr}
+}
 @media (max-width: 640px){
   :root{--header-h:53px}
+  .tabs{overflow-x:auto;scrollbar-width:none}
+  .tabs button{padding:10px 10px 11px}
+  .vright{padding:16px}
   .post{grid-template-columns:1fr;gap:12px;padding:16px}
   .post .thumb{order:-1;width:100%;aspect-ratio:16/9}
   .post .thumb:not(.has-img){display:none}
@@ -276,14 +375,25 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
         <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="8" y="8" width="12" height="12"/><path d="M16 8V4H4v12h4"/></svg>Copy brief for email
       </button>
     </section>
+    <section class="card" id="vendorCard" aria-labelledby="vwH" hidden>
+      <div class="card-h"><h2 id="vwH">Our vendors this week</h2><small id="vwCount"></small></div>
+      <ul class="vw" id="vw"></ul>
+      <p class="vw-rest" id="vwRest"></p>
+      <div class="vw-leg" id="vwLeg"></div>
+    </section>
     <details class="card" id="trendPanel" hidden>
       <summary class="card-h"><h2>Trend radar</h2><small id="trendCount"></small><span class="chev" aria-hidden="true"></span></summary>
+      <div class="map" id="map"></div>
       <ul class="trends" id="trends"></ul>
       <div class="mom" id="mom"></div>
     </details>
   </aside>
 
   <section class="feed" aria-label="Stories">
+    <div class="tabs" id="tabs" role="tablist" aria-label="Sections" hidden></div>
+    <div id="tab-viral" role="tabpanel" hidden></div>
+    <div id="tab-vendors" role="tabpanel" hidden></div>
+    <div id="tab-stories" role="tabpanel">
     <div class="filters" id="filters">
       <div class="rows">
         <div class="frow scroll">
@@ -299,6 +409,7 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
       <button class="clear" id="clear" type="button" hidden>Clear filters</button>
     </div>
     <div class="posts" id="posts"></div>
+    </div>
   </section>
 </main>
 
@@ -330,8 +441,15 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
     physical_ai: '<rect x="7" y="7" width="10" height="10" rx="1.5"/><path d="M10 10h4v4h-4z"/><path d="M9.5 4v3M14.5 4v3M9.5 17v3M14.5 17v3M4 9.5h3M4 14.5h3M17 9.5h3M17 14.5h3"/>'
   };
 
-  var state = { ed: 0, cat: "all", type: "all", region: /(^|#|&)gcc\b/i.test(location.hash) ? "gcc" : "all" };
-  function inRegion(p) { return state.region === "all" || p.region === "GCC"; }
+  var state = { ed: 0, cat: "all", type: "all", region: /(^|#|&)gcc\b/i.test(location.hash) ? "gcc" : /(^|#|&)ours\b/i.test(location.hash) ? "ours" : "all", vendor: null,
+                tab: /(^|#|&)viral\b/i.test(location.hash) ? "viral" : /(^|#|&)new-vendors\b/i.test(location.hash) ? "vendors" : "stories" };
+  /* One lens at a time: all stories, GCC stories, or stories about vendors we work with. */
+  function linked(p) { return (p.portfolio || []).length > 0; }
+  function inRegion(p) {
+    if (state.region === "gcc") return p.region === "GCC";
+    if (state.region === "ours") return linked(p) && (!state.vendor || p.portfolio.some(function (l) { return l.vendor === state.vendor; }));
+    return true;
+  }
   var $ = function (id) { return document.getElementById(id); };
 
   function esc(s) {
@@ -404,7 +522,7 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
   var STATUS = { "new": "New", rising: "▲ Rising", steady: "Steady", cooling: "▼ Cooling" };
   function renderTrends(e) {
     var tw = e.trend_watch || [], mo = e.momentum || [];
-    $("trendPanel").hidden = !tw.length && !mo.length;
+    $("trendPanel").hidden = !tw.length && !mo.length && !(e.matrix || []).length;
     $("trendCount").textContent = tw.length ? plural(tw.length, "theme", "themes") : "";
     $("trends").innerHTML = tw.map(function (t) {
       var st = STATUS[t.status] ? t.status : "steady";
@@ -423,12 +541,113 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
       }).join("") : "";
   }
 
+  var SIGNAL = { positive: "Good news", risk: "Risk", mixed: "Mixed", mention: "In the news", none: "No news" };
+  function renderVendors(e) {
+    var rows = e.vendor_watch || [];
+    $("vendorCard").hidden = !rows.length;
+    if (!rows.length) return;
+    var news = rows.filter(function (w) { return w.signal !== "none"; }), quiet = rows.filter(function (w) { return w.signal === "none"; });
+    $("vwCount").textContent = news.length + " of " + rows.length + " in the news";
+    $("vw").innerHTML = news.length ? news.map(function (w) {
+      var n = (w.post_ids || []).length, sel = state.region === "ours" && state.vendor === w.vendor;
+      return "<li><button type=\"button\" data-vendor=\"" + esc(w.vendor) + "\" aria-pressed=\"" + sel + "\"" + (n ? "" : " disabled") + " title=\"" + esc(SIGNAL[w.signal]) + (w.oem ? " · equipment by " + esc(w.oem) : "") + "\">" +
+        '<span class="sig ' + esc(w.signal) + '" aria-label="' + esc(SIGNAL[w.signal]) + '"></span><span class="vn">' + esc(w.vendor) + "</span>" +
+        '<span class="stl s-' + esc(w.status) + '">' + esc(w.status_label) + '</span><span class="vc">' + (n ? plural(n, "story", "stories") : "mentioned") + "</span></button>" +
+        (w.note ? '<div class="vnote">' + esc(w.note) + "</div>" : "") + "</li>";
+    }).join("") : '<li style="padding:10px 8px;color:var(--muted);font-size:13.5px">No news about our vendors this week.</li>';
+    $("vwRest").textContent = quiet.length ? "No news: " + quiet.map(function (w) { return w.vendor; }).join(", ") + "." : "";
+    var byHeadline = news.some(function (w) { return w.signal_by === "headlines"; });
+    $("vwLeg").innerHTML = news.length ? ["positive", "risk", "mixed", "mention"].map(function (k) { return '<span><i class="sig ' + k + '"></i>' + SIGNAL[k] + "</span>"; }).join("") +
+      (byHeadline ? '<span style="width:100%">Good news and risks are read from headlines.</span>' : "") : "";
+  }
+
+  function showTab(t) {
+    state.tab = t;
+    ["stories", "viral", "vendors"].forEach(function (k) { $("tab-" + k).hidden = k !== t; });
+    Array.prototype.forEach.call($("tabs").querySelectorAll("button"), function (b) { b.setAttribute("aria-selected", String(b.getAttribute("data-tab") === t)); });
+  }
+  function renderTabs(e) {
+    var v = (e.viral || []).length, c = (e.challengers || []).length;
+    $("tabs").hidden = !v && !c;
+    if (!v && !c) { showTab("stories"); return; }
+    $("tabs").innerHTML = [["stories", "Stories", (e.posts || []).length], v ? ["viral", "Viral watch", v] : null, c ? ["vendors", "New vendors", c] : null]
+      .filter(Boolean).map(function (t) { return '<button type="button" role="tab" data-tab="' + t[0] + '" aria-selected="false">' + t[1] + '<span class="n">' + t[2] + "</span></button>"; }).join("");
+    if ((state.tab === "viral" && !v) || (state.tab === "vendors" && !c)) state.tab = "stories";
+    renderViral(e); renderChallengers(e); showTab(state.tab);
+  }
+
+  var CHECK = [["real", "Real footage"], ["autonomous", "Truly autonomous"], ["corroborated", "Independently confirmed"], ["deployed", "Commercially deployed"], ["gcc", "Fits GCC conditions"]];
+  var VERDICT = { hype: "Hype for now", watch: "Watch", real: "Real potential" };
+  function link(u, label) { return /^https:\/\//i.test(u || "") ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(label) + "</a>" : ""; }
+  function renderViral(e) {
+    var items = e.viral || [];
+    $("tab-viral").innerHTML = '<p class="intro">The week\u2019s most-watched robot videos, checked before leadership asks. Reach is shown as reported, with its source. Claude reads the coverage and the page text; it does not watch the videos.</p>' +
+      items.map(function (v) {
+        var c = catOf(v.category), checks = v.checks || {};
+        var sources = (v.corroboration || []).map(function (x) { return link(x.url, x.label); }).filter(Boolean).join(", ");
+        return '<article class="vcard"><div class="vleft"><div class="plat">' + esc(v.platform) + " · " + esc(v.date) + '</div><div class="vnum' + (String(v.views_reported).length > 7 ? " sm" : "") + '">' + esc(v.views_reported) + '</div><div class="vt">views, as reported</div><div class="vs">' + esc(v.views_source) + "</div></div>" +
+          '<div class="vright"><div class="kick" style="--k:' + esc(c.color) + '"><span class="dot"></span><span class="c">' + esc(c.label) + "</span></div><h3>" + esc(v.title) + "</h3>" +
+          "<p><b>What it shows.</b> " + esc(v.what_shows) + "</p><p><b>What\u2019s behind it.</b> " + esc(v.what_behind) + "</p>" +
+          '<ul class="checks">' + CHECK.map(function (k) { var a = checks[k[0]] || "unknown"; return '<li class="' + (a === "yes" ? "y" : a === "no" ? "n" : "q") + '"><i>' + (a === "yes" ? "\u2713" : a === "no" ? "\u2715" : "?") + "</i>" + k[1] + "</li>"; }).join("") + "</ul>" +
+          '<div class="vrow"><span class="verdict ' + esc(v.verdict) + '">' + esc(VERDICT[v.verdict] || v.verdict) + "</span><span>Aldar fit: " + esc(v.fit) + "</span>" + (v.portfolio_match ? "<span>Closest match: " + esc(v.portfolio_match) + "</span>" : "") + '<span class="act">' + esc(v.action) + "</span></div>" +
+          '<div class="say"><b>If leadership asks</b><span>' + esc(v.leadership_line) + "</span></div>" +
+          '<div class="vfoot">Assessed from: ' + esc(v.assessed_from) + (v.video_url ? " · " + link(v.video_url, "Open the video") : "") + (sources ? " · Sources: " + sources : "") + "</div></div></article>";
+      }).join("");
+  }
+
+  var CRIT = [["funding", "Funding"], ["deployments", "Named deployments"], ["scale", "Scale"], ["partners", "Credible partners"], ["gcc", "Route to the GCC"]];
+  var CVERDICT = { add: "Consider adding", watch: "Watch", ignore: "Ignore for now" };
+  function renderChallengers(e) {
+    var items = e.challengers || [];
+    $("tab-vendors").innerHTML = '<p class="intro">Vendors not yet in our portfolio, with news this month, scored 0 to 4 on five traction measures. 14 or more with named deployments: worth adding to the tracker; 8 to 13: watch; under 8: ignore for now. Claude proposes; the Innovation team decides.</p><div class="cgrid">' +
+      items.map(function (x) {
+        var c = catOf(x.category), sc = x.scores || {};
+        return '<article class="ccard"><div class="chd"><div><div class="kick" style="--k:' + esc(c.color) + '"><span class="dot"></span><span class="c">' + esc(c.label) + "</span></div><h3>" + esc(x.name) + '</h3></div><span class="cv ' + esc(x.verdict) + '">' + esc(CVERDICT[x.verdict] || x.verdict) + "</span></div>" +
+          "<p>" + esc(x.what) + "</p><p><b>Why it matters to us.</b> " + esc(x.why) + "</p>" +
+          '<div class="scores">' + CRIT.map(function (k) { var n = sc[k[0]] || 0; return "<span>" + k[1] + '</span><span class="pips" aria-label="' + n + ' of 4">' + [1, 2, 3, 4].map(function (i) { return '<i class="' + (i <= n ? "f" : "") + '"></i>'; }).join("") + "</span>"; }).join("") + "</div>" +
+          '<div class="ctotal">Score <b>' + esc(x.total) + "</b> of 20</div>" +
+          (x.source && /^https:\/\//.test(x.source.url || "") ? '<a class="src" href="' + esc(x.source.url) + '" target="_blank" rel="noopener"><span>' + esc(x.source.label || "Source") + '</span><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>' : "") +
+          "</article>";
+      }).join("") + "</div>";
+  }
+
+  /* Readiness against relevance, one dot per category. A hollow dot means attention runs ahead of evidence. */
+  function renderMap(e) {
+    var m = e.matrix || [];
+    if (!m.length) { $("map").innerHTML = ""; return; }
+    var X0 = 30, X1 = 292, Y0 = 8, Y1 = 196, mx = (X0 + X1) / 2, my = (Y0 + Y1) / 2;
+    var svg = '<svg viewBox="0 0 300 226" role="img" aria-label="Category map: market readiness against relevance to Aldar">' +
+      '<rect x="' + mx + '" y="' + Y0 + '" width="' + (X1 - mx) + '" height="' + (my - Y0) + '" fill="#EEF5EF"/>' +
+      '<rect x="' + X0 + '" y="' + Y0 + '" width="' + (mx - X0) + '" height="' + (my - Y0) + '" fill="#F4F6FA"/>' +
+      '<line x1="' + X0 + '" y1="' + Y1 + '" x2="' + X1 + '" y2="' + Y1 + '" stroke="#9AA0AC"/><line x1="' + X0 + '" y1="' + Y0 + '" x2="' + X0 + '" y2="' + Y1 + '" stroke="#9AA0AC"/>' +
+      '<line x1="' + mx + '" y1="' + Y0 + '" x2="' + mx + '" y2="' + Y1 + '" stroke="#C9CCD3" stroke-dasharray="3 3"/><line x1="' + X0 + '" y1="' + my + '" x2="' + X1 + '" y2="' + my + '" stroke="#C9CCD3" stroke-dasharray="3 3"/>' +
+      '<text x="' + (X0 + 5) + '" y="' + (Y0 + 12) + '" font-size="9" font-weight="600" fill="#6A6A78">WATCH</text>' +
+      '<text x="' + (X1 - 5) + '" y="' + (Y0 + 12) + '" font-size="9" font-weight="600" fill="#1F7A4D" text-anchor="end">ACT / PILOT</text>' +
+      '<text x="' + (X0 + 5) + '" y="' + (Y1 - 6) + '" font-size="9" font-weight="600" fill="#9AA0AC">PARK</text>' +
+      '<text x="' + (X1 - 5) + '" y="' + (Y1 - 6) + '" font-size="9" font-weight="600" fill="#9AA0AC" text-anchor="end">USE WHEN NEEDED</text>' +
+      '<text x="' + mx + '" y="' + (Y1 + 16) + '" font-size="10" fill="#6A6A78" text-anchor="middle">Market readiness \u2192</text>' +
+      '<text transform="translate(11 ' + my + ') rotate(-90)" font-size="10" fill="#6A6A78" text-anchor="middle">Relevance to Aldar \u2192</text>';
+    m.forEach(function (d) {
+      var c = catOf(d.category), x = X0 + d.readiness / 100 * (X1 - X0), y = Y1 - d.relevance / 100 * (Y1 - Y0), hype = d.hype - d.substance >= 15;
+      svg += '<g><title>' + esc(c.label) + ": readiness " + d.readiness + ", relevance " + d.relevance + ", hype " + d.hype + ", substance " + d.substance + ". " + esc(d.reason || "") + "</title>" +
+        '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="6.5" fill="' + (hype ? "#fff" : esc(c.color)) + '" stroke="' + esc(c.ink || c.color) + '" stroke-width="' + (hype ? 2.2 : 1) + '"/></g>';
+    });
+    svg += "</svg>";
+    var key = m.map(function (d) {
+      var c = catOf(d.category), hype = d.hype - d.substance >= 15;
+      return '<span title="' + esc(d.reason || "") + '"><i style="background:' + (hype ? "#fff" : esc(c.color)) + ";border-color:" + esc(c.ink || c.color) + '"></i>' + esc(SHORT[d.category] || c.label) + "</span>";
+    }).join("");
+    $("map").innerHTML = svg + '<div class="mkey">' + key + '</div><div class="cap">Hollow dot: attention ahead of evidence. Positions are Claude\u2019s judgement from this week\u2019s research, not a measurement.</div>';
+  }
+
   function renderFilters(e) {
     var all = e.posts || [], posts = all.filter(inRegion), counts = {};
     var gccN = all.filter(function (p) { return p.region === "GCC"; }).length;
+    var oursN = all.filter(linked).length;
     $("region").innerHTML =
-      '<button type="button" data-region="all" aria-pressed="' + (state.region === "all") + '">All regions<span class="n">' + all.length + "</span></button>" +
-      '<button type="button" data-region="gcc" aria-pressed="' + (state.region === "gcc") + '"><span class="flag"></span>GCC<span class="n">' + gccN + "</span></button>";
+      '<button type="button" data-region="all" aria-pressed="' + (state.region === "all") + '">All stories<span class="n">' + all.length + "</span></button>" +
+      '<button type="button" data-region="gcc" aria-pressed="' + (state.region === "gcc") + '"><span class="flag"></span>GCC<span class="n">' + gccN + "</span></button>" +
+      (oursN ? '<button type="button" data-region="ours" aria-pressed="' + (state.region === "ours") + '" title="Stories about vendors we work with, or the makers of their equipment"><span class="flag" style="background:var(--navy)"></span>Our vendors<span class="n">' + oursN + "</span></button>" : "");
     $("typeSel").innerHTML = TYPES.map(function (t) {
       return '<option value="' + t[0] + '"' + (state.type === t[0] ? " selected" : "") + ">" + t[1] + "</option>";
     }).join("");
@@ -450,6 +669,18 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
       '<span class="ph-ic">' + icon(c.id, c.ink) + "</span>" + img + "</a>";
   }
 
+  /* "Our vendor" line: which vendor we work with this story touches, what they run for us and where. */
+  function oursHtml(p) {
+    var links = (p.portfolio || []).slice(0, 2);
+    if (!links.length) return "";
+    return '<div class="ours">' + links.map(function (l) {
+      var who = "<span>" + esc(l.vendor) + (l.via === "oem" && l.oem ? ' <span class="via">· runs ' + esc(l.oem) + " equipment for us</span>" : "") + "</span>";
+      var where = '<span class="stl s-' + esc(l.status) + '">' + esc(l.status_label) + "</span>" +
+        "<span>" + esc(l.use_case) + " · " + esc(l.site) + (l.site_count > 1 ? " +" + (l.site_count - 1) + (l.site_count > 2 ? " sites" : " site") : "") + "</span>";
+      return '<div class="ol"><b>Our vendor</b>' + who + '</div><div class="ol">' + where + "</div>";
+    }).join("") + (p.portfolio_note ? '<span class="note">' + esc(p.portfolio_note) + "</span>" : "") + "</div>";
+  }
+
   function postHtml(p, lead) {
     var c = catOf(p.category);
     var when = ago(p.published);
@@ -468,6 +699,7 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
       '<div class="body">' + kick +
       '<h3><a href="' + esc(safeUrl(p.url)) + '" target="_blank" rel="noopener">' + esc(p.headline) + "</a></h3>" +
       (p.summary ? '<p class="sum">' + esc(p.summary) + "</p>" : "") +
+      oursHtml(p) +
       (p.why_it_matters ? '<div class="why"><b>Why it matters for Aldar</b><span>' + esc(p.why_it_matters) + "</span></div>" : "") +
       '<div class="meta">' + meta.join("") + "</div></div>" +
       thumbHtml(p, c) + "</article>";
@@ -479,11 +711,12 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
     });
     var title = state.cat === "all" ? (state.type === "all" ? "All stories" : TYPE_LABEL[state.type]) : catOf(state.cat).label + (state.type !== "all" ? " · " + TYPE_LABEL[state.type] : "");
     if (state.region === "gcc") title = "GCC · " + title;
+    if (state.region === "ours") title = (state.vendor || "Our vendors") + " · " + title;
     $("feedTitle").textContent = title;
     $("feedCount").textContent = plural(posts.length, "story", "stories");
     $("clear").hidden = !filtering();
     $("posts").innerHTML = posts.length ? posts.map(function (p, i) { return postHtml(p, i === 0); }).join("") :
-      '<div class="empty">' + (state.region === "gcc" ? "No GCC stories match these filters this week." : "No stories match these filters this week.") + "</div>";
+      '<div class="empty">' + (state.region === "gcc" ? "No GCC stories match these filters this week." : state.region === "ours" ? "No stories about our vendors match these filters this week." : "No stories match these filters this week.") + "</div>";
   }
 
   function render() {
@@ -494,7 +727,7 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
       $("posts").innerHTML = '<div class="empty">No stories yet.</div>';
       return;
     }
-    renderHero(e); renderTakeaways(e); renderTrends(e); renderFilters(e); renderPosts(e);
+    renderHero(e); renderTakeaways(e); renderVendors(e); renderTrends(e); renderMap(e); renderFilters(e); renderPosts(e); renderTabs(e);
     var by = { claude: "Stories selected and summarised by Claude from public news sources.", rules: "Stories selected automatically from public news sources; headlines shown as published.", seed: "Launch edition compiled by Claude from public news sources." }[e.generated_by] || "";
     $("foot").textContent = "Market Pulse updates every Monday at 10:00 Abu Dhabi time. " + by + " Images and summaries belong to their publishers. Check the source before quoting figures.";
   }
@@ -506,10 +739,11 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
     if (feedTop < headerH)  // list starts above the screen: bring the filters and first story back into view
       window.scrollTo({ top: window.scrollY + feedTop - headerH - 12, behavior: "smooth" });
   }
-  function setRegion(r) {
-    state.region = r;
-    try { history.replaceState(null, "", r === "gcc" ? "#gcc" : location.pathname + location.search); } catch (err) {}
-    refresh(true);
+  function setRegion(r, vendor) {
+    state.region = r; state.vendor = r === "ours" ? (vendor || null) : null;
+    try { history.replaceState(null, "", r === "gcc" ? "#gcc" : r === "ours" ? "#ours" : location.pathname + location.search); } catch (err) {}
+    if (state.tab !== "stories") showTab("stories");
+    refresh(true); renderVendors(edition());
   }
   $("cats").addEventListener("click", function (ev) {
     var b = ev.target.closest("[data-cat]"); if (!b || b.disabled) return;
@@ -523,21 +757,38 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
     var b = ev.target.closest("[data-region]"); if (b) setRegion(state.region === "gcc" ? "all" : "gcc");
   });
   $("clear").addEventListener("click", function () { state.cat = "all"; state.type = "all"; setRegion("all"); });
+  $("vw").addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-vendor]"); if (!b || b.disabled) return;
+    var v = b.getAttribute("data-vendor");
+    if (state.region === "ours" && state.vendor === v) setRegion("all"); else { state.cat = "all"; state.type = "all"; setRegion("ours", v); }
+    var top = $("tabs").hidden ? $("filters") : $("tabs");
+    window.scrollTo({ top: window.scrollY + top.getBoundingClientRect().top - $("top").offsetHeight - 12, behavior: "smooth" });
+  });
+  $("tabs").addEventListener("click", function (ev) {
+    var b = ev.target.closest("[data-tab]"); if (!b) return;
+    showTab(b.getAttribute("data-tab"));
+    try { history.replaceState(null, "", state.tab === "viral" ? "#viral" : state.tab === "vendors" ? "#new-vendors" : location.pathname + location.search); } catch (err) {}
+  });
 
   /* Plain-text brief that pastes cleanly into email, Teams or WhatsApp. */
   $("copy").addEventListener("click", function () {
     var e = edition(); if (!e) return;
-    var lines = ["Robotics Market Pulse · " + (e.label || e.id) + (state.region === "gcc" ? " · GCC" : ""), "", e.headline, "", "Key takeaways:"];
+    var lines = ["Robotics Market Pulse · " + (e.label || e.id) + (state.region === "gcc" ? " · GCC" : state.region === "ours" ? " · Our vendors" : ""), "", e.headline, "", "Key takeaways:"];
     (e.takeaways || []).forEach(function (t, i) { lines.push((i + 1) + ". " + t); });
     if ((e.trend_watch || []).length) {
       lines.push("", "Trend radar:");
       e.trend_watch.forEach(function (t) { lines.push("• " + t.trend + " [" + t.status + "]: " + t.evidence); });
     }
+    var inNews = (e.vendor_watch || []).filter(function (w) { return w.signal !== "none"; });
+    if (inNews.length) {
+      lines.push("", "Our vendors in the news:");
+      inNews.forEach(function (w) { lines.push("• " + w.vendor + " [" + (SIGNAL[w.signal] || w.signal).toLowerCase() + "]" + (w.note ? ": " + w.note : "")); });
+    }
     lines.push("", "Top stories:");
     (e.posts || []).filter(inRegion).slice(0, 8).forEach(function (p) {
       lines.push("• " + p.headline + (p.amount_usd_m ? " (" + money(p.amount_usd_m) + ")" : "") + " · " + p.url);
     });
-    lines.push("", "Full feed: " + location.href.split("#")[0] + (state.region === "gcc" ? "#gcc" : ""));
+    lines.push("", "Full feed: " + location.href.split("#")[0] + (state.region === "gcc" ? "#gcc" : state.region === "ours" ? "#ours" : ""));
     var text = lines.join("\n");
     var done = function () { var t = $("toast"); t.textContent = "Brief copied"; t.classList.add("on"); setTimeout(function () { t.classList.remove("on"); }, 1800); };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () { fallbackCopy(text); done(); });

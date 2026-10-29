@@ -53,45 +53,45 @@ window.INTEL_FEED = {
     "ink": "#A04C74"
    }
   ],
-  "updated_at": "2026-10-29T09:13+04:00"
+  "updated_at": "2026-10-29T09:15+04:00"
  },
  "editions": [
   {
    "id": "2026-W44",
    "label": "Week 44 · 29 Oct 2026",
-   "published_at": "2026-10-29T09:13+04:00",
+   "published_at": "2026-10-29T09:15+04:00",
    "period": {
     "from": "2026-10-22",
     "to": "2026-10-29"
    },
-   "stories_scanned": 780,
-   "distinct_events": 431,
+   "stories_scanned": 774,
+   "distinct_events": 428,
    "signals": {
     "volume": {
-     "construction": 35,
+     "construction": 33,
      "facade": 7,
-     "inspection": 85,
-     "cleaning": 15,
-     "security": 33,
-     "delivery": 58,
-     "humanoids": 77,
-     "physical_ai": 121
+     "inspection": 90,
+     "cleaning": 19,
+     "security": 26,
+     "delivery": 60,
+     "humanoids": 83,
+     "physical_ai": 110
     },
     "deals": {
      "construction": 3,
      "facade": 0,
      "inspection": 1,
      "cleaning": 0,
-     "security": 2,
+     "security": 0,
      "delivery": 0,
-     "humanoids": 2,
-     "physical_ai": 18
+     "humanoids": 1,
+     "physical_ai": 17
     }
    },
    "momentum": [
     {
      "category": "construction",
-     "volume": 35,
+     "volume": 33,
      "deals": 3,
      "avg_prev": null,
      "change_pct": null
@@ -105,43 +105,43 @@ window.INTEL_FEED = {
     },
     {
      "category": "inspection",
-     "volume": 85,
+     "volume": 90,
      "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "cleaning",
-     "volume": 15,
+     "volume": 19,
      "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "security",
-     "volume": 33,
-     "deals": 2,
+     "volume": 26,
+     "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "delivery",
-     "volume": 58,
+     "volume": 60,
      "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "humanoids",
-     "volume": 77,
-     "deals": 2,
+     "volume": 83,
+     "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "physical_ai",
-     "volume": 121,
-     "deals": 18,
+     "volume": 110,
+     "deals": 17,
      "avg_prev": null,
      "change_pct": null
     }
@@ -149,30 +149,30 @@ window.INTEL_FEED = {
    "generated_by": "rules",
    "headline": "Autonomous Construction Firm Bedrock Hits $4.1 Billion Valuation",
    "takeaways": [
-    "5 funding stories in the feed, about $40,620M disclosed; largest: Robotics Lab Physical Intelligence in Talks for a $20 Billion Valuation",
-    "Most news this week: Physical AI & platforms (121 distinct stories).",
+    "4 funding stories in the feed, about $40,600M disclosed; largest: Robotics Lab Physical Intelligence in Talks for a $20 Billion Valuation",
+    "Most news this week: Physical AI & platforms (110 distinct stories).",
     "6 stories from the GCC, led by: 10 University teams to compete in Emirates Robotic Competition Finals During the Inaugural Dubai Future Week 2026"
    ],
    "trend_watch": [
     {
      "trend": "News flow in Physical AI & platforms",
      "status": "new",
-     "evidence": "121 stories and 18 funding deals this week; first week tracked."
+     "evidence": "110 stories and 17 funding deals this week; first week tracked."
     },
     {
      "trend": "News flow in Inspection & drones",
      "status": "new",
-     "evidence": "85 stories and 1 funding deal this week; first week tracked."
+     "evidence": "90 stories and 1 funding deal this week; first week tracked."
     },
     {
      "trend": "News flow in Humanoids & guest engagement",
      "status": "new",
-     "evidence": "77 stories and 2 funding deals this week; first week tracked."
+     "evidence": "83 stories and 1 funding deal this week; first week tracked."
     },
     {
      "trend": "News flow in Delivery & autonomous mobility",
      "status": "new",
-     "evidence": "58 stories and 0 funding deals this week; first week tracked."
+     "evidence": "60 stories and 0 funding deals this week; first week tracked."
     }
    ],
    "posts": [
@@ -189,7 +189,7 @@ window.INTEL_FEED = {
      "source": "Bloomberg.com",
      "url": "https://www.bloomberg.com/news/articles/2026-10-26/autonomous-construction-firm-bedrock-hits-4-1-billion-valuation",
      "published": "2026-10-26",
-     "coverage": 26,
+     "coverage": 24,
      "also_covered_by": [
       "TechCrunch",
       "The Robot Report",
@@ -211,11 +211,11 @@ window.INTEL_FEED = {
      "source": "Bloomberg",
      "url": "https://www.bloomberg.com/news/articles/2026-10-27/robotics-lab-physical-intelligence-in-talks-for-a-20-billion-valuation",
      "published": "2026-10-27",
-     "coverage": 5,
+     "coverage": 4,
      "also_covered_by": [
-      "Unite.AI",
       "BigGo Finance",
-      "아시아경제"
+      "아시아경제",
+      "Howl.Link"
      ],
      "portfolio": [],
      "portfolio_note": ""
@@ -255,8 +255,8 @@ window.INTEL_FEED = {
      "why_it_matters": "",
      "source": "The Robot Report",
      "url": "https://www.therobotreport.com/agility-gxo-logistics-plan-expanded-deployment-digit-humanoid/",
-     "published": "2026-10-24",
-     "coverage": 13,
+     "published": "2026-10-22",
+     "coverage": 16,
      "also_covered_by": [
       "Assembly Magazine",
       "Investing.com",
@@ -286,29 +286,6 @@ window.INTEL_FEED = {
      "image": "https://qz.com/cdn-cgi/image/width=1200,quality=85,format=auto/https://assets.qz.com/media/GettyImages-2240813685-300x169.jpg"
     },
     {
-     "id": "110humanoidrobotssetguinnessworldrecordf",
-     "category": "humanoids",
-     "type": "deployment",
-     "region": "China",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "110 humanoid robots set Guinness world record for synchronized dancing in China, eyeing large-scale deployment",
-     "summary": "China",
-     "why_it_matters": "",
-     "source": "Global Times",
-     "url": "https://www.globaltimes.cn/page/202610/1372888.shtml",
-     "published": "2026-10-25",
-     "coverage": 6,
-     "also_covered_by": [
-      "VnExpress International",
-      "ColombiaOne.com",
-      "SBS 뉴스"
-     ],
-     "portfolio": [],
-     "portfolio_note": "",
-     "image": "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-759abf8efb3a.jpeg"
-    },
-    {
      "id": "jdtolaunchrobot4sstorebusinessnoconventi",
      "category": "facade",
      "type": "product",
@@ -321,15 +298,38 @@ window.INTEL_FEED = {
      "source": "36Kr",
      "url": "https://eu.36kr.com/en/p/4037130031044230",
      "published": "2026-10-23",
-     "coverage": 20,
+     "coverage": 19,
      "also_covered_by": [
       "TradingView",
-      "I-Connect007",
+      "eu.36kr.com",
       "Robotics & Automation News"
      ],
      "portfolio": [],
      "portfolio_note": "",
      "image": "https://img.36krcdn.com/hsossms/20261023/v2_0505e48d46c44d2faa4bbaaf00476083@5091053@ai_oswg840312oswg1053oswg495_img_png~tplv-1marlgjv7f-ai-v3:600:400:600:400:q70.jpg"
+    },
+    {
+     "id": "fawvolkswagenexpandstestingofhumanoidrob",
+     "category": "humanoids",
+     "type": "deployment",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "FAW-Volkswagen Expands Testing of Humanoid Robots",
+     "summary": "CHANGCHUN, China—Chinese automaker FAW-Volkswagen Automobile Co. Ltd. is expanding its trial run of humanoid robots from Ubtech Robotics.",
+     "why_it_matters": "",
+     "source": "Assembly Magazine",
+     "url": "https://www.assemblymag.com/articles/100527-faw-volkswagen-expands-testing-of-humanoid-robots",
+     "published": "2026-10-22",
+     "coverage": 6,
+     "also_covered_by": [
+      "Unmanned Systems Technology",
+      "Yahoo! Finance Canada",
+      "GlobeNewswire"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://www.assemblymag.com/ext/resources/2026/10/22/ubtech-walker-900.jpg?height=635&t=1792706457&width=1200"
     },
     {
      "id": "bostondynamicsworkerspetitionagainsticed",
@@ -344,10 +344,10 @@ window.INTEL_FEED = {
      "source": "Startup Fortune",
      "url": "https://startupfortune.com/boston-dynamics-workers-petition-against-ice-deal-for-spot-robots/",
      "published": "2026-10-22",
-     "coverage": 19,
+     "coverage": 21,
      "also_covered_by": [
-      "Tech Times",
       "TOKENPOST",
+      "Tech Times",
       "The Engineer"
      ],
      "portfolio": [
@@ -367,84 +367,26 @@ window.INTEL_FEED = {
      "image": "https://startupfortune.com/wp-content/uploads/2026/10/ice-hyundai-rotem-boston-dynamics.jpg"
     },
     {
-     "id": "fortroboticssecuresapproximately20millio",
-     "category": "security",
+     "id": "affordablehumanoidrobotmakernoetixreport",
+     "category": "humanoids",
      "type": "investment",
      "region": "Global",
      "company": "",
-     "amount_usd_m": 20.0,
-     "headline": "Fort Robotics secures approximately $20 million in additional funding",
-     "summary": "Fort Robotics, a developer of security systems for physical AI, has announced approximately $20 million in new commitments from existing investors, expanding the capital available to support Fort’s…",
+     "amount_usd_m": null,
+     "headline": "Affordable humanoid robot maker Noetix reportedly files for Hong Kong IPO",
+     "summary": "Chinese humanoid robot company Noetix Robotics has confidentially filed for a Hong Kong initial public offering that could raise several hundred million",
      "why_it_matters": "",
-     "source": "Robotics & Automation News",
-     "url": "https://roboticsandautomationnews.com/2026/10/28/fort-robotics-secures-approximately-20-million-in-additional-funding/106419/",
-     "published": "2026-10-22",
+     "source": "TechNode",
+     "url": "https://technode.com/2026/10/26/affordable-humanoid-robot-maker-noetix-reportedly-files-for-hong-kong-ipo/",
+     "published": "2026-10-26",
      "coverage": 4,
      "also_covered_by": [
-      "AI Insider",
-      "Technical.ly",
-      "36Kr"
-     ],
-     "portfolio": [],
-     "portfolio_note": "",
-     "image": "https://roboticsandautomationnews.com/wp-content/uploads/2026/10/FORT-Robotics-remote-1.jpeg"
-    },
-    {
-     "id": "chinasbaidutestsrobotaxionlondonstreets",
-     "category": "delivery",
-     "type": "trend",
-     "region": "China",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "China's Baidu tests robotaxi on London streets",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Reuters",
-     "url": "https://www.reuters.com/business/finance/chinas-baidu-tests-robotaxi-london-streets-2026-10-23/",
-     "published": "2026-10-23",
-     "coverage": 7,
-     "also_covered_by": [
-      "TradingView",
-      "Analytics Insight",
-      "AsiaOne.com"
+      "Eurasia Business News",
+      "eeNews Europe",
+      "Trend Hunter"
      ],
      "portfolio": [],
      "portfolio_note": ""
-    },
-    {
-     "id": "anraadvancesnatotestedcounterdronetechno",
-     "category": "inspection",
-     "type": "trend",
-     "region": "North America",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "ANRA Advances NATO-Tested Counter-Drone Technology With UTM Airspace Data",
-     "summary": "SIOP and TACO have advanced from TRL 5 to TRL 7. ANRA is now inviting U.S. sensor makers, integrators and agencies to explore partnerships as federal counter-drone funding grows. ANRA Technologies announced on October 27, 2026 continued progress in its counter-uncrewed aircraft systems (C-UAS) capabilities. The update follows ANRA’s participation in NATO Counter-UAS Technical Interoperability […]…",
-     "why_it_matters": "",
-     "source": "DroneLife",
-     "url": "https://dronelife.com/2026/10/28/anra-advances-nato-tested-counter-drone-technology-with-utm-airspace-data/",
-     "published": "2026-10-22",
-     "coverage": 8,
-     "also_covered_by": [
-      "markets.businessinsider.com",
-      "citybiz",
-      "KrASIA"
-     ],
-     "portfolio": [
-      {
-       "vendor": "Deep Robotics",
-       "via": "vendor",
-       "oem": "",
-       "status": "pilot",
-       "status_label": "Trialled",
-       "use_case": "Security Patrolling",
-       "model": "X30",
-       "site": "ADGM Square",
-       "site_count": 1
-      }
-     ],
-     "portfolio_note": "",
-     "image": "https://dronelife.com/wp-content/uploads/2026/10/Rugged-TACO-Tactical-Mapping-Workstation-e1793196920954.png"
     },
     {
      "id": "dubaitoclosesomee611lanesalmaktoumairpor",
@@ -466,28 +408,6 @@ window.INTEL_FEED = {
      "portfolio": [],
      "portfolio_note": "",
      "image": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-25/slzrag3f/road.avif?width=1200&height=630&q=60&format=auto&ogImage=true&mode=crop&rect=48,0,504,336"
-    },
-    {
-     "id": "howtoteachhumanoidrobotstomoveproperlyan",
-     "category": "humanoids",
-     "type": "trend",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "How to Teach Humanoid Robots to Move Properly, and Autonomously, in Challenging Environments",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Industrial Equipment News",
-     "url": "https://www.ien.com/artificial-intelligence/video/22977386/how-to-teach-humanoid-robots-to-move-properly-and-autonomously-in-challenging-environments",
-     "published": "2026-10-27",
-     "coverage": 6,
-     "also_covered_by": [
-      "NewsAffinity",
-      "Tech.eu",
-      "Dealroom"
-     ],
-     "portfolio": [],
-     "portfolio_note": ""
     },
     {
      "id": "indriveponyaiandnvidiateamuptoassessrobo",
@@ -512,6 +432,29 @@ window.INTEL_FEED = {
      "portfolio_note": ""
     },
     {
+     "id": "yyforceapplaudsteslaandelonmuskoncommenc",
+     "category": "humanoids",
+     "type": "trend",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "YYForce Applauds Tesla and Elon Musk on Commencing Manufacturing of Optimus Humanoid Robots",
+     "summary": "SINGAPORE, Oct. 26, 2026 (GLOBE NEWSWIRE) -- YYForce Inc. (NASDAQ: YFOR) (“YYForce” or the “Company”), a technology-enabled provider of workforce solutions, integrated facility management and robotics services, today congratulated Tesla, Inc. and Chief Executive Officer Elon Musk following Tesla’s a…",
+     "why_it_matters": "",
+     "source": "aapnews.aap.com.au",
+     "url": "https://aapnews.aap.com.au/aapreleases/globenewswire9852855",
+     "published": "2026-10-22",
+     "coverage": 7,
+     "also_covered_by": [
+      "ABC7 Bay Area",
+      "Manufacturing Dive",
+      "Supply Chain Brain"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://aapnews.imgdeliver.net/article/lead_image/230701/yyforce-final2.png?width=800"
+    },
+    {
      "id": "dewaltandaugustroboticsdalenamedtotimesb",
      "category": "construction",
      "type": "trend",
@@ -530,63 +473,55 @@ window.INTEL_FEED = {
       "Ubergizmo",
       "Koreabizwire"
      ],
-     "portfolio": [
-      {
-       "vendor": "Pudu",
-       "via": "vendor",
-       "oem": "",
-       "status": "deployed",
-       "status_label": "Launched",
-       "use_case": "Floor Scrubbing and Sweeping",
-       "model": "1× CC1 Pro, 1× MT1 Max, 1× BG1 Pro",
-       "site": "International Tower",
-       "site_count": 7
-      }
-     ],
+     "portfolio": [],
      "portfolio_note": "",
      "image": "https://themachinemaker.com/wp-content/uploads/2026/10/DEWALT.jpg"
     },
     {
-     "id": "affordablehumanoidrobotmakernoetixreport",
+     "id": "110humanoidrobotssetguinnessworldrecordf",
      "category": "humanoids",
-     "type": "investment",
-     "region": "Global",
+     "type": "deployment",
+     "region": "China",
      "company": "",
      "amount_usd_m": null,
-     "headline": "Affordable humanoid robot maker Noetix reportedly files for Hong Kong IPO",
-     "summary": "Chinese humanoid robot company Noetix Robotics has confidentially filed for a Hong Kong initial public offering that could raise several hundred million",
+     "headline": "110 humanoid robots set Guinness world record for synchronized dancing in China, eyeing large-scale deployment",
+     "summary": "China",
      "why_it_matters": "",
-     "source": "TechNode",
-     "url": "https://technode.com/2026/10/26/affordable-humanoid-robot-maker-noetix-reportedly-files-for-hong-kong-ipo/",
-     "published": "2026-10-26",
-     "coverage": 3,
+     "source": "Global Times",
+     "url": "https://www.globaltimes.cn/page/202610/1372888.shtml",
+     "published": "2026-10-25",
+     "coverage": 4,
      "also_covered_by": [
-      "Eurasia Business News",
-      "eeNews Europe"
-     ],
-     "portfolio": [],
-     "portfolio_note": ""
-    },
-    {
-     "id": "dubaiannounceslaneclosuresonemiratesroad",
-     "category": "delivery",
-     "type": "trend",
-     "region": "GCC",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "Dubai announces lane closures on Emirates Road from Monday to clear the way for self-driving taxi tests",
-     "summary": "Three lanes opposite Al Maktoum International Airport will be closed to traffic during peak hours for six days",
-     "why_it_matters": "",
-     "source": "The National",
-     "url": "https://www.thenationalnews.com/news/uae/2026/10/26/dubai-announces-lane-closures-on-emirates-road-from-monday-to-allow-for-self-driving-taxi-tests/",
-     "published": "2026-10-26",
-     "coverage": 2,
-     "also_covered_by": [
-      "Gulf Business"
+      "SBS 뉴스",
+      "Moneycontrol.com",
+      "Interesting Engineering"
      ],
      "portfolio": [],
      "portfolio_note": "",
-     "image": "https://www.thenationalnews.com/resizer/v2/VSSDYQDNTRB3LJD4E6FADFJW2A.jpg?auth=7606b706fb0b47577b97ade60cb8af5cc778b0ff618ff5aad8d65273a933bfa4&smart=true&width=1200&height=630"
+     "image": "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-759abf8efb3a.jpeg"
+    },
+    {
+     "id": "hyundaimotorgroupdebutshydrogentrucksyst",
+     "category": "cleaning",
+     "type": "product",
+     "region": "Asia-Pacific",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Hyundai Motor Group debuts hydrogen truck system and unmanned charging robot in Korea",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "Chosunbiz",
+     "url": "https://biz.chosun.com/en/en-industry/2026/10/28/JUZRCOS72NBV7GLJOMR4MS3EVU/",
+     "published": "2026-10-22",
+     "coverage": 4,
+     "also_covered_by": [
+      "Tech Times",
+      "Security Today",
+      "PR Newswire"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://biz.chosun.com/resizer/v2/MK5CREHOMNDATCNVL7B4TXSRR4.jpg?auth=d407162a781a192ad55d5908be4bcba9a2f96742b662553993e9aeb7539bed74&width=1200&height=630&smart=true"
     },
     {
      "id": "middleeastweeklyaridgedeliverstestaircra",
@@ -644,107 +579,70 @@ window.INTEL_FEED = {
      "portfolio_note": ""
     },
     {
-     "id": "hyundaimotorgroupdebutshydrogentrucksyst",
-     "category": "cleaning",
-     "type": "product",
-     "region": "Asia-Pacific",
+     "id": "galaxycorpopensrobotperformancearenaindu",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "GCC",
      "company": "",
      "amount_usd_m": null,
-     "headline": "Hyundai Motor Group debuts hydrogen truck system and unmanned charging robot in Korea",
-     "summary": "",
+     "headline": "Galaxy Corp. opens robot performance arena in Dubai",
+     "summary": "Korean entertainment technology startup Galaxy Corp. said Monday it has opened a robot performance arena in the United Arab Emirates (UAE), its sec...",
      "why_it_matters": "",
-     "source": "Chosunbiz",
-     "url": "https://biz.chosun.com/en/en-industry/2026/10/28/JUZRCOS72NBV7GLJOMR4MS3EVU/",
-     "published": "2026-10-22",
-     "coverage": 3,
+     "source": "The Korea Times",
+     "url": "https://www.koreatimes.co.kr/amp/business/companies/20261026/galaxy-corp-opens-robot-performance-arena-in-dubai",
+     "published": "2026-10-26",
+     "coverage": 2,
      "also_covered_by": [
-      "Tech Times",
-      "Security Today"
+      "Korea JoongAng Daily"
      ],
      "portfolio": [],
      "portfolio_note": "",
-     "image": "https://biz.chosun.com/resizer/v2/MK5CREHOMNDATCNVL7B4TXSRR4.jpg?auth=d407162a781a192ad55d5908be4bcba9a2f96742b662553993e9aeb7539bed74&width=1200&height=630&smart=true"
+     "image": "https://newsimg.koreatimes.co.kr/2026/10/26/23543494-a097-4855-b8a0-b628d98b49db.jpg"
     },
     {
-     "id": "thedjineocameradroneisdowntoitsalltimelo",
-     "category": "inspection",
+     "id": "drivershortagesshapeneolixsautonomouspus",
+     "category": "delivery",
      "type": "trend",
      "region": "Global",
      "company": "",
      "amount_usd_m": null,
-     "headline": "The DJI Neo camera drone is down to its all-time low price at Amazon — save $60 this weekend",
-     "summary": "Don't miss this record price drop.",
+     "headline": "Driver shortages shape Neolix’s autonomous push into overseas delivery markets",
+     "summary": "Fresh from a $400m funding round, Chinese robovan maker Neolix is now doubling down on Europe, the Middle East and Asia in its international expansion plans.",
      "why_it_matters": "",
-     "source": "Mashable",
-     "url": "https://mashable.com/tech/oct-10-dji-neo-drone-deal",
-     "published": "2026-10-23",
-     "coverage": 3,
-     "also_covered_by": [
-      "AppleInsider",
-      "Yahoo Tech"
-     ],
+     "source": "Zag Daily",
+     "url": "https://zagdaily.com/connected/driver-shortages-shape-neolixs-autonomous-push-into-overseas-delivery-markets/",
+     "published": "2026-10-27",
+     "coverage": 1,
+     "also_covered_by": [],
      "portfolio": [
       {
-       "vendor": "AirTech",
+       "vendor": "Cargo X / Noon",
        "via": "oem",
-       "oem": "DJI",
-       "status": "pilot",
-       "status_label": "Trialled",
-       "use_case": "Drone Inspections for Unit Exterior",
-       "model": "Thermal: M300 H20T · General capture: Matrice 4E",
-       "site": "Saadiyat Lagoons",
-       "site_count": 1
+       "oem": "Neolix",
+       "status": "deployed",
+       "status_label": "Launched",
+       "use_case": "Autonomous Delivery Vans",
+       "model": "Neolix X3",
+       "site": "Al Raha Gardens",
+       "site_count": 3
       }
      ],
      "portfolio_note": "",
-     "image": "https://helios-i.mashable.com/imagery/articles/07LI0o3DtPOu4e3x7bS04yA/hero-image.fill.size_1200x675.v1791550209.jpg"
+     "image": "https://zagdaily.com/wp-content/uploads/2026/06/Neolix.jpg"
     },
     {
-     "id": "realbotixsnewlifelikehumanoidrobotsinteg",
-     "category": "humanoids",
-     "type": "trend",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "Realbotix’s New Lifelike Humanoid Robots Integrate On-Device AI Vision",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Thomasnet",
-     "url": "https://www.thomasnet.com/insights/realbotix-echo-humanoid-robot-line/",
-     "published": "2026-10-22",
-     "coverage": 3,
-     "also_covered_by": [
-      "Pandaily",
-      "AppleInsider"
-     ],
-     "portfolio": [
-      {
-       "vendor": "AirTech",
-       "via": "oem",
-       "oem": "DJI",
-       "status": "pilot",
-       "status_label": "Trialled",
-       "use_case": "Drone Inspections for Unit Exterior",
-       "model": "Thermal: M300 H20T · General capture: Matrice 4E",
-       "site": "Saadiyat Lagoons",
-       "site_count": 1
-      }
-     ],
-     "portfolio_note": ""
-    },
-    {
-     "id": "djiagriculturelaunchest55elevatingtheapp",
+     "id": "djimatrice5tdsnative1280thermalhasausdro",
      "category": "inspection",
-     "type": "product",
-     "region": "Global",
+     "type": "trend",
+     "region": "North America",
      "company": "",
      "amount_usd_m": null,
-     "headline": "DJI Agriculture launches T55, elevating the application of agricultural drones in Vietnam.",
-     "summary": "On October 27, 2026, in Ho Chi Minh City, DJI Agriculture – a subsidiary of DJI (Da-Jiang Innovations) specializing in agricultural technology – officially introduced the T55, a new generation of agricultural drones integrating both spraying and spreading functions, aimed at serving the production n…",
+     "headline": "DJI Matrice 5TD's Native 1280 Thermal Has a US Drone Maker Alarmed",
+     "summary": "A viral X post says DJI",
      "why_it_matters": "",
-     "source": "Vietnam.vn",
-     "url": "https://www.vietnam.vn/en/dji-agriculture-ra-mat-t55-nang-tam-ung-dung-drone-nong-nghiep-tai-viet-nam",
-     "published": "2026-10-28",
+     "source": "DroneXL",
+     "url": "https://dronexl.co/2026/10/26/dji-matrice-5td-native-1280-thermal-us-drone-maker-alarm/",
+     "published": "2026-10-26",
      "coverage": 1,
      "also_covered_by": [],
      "portfolio": [
@@ -761,58 +659,102 @@ window.INTEL_FEED = {
       }
      ],
      "portfolio_note": "",
-     "image": "https://vstatic.vietnam.vn/vietnam/resource/IMAGE/2026/10/28/1793166384411_hue-1_6ae17c07f29f4.jpeg"
+     "image": "https://cdn.dronexl.co/wp-content/uploads/2026/10/dji-matrice-4td-thermal-drone-solar-farm.webp"
+    },
+    {
+     "id": "whitecountysnewrescuedroneisadjimatrice4",
+     "category": "inspection",
+     "type": "trend",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "White County's New Rescue Drone Is a DJI Matrice 4TD It Didn't Name",
+     "summary": "White County, Georgia, bought a rain-capable DJI Matrice 4TD with SPLOST money. Neither Georgia ban bill became law, and federal rules allow it.",
+     "why_it_matters": "",
+     "source": "DroneXL",
+     "url": "https://dronexl.co/2026/10/26/white-county-georgia-dji-matrice-4td-splost-drone/",
+     "published": "2026-10-26",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "AirTech",
+       "via": "oem",
+       "oem": "DJI",
+       "status": "pilot",
+       "status_label": "Trialled",
+       "use_case": "Drone Inspections for Unit Exterior",
+       "model": "Thermal: M300 H20T · General capture: Matrice 4E",
+       "site": "Saadiyat Lagoons",
+       "site_count": 1
+      }
+     ],
+     "portfolio_note": "",
+     "image": "https://cdn.dronexl.co/wp-content/uploads/2026/10/white-county-public-safety-dji-matrice-4td-drone.webp"
+    },
+    {
+     "id": "waymoscalesupneolixgoesglobalgmbetsbigon",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Waymo Scales Up, Neolix Goes Global, GM Bets Big on 2028｜Road to Autonomy",
+     "summary": "Waymo has the capital and the vehicle supply to reach roughly 20,000 robotaxis by the end of 2027, but Magna's Mesa, Arizona integration line is the bindin",
+     "why_it_matters": "",
+     "source": "finance.biggo.com",
+     "url": "https://finance.biggo.com/podcast/52a650f94827cae2",
+     "published": "2026-10-26",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "Cargo X / Noon",
+       "via": "oem",
+       "oem": "Neolix",
+       "status": "deployed",
+       "status_label": "Launched",
+       "use_case": "Autonomous Delivery Vans",
+       "model": "Neolix X3",
+       "site": "Al Raha Gardens",
+       "site_count": 3
+      }
+     ],
+     "portfolio_note": ""
+    },
+    {
+     "id": "waymos20000robotaxiplanhitsamagnaassembl",
+     "category": "delivery",
+     "type": "trend",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Waymo's 20,000-Robotaxi Plan Hits a Magna Assembly Line; Neolix and GM Face the Same Test",
+     "summary": "Alphabet's Waymo has $21 billion in debt and equity behind a plan to operate 20,000 robotaxis by the end of 2027, but its actual constraint is the…",
+     "why_it_matters": "",
+     "source": "BigGo Finance",
+     "url": "https://finance.biggo.com/news/52a650f94827cae2",
+     "published": "2026-10-26",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "Cargo X / Noon",
+       "via": "oem",
+       "oem": "Neolix",
+       "status": "deployed",
+       "status_label": "Launched",
+       "use_case": "Autonomous Delivery Vans",
+       "model": "Neolix X3",
+       "site": "Al Raha Gardens",
+       "site_count": 3
+      }
+     ],
+     "portfolio_note": "",
+     "image": "https://img.biggo.com/mzKp2dYKnderRItVkx1b8g49LkLQh9KN8BVkCrYTpIE/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYWdlL2FpX2dlbmVyYXRlZC8yMDI2LTEwLzUyYTY1MGY5NDgyN2NhZTJfMTc5Mjk4MjQ2OV9jb3Zlci5qcGc.jpg"
     }
    ],
    "vendor_watch": [
-    {
-     "vendor": "AirTech",
-     "oem": "DJI",
-     "status": "pilot",
-     "status_label": "Trialled",
-     "use_cases": [
-      "Drone Inspections for Unit Exterior"
-     ],
-     "models": [
-      "Thermal: M300 H20T · General capture: Matrice 4E"
-     ],
-     "sites": [
-      "Saadiyat Lagoons"
-     ],
-     "mentions": 17,
-     "post_ids": [
-      "thedjineocameradroneisdowntoitsalltimelo",
-      "realbotixsnewlifelikehumanoidrobotsinteg",
-      "djiagriculturelaunchest55elevatingtheapp"
-     ],
-     "signal": "mixed",
-     "note": "",
-     "signal_by": "headlines"
-    },
-    {
-     "vendor": "Cargo X / Noon",
-     "oem": "Neolix",
-     "status": "deployed",
-     "status_label": "Launched",
-     "use_cases": [
-      "Autonomous Delivery Vans",
-      "Autonomous Delivery Vans (Al Merief expansion)",
-      "Autonomous Delivery Vans (Golf Gardens expansion)"
-     ],
-     "models": [
-      "Neolix X3"
-     ],
-     "sites": [
-      "Al Raha Gardens",
-      "Golf Gardens",
-      "Al Merief"
-     ],
-     "mentions": 4,
-     "post_ids": [],
-     "signal": "mention",
-     "note": "",
-     "signal_by": "headlines"
-    },
     {
      "vendor": "Analog",
      "oem": "Boston Dynamics",
@@ -827,11 +769,11 @@ window.INTEL_FEED = {
      "sites": [
       "Yas Park Gate"
      ],
-     "mentions": 3,
+     "mentions": 14,
      "post_ids": [
       "bostondynamicsworkerspetitionagainsticed"
      ],
-     "signal": "mention",
+     "signal": "positive",
      "note": "",
      "signal_by": "headlines"
     },
@@ -862,10 +804,8 @@ window.INTEL_FEED = {
       "Aldar Estates Office · Yas Mall"
      ],
      "mentions": 1,
-     "post_ids": [
-      "dewaltandaugustroboticsdalenamedtotimesb"
-     ],
-     "signal": "mention",
+     "post_ids": [],
+     "signal": "positive",
      "note": "",
      "signal_by": "headlines"
     },
@@ -884,8 +824,57 @@ window.INTEL_FEED = {
       "ADGM Square"
      ],
      "mentions": 1,
+     "post_ids": [],
+     "signal": "positive",
+     "note": "",
+     "signal_by": "headlines"
+    },
+    {
+     "vendor": "Cargo X / Noon",
+     "oem": "Neolix",
+     "status": "deployed",
+     "status_label": "Launched",
+     "use_cases": [
+      "Autonomous Delivery Vans",
+      "Autonomous Delivery Vans (Al Merief expansion)",
+      "Autonomous Delivery Vans (Golf Gardens expansion)"
+     ],
+     "models": [
+      "Neolix X3"
+     ],
+     "sites": [
+      "Al Raha Gardens",
+      "Golf Gardens",
+      "Al Merief"
+     ],
+     "mentions": 4,
      "post_ids": [
-      "anraadvancesnatotestedcounterdronetechno"
+      "drivershortagesshapeneolixsautonomouspus",
+      "waymoscalesupneolixgoesglobalgmbetsbigon",
+      "waymos20000robotaxiplanhitsamagnaassembl"
+     ],
+     "signal": "mention",
+     "note": "",
+     "signal_by": "headlines"
+    },
+    {
+     "vendor": "AirTech",
+     "oem": "DJI",
+     "status": "pilot",
+     "status_label": "Trialled",
+     "use_cases": [
+      "Drone Inspections for Unit Exterior"
+     ],
+     "models": [
+      "Thermal: M300 H20T · General capture: Matrice 4E"
+     ],
+     "sites": [
+      "Saadiyat Lagoons"
+     ],
+     "mentions": 3,
+     "post_ids": [
+      "djimatrice5tdsnative1280thermalhasausdro",
+      "whitecountysnewrescuedroneisadjimatrice4"
      ],
      "signal": "mention",
      "note": "",

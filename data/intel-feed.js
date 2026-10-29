@@ -53,46 +53,46 @@ window.INTEL_FEED = {
     "ink": "#A04C74"
    }
   ],
-  "updated_at": "2026-10-29T09:15+04:00"
+  "updated_at": "2026-10-29T09:17+04:00"
  },
  "editions": [
   {
    "id": "2026-W44",
    "label": "Week 44 · 29 Oct 2026",
-   "published_at": "2026-10-29T09:15+04:00",
+   "published_at": "2026-10-29T09:17+04:00",
    "period": {
     "from": "2026-10-22",
     "to": "2026-10-29"
    },
-   "stories_scanned": 774,
-   "distinct_events": 428,
+   "stories_scanned": 783,
+   "distinct_events": 438,
    "signals": {
     "volume": {
-     "construction": 33,
+     "construction": 24,
      "facade": 7,
-     "inspection": 90,
-     "cleaning": 19,
-     "security": 26,
-     "delivery": 60,
-     "humanoids": 83,
-     "physical_ai": 110
+     "inspection": 99,
+     "cleaning": 18,
+     "security": 27,
+     "delivery": 61,
+     "humanoids": 79,
+     "physical_ai": 123
     },
     "deals": {
-     "construction": 3,
+     "construction": 1,
      "facade": 0,
      "inspection": 1,
      "cleaning": 0,
      "security": 0,
      "delivery": 0,
      "humanoids": 1,
-     "physical_ai": 17
+     "physical_ai": 20
     }
    },
    "momentum": [
     {
      "category": "construction",
-     "volume": 33,
-     "deals": 3,
+     "volume": 24,
+     "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
@@ -105,43 +105,43 @@ window.INTEL_FEED = {
     },
     {
      "category": "inspection",
-     "volume": 90,
+     "volume": 99,
      "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "cleaning",
-     "volume": 19,
+     "volume": 18,
      "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "security",
-     "volume": 26,
+     "volume": 27,
      "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "delivery",
-     "volume": 60,
+     "volume": 61,
      "deals": 0,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "humanoids",
-     "volume": 83,
+     "volume": 79,
      "deals": 1,
      "avg_prev": null,
      "change_pct": null
     },
     {
      "category": "physical_ai",
-     "volume": 110,
-     "deals": 17,
+     "volume": 123,
+     "deals": 20,
      "avg_prev": null,
      "change_pct": null
     }
@@ -149,30 +149,30 @@ window.INTEL_FEED = {
    "generated_by": "rules",
    "headline": "Autonomous Construction Firm Bedrock Hits $4.1 Billion Valuation",
    "takeaways": [
-    "4 funding stories in the feed, about $40,600M disclosed; largest: Robotics Lab Physical Intelligence in Talks for a $20 Billion Valuation",
-    "Most news this week: Physical AI & platforms (110 distinct stories).",
+    "2 funding stories in the feed, about $600M disclosed; largest: Autonomous Construction Firm Bedrock Hits $4.1 Billion Valuation",
+    "Most news this week: Physical AI & platforms (123 distinct stories).",
     "6 stories from the GCC, led by: 10 University teams to compete in Emirates Robotic Competition Finals During the Inaugural Dubai Future Week 2026"
    ],
    "trend_watch": [
     {
      "trend": "News flow in Physical AI & platforms",
      "status": "new",
-     "evidence": "110 stories and 17 funding deals this week; first week tracked."
+     "evidence": "123 stories and 20 funding deals this week; first week tracked."
     },
     {
      "trend": "News flow in Inspection & drones",
      "status": "new",
-     "evidence": "90 stories and 1 funding deal this week; first week tracked."
+     "evidence": "99 stories and 1 funding deal this week; first week tracked."
     },
     {
      "trend": "News flow in Humanoids & guest engagement",
      "status": "new",
-     "evidence": "83 stories and 1 funding deal this week; first week tracked."
+     "evidence": "79 stories and 1 funding deal this week; first week tracked."
     },
     {
      "trend": "News flow in Delivery & autonomous mobility",
      "status": "new",
-     "evidence": "60 stories and 0 funding deals this week; first week tracked."
+     "evidence": "61 stories and 0 funding deals this week; first week tracked."
     }
    ],
    "posts": [
@@ -189,33 +189,11 @@ window.INTEL_FEED = {
      "source": "Bloomberg.com",
      "url": "https://www.bloomberg.com/news/articles/2026-10-26/autonomous-construction-firm-bedrock-hits-4-1-billion-valuation",
      "published": "2026-10-26",
-     "coverage": 24,
+     "coverage": 22,
      "also_covered_by": [
       "TechCrunch",
       "The Robot Report",
       "SiliconANGLE"
-     ],
-     "portfolio": [],
-     "portfolio_note": ""
-    },
-    {
-     "id": "roboticslabphysicalintelligenceintalksfo",
-     "category": "construction",
-     "type": "investment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": 20000.0,
-     "headline": "Robotics Lab Physical Intelligence in Talks for a $20 Billion Valuation",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Bloomberg",
-     "url": "https://www.bloomberg.com/news/articles/2026-10-27/robotics-lab-physical-intelligence-in-talks-for-a-20-billion-valuation",
-     "published": "2026-10-27",
-     "coverage": 4,
-     "also_covered_by": [
-      "BigGo Finance",
-      "아시아경제",
-      "Howl.Link"
      ],
      "portfolio": [],
      "portfolio_note": ""
@@ -233,7 +211,7 @@ window.INTEL_FEED = {
      "source": "Zawya",
      "url": "https://www.zawya.com/en/press-release/events-conferences/10-university-teams-to-compete-in-emirates-robotic-competition-finals-during-the-inaugural-dubai-future-week-2026-1854412",
      "published": "2026-10-23",
-     "coverage": 7,
+     "coverage": 6,
      "also_covered_by": [
       "Press Release Hub",
       "Binance",
@@ -256,7 +234,7 @@ window.INTEL_FEED = {
      "source": "The Robot Report",
      "url": "https://www.therobotreport.com/agility-gxo-logistics-plan-expanded-deployment-digit-humanoid/",
      "published": "2026-10-22",
-     "coverage": 16,
+     "coverage": 13,
      "also_covered_by": [
       "Assembly Magazine",
       "Investing.com",
@@ -267,23 +245,27 @@ window.INTEL_FEED = {
      "image": "https://www.therobotreport.com/wp-content/uploads/2026/10/GXO_Agility_Digit_02.jpg"
     },
     {
-     "id": "roboticsaistartupphysicalintelligenceiss",
-     "category": "construction",
-     "type": "investment",
-     "region": "Global",
+     "id": "110humanoidrobotssetguinnessworldrecordf",
+     "category": "humanoids",
+     "type": "deployment",
+     "region": "China",
      "company": "",
-     "amount_usd_m": 20000.0,
-     "headline": "Robotics AI startup Physical Intelligence is seeking a valuation of about $20 billion",
-     "summary": "The startup is in talks to raise at least $1 billion, with existing backers Avenir and Lux Capital in talks to lead the round",
+     "amount_usd_m": null,
+     "headline": "110 humanoid robots set Guinness world record for synchronized dancing in China, eyeing large-scale deployment",
+     "summary": "China",
      "why_it_matters": "",
-     "source": "Quartz",
-     "url": "https://qz.com/physical-intelligence-funding-talks-20-billion-valuation-102726",
-     "published": "2026-10-27",
-     "coverage": 1,
-     "also_covered_by": [],
+     "source": "Global Times",
+     "url": "https://www.globaltimes.cn/page/202610/1372888.shtml",
+     "published": "2026-10-25",
+     "coverage": 6,
+     "also_covered_by": [
+      "VnExpress International",
+      "ColombiaOne.com",
+      "SBS 뉴스"
+     ],
      "portfolio": [],
      "portfolio_note": "",
-     "image": "https://qz.com/cdn-cgi/image/width=1200,quality=85,format=auto/https://assets.qz.com/media/GettyImages-2240813685-300x169.jpg"
+     "image": "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-759abf8efb3a.jpeg"
     },
     {
      "id": "jdtolaunchrobot4sstorebusinessnoconventi",
@@ -298,7 +280,7 @@ window.INTEL_FEED = {
      "source": "36Kr",
      "url": "https://eu.36kr.com/en/p/4037130031044230",
      "published": "2026-10-23",
-     "coverage": 19,
+     "coverage": 18,
      "also_covered_by": [
       "TradingView",
       "eu.36kr.com",
@@ -307,29 +289,6 @@ window.INTEL_FEED = {
      "portfolio": [],
      "portfolio_note": "",
      "image": "https://img.36krcdn.com/hsossms/20261023/v2_0505e48d46c44d2faa4bbaaf00476083@5091053@ai_oswg840312oswg1053oswg495_img_png~tplv-1marlgjv7f-ai-v3:600:400:600:400:q70.jpg"
-    },
-    {
-     "id": "fawvolkswagenexpandstestingofhumanoidrob",
-     "category": "humanoids",
-     "type": "deployment",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "FAW-Volkswagen Expands Testing of Humanoid Robots",
-     "summary": "CHANGCHUN, China—Chinese automaker FAW-Volkswagen Automobile Co. Ltd. is expanding its trial run of humanoid robots from Ubtech Robotics.",
-     "why_it_matters": "",
-     "source": "Assembly Magazine",
-     "url": "https://www.assemblymag.com/articles/100527-faw-volkswagen-expands-testing-of-humanoid-robots",
-     "published": "2026-10-22",
-     "coverage": 6,
-     "also_covered_by": [
-      "Unmanned Systems Technology",
-      "Yahoo! Finance Canada",
-      "GlobeNewswire"
-     ],
-     "portfolio": [],
-     "portfolio_note": "",
-     "image": "https://www.assemblymag.com/ext/resources/2026/10/22/ubtech-walker-900.jpg?height=635&t=1792706457&width=1200"
     },
     {
      "id": "bostondynamicsworkerspetitionagainsticed",
@@ -344,7 +303,7 @@ window.INTEL_FEED = {
      "source": "Startup Fortune",
      "url": "https://startupfortune.com/boston-dynamics-workers-petition-against-ice-deal-for-spot-robots/",
      "published": "2026-10-22",
-     "coverage": 21,
+     "coverage": 20,
      "also_covered_by": [
       "TOKENPOST",
       "Tech Times",
@@ -365,6 +324,28 @@ window.INTEL_FEED = {
      ],
      "portfolio_note": "",
      "image": "https://startupfortune.com/wp-content/uploads/2026/10/ice-hyundai-rotem-boston-dynamics.jpg"
+    },
+    {
+     "id": "chinasbaidutestsrobotaxionlondonstreets",
+     "category": "delivery",
+     "type": "trend",
+     "region": "China",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "China's Baidu tests robotaxi on London streets",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "Reuters",
+     "url": "https://www.reuters.com/business/finance/chinas-baidu-tests-robotaxi-london-streets-2026-10-23/",
+     "published": "2026-10-23",
+     "coverage": 6,
+     "also_covered_by": [
+      "TradingView",
+      "Analytics Insight",
+      "ad-hoc-news.de"
+     ],
+     "portfolio": [],
+     "portfolio_note": ""
     },
     {
      "id": "affordablehumanoidrobotmakernoetixreport",
@@ -410,118 +391,93 @@ window.INTEL_FEED = {
      "image": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-10-25/slzrag3f/road.avif?width=1200&height=630&q=60&format=auto&ogImage=true&mode=crop&rect=48,0,504,336"
     },
     {
-     "id": "indriveponyaiandnvidiateamuptoassessrobo",
-     "category": "delivery",
+     "id": "howtoteachhumanoidrobotstomoveproperlyan",
+     "category": "humanoids",
      "type": "trend",
      "region": "Global",
      "company": "",
      "amount_usd_m": null,
-     "headline": "inDrive, Pony.ai and NVIDIA team up to assess robotaxi prospects in Kazakhstan",
+     "headline": "How to Teach Humanoid Robots to Move Properly, and Autonomously, in Challenging Environments",
      "summary": "",
      "why_it_matters": "",
-     "source": "Kursiv Media",
-     "url": "https://kz.kursiv.media/en/2026-10-23/engk-nknk-indrive-pony-ai-and-nvidia-team-up-to-assess-robotaxi-prospects-in-kazakhstan/",
-     "published": "2026-10-23",
+     "source": "Industrial Equipment News",
+     "url": "https://www.ien.com/artificial-intelligence/video/22977386/how-to-teach-humanoid-robots-to-move-properly-and-autonomously-in-challenging-environments",
+     "published": "2026-10-27",
      "coverage": 6,
      "also_covered_by": [
-      "Mezha.net",
-      "디지털투데이",
-      "Pluang"
+      "NewsAffinity",
+      "Tech.eu",
+      "Dealroom"
      ],
      "portfolio": [],
      "portfolio_note": ""
     },
     {
-     "id": "yyforceapplaudsteslaandelonmuskoncommenc",
-     "category": "humanoids",
+     "id": "fooddeliveryrobotscollectedbiometricdata",
+     "category": "delivery",
      "type": "trend",
      "region": "Global",
      "company": "",
      "amount_usd_m": null,
-     "headline": "YYForce Applauds Tesla and Elon Musk on Commencing Manufacturing of Optimus Humanoid Robots",
-     "summary": "SINGAPORE, Oct. 26, 2026 (GLOBE NEWSWIRE) -- YYForce Inc. (NASDAQ: YFOR) (“YYForce” or the “Company”), a technology-enabled provider of workforce solutions, integrated facility management and robotics services, today congratulated Tesla, Inc. and Chief Executive Officer Elon Musk following Tesla’s a…",
+     "headline": "Food delivery robots collected biometric data, lawsuits allege",
+     "summary": "",
      "why_it_matters": "",
-     "source": "aapnews.aap.com.au",
-     "url": "https://aapnews.aap.com.au/aapreleases/globenewswire9852855",
-     "published": "2026-10-22",
-     "coverage": 7,
-     "also_covered_by": [
-      "ABC7 Bay Area",
-      "Manufacturing Dive",
-      "Supply Chain Brain"
-     ],
-     "portfolio": [],
-     "portfolio_note": "",
-     "image": "https://aapnews.imgdeliver.net/article/lead_image/230701/yyforce-final2.png?width=800"
-    },
-    {
-     "id": "dewaltandaugustroboticsdalenamedtotimesb",
-     "category": "construction",
-     "type": "trend",
-     "region": "Global",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "DEWALT and August Robotics’ DALE Named to TIME’s Best Inventions of 2026 List",
-     "summary": "DEWALT and August Robotics have received recognition from TIME, which has named their autonomous drilling robot, DALE, to its Best Inventions of 2026 list in the Robotics category. The robot was developed to automate downward drilling on construction sites, with a focus on large data centre projects…",
-     "why_it_matters": "",
-     "source": "Machine Maker",
-     "url": "https://themachinemaker.com/news/dewalt-and-august-robotics-dale-named-to-times-best-inventions-of-2026-list/",
+     "source": "USA Today",
+     "url": "https://www.usatoday.com/story/tech/2026/10/21/food-delivery-robot-companies-sued-biometric-data-collection/92366478007/",
      "published": "2026-10-22",
      "coverage": 6,
      "also_covered_by": [
-      "Anker",
-      "Ubergizmo",
-      "Koreabizwire"
+      "BroBible",
+      "Tech Edition",
+      "Attack of the Fanboy"
      ],
      "portfolio": [],
-     "portfolio_note": "",
-     "image": "https://themachinemaker.com/wp-content/uploads/2026/10/DEWALT.jpg"
+     "portfolio_note": ""
     },
     {
-     "id": "110humanoidrobotssetguinnessworldrecordf",
+     "id": "fawvolkswagenexpandstestingofhumanoidrob",
      "category": "humanoids",
      "type": "deployment",
-     "region": "China",
+     "region": "Global",
      "company": "",
      "amount_usd_m": null,
-     "headline": "110 humanoid robots set Guinness world record for synchronized dancing in China, eyeing large-scale deployment",
-     "summary": "China",
+     "headline": "FAW-Volkswagen Expands Testing of Humanoid Robots",
+     "summary": "CHANGCHUN, China—Chinese automaker FAW-Volkswagen Automobile Co. Ltd. is expanding its trial run of humanoid robots from Ubtech Robotics.",
      "why_it_matters": "",
-     "source": "Global Times",
-     "url": "https://www.globaltimes.cn/page/202610/1372888.shtml",
-     "published": "2026-10-25",
-     "coverage": 4,
-     "also_covered_by": [
-      "SBS 뉴스",
-      "Moneycontrol.com",
-      "Interesting Engineering"
-     ],
-     "portfolio": [],
-     "portfolio_note": "",
-     "image": "https://www.globaltimes.cn/Portals/0/attachment/2026/2026-10-22/769f8f28-90cd-4fde-b250-759abf8efb3a.jpeg"
-    },
-    {
-     "id": "hyundaimotorgroupdebutshydrogentrucksyst",
-     "category": "cleaning",
-     "type": "product",
-     "region": "Asia-Pacific",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "Hyundai Motor Group debuts hydrogen truck system and unmanned charging robot in Korea",
-     "summary": "",
-     "why_it_matters": "",
-     "source": "Chosunbiz",
-     "url": "https://biz.chosun.com/en/en-industry/2026/10/28/JUZRCOS72NBV7GLJOMR4MS3EVU/",
+     "source": "Assembly Magazine",
+     "url": "https://www.assemblymag.com/articles/100527-faw-volkswagen-expands-testing-of-humanoid-robots",
      "published": "2026-10-22",
      "coverage": 4,
      "also_covered_by": [
-      "Tech Times",
-      "Security Today",
-      "PR Newswire"
+      "Unmanned Systems Technology",
+      "Yahoo! Finance Canada",
+      "Asia Business Outlook"
      ],
      "portfolio": [],
      "portfolio_note": "",
-     "image": "https://biz.chosun.com/resizer/v2/MK5CREHOMNDATCNVL7B4TXSRR4.jpg?auth=d407162a781a192ad55d5908be4bcba9a2f96742b662553993e9aeb7539bed74&width=1200&height=630&smart=true"
+     "image": "https://www.assemblymag.com/ext/resources/2026/10/22/ubtech-walker-900.jpg?height=635&t=1792706457&width=1200"
+    },
+    {
+     "id": "chinasunitreeshowsoffh2xrobotwithkungfum",
+     "category": "security",
+     "type": "trend",
+     "region": "China",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "China’s Unitree Shows Off H2-X Robot With Kung Fu Moves and Rescue Skills",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "TechRepublic",
+     "url": "https://www.techrepublic.com/article/news-unitree-h2-x-humanoid-robot-security-rescue-china-apac/",
+     "published": "2026-10-22",
+     "coverage": 5,
+     "also_covered_by": [
+      "Bioengineer.org",
+      "DroneXL",
+      "China Daily"
+     ],
+     "portfolio": [],
+     "portfolio_note": ""
     },
     {
      "id": "middleeastweeklyaridgedeliverstestaircra",
@@ -561,24 +517,6 @@ window.INTEL_FEED = {
      "portfolio_note": ""
     },
     {
-     "id": "zawyaomanpdolaunchesaidrivetoautomatepro",
-     "category": "physical_ai",
-     "type": "product",
-     "region": "GCC",
-     "company": "",
-     "amount_usd_m": null,
-     "headline": "ZAWYA: Oman: PDO launches AI drive to automate production",
-     "summary": "By Staff WriterMUSCAT - Petroleum Development Oman (PDO) on Monday launched a programme to introduce increasingly autonomous production operations, alongside new artificial intelligence tools and digital partnerships aimed at improving efficiency, strengthening safety and reducing operating costs.T…",
-     "why_it_matters": "",
-     "source": "TradingView",
-     "url": "https://www.tradingview.com/news/reuters.com,2026-10-27:newsml_Zaw676t8f:0-zawya-oman-pdo-launches-ai-drive-to-automate-production/",
-     "published": "2026-10-27",
-     "coverage": 1,
-     "also_covered_by": [],
-     "portfolio": [],
-     "portfolio_note": ""
-    },
-    {
      "id": "galaxycorpopensrobotperformancearenaindu",
      "category": "physical_ai",
      "type": "trend",
@@ -598,6 +536,71 @@ window.INTEL_FEED = {
      "portfolio": [],
      "portfolio_note": "",
      "image": "https://newsimg.koreatimes.co.kr/2026/10/26/23543494-a097-4855-b8a0-b628d98b49db.jpg"
+    },
+    {
+     "id": "muscatstudentsroverdronerescuesystemwins",
+     "category": "inspection",
+     "type": "trend",
+     "region": "GCC",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Muscat student's rover–drone rescue system wins recognition in flood-hit Nepal",
+     "summary": "When devastating flash floods swept through northern and central Nepal on 26 August, just five days had passed since a Muscat schoolboy presented a robotic...",
+     "why_it_matters": "",
+     "source": "Times of Oman",
+     "url": "https://timesofoman.com/article/178369-muscat-students-roverdrone-rescue-system-wins-recognition-in-flood-hit-nepal",
+     "published": "2026-10-25",
+     "coverage": 2,
+     "also_covered_by": [
+      "Muscat Daily"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://shabiba.eu-central-1.linodeobjects.com/2026/10/1792946284-1792946284-alq7x2illeeu-700x400.jpg"
+    },
+    {
+     "id": "kpgrouplauncheswaterlesssolarpanelcleani",
+     "category": "cleaning",
+     "type": "product",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "KP Group launches waterless solar panel cleaning robot at REI Expo 2026",
+     "summary": "",
+     "why_it_matters": "",
+     "source": "Manufacturing Today India",
+     "url": "https://www.manufacturingtodayindia.com/kp-group-waterless-solar-panel",
+     "published": "2026-10-26",
+     "coverage": 3,
+     "also_covered_by": [
+      "Energetica India Magazine",
+      "Construction World"
+     ],
+     "portfolio": [],
+     "portfolio_note": ""
+    },
+    {
+     "id": "pleasestatethenatureofthemedicalemergenc",
+     "category": "facade",
+     "type": "trend",
+     "region": "Global",
+     "company": "",
+     "amount_usd_m": null,
+     "headline": "Please state the nature of the medical emergency: Google is building a robot medic for NASA",
+     "summary": "The AI medical assistant is still being tested. Now the space boffins want to give it hands",
+     "why_it_matters": "",
+     "source": "The Register",
+     "url": "https://www.theregister.com/offbeat/2026/10/28/please-state-the-nature-of-the-medical-emergency-google-is-building-a-robot-medic-for-nasa/5306130",
+     "published": "2026-10-27",
+     "coverage": 4,
+     "also_covered_by": [
+      "news.lavx.hu",
+      "Google Cloud",
+      "Investing.com"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://image.theregister.com/5240526.jpg?imageId=5240526&x=1.55&y=0&cropw=98.45&croph=100&panox=1.55&panoy=0&panow=98.45&panoh=100&width=1200&height=683"
     },
     {
      "id": "drivershortagesshapeneolixsautonomouspus",
@@ -723,35 +726,35 @@ window.INTEL_FEED = {
      "portfolio_note": ""
     },
     {
-     "id": "waymos20000robotaxiplanhitsamagnaassembl",
-     "category": "delivery",
+     "id": "puduroboticspudubg1serieswinstwoissaawar",
+     "category": "cleaning",
      "type": "trend",
      "region": "Global",
      "company": "",
      "amount_usd_m": null,
-     "headline": "Waymo's 20,000-Robotaxi Plan Hits a Magna Assembly Line; Neolix and GM Face the Same Test",
-     "summary": "Alphabet's Waymo has $21 billion in debt and equity behind a plan to operate 20,000 robotaxis by the end of 2027, but its actual constraint is the…",
+     "headline": "Pudu Robotics PUDU BG1 Series Wins Two ISSA Awards, Reinforcing Global Leadership in Commercial Cleaning Robotics",
+     "summary": "Pudu Robotics, a global leader in commercial service robotics, has received two awards for its PUDU BG1 Series at ISSA industry events in South Korea and ...",
      "why_it_matters": "",
-     "source": "BigGo Finance",
-     "url": "https://finance.biggo.com/news/52a650f94827cae2",
-     "published": "2026-10-26",
+     "source": "ANTARA News",
+     "url": "https://en.antaranews.com/amp/news/437419/pudu-robotics-pudu-bg1-series-wins-two-issa-awards-reinforcing-global-leadership-in-commercial-cleaning-robotics",
+     "published": "2026-10-23",
      "coverage": 1,
      "also_covered_by": [],
      "portfolio": [
       {
-       "vendor": "Cargo X / Noon",
-       "via": "oem",
-       "oem": "Neolix",
+       "vendor": "Pudu",
+       "via": "vendor",
+       "oem": "",
        "status": "deployed",
        "status_label": "Launched",
-       "use_case": "Autonomous Delivery Vans",
-       "model": "Neolix X3",
-       "site": "Al Raha Gardens",
-       "site_count": 3
+       "use_case": "Floor Scrubbing and Sweeping",
+       "model": "1× CC1 Pro, 1× MT1 Max, 1× BG1 Pro",
+       "site": "International Tower",
+       "site_count": 7
       }
      ],
      "portfolio_note": "",
-     "image": "https://img.biggo.com/mzKp2dYKnderRItVkx1b8g49LkLQh9KN8BVkCrYTpIE/fit/1200/0/sm/0/aHR0cHM6Ly9pbWcuYmdvLm9uZS9uZXdzLWltYWdlL2FpX2dlbmVyYXRlZC8yMDI2LTEwLzUyYTY1MGY5NDgyN2NhZTJfMTc5Mjk4MjQ2OV9jb3Zlci5qcGc.jpg"
+     "image": "https://cdn.antaranews.com/cache/1200x800/2026/10/23/PUDUR.jpg"
     }
    ],
    "vendor_watch": [
@@ -775,7 +778,8 @@ window.INTEL_FEED = {
      ],
      "signal": "positive",
      "note": "",
-     "signal_by": "headlines"
+     "signal_by": "headlines",
+     "article": null
     },
     {
      "vendor": "Pudu",
@@ -804,10 +808,13 @@ window.INTEL_FEED = {
       "Aldar Estates Office · Yas Mall"
      ],
      "mentions": 1,
-     "post_ids": [],
+     "post_ids": [
+      "puduroboticspudubg1serieswinstwoissaawar"
+     ],
      "signal": "positive",
      "note": "",
-     "signal_by": "headlines"
+     "signal_by": "headlines",
+     "article": null
     },
     {
      "vendor": "Deep Robotics",
@@ -827,7 +834,12 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "positive",
      "note": "",
-     "signal_by": "headlines"
+     "signal_by": "headlines",
+     "article": {
+      "title": "DEEP Robotics Unveils Five Research Advances in Embodied AI",
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOaWRyS1R4dm5qUkoyRzBSdGNMczFJVE1WeE1LSE5QTEF4ZWs3ZzlERmFETXRQc0g5RzBtc25VNFNsXzdSNFRvTWg4WjZUYVo2MjczOVdidkZvV21MR25WZWY5SUNqOTcwUDEyLTFGd2t1N21PNUNPQ21qNXhUVUN6MXJrVkc4Y2R6Y2dZalgycmJaNDdPVXVoNmk1bFZ1bzlNYTFSbk14eUVBZk1FQ1QtdE5USGFnWlpYYVE?oc=5",
+      "source": "markets.businessinsider.com"
+     }
     },
     {
      "vendor": "Cargo X / Noon",
@@ -850,12 +862,12 @@ window.INTEL_FEED = {
      "mentions": 4,
      "post_ids": [
       "drivershortagesshapeneolixsautonomouspus",
-      "waymoscalesupneolixgoesglobalgmbetsbigon",
-      "waymos20000robotaxiplanhitsamagnaassembl"
+      "waymoscalesupneolixgoesglobalgmbetsbigon"
      ],
      "signal": "mention",
      "note": "",
-     "signal_by": "headlines"
+     "signal_by": "headlines",
+     "article": null
     },
     {
      "vendor": "AirTech",
@@ -878,7 +890,8 @@ window.INTEL_FEED = {
      ],
      "signal": "mention",
      "note": "",
-     "signal_by": "headlines"
+     "signal_by": "headlines",
+     "article": null
     },
     {
      "vendor": "BarqAir",
@@ -898,7 +911,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     },
     {
      "vendor": "SINDAN",
@@ -924,7 +938,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     },
     {
      "vendor": "Thub Technologies",
@@ -946,7 +961,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     },
     {
      "vendor": "X-Human",
@@ -966,7 +982,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     },
     {
      "vendor": "AD Robotics",
@@ -989,7 +1006,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     },
     {
      "vendor": "Falcon Tech Robotics",
@@ -1009,7 +1027,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     },
     {
      "vendor": "Solinas",
@@ -1029,7 +1048,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     },
     {
      "vendor": "Subdivo",
@@ -1047,7 +1067,8 @@ window.INTEL_FEED = {
      "post_ids": [],
      "signal": "none",
      "note": "",
-     "signal_by": ""
+     "signal_by": "",
+     "article": null
     }
    ]
   }

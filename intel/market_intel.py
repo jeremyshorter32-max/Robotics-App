@@ -49,6 +49,7 @@ FEED_JS = ROOT / "data" / "intel-feed.js"
 
 USER_AGENT = "Mozilla/5.0 (compatible; AldarRoboticsMarketPulse/1.0)"
 PORTFOLIO: dict = {"vendors": [], "queries": [], "min_posts": 0}  # set in main()
+ARTICLES: list[dict] = []  # every relevant article before grouping, for counting vendor mentions
 POST_TYPES = ["investment", "product", "deployment", "trend"]
 REGIONS = ["GCC", "North America", "Europe", "China", "Asia-Pacific", "Global"]
 
@@ -62,7 +63,7 @@ TYPE_PATTERNS = [
 MONEY = r"\$\s?(\d+(?:\.\d+)?)\s?(m|mn|million|bn|b|billion)\b"
 
 # Market-size press releases and similar filler, dropped before curation.
-NOISE_TITLE = r"houthi|airstrike|air strike|drone strikes?|missile|warplane|troops|battlefield|frontline|front line|kamikaze|drone attack|shot down|\bkilled\b|ukraine war|\b(jumps|surges|soars|slumps|plunges|tumbles|rallies|skyrockets) (over |nearly |more than )?\d+(\.\d+)?%|(shares?|stock)\b.{0,30}\b(rise|rises|fall|falls|drop|drops|gain|gains|climb|climbs)\b|stock market|hk stock|stock movement|round-?up|recap|week in review|this week in|industry insights|newsletter|digest|robotic raises|video friday|surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
+NOISE_TITLE = r"all-time low|lowest price|\bsave \$|\d+% off|\bdeals?\b.{0,20}(today|now|alert)|black friday|cyber monday|prime day|coupon|gift guide|best .{0,30} to buy|hands-on review|\breview:|houthi|airstrike|air strike|drone strikes?|missile|warplane|troops|battlefield|frontline|front line|kamikaze|drone attack|shot down|\bkilled\b|ukraine war|\b(jumps|surges|soars|slumps|plunges|tumbles|rallies|skyrockets) (over |nearly |more than )?\d+(\.\d+)?%|(shares?|stock)\b.{0,30}\b(rise|rises|fall|falls|drop|drops|gain|gains|climb|climbs)\b|stock market|hk stock|stock movement|round-?up|recap|week in review|this week in|industry insights|newsletter|digest|robotic raises|video friday|surgical|surgery|surgeon|da vinci|hospital robot|medical robot|rehabilitation robot|exoskeleton|market (size|share|to reach|worth|heads|forecast|report|outlook|analysis|growth)|\bcagr\b|by 20[3-4]\d|research report|industry report|market is expected|stock (price|forecast)|shares (jump|fall|rise|surge)"
 NOISE_SOURCES = {"openpr.com", "ein presswire", "einpresswire", "marketsandmarkets", "taiwannews", "barchart", "benzinga", "seeking alpha", "the globe and mail", "fool.com", "the motley fool", "insidermonkey"}
 # When several outlets cover the same story, show the one from the best-known outlet.
 TRUSTED_SOURCES = ["reuters", "bloomberg", "financial times", "the wall street journal", "techcrunch", "the robot report",
@@ -230,7 +231,10 @@ def collect(config: dict) -> tuple[list[dict], int]:
         enrich(item, config)
     raw = len(items)
     pf.link_items(items, PORTFOLIO)
+    ARTICLES[:] = [i for i in items if i["portfolio"]]
     items = group_same_story(items)
+    # A story is linked only to vendors that its own headline or summary names.
+    pf.link_items(items, PORTFOLIO)
     linked = sum(1 for i in items if i.get("portfolio"))
     if linked:
         log(f"{linked} stories mention a vendor we work with (or the maker of their equipment).")
@@ -386,11 +390,6 @@ def group_same_story(items: list[dict]) -> list[dict]:
         dates = [o["published"] for o in group if o["published"]]
         lead["published"] = min(dates) if dates else None
         lead["coverage"] = len(sources)
-        links = {}
-        for other in group:
-            for link in other.get("portfolio", []):
-                links.setdefault(link["vendor"], link)
-        lead["portfolio"] = list(links.values())
         if len(group) > 40:
             log(f"  note: {len(group)} articles grouped under '{lead['title'][:60]}'")
         lead["also_covered_by"] = sources[1:4]
@@ -646,7 +645,13 @@ def curate_with_rules(items: list[dict], config: dict, history: list[dict], move
     posts = []
     ranked = sorted(items, key=score, reverse=True)
     # Stories about our own vendors first, then GCC stories, so those views always have news to show.
-    ours_first = [i for i in ranked if i.get("portfolio")][: PORTFOLIO.get("min_posts", 6)]
+    ours_first, covered = [], set()
+    for i in ranked:  # the best story for each vendor in the news, then their next best
+        new = {l["vendor"] for l in i.get("portfolio", [])} - covered
+        if new:
+            ours_first.append(i); covered |= new
+    ours_first += [i for i in ranked if i.get("portfolio") and i not in ours_first]
+    ours_first = ours_first[: max(PORTFOLIO.get("min_posts", 6), len(covered))]
     gcc_first = [i for i in ranked if i["region"] == "GCC" and i not in ours_first][: config.get("gcc_min_posts", 6)]
     reserved = ours_first + gcc_first
     chosen = set()
@@ -916,7 +921,7 @@ def main() -> int:
     curated = curate_with_claude(items, config, history, moves) or curate_with_rules(items, config, history, moves)
     add_previews(curated["posts"])
     pf.relink_posts(curated["posts"], PORTFOLIO)
-    watch = pf.vendor_watch(PORTFOLIO, items, curated["posts"], curated.pop("vendor_signals", None))
+    watch = pf.vendor_watch(PORTFOLIO, ARTICLES, curated["posts"], curated.pop("vendor_signals", None))
     log(f"Vendor watch: {sum(1 for w in watch if w['signal'] != 'none')} of {len(watch)} vendors in the news.")
 
     # Web research by Claude: viral watch, new vendors, category map. Never blocks the edition.

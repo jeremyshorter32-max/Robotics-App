@@ -12,8 +12,9 @@
    meta.tagline = one-line description shown at the top of the page.
    meta.metrics = the key-figures bar, in display order. Each item is
      {"key": ..., "label": ...}. Keys (calculated from fleet automatically):
-     deployments, live, testing, planned, assets, districts, partners,
-     robot_types, units.
+     sites, sites_live, sites_testing, sites_planned (each site once, under
+     its most advanced status), deployments, live, testing, planned
+     (per robot service), assets, districts, partners, robot_types, units.
      For a hand-entered figure use {"label": "...", "value": "..."} instead.
      Remove an item to hide it; reorder to change its position.
    videos = optional list of footage for a deployment, shown on its card,
@@ -36,24 +37,24 @@ window.FLEET_DATA = {
   "tagline": "Aldar's view of robotics across its Abu Dhabi portfolio: what's live, in testing and planned, asset by asset.",
   "metrics": [
    {
-    "key": "deployments",
-    "label": "Deployments"
+    "key": "sites",
+    "label": "Sites"
    },
    {
-    "key": "live",
+    "key": "sites_live",
     "label": "Live"
    },
    {
-    "key": "testing",
+    "key": "sites_testing",
     "label": "Testing"
    },
    {
-    "key": "planned",
+    "key": "sites_planned",
     "label": "Planned"
    },
    {
-    "key": "assets",
-    "label": "Aldar assets"
+    "key": "districts",
+    "label": "Districts"
    },
    {
     "key": "partners",

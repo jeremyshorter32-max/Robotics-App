@@ -912,9 +912,9 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#9DB9E0;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2.4s infinite"></span>Data as of {{ asOf }}</span>
       </div>
       <div title="{{ unitsTip }}" style="display:flex;align-items:center;gap:12px;padding-left:18px;border-left:1px solid rgba(118,156,210,0.3)">
-        <span style="font-size:34px;font-weight:300;line-height:1;color:#FFFFFF;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">{{ unitsTotal }}</span>
+        <span style="font-size:36px;font-weight:600;line-height:1;color:#FFFFFF;letter-spacing:-0.03em;font-variant-numeric:tabular-nums">{{ unitsTotal }}</span>
         <span style="display:flex;flex-direction:column;gap:2px">
-          <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#9DB9E0">Robotic units</span>
+          <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#DCE7F6">Robotic units</span>
           <span class="rr-usub" style="font-size:10px;color:rgba(255,255,255,0.66);white-space:nowrap">{{ unitsSub }}</span>
         </span>
       </div>
@@ -977,7 +977,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
       </sc-for>
     </div>
     <div class="rr-fnote" style="margin-left:auto;display:flex;align-items:center;gap:8px">
-      <span style="font-size:11px;color:rgba(255,255,255,0.72)">Totals count deployments</span>
+      <span style="font-size:11px;color:rgba(255,255,255,0.72)">Totals count sites · each site under its most advanced status</span>
     </div>
     <div class="rr-fdone">
       <button sc-camel-on-click="{{ clearFilters }}" style="background:transparent;border:1px solid rgba(255,255,255,0.28);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:9px 14px;cursor:pointer" style-hover="border-color:#9DB9E0">Clear all</button>
@@ -1102,7 +1102,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
           <div style="display:grid;grid-template-columns:auto minmax(0,1fr);gap:22px;align-items:center;padding:14px 0;border-top:1px solid rgba(var(--pInk,11,11,11),0.1);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.1)">
             <div style="display:flex;flex-direction:column;gap:3px">
               <span style="font-size:34px;font-weight:600;line-height:1;letter-spacing:-0.02em;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums">{{ hero.big }}</span>
-              <span style="display:flex;align-items:center;gap:6px;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">Deployments<sc-if value="{{ heroSample }}" hint-placeholder-val="{{ false }}"><span style="font-size:8px;font-weight:600;letter-spacing:0.14em;padding:1px 4px;border:1px solid #E0703C;color:#B0501E">SAMPLE</span></sc-if></span>
+              <span style="display:flex;align-items:center;gap:6px;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">{{ heroUnit }}<sc-if value="{{ heroSample }}" hint-placeholder-val="{{ false }}"><span style="font-size:8px;font-weight:600;letter-spacing:0.14em;padding:1px 4px;border:1px solid #E0703C;color:#B0501E">SAMPLE</span></sc-if></span>
             </div>
             <div style="display:flex;flex-direction:column;gap:10px;min-width:0">
               <div role="img" aria-label="{{ hero.barAria }}" style="display:flex;gap:2px;height:6px">
@@ -1411,7 +1411,18 @@ class Component extends DCLogic {
     const s = this.state, A = this.A;
     return window.FLEET_DATA.fleet.filter((f) => this.A && this.A[f.asset_id] && this.T && this.T[f.robot_type]).filter((f) => (!s.types.length || s.types.includes(f.robot_type)) && (s.status === "all" || f.status === s.status) && (!s.dists.length || s.dists.includes(A[f.asset_id].district_id)) && (!s.vid || (f.videos || []).length > 0));
   }
+  // Sites: each Aldar site counts once, under its most advanced status (live > testing > planned).
   agg(rows) {
+    const g = { total: 0, deployed: 0, pilot: 0, planned: 0, by: {}, sample: false };
+    window.FLEET_DATA.robot_types.forEach((t) => (g.by[t.id] = { total: 0, deployed: 0, pilot: 0, planned: 0 }));
+    const R = { deployed: 3, pilot: 2, planned: 1 }, best = (a, b) => (!a || R[b] > R[a] ? b : a), site = {}, siteType = {};
+    rows.forEach((f) => { site[f.asset_id] = best(site[f.asset_id], f.status); const k = f.robot_type + "|" + f.asset_id; siteType[k] = best(siteType[k], f.status); });
+    Object.keys(site).forEach((k) => { g.total += 1; g[site[k]] += 1; });
+    Object.keys(siteType).forEach((k) => { const t = k.split("|")[0], st = siteType[k]; if (g.by[t]) { g.by[t].total += 1; g.by[t][st] += 1; } });
+    return g;
+  }
+  // Deployments: each robot service at a site counts once (used inside a single site).
+  aggD(rows) {
     const g = { total: 0, deployed: 0, pilot: 0, planned: 0, by: {}, sample: false };
     window.FLEET_DATA.robot_types.forEach((t) => (g.by[t.id] = { total: 0, deployed: 0, pilot: 0, planned: 0 }));
     const seen = new Set();
@@ -1539,7 +1550,7 @@ class Component extends DCLogic {
     const s = this.state, L = window.L, map = this.map, D = window.FLEET_DATA, A = this.A, rows = this.rows();
     const byD = {}, byA = {};
     D.districts.forEach((d) => (byD[d.id] = this.agg(rows.filter((f) => A[f.asset_id] && A[f.asset_id].district_id === d.id))));
-    D.assets.forEach((a) => (byA[a.id] = this.agg(rows.filter((f) => f.asset_id === a.id))));
+    D.assets.forEach((a) => (byA[a.id] = this.aggD(rows.filter((f) => f.asset_id === a.id))));
     const max = Math.max.apply(null, [1].concat(D.districts.map((d) => byD[d.id].total)));
     D.districts.forEach((d) => {
       const g = byD[d.id], inF = !s.dists.length || s.dists.includes(d.id), focus = s.level === 0 ? inF : d.id === s.d;
@@ -1655,11 +1666,11 @@ class Component extends DCLogic {
     let head, body, name;
     if (s.level === 0) {
       head = ["district", "total", "live", "testing", "planned", "dominant_type", "note"];
-      body = D.districts.filter((d) => !s.dists.length || s.dists.includes(d.id)).map((d) => { const g = this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)), dm = this.dom(g); return [d.name, g.total, g.deployed, g.pilot, g.planned, dm ? T[dm].label : "", "counts are deployments"]; });
+      body = D.districts.filter((d) => !s.dists.length || s.dists.includes(d.id)).map((d) => { const g = this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)), dm = this.dom(g); return [d.name, g.total, g.deployed, g.pilot, g.planned, dm ? T[dm].label : "", "counts are sites"]; });
       name = "fleet-portfolio";
     } else if (s.level === 1) {
       head = ["location", "district", "asset_type", "deployments", "total", "live", "testing", "planned", "note"];
-      body = D.assets.filter((a) => a.district_id === s.d).map((a) => { const g = this.agg(rows.filter((f) => f.asset_id === a.id)); return [a.name, this.DI[a.district_id].name, a.asset_type, D.fleet.filter((f) => f.asset_id === a.id).length, g.total, g.deployed, g.pilot, g.planned, "counts are deployments"]; });
+      body = D.assets.filter((a) => a.district_id === s.d).map((a) => { const g = this.aggD(rows.filter((f) => f.asset_id === a.id)); return [a.name, this.DI[a.district_id].name, a.asset_type, D.fleet.filter((f) => f.asset_id === a.id).length, g.total, g.deployed, g.pilot, g.planned, "counts are deployments"]; });
       name = "fleet-" + s.d;
     } else {
       head = ["id", "location", "category", "use_case", "robot_type", "vendor", "model", "units_stated", "tracker_status", "stage", "owner", "entity", "funded_by", "latest_update", "scope", "next_steps"];
@@ -1690,7 +1701,8 @@ class Component extends DCLogic {
     if ((s.d && !DI[s.d]) || (s.a && !A[s.a]) || (s.level === 1 && !s.d) || (s.level === 2 && !s.a)) { clearTimeout(this.navFix); this.navFix = setTimeout(() => this.goPortfolio(), 0); }
     const lvl = (s.level === 2 && !A[s.a]) || (s.level === 1 && !DI[s.d]) ? 0 : s.level, dist = s.d && DI[s.d] ? DI[s.d] : null, ast = s.a && A[s.a] ? A[s.a] : null;
     const scope = lvl === 0 ? rows : lvl === 1 ? rows.filter((f) => A[f.asset_id].district_id === s.d) : rows.filter((f) => f.asset_id === s.a);
-    const g = this.agg(scope), INK = "#12102A";
+    const g = lvl === 2 ? this.aggD(scope) : this.agg(scope), INK = "#12102A";
+    const unitW = (n) => lvl === 2 ? (n === 1 ? " deployment" : " deployments") : (n === 1 ? " site" : " sites");
     const G = { deployed: this.nodeU("deployed", INK), pilot: this.nodeU("pilot", INK), planned: this.nodeU("planned", INK) };
     const GL = { deployed: this.nodeU("deployed", "#DCE7F6"), pilot: this.nodeU("pilot", "#DCE7F6"), planned: this.nodeU("planned", "#DCE7F6") };
     const LBL = { deployed: "Live", pilot: "Testing", planned: "Planned" };
@@ -1702,13 +1714,13 @@ class Component extends DCLogic {
     const SUM = window.RR_SUMMARY ? window.RR_SUMMARY(D) : { tagline: "", items: [] };
     const sumItems = SUM.items.map((m, i) => Object.assign({}, m, { bl: i ? "1px solid rgba(118,156,210,0.25)" : "0", pl: i ? "18px" : "0" }));
     let hero;
-    if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + " assets across " + actD.size + " districts · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
+    if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + (actA.size === 1 ? " site" : " sites") + " across " + actD.size + (actD.size === 1 ? " district" : " districts") + " · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
     else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? (dist.zone ? " · approximate area" : " · OpenStreetMap boundary") : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
     else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Types", typesIn)] };
     hero.big = String(Math.round(g.total * e));
     hero.bar = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "#769CD2"], ["planned", "Planned", "rgba(var(--pInk,11,11,11),0.22)"]].map((x) => ({ l: x[1], n: String(Math.round(g[x[0]] * e)), w: g.total ? (g[x[0]] / g.total * 100).toFixed(2) + "%" : "0%", bg: x[2], g: G[x[0]] }));
     hero.barAria = g.deployed + " live, " + g.pilot + " testing, " + g.planned + " planned";
-    hero.extra = lvl === 0 ? [] : (hero.metrics || []).slice(3).map((m) => ({ v: String(Number(m.v)), l: m.l }));
+    hero.extra = lvl !== 2 ? [] : (hero.metrics || []).slice(3).map((m) => ({ v: String(Number(m.v)), l: m.l }));
 
     const typeRows = D.robot_types.filter((t) => (!s.types.length || s.types.includes(t.id)) && scope.some((f) => f.robot_type === t.id)).map((t) => {
       const b = g.by[t.id], nodes = [];
@@ -1735,7 +1747,7 @@ class Component extends DCLogic {
 
     const distAssets = lvl > 0 ? D.assets.filter((a) => a.district_id === s.d && rows.some((f) => f.asset_id === a.id)) : [];
     const assetRows = distAssets.map((a) => {
-      const gg = this.agg(rows.filter((f) => f.asset_id === a.id)), st = gg.deployed ? "deployed" : gg.pilot ? "pilot" : gg.total ? "planned" : null;
+      const gg = this.aggD(rows.filter((f) => f.asset_id === a.id)), st = gg.deployed ? "deployed" : gg.pilot ? "pilot" : gg.total ? "planned" : null;
       return { hasVid: VN(a.id) > 0, nVid: VN(a.id) + (VN(a.id) === 1 ? " video" : " videos"), name: a.name, type: a.asset_type, wave: nInit(a.id), ring: this.ringU(gg, 56, 23, 3), total: cnt(gg.total), status: st ? LBL[st] : "None in view", sg: st ? G[st] : "", hasSg: !!st, types: D.robot_types.filter((t) => gg.by[t.id].total).map((t) => ({ icon: this.iconU(t.id, t.ink), n: gg.by[t.id].total, label: t.label })), go: () => this.goAsset(a.id) };
     });
 
@@ -1749,7 +1761,7 @@ class Component extends DCLogic {
     if (ast) crumbs.push({ label: ast.name, go: () => {} });
     crumbs.forEach((c, i) => { const last = i === crumbs.length - 1; c.sep = i > 0; c.fw = last ? "600" : "400"; c.color = last ? "var(--p12102A,#12102A)" : "var(--p515150,#515150)"; c.cur = last ? "page" : "false"; });
     const pickOpts = (lvl === 0 ? D.districts.filter((d) => rows.some((f) => A[f.asset_id].district_id === d.id)).map((d) => ({ id: d.id, label: d.name + "  (" + this.agg(rows.filter((f) => A[f.asset_id].district_id === d.id)).total + ")" }))
-      : D.assets.filter((a) => a.district_id === s.d).filter((a) => rows.some((f) => f.asset_id === a.id)).map((a) => ({ id: a.id, label: a.name + "  (" + this.agg(rows.filter((f) => f.asset_id === a.id)).total + ")" })));
+      : D.assets.filter((a) => a.district_id === s.d).filter((a) => rows.some((f) => f.asset_id === a.id)).map((a) => ({ id: a.id, label: a.name + "  (" + this.aggD(rows.filter((f) => f.asset_id === a.id)).total + ")" })));
     const picker = { show: lvl < 2 || pickOpts.length > 1, ph: lvl === 0 ? "Choose district" : lvl === 1 ? "Choose location" : "Switch location", val: lvl === 2 ? s.a : "", opts: pickOpts,
       change: (ev) => { const v = ev.target.value; if (!v) return; if (lvl === 0) this.goDistrict(v); else this.goAsset(v); } };
     const stepNo = ["1", "2", "3"][lvl], stepTxt = ["Portfolio overview", "District view", "Location detail"][lvl];
@@ -1760,7 +1772,7 @@ class Component extends DCLogic {
     if (s.vid) fChips.push({ label: "Has video", kind: "Footage", x: () => { this.setState({ vid: false }); this.kick(); } });
     const fChipsOn = fChips.length > 0;
     const nAll = D.fleet.filter((f) => lvl === 0 || (lvl === 1 ? A[f.asset_id].district_id === s.d : f.asset_id === s.a));
-    const fInfo = { on: fChips.length > 0, chips: fChips, count: "Showing " + this.agg(scope).total + " of " + this.agg(nAll).total + " deployments" };
+    const fInfo = { on: fChips.length > 0, chips: fChips, count: (() => { const ag = lvl === 2 ? (r) => this.aggD(r) : (r) => this.agg(r), a = ag(scope).total, b = ag(nAll).total; return "Showing " + a + " of " + b + unitW(b); })() };
 
     const ql = s.q.trim().toLowerCase();
     const results = !ql ? [] : D.districts.filter((d) => d.name.toLowerCase().includes(ql)).map((d) => ({ label: d.name, sub: D.assets.filter((a) => a.district_id === d.id).length + " assets", kind: "District", go: (ev) => { ev && ev.preventDefault && ev.preventDefault(); this.goDistrict(d.id); } }))
@@ -1787,7 +1799,7 @@ class Component extends DCLogic {
     const compass = (deg) => ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"][Math.round(deg / 45) % 8];
     const remote = { show: remoteDs.length > 0 && (lvl === 0 || inRemote), items: inRemote
       ? [{ over: dist.name, label: "Back to Abu Dhabi", tip: "Zoom back to the main Abu Dhabi districts", rot: 180, go: () => this.goPortfolio() }]
-      : remoteDs.map((d) => { const n = rows.filter((f) => A[f.asset_id] && A[f.asset_id].district_id === d.id).length; return { over: "~" + kmTo(d.centroid) + " km " + compass(bearing(d.centroid)), label: d.name + " · " + n + (n === 1 ? " deployment" : " deployments"), tip: "Zoom to " + d.name, rot: Math.round(bearing(d.centroid) - 90), go: () => this.goDistrict(d.id) }; }) };
+      : remoteDs.map((d) => { const n = this.agg(rows.filter((f) => A[f.asset_id] && A[f.asset_id].district_id === d.id)).total; return { over: "~" + kmTo(d.centroid) + " km " + compass(bearing(d.centroid)), label: d.name + " · " + n + (n === 1 ? " site" : " sites"), tip: "Zoom to " + d.name, rot: Math.round(bearing(d.centroid) - 90), go: () => this.goDistrict(d.id) }; }) };
     return Object.assign(refs, {
       q: s.q, results, showResults: !!ql && s.qFocus, noResults: !!ql && !results.length,
       onQ: (ev) => this.setState({ q: ev.target.value }),
@@ -1812,8 +1824,8 @@ class Component extends DCLogic {
       fWrapRef: this.fWrapRef || (this.fWrapRef = (el) => { this.fWrapEl = el; }), fOpenS: String(!!s.fOpen), fCaret: s.fOpen ? 180 : 0, fN: String(fChips.length), fNone: !fChips.length,
       fBtnBg: s.fOpen || fChips.length ? "rgba(118,156,210,0.16)" : "transparent", fBtnBd: s.fOpen || fChips.length ? "#9DB9E0" : "rgba(255,255,255,0.22)",
       toggleF: () => this.setState({ fOpen: !s.fOpen }), closeF: () => this.setState({ fOpen: false }),
-      fShowN: (() => { const n = this.agg(rows).total; return n + (n === 1 ? " deployment" : " deployments"); })(),
-      remote, sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
+      fShowN: (() => { const n = this.agg(rows).total; return n + (n === 1 ? " site" : " sites"); })(),
+      heroUnit: lvl === 2 ? "Deployments" : "Sites", remote, sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: lvl === 2 ? this.ringU(g, 150, 66, 7) : "", inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
       scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,
@@ -1871,8 +1883,8 @@ function badgeHtml(d, g, compact, dim) {
   return '<div style="position:absolute;left:0;top:0;transform:' + ({ right: "translate(calc(-100% - 8px),-50%)", left: "translate(8px,-50%)", top: "translate(-50%,calc(-100% - 8px))", bottom: "translate(-50%,8px)" }[d.badge_align] || "translate(-50%,-50%)") + ';white-space:nowrap;background:rgba(18,16,42,0.9);border:1px solid rgba(118,156,210,0.55);padding:' + (compact ? "6px 9px" : "9px 12px 10px") + ";display:flex;flex-direction:column;gap:4px;font-family:Poppins,sans-serif;color:#fff;cursor:pointer;opacity:" + (dim ? 0.5 : 1) + ';transition:opacity .4s;box-shadow:0 10px 30px rgba(0,0,0,0.4)">' +
     tk("left:-1px;top:-1px;border-left-width:1px;border-top-width:1px") + tk("right:-1px;bottom:-1px;border-right-width:1px;border-bottom-width:1px") +
     '<span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0">' + d.name + "</span>" +
-    (compact ? '<span style="font-size:15px;font-weight:300;line-height:1">' + pad(g.total) + ' <span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.7)">DEPLOYMENTS</span></span>'
-      : '<span style="display:flex;align-items:baseline;gap:8px"><b style="font-size:28px;font-weight:200;line-height:1;letter-spacing:-0.02em">' + pad(g.total) + '</b><span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.72)">DEPLOYMENTS</span>' + (g.sample ? '<span style="font-size:8px;font-weight:600;letter-spacing:0.14em;color:#F2A27C">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g)) +
+    (compact ? '<span style="font-size:15px;font-weight:300;line-height:1">' + pad(g.total) + ' <span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.7)">' + (g.total === 1 ? "SITE" : "SITES") + '</span></span>'
+      : '<span style="display:flex;align-items:baseline;gap:8px"><b style="font-size:28px;font-weight:200;line-height:1;letter-spacing:-0.02em">' + pad(g.total) + '</b><span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.72)">' + (g.total === 1 ? "SITE" : "SITES") + '</span>' + (g.sample ? '<span style="font-size:8px;font-weight:600;letter-spacing:0.14em;color:#F2A27C">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g)) +
     "</div>";
 }
 function markerHtml(a, g, on, dim, ly, sc) {

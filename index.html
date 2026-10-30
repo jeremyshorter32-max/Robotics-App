@@ -16,7 +16,7 @@
 (function () {
   try {
     if (/[?&]view=desktop\b/.test(location.search)) return;
-    if ((window.matchMedia("(max-width: 760px)").matches || (screen && screen.width <= 760))) location.replace("mobile.html" + location.hash);
+    if ((window.matchMedia("(max-width: 760px)").matches || (screen && screen.width <= 760))) location.replace("mobile.html" + location.search.replace(/[?&]view=[^&]*/, "") + location.hash);
   } catch (e) {}
 })();
 </script>
@@ -831,27 +831,29 @@ svg.leaflet-image-layer.leaflet-interactive path {
 }
 </style>
 <script src="data/fleet-data.js"></script>
+<script src="data/construction-data.js"></script>
+<script src="assets/js/modes.js?v=20261030c"></script>
 <style>
 html,body{margin:0;background:#0B0A1F;font-family:Poppins,sans-serif;-webkit-font-smoothing:antialiased}
-a{color:#2F245C;text-decoration:none}a:hover{color:#769CD2}
+a{color:var(--accDeep,#2F245C);text-decoration:none}a:hover{color:var(--acc,#769CD2)}
 input::placeholder{color:rgba(255,255,255,0.5)}
-button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offset:2px}
+button:focus-visible,input:focus-visible{outline:2px solid var(--acc,#769CD2);outline-offset:2px}
 .leaflet-container{background:#0B0A1F;font-family:Poppins,sans-serif;outline:0}
 .leaflet-tile-pane{filter:sepia(0.5) hue-rotate(200deg) saturate(1.5) brightness(0.95)}
 .rr-labels{opacity:0.75;pointer-events:none}
 .leaflet-control-attribution{background:rgba(11,10,31,0.82)!important;color:rgba(255,255,255,0.66)!important;font-size:9px;padding:2px 8px!important}
-.leaflet-control-attribution a{color:#9DB9E0!important}
-.leaflet-bar{border:1px solid rgba(118,156,210,0.4)!important;border-radius:0!important;box-shadow:none!important}
-.leaflet-bar a{background:rgba(18,16,42,0.94)!important;color:#DCE7F6!important;border-radius:0!important;border-bottom:1px solid rgba(118,156,210,0.25)!important;width:32px!important;height:32px!important;line-height:32px!important;font-weight:300}
-.leaflet-bar a:hover{background:#2F245C!important;color:#fff!important}
+.leaflet-control-attribution a{color:var(--acc2,#9DB9E0)!important}
+.leaflet-bar{border:1px solid rgba(var(--accRGB,118,156,210),0.4)!important;border-radius:0!important;box-shadow:none!important}
+.leaflet-bar a{background:rgba(18,16,42,0.94)!important;color:var(--acc3,#DCE7F6)!important;border-radius:0!important;border-bottom:1px solid rgba(var(--accRGB,118,156,210),0.25)!important;width:32px!important;height:32px!important;line-height:32px!important;font-weight:300}
+.leaflet-bar a:hover{background:var(--accDeep,#2F245C)!important;color:#fff!important}
 .leaflet-control-zoom{margin:0 22px 30px 0!important}
-.leaflet-tooltip.rr-tip{background:rgba(18,16,42,0.94);border:1px solid rgba(118,156,210,0.45);border-radius:0;box-shadow:0 6px 18px rgba(0,0,0,0.4);color:#fff;font-family:Poppins,sans-serif;padding:6px 10px;white-space:nowrap}
+.leaflet-tooltip.rr-tip{background:rgba(18,16,42,0.94);border:1px solid rgba(var(--accRGB,118,156,210),0.45);border-radius:0;box-shadow:0 6px 18px rgba(0,0,0,0.4);color:#fff;font-family:Poppins,sans-serif;padding:6px 10px;white-space:nowrap}
 .leaflet-tooltip.rr-tip:before{display:none}
 .rr-poly{cursor:pointer;transition:fill-opacity .6s,stroke-opacity .6s}
 .rr-in{animation:rrDraw 1.9s cubic-bezier(.2,.7,.2,1) both}
 .rr-poly:hover{filter:drop-shadow(0 0 4px rgba(157,185,224,0.8));stroke-width:2px}
 .leaflet-interactive:focus,.leaflet-container path:focus,.leaflet-container svg:focus{outline:none}
-.leaflet-marker-icon:focus-visible{outline:1px solid #DCE7F6;outline-offset:4px}
+.leaflet-marker-icon:focus-visible{outline:1px solid var(--acc3,#DCE7F6);outline-offset:4px}
 @keyframes rrDraw{from{stroke-dasharray:0 3000;fill-opacity:0}to{stroke-dasharray:3000 0}}
 @keyframes rrMarch{to{stroke-dashoffset:-18}}
 @keyframes rrScanY{0%{top:0;opacity:0}8%{opacity:1}88%{opacity:1}100%{top:100%;opacity:0}}
@@ -868,35 +870,46 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
 .rr-asof,.rr-usub,.rr-rlong{display:none !important}
 .rr-search{max-width:320px !important}
 .rr-ftool{display:flex}
-.rr-fbar{position:absolute !important;top:calc(100% + 6px);left:24px;width:min(760px,calc(100% - 48px));display:none !important;flex-direction:column;align-items:flex-start !important;gap:16px !important;padding:18px 20px 16px !important;background:#12102A !important;border:1px solid rgba(118,156,210,0.45) !important;box-shadow:0 22px 50px rgba(0,0,0,0.5);z-index:1200}
+.rr-fbar{position:absolute !important;top:calc(100% + 6px);left:24px;width:min(760px,calc(100% - 48px));display:none !important;flex-direction:column;align-items:flex-start !important;gap:16px !important;padding:18px 20px 16px !important;background:#12102A !important;border:1px solid rgba(var(--accRGB,118,156,210),0.45) !important;box-shadow:0 22px 50px rgba(0,0,0,0.5);z-index:1200}
 .rr-fbar[data-open="true"]{display:flex !important}
 .rr-fnote,.rr-pchips{display:none !important}
-.rr-fdone{display:flex;align-self:stretch;justify-content:flex-end;gap:10px;padding-top:14px;border-top:1px solid rgba(118,156,210,0.2)}
+.rr-fdone{display:flex;align-self:stretch;justify-content:flex-end;gap:10px;padding-top:14px;border-top:1px solid rgba(var(--accRGB,118,156,210),0.2)}
 }
 @media (max-width:1279px){.rr-search{min-width:150px !important;max-width:240px !important}.rr-wlong{display:none !important}}
+
+/* Construction layer: green map tint and district outlines. */
+html[data-rr-mode="construction"] .leaflet-tile-pane{filter:sepia(0.55) hue-rotate(85deg) saturate(1.35) brightness(0.92) !important}
+html[data-rr-mode="construction"] .rr-poly{stroke:#8FD3A8 !important;fill:#5FB37F !important}
+.rr-mshort{display:none}
+@media (max-width:1439px){.rr-mlong{display:none}.rr-mshort{display:inline}}
 </style>
 </helmet>
 
 <div ref="{{ rootRef }}" style="height:{{ rootH }};min-height:100vh;display:flex;flex-direction:column;overflow:{{ rootOv }};background:#0B0A1F;font-family:Poppins,sans-serif;color:#0B0B0B">
 
-  <header style="position:relative;z-index:1100;display:flex;align-items:center;gap:20px;padding:12px 24px;background:#12102A;border-bottom:1px solid rgba(118,156,210,0.22);flex-wrap:wrap">
+  <header style="position:relative;z-index:1100;display:flex;align-items:center;gap:20px;padding:12px 24px;background:#12102A;border-bottom:1px solid rgba(var(--accRGB,118,156,210),0.22);flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:14px;flex:none">
       <img src="assets/img/aldar-logo.png" alt="Aldar" style="height:24px;width:auto;display:block">
       <span style="width:1px;height:22px;background:rgba(255,255,255,0.25)"></span>
       <div style="display:flex;flex-direction:column;gap:1px">
         <span style="font-size:15px;font-weight:500;color:#FFFFFF;letter-spacing:-0.01em;line-height:1.2">Robotics Fleet</span>
-        <span style="font-size:9px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:#9DB9E0">Command view · Portfolio</span>
+        <span style="font-size:9px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">Command view · Portfolio</span>
       </div>
     </div>
+    <div role="radiogroup" aria-label="Map layer" style="flex:none;display:flex;border:1px solid rgba(255,255,255,0.22)">
+      <sc-for list="{{ modeOpts }}" as="mo" hint-placeholder-count="2">
+        <button sc-camel-on-click="{{ mo.go }}" role="radio" aria-checked="{{ mo.sel }}" title="{{ mo.tip }}" style="display:flex;align-items:center;gap:8px;padding:8px 13px;background:{{ mo.bg }};border:0;color:{{ mo.fg }};font-family:Poppins,sans-serif;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;cursor:pointer;transition:background .25s,color .25s"><span style="width:7px;height:7px;border-radius:50%;background:{{ mo.dot }};flex:none"></span><span class="rr-mlong">{{ mo.label }}</span><span class="rr-mshort">{{ mo.short }}</span></button>
+      </sc-for>
+    </div>
     <div class="rr-search" style="position:relative;flex:1;min-width:220px;max-width:440px">
-      <svg sc-camel-view-box="0 0 24 24" width="15" height="15" fill="none" stroke="#9DB9E0" stroke-width="1.6" stroke-linecap="round" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg>
+      <svg sc-camel-view-box="0 0 24 24" width="15" height="15" fill="none" stroke-width="1.6" stroke-linecap="round" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);pointer-events:none;stroke:var(--acc2,#9DB9E0)"><circle cx="10.5" cy="10.5" r="6"></circle><path d="M15 15l5 5"></path></svg>
       <input value="{{ q }}" sc-camel-on-change="{{ onQ }}" sc-camel-on-focus="{{ onQFocus }}" sc-camel-on-blur="{{ onQBlur }}" sc-camel-on-key-down="{{ onQKey }}" placeholder="Search a district or asset" aria-label="Search districts and assets" style="width:100%;box-sizing:border-box;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.18);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:13px;padding:9px 12px 9px 36px;outline:none">
       <sc-if value="{{ showResults }}" hint-placeholder-val="{{ false }}">
         <div role="listbox" style="position:absolute;left:0;right:0;top:calc(100% + 6px);background:#FFFFFF;border:1px solid rgba(11,11,11,0.12);box-shadow:0 18px 40px rgba(0,0,0,0.35);display:flex;flex-direction:column;padding:6px 0">
           <sc-for list="{{ results }}" as="r" hint-placeholder-count="0">
             <button sc-camel-on-mouse-down="{{ r.go }}" role="option" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:transparent;border:0;text-align:left;cursor:pointer;font-family:Poppins,sans-serif" style-hover="background:#F2F5FA">
               <span style="display:flex;flex-direction:column;gap:1px"><span style="font-size:13px;font-weight:500;color:#12102A">{{ r.label }}</span><span style="font-size:11px;color:#515150">{{ r.sub }}</span></span>
-              <span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#3F6FAE">{{ r.kind }}</span>
+              <span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--accInk,#3F6FAE)">{{ r.kind }}</span>
             </button>
           </sc-for>
           <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}">
@@ -906,54 +919,54 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
       </sc-if>
     </div>
     <div style="display:flex;align-items:center;gap:18px;margin-left:auto;flex:none">
-      <a href="intel.html" class="rr-pulse" title="Weekly robotics market intelligence: trends, products and investments worldwide" aria-label="Open Market Pulse, weekly robotics market intelligence" style="display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid rgba(255,255,255,0.28);background:transparent;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap;text-decoration:none" style-hover="border-color:#769CD2;color:#9DB9E0"><svg sc-camel-view-box="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"></path></svg><span class="rr-pulse-lbl">Market pulse</span></a>
-      <button sc-camel-on-click="{{ openGallery }}" title="Watch footage of robots in action, filtered by your current selection" aria-label="Watch deployments, {{ watchN }} videos" style="display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid #769CD2;background:rgba(118,156,210,0.12);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap;cursor:pointer" style-hover="background:#769CD2;color:#12102A"><svg sc-camel-view-box="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg>Watch<span class="rr-wlong">&nbsp;deployments</span><span style="font-size:10px;letter-spacing:0.04em;padding:1px 6px;border:1px solid currentColor;opacity:0.85;font-variant-numeric:tabular-nums">{{ watchN }}</span></button>
+      <a href="intel.html" class="rr-pulse" title="Weekly robotics market intelligence: trends, products and investments worldwide" aria-label="Open Market Pulse, weekly robotics market intelligence" style="display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid rgba(255,255,255,0.28);background:transparent;color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap;text-decoration:none" style-hover="border-color:var(--acc,#769CD2);color:var(--acc2,#9DB9E0)"><svg sc-camel-view-box="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l2.5-6 5 12 2.5-6h4"></path></svg><span class="rr-pulse-lbl">Market pulse</span></a>
+      <button sc-camel-on-click="{{ openGallery }}" title="Watch footage of robots in action, filtered by your current selection" aria-label="Watch deployments, {{ watchN }} videos" style="display:flex;align-items:center;gap:8px;padding:9px 14px;border:1px solid var(--acc,#769CD2);background:rgba(var(--accRGB,118,156,210),0.12);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;white-space:nowrap;cursor:pointer" style-hover="background:var(--acc,#769CD2);color:#12102A"><svg sc-camel-view-box="0 0 24 24" width="11" height="11" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg>Watch<span class="rr-wlong">&nbsp;deployments</span><span style="font-size:10px;letter-spacing:0.04em;padding:1px 6px;border:1px solid currentColor;opacity:0.85;font-variant-numeric:tabular-nums">{{ watchN }}</span></button>
       <div class="rr-asof" style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
-        <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#9DB9E0;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2.4s infinite"></span>Data as of {{ asOf }}</span>
+        <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--acc2,#9DB9E0);display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:var(--acc,#769CD2);animation:rrBlink 2.4s infinite"></span>Data as of {{ asOf }}</span>
       </div>
-      <button sc-camel-on-click="{{ resetAll }}" style="background:transparent;border:1px solid rgba(255,255,255,0.28);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:9px 14px;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="border-color:#769CD2;color:#9DB9E0"><svg sc-camel-view-box="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"></path><path d="M4 4v4h4"></path></svg>Reset<span class="rr-rlong"> to portfolio</span></button>
+      <button sc-camel-on-click="{{ resetAll }}" style="background:transparent;border:1px solid rgba(255,255,255,0.28);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:9px 14px;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="border-color:var(--acc,#769CD2);color:var(--acc2,#9DB9E0)"><svg sc-camel-view-box="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"></path><path d="M4 4v4h4"></path></svg>Reset<span class="rr-rlong"> to portfolio</span></button>
     </div>
   </header>
 
-  <section aria-label="About this platform and key figures" style="position:relative;z-index:1050;display:flex;align-items:center;gap:12px 32px;padding:12px 24px;background:#100E28;border-bottom:1px solid rgba(118,156,210,0.16);flex-wrap:wrap">
+  <section aria-label="About this platform and key figures" style="position:relative;z-index:1050;display:flex;align-items:center;gap:12px 32px;padding:12px 24px;background:#100E28;border-bottom:1px solid rgba(var(--accRGB,118,156,210),0.16);flex-wrap:wrap">
     <p style="margin:0;flex:1 1 340px;min-width:0;font-size:13px;font-weight:300;line-height:1.5;color:rgba(255,255,255,0.84)">{{ sumPre }}<sc-if value="{{ sumHasNum }}" hint-placeholder-val="{{ false }}"><b title="{{ unitsTip }}" style="font-weight:700;color:#F2C14E;font-size:1.45em;line-height:1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap">{{ sumNum }}</b></sc-if>{{ sumPost }}</p>
     <div style="display:flex;align-items:center;flex-wrap:wrap;row-gap:8px">
       <sc-for list="{{ sumItems }}" as="m" hint-placeholder-count="6">
         <div title="{{ m.hint }}" style="display:flex;align-items:baseline;gap:8px;padding:2px 18px 2px {{ m.pl }};border-left:{{ m.bl }}">
           <span style="font-size:24px;font-weight:300;line-height:1;color:#FFFFFF;letter-spacing:-0.02em;font-variant-numeric:tabular-nums">{{ m.value }}</span>
-          <span style="font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0;white-space:nowrap">{{ m.label }}</span>
+          <span style="font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--acc2,#9DB9E0);white-space:nowrap">{{ m.label }}</span>
         </div>
       </sc-for>
     </div>
   </section>
 
   <div ref="{{ fWrapRef }}" style="position:relative;z-index:1000">
-  <div class="rr-ftool" style="align-items:center;gap:10px;padding:8px 24px;min-height:46px;box-sizing:border-box;background:#0E0C24;border-bottom:1px solid rgba(118,156,210,0.16)">
-    <button sc-camel-on-click="{{ toggleF }}" aria-expanded="{{ fOpenS }}" aria-haspopup="true" title="Filter by robot type, status, district or footage" style="flex:none;display:flex;align-items:center;gap:8px;padding:6px 12px;background:{{ fBtnBg }};border:1px solid {{ fBtnBd }};color:#FFFFFF;font-family:Poppins,sans-serif;font-size:12px;cursor:pointer" style-hover="border-color:#9DB9E0"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"></path></svg> Filters<sc-if value="{{ fInfo.on }}" hint-placeholder-val="{{ false }}"><span style="min-width:18px;padding:0 5px;background:#769CD2;color:#12102A;font-size:11px;font-weight:600;line-height:18px;text-align:center;font-variant-numeric:tabular-nums">{{ fN }}</span></sc-if><span aria-hidden="true" style="font-size:10px;opacity:0.8;transform:rotate({{ fCaret }}deg);transition:transform .2s">▾</span></button>
+  <div class="rr-ftool" style="align-items:center;gap:10px;padding:8px 24px;min-height:46px;box-sizing:border-box;background:#0E0C24;border-bottom:1px solid rgba(var(--accRGB,118,156,210),0.16)">
+    <button sc-camel-on-click="{{ toggleF }}" aria-expanded="{{ fOpenS }}" aria-haspopup="true" title="Filter by robot type, status, district or footage" style="flex:none;display:flex;align-items:center;gap:8px;padding:6px 12px;background:{{ fBtnBg }};border:1px solid {{ fBtnBd }};color:#FFFFFF;font-family:Poppins,sans-serif;font-size:12px;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5h16l-6 7.5V19l-4-2v-4.5z"></path></svg> Filters<sc-if value="{{ fInfo.on }}" hint-placeholder-val="{{ false }}"><span style="min-width:18px;padding:0 5px;background:var(--acc,#769CD2);color:#12102A;font-size:11px;font-weight:600;line-height:18px;text-align:center;font-variant-numeric:tabular-nums">{{ fN }}</span></sc-if><span aria-hidden="true" style="font-size:10px;opacity:0.8;transform:rotate({{ fCaret }}deg);transition:transform .2s">▾</span></button>
     <div style="display:flex;align-items:center;gap:6px;min-width:0;flex:1;overflow-x:auto;scrollbar-width:none">
       <sc-if value="{{ fInfo.on }}" hint-placeholder-val="{{ false }}">
         <sc-for list="{{ fInfo.chips }}" as="fc" hint-placeholder-count="0">
-          <button sc-camel-on-click="{{ fc.x }}" title="Remove this filter" style="flex:none;display:flex;align-items:center;gap:6px;padding:4px 6px 4px 9px;background:rgba(118,156,210,0.14);border:1px solid rgba(118,156,210,0.45);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11.5px;white-space:nowrap;cursor:pointer" style-hover="border-color:#DCE7F6"><span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:#9DB9E0">{{ fc.kind }}</span>{{ fc.label }}<span aria-hidden="true" style="font-size:13px;line-height:1;opacity:0.75;padding:0 2px">×</span></button>
+          <button sc-camel-on-click="{{ fc.x }}" title="Remove this filter" style="flex:none;display:flex;align-items:center;gap:6px;padding:4px 6px 4px 9px;background:rgba(var(--accRGB,118,156,210),0.14);border:1px solid rgba(var(--accRGB,118,156,210),0.45);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11.5px;white-space:nowrap;cursor:pointer" style-hover="border-color:var(--acc3,#DCE7F6)"><span style="font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">{{ fc.kind }}</span>{{ fc.label }}<span aria-hidden="true" style="font-size:13px;line-height:1;opacity:0.75;padding:0 2px">×</span></button>
         </sc-for>
-        <button sc-camel-on-click="{{ clearFilters }}" style="flex:none;background:none;border:0;padding:4px 6px;color:#9DB9E0;font-family:Poppins,sans-serif;font-size:11.5px;text-decoration:underline;cursor:pointer">Clear all</button>
+        <button sc-camel-on-click="{{ clearFilters }}" style="flex:none;background:none;border:0;padding:4px 6px;color:var(--acc2,#9DB9E0);font-family:Poppins,sans-serif;font-size:11.5px;text-decoration:underline;cursor:pointer">Clear all</button>
       </sc-if>
       <sc-if value="{{ fNone }}" hint-placeholder-val="{{ true }}">
         <span style="font-size:11.5px;color:rgba(255,255,255,0.55);white-space:nowrap">All robot types, statuses and districts</span>
       </sc-if>
     </div>
-    <span style="flex:none;display:flex;align-items:center;gap:8px;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#9DB9E0;white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2"></span>Data as of {{ asOf }}</span>
+    <span style="flex:none;display:flex;align-items:center;gap:8px;font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--acc2,#9DB9E0);white-space:nowrap"><span style="width:6px;height:6px;border-radius:50%;background:var(--acc,#769CD2)"></span>Data as of {{ asOf }}</span>
   </div>
-  <div class="rr-fbar" data-open="{{ fOpenS }}" role="dialog" aria-label="Filters" style="position:relative;z-index:1000;display:flex;align-items:center;gap:22px;padding:10px 24px;background:#0E0C24;border-bottom:1px solid rgba(118,156,210,0.16);flex-wrap:wrap">
+  <div class="rr-fbar" data-open="{{ fOpenS }}" role="dialog" aria-label="Filters" style="position:relative;z-index:1000;display:flex;align-items:center;gap:22px;padding:10px 24px;background:#0E0C24;border-bottom:1px solid rgba(var(--accRGB,118,156,210),0.16);flex-wrap:wrap">
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0;margin-right:4px">Type</span>
+      <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--acc2,#9DB9E0);margin-right:4px">Type</span>
       <sc-for list="{{ typeChips }}" as="t" hint-placeholder-count="0">
-        <button sc-camel-on-click="{{ t.toggle }}" aria-pressed="{{ t.pressed }}" title="Show {{ t.label }} robots" style="display:flex;align-items:center;gap:7px;padding:6px 11px 6px 8px;background:{{ t.bg }};border:1px solid {{ t.bd }};color:{{ t.fg }};font-family:Poppins,sans-serif;font-size:12px;white-space:nowrap;cursor:pointer;transition:background .2s,border-color .2s" style-hover="border-color:#9DB9E0">
+        <button sc-camel-on-click="{{ t.toggle }}" aria-pressed="{{ t.pressed }}" title="Show {{ t.label }} robots" style="display:flex;align-items:center;gap:7px;padding:6px 11px 6px 8px;background:{{ t.bg }};border:1px solid {{ t.bd }};color:{{ t.fg }};font-family:Poppins,sans-serif;font-size:12px;white-space:nowrap;cursor:pointer;transition:background .2s,border-color .2s" style-hover="border-color:var(--acc2,#9DB9E0)">
           <span aria-hidden="true" style="display:block;width:16px;height:16px;;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ t.label }}
         </button>
       </sc-for>
     </div>
     <div style="display:flex;align-items:center;gap:8px">
-      <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0;margin-right:4px">Status</span>
+      <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--acc2,#9DB9E0);margin-right:4px">Status</span>
       <div role="radiogroup" aria-label="Status" style="display:flex;border:1px solid rgba(255,255,255,0.18)">
         <sc-for list="{{ statusOpts }}" as="o" hint-placeholder-count="0">
           <button sc-camel-on-click="{{ o.go }}" role="radio" aria-checked="{{ o.pressed }}" title="{{ o.tip }}" style="display:flex;align-items:center;gap:6px;padding:6px 11px;background:{{ o.bg }};border:0;color:{{ o.fg }};font-family:Poppins,sans-serif;font-size:12px;white-space:nowrap;cursor:pointer">
@@ -961,20 +974,20 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
           </button>
         </sc-for>
       </div>
-      <button sc-camel-on-click="{{ toggleVid }}" aria-pressed="{{ vidPressed }}" title="Show only deployments with video footage" style="display:flex;align-items:center;gap:6px;margin-left:6px;padding:6px 11px;background:{{ vidBg }};border:1px solid {{ vidBd }};color:#FFFFFF;font-family:Poppins,sans-serif;font-size:12px;white-space:nowrap;cursor:pointer" style-hover="border-color:#9DB9E0"><svg sc-camel-view-box="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg>Has video</button>
+      <button sc-camel-on-click="{{ toggleVid }}" aria-pressed="{{ vidPressed }}" title="Show only deployments with video footage" style="display:flex;align-items:center;gap:6px;margin-left:6px;padding:6px 11px;background:{{ vidBg }};border:1px solid {{ vidBd }};color:#FFFFFF;font-family:Poppins,sans-serif;font-size:12px;white-space:nowrap;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)"><svg sc-camel-view-box="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg>Has video</button>
     </div>
     <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap">
-      <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0;margin-right:4px">District</span>
+      <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--acc2,#9DB9E0);margin-right:4px">District</span>
       <sc-for list="{{ distChips }}" as="d" hint-placeholder-count="3">
-        <button sc-camel-on-click="{{ d.toggle }}" aria-pressed="{{ d.pressed }}" style="padding:6px 11px;background:{{ d.bg }};border:1px solid {{ d.bd }};color:{{ d.fg }};font-family:Poppins,sans-serif;font-size:12px;white-space:nowrap;cursor:pointer" style-hover="border-color:#9DB9E0">{{ d.label }}</button>
+        <button sc-camel-on-click="{{ d.toggle }}" aria-pressed="{{ d.pressed }}" style="padding:6px 11px;background:{{ d.bg }};border:1px solid {{ d.bd }};color:{{ d.fg }};font-family:Poppins,sans-serif;font-size:12px;white-space:nowrap;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)">{{ d.label }}</button>
       </sc-for>
     </div>
     <div class="rr-fnote" style="margin-left:auto;display:flex;align-items:center;gap:8px">
       <span style="font-size:11px;color:rgba(255,255,255,0.72)">Totals count sites · each site under its most advanced status</span>
     </div>
     <div class="rr-fdone">
-      <button sc-camel-on-click="{{ clearFilters }}" style="background:transparent;border:1px solid rgba(255,255,255,0.28);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:9px 14px;cursor:pointer" style-hover="border-color:#9DB9E0">Clear all</button>
-      <button sc-camel-on-click="{{ closeF }}" style="background:#769CD2;border:0;color:#12102A;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:9px 18px;cursor:pointer" style-hover="background:#DCE7F6">Show {{ fShowN }}</button>
+      <button sc-camel-on-click="{{ clearFilters }}" style="background:transparent;border:1px solid rgba(255,255,255,0.28);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:9px 14px;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)">Clear all</button>
+      <button sc-camel-on-click="{{ closeF }}" style="background:var(--acc,#769CD2);border:0;color:#12102A;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:9px 18px;cursor:pointer" style-hover="background:var(--acc3,#DCE7F6)">Show {{ fShowN }}</button>
     </div>
   </div>
   </div>
@@ -983,51 +996,51 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
 
     <div style="position:relative;min-height:{{ mapMin }};height:{{ mapH }};background:#0B0A1F;overflow:hidden">
       <div ref="{{ mapRef }}" style="position:absolute;inset:0;z-index:0;background:#0B0A1F"></div>
-      <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(118,156,210,0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(118,156,210,0.07) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,transparent 30%,#000 100%);mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,transparent 30%,#000 100%)"></div>
+      <div style="position:absolute;inset:0;z-index:1;pointer-events:none;background-image:linear-gradient(rgba(var(--accRGB,118,156,210),0.07) 1px,transparent 1px),linear-gradient(90deg,rgba(var(--accRGB,118,156,210),0.07) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,transparent 30%,#000 100%);mask-image:radial-gradient(ellipse 80% 75% at 50% 50%,transparent 30%,#000 100%)"></div>
       <div ref="{{ tickRef }}" style="position:absolute;inset:0;z-index:2;pointer-events:none"></div>
-      <span style="position:absolute;left:14px;top:14px;z-index:2;width:18px;height:18px;border-left:1px solid #769CD2;border-top:1px solid #769CD2;pointer-events:none"></span>
-      <span style="position:absolute;right:14px;top:14px;z-index:2;width:18px;height:18px;border-right:1px solid #769CD2;border-top:1px solid #769CD2;pointer-events:none"></span>
-      <span style="position:absolute;left:14px;bottom:14px;z-index:2;width:18px;height:18px;border-left:1px solid #769CD2;border-bottom:1px solid #769CD2;pointer-events:none"></span>
-      <span style="position:absolute;right:14px;bottom:14px;z-index:2;width:18px;height:18px;border-right:1px solid #769CD2;border-bottom:1px solid #769CD2;pointer-events:none"></span>
+      <span style="position:absolute;left:14px;top:14px;z-index:2;width:18px;height:18px;border-left:1px solid var(--acc,#769CD2);border-top:1px solid var(--acc,#769CD2);pointer-events:none"></span>
+      <span style="position:absolute;right:14px;top:14px;z-index:2;width:18px;height:18px;border-right:1px solid var(--acc,#769CD2);border-top:1px solid var(--acc,#769CD2);pointer-events:none"></span>
+      <span style="position:absolute;left:14px;bottom:14px;z-index:2;width:18px;height:18px;border-left:1px solid var(--acc,#769CD2);border-bottom:1px solid var(--acc,#769CD2);pointer-events:none"></span>
+      <span style="position:absolute;right:14px;bottom:14px;z-index:2;width:18px;height:18px;border-right:1px solid var(--acc,#769CD2);border-bottom:1px solid var(--acc,#769CD2);pointer-events:none"></span>
       {{ scanLine }}
       <div style="position:absolute;left:30px;top:38px;z-index:3;pointer-events:none;display:flex;flex-direction:column;gap:6px">
-        <span style="display:flex;align-items:center;gap:10px;font-size:9px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--mAcc,#9DB9E0)"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2s infinite"></span>{{ lvlTag }}</span>
+        <span style="display:flex;align-items:center;gap:10px;font-size:9px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;color:var(--mAcc,var(--acc2,#9DB9E0))"><span style="width:6px;height:6px;border-radius:50%;background:var(--acc,#769CD2);animation:rrBlink 2s infinite"></span>{{ lvlTag }}</span>
         <span style="font-size:24px;font-weight:300;letter-spacing:-0.01em;color:var(--mFg,#FFFFFF);line-height:1.1;text-shadow:0 2px 12px var(--mSh,#0B0A1F)">{{ mapTitle }}</span>
         <span style="font-size:11px;color:var(--mFg2,rgba(255,255,255,0.7));text-shadow:0 1px 8px var(--mSh,#0B0A1F)">{{ mapSub }}</span>
       </div>
-      <div style="position:absolute;right:30px;top:38px;z-index:3;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--mAcc,#9DB9E0);font-variant-numeric:tabular-nums">
+      <div style="position:absolute;right:30px;top:38px;z-index:3;pointer-events:none;display:flex;flex-direction:column;align-items:flex-end;gap:4px;font-size:9px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--mAcc,var(--acc2,#9DB9E0));font-variant-numeric:tabular-nums">
         <span ref="{{ curRef }}">Cursor · —</span>
         <span ref="{{ zRef }}">Z —</span>
       </div>
       <sc-if value="{{ remote.show }}" hint-placeholder-val="{{ false }}">
         <div style="position:absolute;left:50%;bottom:24px;transform:translateX(-50%);z-index:4;display:flex;gap:8px">
           <sc-for list="{{ remote.items }}" as="r" hint-placeholder-count="0">
-            <button sc-camel-on-click="{{ r.go }}" title="{{ r.tip }}" style="display:flex;align-items:center;gap:14px;padding:9px 14px 9px 16px;background:rgba(14,12,36,0.94);border:1px solid #769CD2;color:#FFFFFF;font-family:Poppins,sans-serif;text-align:left;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.35);white-space:nowrap" style-hover="background:#2F245C">
-              <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#9DB9E0">{{ r.over }}</span><span style="font-size:13px">{{ r.label }}</span></span>
+            <button sc-camel-on-click="{{ r.go }}" title="{{ r.tip }}" style="display:flex;align-items:center;gap:14px;padding:9px 14px 9px 16px;background:rgba(14,12,36,0.94);border:1px solid var(--acc,#769CD2);color:#FFFFFF;font-family:Poppins,sans-serif;text-align:left;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,0.35);white-space:nowrap" style-hover="background:var(--accDeep,#2F245C)">
+              <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">{{ r.over }}</span><span style="font-size:13px">{{ r.label }}</span></span>
               <svg sc-camel-view-box="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex:none;transform:rotate({{ r.rot }}deg)"><path d="M5 12h14M13 6l6 6-6 6"></path></svg>
             </button>
           </sc-for>
         </div>
       </sc-if>
-      <div style="position:absolute;left:24px;bottom:24px;z-index:3;background:rgba(14,12,36,0.92);border:1px solid rgba(118,156,210,0.32);color:#FFFFFF;display:flex;flex-direction:column;min-width:208px;max-height:calc(100% - 130px);overflow:auto">
-        <button sc-camel-on-click="{{ toggleLegend }}" aria-expanded="{{ legendOpenS }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:transparent;border:0;color:#9DB9E0;font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;cursor:pointer">Legend<span style="font-size:13px;letter-spacing:0;color:#FFFFFF">{{ legendSign }}</span></button>
+      <div style="position:absolute;left:24px;bottom:24px;z-index:3;background:rgba(14,12,36,0.92);border:1px solid rgba(var(--accRGB,118,156,210),0.32);color:#FFFFFF;display:flex;flex-direction:column;min-width:208px;max-height:calc(100% - 130px);overflow:auto">
+        <button sc-camel-on-click="{{ toggleLegend }}" aria-expanded="{{ legendOpenS }}" style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 14px;background:transparent;border:0;color:var(--acc2,#9DB9E0);font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.26em;text-transform:uppercase;cursor:pointer">Legend<span style="font-size:13px;letter-spacing:0;color:#FFFFFF">{{ legendSign }}</span></button>
         <sc-if value="{{ legendOpen }}" hint-placeholder-val="{{ false }}">
           <div style="display:flex;flex-direction:column;gap:12px;padding:0 14px 14px">
-            <div style="display:flex;flex-direction:column;gap:6px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
+            <div style="display:flex;flex-direction:column;gap:6px;padding-top:10px;border-top:1px solid rgba(var(--accRGB,118,156,210),0.2)">
               <span style="font-size:10px;color:rgba(255,255,255,0.7)">Node size · deployments at location</span>
               <div style="display:flex;align-items:flex-end;gap:14px">
-                <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="18" height="18" sc-camel-view-box="0 0 18 18"><circle cx="9" cy="9" r="7" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">1</span></span>
-                <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="26" height="26" sc-camel-view-box="0 0 26 26"><circle cx="13" cy="13" r="11" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">4</span></span>
-                <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="34" height="34" sc-camel-view-box="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#12102A" stroke="#9DB9E0"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">9</span></span>
+                <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="18" height="18" sc-camel-view-box="0 0 18 18"><circle cx="9" cy="9" r="7" fill="#12102A" style="stroke:var(--acc2,#9DB9E0)"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">1</span></span>
+                <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="26" height="26" sc-camel-view-box="0 0 26 26"><circle cx="13" cy="13" r="11" fill="#12102A" style="stroke:var(--acc2,#9DB9E0)"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">4</span></span>
+                <span style="display:flex;flex-direction:column;align-items:center;gap:4px"><svg width="34" height="34" sc-camel-view-box="0 0 34 34"><circle cx="17" cy="17" r="15" fill="#12102A" style="stroke:var(--acc2,#9DB9E0)"></circle></svg><span style="font-size:9px;color:rgba(255,255,255,0.7)">9</span></span>
               </div>
             </div>
-            <div style="display:flex;flex-direction:column;gap:7px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
+            <div style="display:flex;flex-direction:column;gap:7px;padding-top:10px;border-top:1px solid rgba(var(--accRGB,118,156,210),0.2)">
               <span style="font-size:10px;color:rgba(255,255,255,0.7)">Status · ring split and nodes</span>
-              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="5" fill="#DCE7F6"></circle></svg>Live · solid</span>
-              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="3" stroke-dasharray="2 2"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><defs><pattern id="lgH" width="2.6" height="2.6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.2" height="2.6" fill="#DCE7F6"></rect></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#lgH)" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Testing · broken</span>
-              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke="#DCE7F6" stroke-width="1" stroke-opacity="0.75"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke="#DCE7F6" stroke-width="1.2"></circle></svg>Planned · outline</span>
+              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke-width="3" style="stroke:var(--acc3,#DCE7F6)"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="5" style="fill:var(--acc3,#DCE7F6)"></circle></svg>Live · solid</span>
+              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke-width="3" stroke-dasharray="2 2" style="stroke:var(--acc3,#DCE7F6)"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><defs><pattern id="lgH" width="2.6" height="2.6" sc-camel-pattern-units="userSpaceOnUse" sc-camel-pattern-transform="rotate(45)"><rect width="1.2" height="2.6" style="fill:var(--acc3,#DCE7F6)"></rect></pattern></defs><circle cx="6" cy="6" r="4.6" fill="url(#lgH)" stroke-width="1.2" style="stroke:var(--acc3,#DCE7F6)"></circle></svg>Testing · broken</span>
+              <span style="display:flex;align-items:center;gap:9px;font-size:11px"><svg width="26" height="8" sc-camel-view-box="0 0 26 8"><path d="M1 4h24" stroke-width="1" stroke-opacity="0.75" style="stroke:var(--acc3,#DCE7F6)"></path></svg><svg width="10" height="10" sc-camel-view-box="0 0 12 12"><circle cx="6" cy="6" r="4.6" fill="none" stroke-width="1.2" style="stroke:var(--acc3,#DCE7F6)"></circle></svg>Planned · outline</span>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;padding-top:10px;border-top:1px solid rgba(118,156,210,0.2)">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;padding-top:10px;border-top:1px solid rgba(var(--accRGB,118,156,210),0.2)">
               <sc-for list="{{ legendTypes }}" as="t" hint-placeholder-count="0">
                 <span style="display:flex;align-items:center;gap:7px;font-size:11px"><span aria-hidden="true" style="display:block;width:15px;height:15px;;background-image:url('{{ t.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ t.label }}</span>
               </sc-for>
@@ -1037,8 +1050,8 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
       </div>
       <sc-if value="{{ loading }}" hint-placeholder-val="{{ true }}">
         <div style="position:absolute;inset:0;z-index:6;background:#0B0A1F;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
-          <svg width="64" height="64" sc-camel-view-box="0 0 64 64" fill="none" style="animation:rrSpin 2.4s linear infinite"><circle cx="32" cy="32" r="28" stroke="rgba(118,156,210,0.25)" stroke-width="1"></circle><path d="M32 4a28 28 0 0 1 28 28" stroke="#9DB9E0" stroke-width="2"></path><circle cx="32" cy="4" r="2.5" fill="#DCE7F6"></circle></svg>
-          <span style="font-size:10px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:#9DB9E0">Initialising map layer</span>
+          <svg width="64" height="64" sc-camel-view-box="0 0 64 64" fill="none" style="animation:rrSpin 2.4s linear infinite"><circle cx="32" cy="32" r="28" stroke="rgba(var(--accRGB,118,156,210),0.25)" stroke-width="1"></circle><path d="M32 4a28 28 0 0 1 28 28" stroke-width="2" style="stroke:var(--acc2,#9DB9E0)"></path><circle cx="32" cy="4" r="2.5" style="fill:var(--acc3,#DCE7F6)"></circle></svg>
+          <span style="font-size:10px;font-weight:500;letter-spacing:0.28em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">Initialising map layer</span>
           <span style="font-size:12px;color:rgba(255,255,255,0.66)">Resolving districts and asset nodes</span>
         </div>
       </sc-if>
@@ -1047,24 +1060,24 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
     <aside ref="{{ asideRef }}" style="background:var(--pFFFFFF,#FFFFFF);min-height:0;overflow:{{ panelOv }};position:relative">
       <div style="position:sticky;top:0;z-index:5;background:rgb(var(--pPaper,255,255,255));border-bottom:1px solid rgba(var(--pInk,11,11,11),0.08);padding:10px 28px;display:flex;align-items:center;gap:10px;min-height:52px;box-sizing:border-box">
         <sc-if value="{{ canBack }}" hint-placeholder-val="{{ false }}">
-          <button sc-camel-on-click="{{ back }}" aria-label="Back one level" title="Back (Esc)" style="flex:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.16);cursor:pointer;color:var(--p12102A,#12102A)" style-hover="border-color:#769CD2;color:var(--p3F6FAE,#3F6FAE)"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
+          <button sc-camel-on-click="{{ back }}" aria-label="Back one level" title="Back (Esc)" style="flex:none;width:32px;height:32px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(var(--pInk,11,11,11),0.16);cursor:pointer;color:var(--p12102A,#12102A)" style-hover="border-color:var(--acc,#769CD2);color:var(--p3F6FAE,var(--accInk,#3F6FAE))"><svg sc-camel-view-box="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M15 5l-7 7 7 7"></path></svg></button>
         </sc-if>
         <nav aria-label="Breadcrumb" style="display:flex;align-items:center;gap:4px;flex-wrap:wrap;min-width:0;flex:1">
           <sc-for list="{{ crumbs }}" as="c" hint-placeholder-count="1">
             <span style="display:flex;align-items:center;gap:4px">
               <sc-if value="{{ c.sep }}" hint-placeholder-val="{{ false }}"><span style="color:var(--p9A9A98,#9A9A98);font-size:13px">›</span></sc-if>
-              <button sc-camel-on-click="{{ c.go }}" aria-current="{{ c.cur }}" style="background:none;border:0;padding:4px 3px;font-family:Poppins,sans-serif;font-size:13px;font-weight:{{ c.fw }};color:{{ c.color }};cursor:pointer" style-hover="color:var(--p3F6FAE,#3F6FAE)">{{ c.label }}</button>
+              <button sc-camel-on-click="{{ c.go }}" aria-current="{{ c.cur }}" style="background:none;border:0;padding:4px 3px;font-family:Poppins,sans-serif;font-size:13px;font-weight:{{ c.fw }};color:{{ c.color }};cursor:pointer" style-hover="color:var(--p3F6FAE,var(--accInk,#3F6FAE))">{{ c.label }}</button>
             </span>
           </sc-for>
           <sc-if value="{{ picker.show }}" hint-placeholder-val="{{ true }}">
             <span style="display:flex;align-items:center;gap:4px">
               <span style="color:var(--p9A9A98,#9A9A98);font-size:13px">›</span>
               <span style="position:relative;display:flex;align-items:center">
-                <sc-raw-select aria-label="{{ picker.ph }}" value="{{ picker.val }}" sc-camel-on-change="{{ picker.change }}" style="appearance:none;-webkit-appearance:none;background:var(--pF2F5FA,#F2F5FA);border:1px dashed rgba(63,111,174,0.5);padding:5px 26px 5px 9px;font-family:Poppins,sans-serif;font-size:12px;color:var(--p3F6FAE,#3F6FAE);cursor:pointer;max-width:200px">
+                <sc-raw-select aria-label="{{ picker.ph }}" value="{{ picker.val }}" sc-camel-on-change="{{ picker.change }}" style="appearance:none;-webkit-appearance:none;background:var(--pF2F5FA,#F2F5FA);border:1px dashed rgba(63,111,174,0.5);padding:5px 26px 5px 9px;font-family:Poppins,sans-serif;font-size:12px;color:var(--p3F6FAE,var(--accInk,#3F6FAE));cursor:pointer;max-width:200px">
                   <option value="">{{ picker.ph }}</option>
                   <sc-for list="{{ picker.opts }}" as="o" hint-placeholder-count="0"><option value="{{ o.id }}">{{ o.label }}</option></sc-for>
                 </sc-raw-select>
-                <svg sc-camel-view-box="0 0 24 24" width="11" height="11" fill="none" stroke="#3F6FAE" stroke-width="2" stroke-linecap="round" style="position:absolute;right:9px;pointer-events:none"><path d="M6 9l6 6 6-6"></path></svg>
+                <svg sc-camel-view-box="0 0 24 24" width="11" height="11" fill="none" stroke-width="2" stroke-linecap="round" style="position:absolute;right:9px;pointer-events:none;stroke:var(--accInk,#3F6FAE)"><path d="M6 9l6 6 6-6"></path></svg>
               </span>
             </span>
           </sc-if>
@@ -1076,9 +1089,9 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         <sc-if value="{{ fInfo.on }}" hint-placeholder-val="{{ false }}">
           <span class="rr-pchips" style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
             <sc-for list="{{ fInfo.chips }}" as="fc" hint-placeholder-count="0">
-              <button sc-camel-on-click="{{ fc.x }}" title="Remove {{ fc.kind }} filter" style="display:flex;align-items:center;gap:6px;white-space:nowrap;flex:none;padding:3px 6px 3px 8px;background:var(--pFFFFFF,#FFFFFF);border:1px solid rgba(63,111,174,0.45);font-family:Poppins,sans-serif;font-size:11px;color:var(--p12102A,#12102A);cursor:pointer" style-hover="border-color:#3F6FAE"><span style="font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--p515150,#515150)">{{ fc.kind }}</span>{{ fc.label }}<span aria-hidden="true" style="font-size:13px;line-height:1;color:var(--p3F6FAE,#3F6FAE)">×</span></button>
+              <button sc-camel-on-click="{{ fc.x }}" title="Remove {{ fc.kind }} filter" style="display:flex;align-items:center;gap:6px;white-space:nowrap;flex:none;padding:3px 6px 3px 8px;background:var(--pFFFFFF,#FFFFFF);border:1px solid rgba(63,111,174,0.45);font-family:Poppins,sans-serif;font-size:11px;color:var(--p12102A,#12102A);cursor:pointer" style-hover="border-color:var(--accInk,#3F6FAE)"><span style="font-size:8.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--p515150,#515150)">{{ fc.kind }}</span>{{ fc.label }}<span aria-hidden="true" style="font-size:13px;line-height:1;color:var(--p3F6FAE,var(--accInk,#3F6FAE))">×</span></button>
             </sc-for>
-            <button sc-camel-on-click="{{ clearFilters }}" style="background:none;border:0;padding:3px 4px;font-family:Poppins,sans-serif;font-size:11px;color:var(--p3F6FAE,#3F6FAE);text-decoration:underline;cursor:pointer">Clear all</button>
+            <button sc-camel-on-click="{{ clearFilters }}" style="background:none;border:0;padding:3px 4px;font-family:Poppins,sans-serif;font-size:11px;color:var(--p3F6FAE,var(--accInk,#3F6FAE));text-decoration:underline;cursor:pointer">Clear all</button>
           </span>
         </sc-if>
         <span style="font-size:11px;color:var(--p515150,#515150);font-variant-numeric:tabular-nums">{{ fInfo.count }}</span>
@@ -1088,7 +1101,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
 
         <div style="display:flex;flex-direction:column;gap:14px">
           <div style="display:flex;flex-direction:column;gap:5px">
-            <span style="display:flex;align-items:center;gap:10px;font-size:9.5px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p3F6FAE,#3F6FAE)"><span style="width:20px;height:2px;background:#769CD2"></span>{{ hero.over }}</span>
+            <span style="display:flex;align-items:center;gap:10px;font-size:9.5px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--p3F6FAE,var(--accInk,#3F6FAE))"><span style="width:20px;height:2px;background:var(--acc,#769CD2)"></span>{{ hero.over }}</span>
             <h1 style="margin:0;font-size:22px;font-weight:400;letter-spacing:-0.01em;line-height:1.2;color:var(--p12102A,#12102A);text-wrap:pretty">{{ hero.title }}</h1>
             <span style="font-size:12px;color:var(--p515150,#515150)">{{ hero.sub }}</span>
           </div>
@@ -1120,7 +1133,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
             <svg width="44" height="44" sc-camel-view-box="0 0 44 44" fill="none"><circle cx="22" cy="22" r="18" stroke="currentColor" stroke-width="1" stroke-dasharray="2 3"></circle><path d="M15 22h14" stroke="currentColor" stroke-width="1.4"></path></svg>
             <span style="font-size:17px;font-weight:400;color:var(--p12102A,#12102A)">No robots match this filter set</span>
             <span style="font-size:13px;line-height:1.55;color:var(--p515150,#515150);max-width:44ch">Widen the type, status or district filters to bring units back into view. The map reflects the same filters.</span>
-            <button sc-camel-on-click="{{ clearFilters }}" style="background:var(--p12102A,#12102A);border:0;color:var(--pFFFFFF,#FFFFFF);font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:10px 16px;cursor:pointer" style-hover="background:var(--p2F245C,#2F245C)">Clear filters</button>
+            <button sc-camel-on-click="{{ clearFilters }}" style="background:var(--p12102A,#12102A);border:0;color:var(--pFFFFFF,#FFFFFF);font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;padding:10px 16px;cursor:pointer" style-hover="background:var(--p2F245C,var(--accDeep,#2F245C))">Clear filters</button>
           </div>
         </sc-if>
 
@@ -1157,7 +1170,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
             </div>
             <div style="display:grid;grid-template-columns:minmax(0,1.6fr) repeat(4,minmax(0,0.62fr)) minmax(0,1.3fr);gap:8px;padding:8px 0;border-top:1px solid var(--p12102A,#12102A);border-bottom:1px solid rgba(var(--pInk,11,11,11),0.1)">
               <sc-for list="{{ sortCols }}" as="c" hint-placeholder-count="6">
-                <button sc-camel-on-click="{{ c.sort }}" aria-label="Sort by {{ c.label }}" style="display:flex;align-items:center;justify-content:{{ c.jc }};gap:4px;background:none;border:0;padding:2px 0;font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:{{ c.color }};cursor:pointer" style-hover="color:var(--p3F6FAE,#3F6FAE)">{{ c.label }}<span style="font-size:9px;letter-spacing:0">{{ c.arrow }}</span></button>
+                <button sc-camel-on-click="{{ c.sort }}" aria-label="Sort by {{ c.label }}" style="display:flex;align-items:center;justify-content:{{ c.jc }};gap:4px;background:none;border:0;padding:2px 0;font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:{{ c.color }};cursor:pointer" style-hover="color:var(--p3F6FAE,var(--accInk,#3F6FAE))">{{ c.label }}<span style="font-size:9px;letter-spacing:0">{{ c.arrow }}</span></button>
               </sc-for>
             </div>
             <sc-for list="{{ league }}" as="r" hint-placeholder-count="0">
@@ -1188,7 +1201,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
                     <sc-for list="{{ r.types }}" as="tt" hint-placeholder-count="0">
                       <span title="{{ tt.label }}" style="display:flex;align-items:center;gap:5px;font-size:12px;color:var(--p12102A,#12102A);font-variant-numeric:tabular-nums"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:15px;height:15px;;background-image:url('{{ tt.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ tt.n }}</span>
                     </sc-for>
-                    <sc-if value="{{ r.hasVid }}" hint-placeholder-val="{{ false }}"><span title="Has video footage" style="display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--p3F6FAE,#3F6FAE)"><svg sc-camel-view-box="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg>{{ r.nVid }}</span></sc-if>
+                    <sc-if value="{{ r.hasVid }}" hint-placeholder-val="{{ false }}"><span title="Has video footage" style="display:flex;align-items:center;gap:4px;font-size:11px;font-weight:500;color:var(--p3F6FAE,var(--accInk,#3F6FAE))"><svg sc-camel-view-box="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg>{{ r.nVid }}</span></sc-if>
                   </span>
                 </span>
                 <span style="display:flex;flex-direction:column;align-items:flex-end;gap:5px">
@@ -1226,7 +1239,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
                 <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap">
                   <div style="display:flex;align-items:flex-start;gap:12px;min-width:0">
                     <span style="flex:none;width:34px;height:34px;border:1px solid rgba(var(--pInk,11,11,11),0.14);display:flex;align-items:center;justify-content:center"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:19px;height:19px;;background-image:url('{{ i.icon }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span></span>
-                    <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:9.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--p3F6FAE,#3F6FAE)">#{{ i.id }} · {{ i.category }}</span><span style="font-size:16px;font-weight:500;color:var(--p12102A,#12102A);line-height:1.3">{{ i.useCase }}</span><span style="font-size:12px;color:var(--p515150,#515150)">{{ i.vm }}</span></div>
+                    <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><span style="font-size:9.5px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:var(--p3F6FAE,var(--accInk,#3F6FAE))">#{{ i.id }} · {{ i.category }}</span><span style="font-size:16px;font-weight:500;color:var(--p12102A,#12102A);line-height:1.3">{{ i.useCase }}</span><span style="font-size:12px;color:var(--p515150,#515150)">{{ i.vm }}</span></div>
                   </div>
                   <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
                     <span style="display:flex;align-items:center;gap:6px;font-size:10px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--p12102A,#12102A);color:var(--p12102A,#12102A);white-space:nowrap"><span aria-hidden="true" style="filter:var(--pImgF,none);display:block;width:9px;height:9px;;background-image:url('{{ i.sg }}');background-size:contain;background-position:center;background-repeat:no-repeat"></span>{{ i.tstatus }}</span>
@@ -1261,7 +1274,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
                   <div style="display:flex;flex-direction:column;gap:5px"><span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150)">Scope</span><p style="margin:0;font-size:13px;line-height:1.6;color:var(--p515150,#515150);text-wrap:pretty">{{ i.desc }}</p></div>
                 </sc-if>
                 <sc-if value="{{ i.hasNext }}" hint-placeholder-val="{{ false }}">
-                  <div style="display:flex;align-items:baseline;gap:12px;padding:10px 12px;background:var(--pF2F5FA,#F2F5FA)"><span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150);color:var(--p3F6FAE,#3F6FAE);flex:none">Next</span><span style="font-size:13px;color:var(--p12102A,#12102A)">{{ i.next }}</span></div>
+                  <div style="display:flex;align-items:baseline;gap:12px;padding:10px 12px;background:var(--pF2F5FA,#F2F5FA)"><span style="font-size:9px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:var(--p515150,#515150);color:var(--p3F6FAE,var(--accInk,#3F6FAE));flex:none">Next</span><span style="font-size:13px;color:var(--p12102A,#12102A)">{{ i.next }}</span></div>
                 </sc-if>
                 <sc-if value="{{ i.empty }}" hint-placeholder-val="{{ false }}">
                   <span style="font-size:12px;color:var(--p515150,#515150)">No update, scope or commercial details recorded in the tracker.</span>
@@ -1279,23 +1292,23 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
   </div>
   <sc-if value="{{ gallery.open }}" hint-placeholder-val="{{ false }}">
     <div sc-camel-on-click="{{ gallery.close }}" style="position:fixed;inset:0;z-index:3500;background:rgba(6,5,18,0.82);display:flex;justify-content:center;align-items:flex-start;padding:40px 24px;overflow-y:auto;font-family:Poppins,sans-serif">
-      <div role="dialog" aria-modal="true" aria-label="Deployments in action" sc-camel-on-click="{{ vstop }}" style="position:relative;width:min(1120px,100%);background:#12102A;border:1px solid rgba(118,156,210,0.35);box-shadow:0 30px 80px rgba(0,0,0,0.5);padding:26px 28px 32px;color:#FFFFFF;display:flex;flex-direction:column;gap:22px">
+      <div role="dialog" aria-modal="true" aria-label="Deployments in action" sc-camel-on-click="{{ vstop }}" style="position:relative;width:min(1120px,100%);background:#12102A;border:1px solid rgba(var(--accRGB,118,156,210),0.35);box-shadow:0 30px 80px rgba(0,0,0,0.5);padding:26px 28px 32px;color:#FFFFFF;display:flex;flex-direction:column;gap:22px">
         <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">
           <div style="display:flex;flex-direction:column;gap:6px">
-            <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0">Footage</span>
+            <span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">Footage</span>
             <span style="font-size:26px;font-weight:300;letter-spacing:-0.01em">Deployments in action</span>
             <span style="font-size:12px;color:rgba(255,255,255,0.7)">{{ gallery.sub }}</span>
           </div>
-          <button sc-camel-on-click="{{ gallery.close }}" aria-label="Close" style="flex:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-size:18px;line-height:1;cursor:pointer" style-hover="border-color:#9DB9E0">×</button>
+          <button sc-camel-on-click="{{ gallery.close }}" aria-label="Close" style="flex:none;width:36px;height:36px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-size:18px;line-height:1;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)">×</button>
         </div>
-        <div role="tablist" aria-label="Footage sections" style="display:flex;gap:8px;flex-wrap:wrap;padding-bottom:4px;border-bottom:1px solid rgba(118,156,210,0.2)">
+        <div role="tablist" aria-label="Footage sections" style="display:flex;gap:8px;flex-wrap:wrap;padding-bottom:4px;border-bottom:1px solid rgba(var(--accRGB,118,156,210),0.2)">
           <sc-for list="{{ gallery.tabs }}" as="gt" hint-placeholder-count="2">
             <button sc-camel-on-click="{{ gt.go }}" role="tab" aria-selected="{{ gt.sel }}" style="flex:none;display:flex;align-items:center;justify-content:center;gap:10px;min-height:38px;padding:0 16px;background:{{ gt.bg }};border:1px solid {{ gt.bd }};color:{{ gt.fg }};font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.12em;text-transform:uppercase;white-space:nowrap;cursor:pointer">{{ gt.label }}<span style="font-size:10px;letter-spacing:0.06em;padding:2px 7px;background:{{ gt.nbg }};font-variant-numeric:tabular-nums">{{ gt.n }}</span></button>
           </sc-for>
         </div>
         <sc-if value="{{ gallery.soon }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:54px 24px;border:1px dashed rgba(118,156,210,0.4);background:rgba(118,156,210,0.05);text-align:center">
-            <svg sc-camel-view-box="0 0 24 24" width="34" height="34" fill="none" stroke="#9DB9E0" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1"></rect><path d="M10 9.5v5l4.5-2.5z"></path></svg>
+          <div style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:54px 24px;border:1px dashed rgba(var(--accRGB,118,156,210),0.4);background:rgba(var(--accRGB,118,156,210),0.05);text-align:center">
+            <svg sc-camel-view-box="0 0 24 24" width="34" height="34" fill="none" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="stroke:var(--acc2,#9DB9E0)"><rect x="3" y="5" width="18" height="14" rx="1"></rect><path d="M10 9.5v5l4.5-2.5z"></path></svg>
             <span style="font-size:20px;font-weight:300">{{ gallery.soonTitle }}</span>
             <span style="font-size:13px;color:rgba(255,255,255,0.65);max-width:44ch">{{ gallery.soonText }}</span>
           </div>
@@ -1306,11 +1319,11 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
         <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:22px 18px">
           <sc-for list="{{ gallery.items }}" as="g" hint-placeholder-count="0">
             <button sc-camel-on-click="{{ g.play }}" aria-label="{{ g.label }}" style="display:flex;flex-direction:column;gap:7px;padding:0;border:0;background:none;color:#FFFFFF;text-align:left;font-family:Poppins,sans-serif;cursor:pointer" style-hover="opacity:0.9">
-              <span style="position:relative;display:block;width:100%;aspect-ratio:9/16;background:#0B0A1F url('{{ g.poster }}') center/cover no-repeat;border:1px solid rgba(118,156,210,0.3)">
+              <span style="position:relative;display:block;width:100%;aspect-ratio:9/16;background:#0B0A1F url('{{ g.poster }}') center/cover no-repeat;border:1px solid rgba(var(--accRGB,118,156,210),0.3)">
                 <span style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:44px;height:44px;border-radius:50%;background:rgba(18,16,42,0.72);border:1px solid rgba(220,231,246,0.7);display:flex;align-items:center;justify-content:center"><svg sc-camel-view-box="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M8 5.5v13l10.5-6.5z"></path></svg></span>
                 <span style="position:absolute;left:8px;bottom:8px;font-size:10px;font-weight:500;padding:1px 6px;background:rgba(11,10,31,0.8);font-variant-numeric:tabular-nums">{{ g.dur }}</span>
               </span>
-              <span style="font-size:9px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:#9DB9E0">{{ g.status }} · {{ g.site }}</span>
+              <span style="font-size:9px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">{{ g.status }} · {{ g.site }}</span>
               <span style="font-size:13px;line-height:1.35">{{ g.heading }}</span>
               <span style="font-size:11px;color:rgba(255,255,255,0.65)">{{ g.caption }}</span>
             </button>
@@ -1321,24 +1334,24 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
   </sc-if>
   <sc-if value="{{ player.open }}" hint-placeholder-val="{{ false }}">
     <div sc-camel-on-click="{{ player.close }}" style="position:fixed;inset:0;z-index:4000;background:rgba(6,5,18,0.92);display:flex;align-items:center;justify-content:center;padding:24px;font-family:Poppins,sans-serif">
-      <div role="dialog" aria-modal="true" aria-label="Deployment footage" sc-camel-on-click="{{ vstop }}" style="display:flex;align-items:stretch;max-width:100%;max-height:100%;background:#12102A;border:1px solid rgba(118,156,210,0.35);box-shadow:0 30px 80px rgba(0,0,0,0.55);color:#FFFFFF">
+      <div role="dialog" aria-modal="true" aria-label="Deployment footage" sc-camel-on-click="{{ vstop }}" style="display:flex;align-items:stretch;max-width:100%;max-height:100%;background:#12102A;border:1px solid rgba(var(--accRGB,118,156,210),0.35);box-shadow:0 30px 80px rgba(0,0,0,0.55);color:#FFFFFF">
         <video ref="{{ vidRef }}" src="{{ player.src }}" poster="{{ player.poster }}" controls="{{ true }}" sc-camel-auto-play="{{ true }}" sc-camel-plays-inline="{{ true }}" preload="auto" style="display:block;aspect-ratio:{{ player.ar }};height:{{ player.vh }};width:{{ player.vw }};max-width:{{ player.vmw }};max-height:82vh;background:#000;object-fit:contain"></video>
         <div style="width:320px;max-width:40vw;padding:22px 22px 24px;display:flex;flex-direction:column;gap:12px;overflow-y:auto">
           <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:12px">
-            <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#9DB9E0;padding-top:4px">{{ player.over }}</span>
-            <button sc-camel-on-click="{{ player.close }}" aria-label="Close video" style="flex:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-size:18px;line-height:1;cursor:pointer" style-hover="border-color:#9DB9E0">×</button>
+            <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:var(--acc2,#9DB9E0);padding-top:4px">{{ player.over }}</span>
+            <button sc-camel-on-click="{{ player.close }}" aria-label="Close video" style="flex:none;width:34px;height:34px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-size:18px;line-height:1;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)">×</button>
           </div>
           <span style="font-size:20px;font-weight:300;line-height:1.25">{{ player.heading }}</span>
           <span style="font-size:12px;color:rgba(255,255,255,0.72)">{{ player.vm }}</span>
           <span style="font-size:12px;color:rgba(255,255,255,0.72)">{{ player.site }}</span>
-          <div style="display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid rgba(118,156,210,0.25)">
+          <div style="display:flex;flex-direction:column;gap:4px;padding-top:12px;border-top:1px solid rgba(var(--accRGB,118,156,210),0.25)">
             <span style="font-size:14px">{{ player.caption }}</span>
-            <span style="font-size:11px;color:#9DB9E0">{{ player.clip }}</span>
+            <span style="font-size:11px;color:var(--acc2,#9DB9E0)">{{ player.clip }}</span>
           </div>
           <sc-if value="{{ player.multi }}" hint-placeholder-val="{{ false }}">
             <div style="display:flex;gap:8px">
-              <button sc-camel-on-click="{{ player.prev }}" aria-label="Previous clip" style="flex:1;min-height:36px;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer" style-hover="border-color:#9DB9E0">← Prev</button>
-              <button sc-camel-on-click="{{ player.next }}" aria-label="Next clip" style="flex:1;min-height:36px;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer" style-hover="border-color:#9DB9E0">Next →</button>
+              <button sc-camel-on-click="{{ player.prev }}" aria-label="Previous clip" style="flex:1;min-height:36px;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)">← Prev</button>
+              <button sc-camel-on-click="{{ player.next }}" aria-label="Next clip" style="flex:1;min-height:36px;background:transparent;border:1px solid rgba(255,255,255,0.25);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;cursor:pointer" style-hover="border-color:var(--acc2,#9DB9E0)">Next →</button>
             </div>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
               <sc-for list="{{ player.thumbs }}" as="t" hint-placeholder-count="0">
@@ -1348,7 +1361,7 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
           </sc-if>
           <span style="flex:1"></span>
           <sc-if value="{{ player.canOpen }}" hint-placeholder-val="{{ false }}">
-            <button sc-camel-on-click="{{ player.openDep }}" style="min-height:40px;background:#769CD2;border:0;color:#12102A;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer" style-hover="background:#DCE7F6">Open deployment →</button>
+            <button sc-camel-on-click="{{ player.openDep }}" style="min-height:40px;background:var(--acc,#769CD2);border:0;color:#12102A;font-family:Poppins,sans-serif;font-size:11px;font-weight:500;letter-spacing:0.16em;text-transform:uppercase;cursor:pointer" style-hover="background:var(--acc3,#DCE7F6)">Open deployment →</button>
           </sc-if>
           <span style="font-size:10px;color:rgba(255,255,255,0.5)">Esc to close · ← → to switch clips</span>
         </div>
@@ -1402,9 +1415,10 @@ class Component extends DCLogic {
     this.A = {}; this.DI = {}; this.T = {};
     D.assets.forEach((a) => (this.A[a.id] = a)); D.districts.forEach((d) => (this.DI[d.id] = d)); D.robot_types.forEach((t) => (this.T[t.id] = t));
   }
-  vidsOf(list) {
-    const out = [];
-    list.forEach((f) => (f.videos || []).forEach((v, k) => out.push(Object.assign({}, v, { f, k, n: f.videos.length }))));
+  vidsOf(list, ds, mode) {
+    const out = [], D = ds || window.FLEET_DATA, md = mode || this.state.mode || window.RR_MODE || "rc";
+    const AS = {}, DI = {}; (D.assets || []).forEach((a) => (AS[a.id] = a)); (D.districts || []).forEach((d) => (DI[d.id] = d));
+    list.forEach((f) => (f.videos || []).forEach((v, k) => { const a = AS[f.asset_id]; out.push(Object.assign({}, v, { f, k, n: f.videos.length, mode: md, siteName: a ? a.name : "", distName: a && DI[a.district_id] ? DI[a.district_id].name : "" })); }));
     return out;
   }
   fmtDur(sec) { const n = Math.max(0, Math.round(Number(sec) || 0)); return Math.floor(n / 60) + ":" + String(n % 60).padStart(2, "0"); }
@@ -1461,15 +1475,14 @@ class Component extends DCLogic {
   toggleType(id) { this.setState((s) => ({ types: s.types.includes(id) ? s.types.filter((x) => x !== id) : s.types.concat(id) })); this.kick(); }
   toggleDist(id) { this.setState((s) => ({ dists: s.dists.includes(id) ? s.dists.filter((x) => x !== id) : s.dists.concat(id) })); this.kick(); }
 
-  initMap() {
-    if (this.map) return;
-    const L = window.L, D = window.FLEET_DATA; this.idx(D);
-    const map = (this.map = L.map(this.mapEl, { zoomControl: false, attributionControl: true, zoomSnap: 0.25, zoomDelta: 0.5, minZoom: 9, maxZoom: 18, wheelPxPerZoomLevel: 120 }));
-    L.control.zoom({ position: "bottomright" }).addTo(map);
-    map.setView([24.47, 54.47], 11, { animate: false });
-    const tl = this.tl = L.tileLayer(this.tileUrl(this.theme() === "dark"), { maxZoom: 18, maxNativeZoom: 15, attribution: 'Tiles &copy; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
-    const ready = () => { if (!this.state.mapReady) this.setState((s) => ({ mapReady: true, scanKey: s.scanKey + 1 })); };
-    tl.once("load", ready); setTimeout(ready, 3500);
+  buildLayers(rebuild) {
+    const L = window.L, map = this.map, D = window.FLEET_DATA; this.idx(D);
+    if (rebuild) {
+      Object.values(this.polys || {}).forEach((p) => map.removeLayer(p));
+      Object.values(this.badges || {}).forEach((b) => { if (map.hasLayer(b)) map.removeLayer(b); });
+      Object.values(this.marks || {}).forEach((m) => { if (map.hasLayer(m)) map.removeLayer(m); });
+      if (this.ringG) this.ringG.clearLayers();
+    }
     this.polys = {}; this.badges = {}; this.marks = {};
     let all = null;
     D.districts.forEach((d) => {
@@ -1494,8 +1507,30 @@ class Component extends DCLogic {
       m.on("click", () => this.goAsset(a.id));
       this.marks[a.id] = m;
     });
-    this.ringG = L.layerGroup().addTo(map);
+    if (!this.ringG) this.ringG = L.layerGroup().addTo(map);
     this.allB = all;
+  }
+  setMode(mode, after) {
+    const DS = window.RR_DATASETS || {}, cur = this.state.mode || window.RR_MODE || "rc";
+    if (!DS[mode]) return;
+    if (mode === cur) { if (after) after(); return; }
+    window.RR_MODE = mode; window.FLEET_DATA = DS[mode]; if (window.RR_applyAccent) window.RR_applyAccent(mode);
+    this.idxDone = false; this.idx(window.FLEET_DATA);
+    if (this.mapOk()) { this.buildLayers(true); this.sig = null; }
+    try { const u = new URL(location.href); if (mode === "rc") u.searchParams.delete("map"); else u.searchParams.set("map", mode); history.replaceState(null, "", u); } catch (err) {}
+    this.masterReset(Object.assign({ mode, galTab: mode === "construction" ? "construction" : "residential-commercial" }, {}));
+    if (after) setTimeout(after, 150);
+  }
+  initMap() {
+    if (this.map) return;
+    const L = window.L, D = window.FLEET_DATA; this.idx(D);
+    const map = (this.map = L.map(this.mapEl, { zoomControl: false, attributionControl: true, zoomSnap: 0.25, zoomDelta: 0.5, minZoom: 9, maxZoom: 18, wheelPxPerZoomLevel: 120 }));
+    L.control.zoom({ position: "bottomright" }).addTo(map);
+    map.setView([24.47, 54.47], 11, { animate: false });
+    const tl = this.tl = L.tileLayer(this.tileUrl(this.theme() === "dark"), { maxZoom: 18, maxNativeZoom: 15, attribution: 'Tiles &copy; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' }).addTo(map);
+    const ready = () => { if (!this.state.mapReady) this.setState((s) => ({ mapReady: true, scanKey: s.scanKey + 1 })); };
+    tl.once("load", ready); setTimeout(ready, 3500);
+    this.buildLayers();
     this.fitAll(false);
     map.on("moveend zoomend", () => { if ((this.flyUntil || 0) > Date.now() && !m0()) return; this.flyUntil = 0; this.flushSoon(30); });
     const m0 = () => !map._animatingZoom;
@@ -1619,9 +1654,9 @@ class Component extends DCLogic {
       const a = A[s.a], c = [a.lat, a.lng];
       const mpp = 40075016.686 * Math.cos(a.lat * Math.PI / 180) / Math.pow(2, map.getZoom() + 8), px = (m) => Math.max(4, Math.round(m / mpp));
       const ring = (m, css) => L.marker(c, { interactive: false, keyboard: false, zIndexOffset: -500, icon: L.divIcon({ className: "", iconSize: [0, 0], html: '<span style="position:absolute;left:0;top:0;width:' + px(m) * 2 + 'px;height:' + px(m) * 2 + 'px;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;' + css + '"></span>' }) }).addTo(this.ringG);
-      ring(320, "border:1px dashed #DCE7F6");
-      ring(640, "border:1px solid rgba(118,156,210,0.45)");
-      L.marker([a.lat + 0.0058, a.lng], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: [0, 0], html: '<span style="position:absolute;transform:translate(-50%,-50%);font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.2em;color:#9DB9E0;background:#0B0A1F;padding:1px 6px;white-space:nowrap">R 640 M</span>' }) }).addTo(this.ringG);
+      ring(320, "border:1px dashed var(--acc3,#DCE7F6)");
+      ring(640, "border:1px solid rgba(var(--accRGB,118,156,210),0.45)");
+      L.marker([a.lat + 0.0058, a.lng], { interactive: false, keyboard: false, icon: L.divIcon({ className: "", iconSize: [0, 0], html: '<span style="position:absolute;transform:translate(-50%,-50%);font-family:Poppins,sans-serif;font-size:9px;font-weight:500;letter-spacing:0.2em;color:var(--acc2,#9DB9E0);background:#0B0A1F;padding:1px 6px;white-space:nowrap">R 640 M</span>' }) }).addTo(this.ringG);
     }
   }
   updateFrame() {
@@ -1645,7 +1680,7 @@ class Component extends DCLogic {
   setTheme(th) { this.setState({ theme: th }, () => { try { this.applyTheme(); this.sig = null; this.syncMap(); } catch (err) { console.warn("[fleet] theme", err); } }); }
   applyTheme() {
     const el = this.rootEl; if (!el) return; const dk = this.theme() === "dark";
-    const V = { FFFFFF: "#12102A", "12102A": "#FFFFFF", "515150": "#B5C6DE", F2F5FA: "#1C1940", FAFAF8: "#171433", EDEDEA: "#2A2650", "9A9A98": "#8E9AB8", "3F6FAE": "#9DB9E0", "2F245C": "#DCE7F6", "0B0B0B": "#FFFFFF", Ink: "255,255,255", Paper: "18,16,42", ImgF: "invert(1) hue-rotate(180deg)" };
+    const V = { FFFFFF: "#12102A", "12102A": "#FFFFFF", "515150": "#B5C6DE", F2F5FA: "#1C1940", FAFAF8: "#171433", EDEDEA: "#2A2650", "9A9A98": "#8E9AB8", "3F6FAE": "var(--acc2,#9DB9E0)", "2F245C": "var(--acc3,#DCE7F6)", "0B0B0B": "#FFFFFF", Ink: "255,255,255", Paper: "18,16,42", ImgF: "invert(1) hue-rotate(180deg)" };
     Object.keys(V).forEach((k) => dk ? el.style.setProperty("--p" + k, V[k]) : el.style.removeProperty("--p" + k));
     const MV = { mFg: "#12102A", mFg2: "#3A3A52", mAcc: "#3F6FAE", mSh: "rgba(255,255,255,0.9)", mTick: "rgba(63,111,174,0.75)" };
     Object.keys(MV).forEach((k) => dk ? el.style.removeProperty("--" + k) : el.style.setProperty("--" + k, MV[k]));
@@ -1717,13 +1752,13 @@ class Component extends DCLogic {
     const actD = new Set(rows.map((f) => A[f.asset_id].district_id)), actA = new Set(rows.map((f) => f.asset_id));
     const typesIn = D.robot_types.filter((t) => g.by[t.id].total > 0).length;
     const SUM = window.RR_SUMMARY ? window.RR_SUMMARY(D) : { tagline: "", items: [] };
-    const sumItems = SUM.items.map((m, i) => Object.assign({}, m, { bl: i ? "1px solid rgba(118,156,210,0.25)" : "0", pl: i ? "18px" : "0" }));
+    const sumItems = SUM.items.map((m, i) => Object.assign({}, m, { bl: i ? "1px solid rgba(var(--accRGB,118,156,210),0.25)" : "0", pl: i ? "18px" : "0" }));
     let hero;
-    if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: "Aldar portfolio", sub: actA.size + (actA.size === 1 ? " site" : " sites") + " across " + actD.size + (actD.size === 1 ? " district" : " districts") + " · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
+    if (lvl === 0) hero = { over: "Level 01 · Portfolio", title: (D.meta && D.meta.portfolio_title) || "Aldar portfolio", sub: actA.size + (actA.size === 1 ? " site" : " sites") + " across " + actD.size + (actD.size === 1 ? " district" : " districts") + " · Abu Dhabi", metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Districts", actD.size), mt("Assets", actA.size)] };
     else if (lvl === 1) { const nA = D.assets.filter((a) => a.district_id === s.d).length; hero = { over: "Level 02 · District", title: dist.name, sub: nA + (nA === 1 ? " location" : " locations") + (dist.geometry ? (dist.zone ? " · approximate area" : " · OpenStreetMap boundary") : " · no fixed map location"), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Assets", nA)] }; }
     else hero = { over: "Level 03 · Asset · " + ast.asset_type, title: ast.name, sub: dist.name + " · " + nInit(ast.id), metrics: [mt("Live", g.deployed, G.deployed), mt("Testing", g.pilot, G.pilot), mt("Planned", g.planned, G.planned), mt("Types", typesIn)] };
     hero.big = String(Math.round(g.total * e));
-    hero.bar = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "#769CD2"], ["planned", "Planned", "rgba(var(--pInk,11,11,11),0.22)"]].map((x) => ({ l: x[1], n: String(Math.round(g[x[0]] * e)), w: g.total ? (g[x[0]] / g.total * 100).toFixed(2) + "%" : "0%", bg: x[2], g: G[x[0]] }));
+    hero.bar = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "var(--acc,#769CD2)"], ["planned", "Planned", "rgba(var(--pInk,11,11,11),0.22)"]].map((x) => ({ l: x[1], n: String(Math.round(g[x[0]] * e)), w: g.total ? (g[x[0]] / g.total * 100).toFixed(2) + "%" : "0%", bg: x[2], g: G[x[0]] }));
     hero.barAria = g.deployed + " live, " + g.pilot + " testing, " + g.planned + " planned";
     hero.extra = lvl !== 2 ? [] : (hero.metrics || []).slice(3).map((m) => ({ v: String(Number(m.v)), l: m.l }));
 
@@ -1757,8 +1792,8 @@ class Component extends DCLogic {
     });
 
     const fleetRows = lvl === 2 ? scope.map((f) => ({ icon: this.iconU(f.robot_type, T[f.robot_type].ink), type: T[f.robot_type].label, vendor: f.vendor, model: f.model, cs: false, count: f.units == null ? "—" : f.units, tstatus: LBL[f.status], sg: G[f.status], owner: f.owner || "—" })) : [];
-    const splitLegend = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "var(--p3F6FAE,#3F6FAE)"], ["planned", "Planned", "#B5C6DE"]].map((x) => ({ g: G[x[0]], l: x[1], n: cnt(g[x[0]]), pct: g.total ? Math.round((100 * g[x[0]]) / g.total) + "%" : "0%", w: (g.total ? (100 * g[x[0]] * e) / g.total : 0) + "%", bar: x[2] }));
-    const inits = lvl === 2 ? scope.map((f) => { const fx = [["Tracker status", f.tracker_status], ["Owner", f.owner], ["Entity", f.entity], ["Units", f.units == null ? "" : String(f.units)], ["Funded by", f.funded_by]].filter((x) => x[1]).map((x) => ({ k: x[0], v: x[1] })); const fv = this.vidsOf([f]); return { hasVids: fv.length > 0, vidCount: fv.length + (fv.length === 1 ? " clip" : " clips"), vids: fv.map((v, k) => ({ poster: v.poster || "", title: v.title || "Clip " + (k + 1), dur: this.fmtDur(v.duration), label: "Play " + (v.title || "clip " + (k + 1)) + " (" + this.fmtDur(v.duration) + ")", play: () => this.openPlayer(fv, k) })), id: f.id, category: f.category, useCase: f.use_case, vm: [f.vendor, f.model].filter(Boolean).join(" · ") || "Vendor and model not yet recorded", icon: this.iconU(f.robot_type, T[f.robot_type].ink), tstatus: LBL[f.status], sg: G[f.status], stage: f.stage, hasStage: !!f.stage, stageBg: f.stage === "Scaling" ? "var(--p12102A,#12102A)" : "var(--pEDEDEA,#EDEDEA)", stageFg: f.stage === "Scaling" ? "var(--pFFFFFF,#FFFFFF)" : "var(--p12102A,#12102A)", facts: fx, update: this.bullets(f.update), hasUpdate: !!(f.update || "").trim(), desc: f.description, hasDesc: !!f.description, next: f.next_steps, hasNext: !!f.next_steps, empty: !f.update && !f.description }; }) : [];
+    const splitLegend = [["deployed", "Live", "var(--p12102A,#12102A)"], ["pilot", "Testing", "var(--p3F6FAE,var(--accInk,#3F6FAE))"], ["planned", "Planned", "#B5C6DE"]].map((x) => ({ g: G[x[0]], l: x[1], n: cnt(g[x[0]]), pct: g.total ? Math.round((100 * g[x[0]]) / g.total) + "%" : "0%", w: (g.total ? (100 * g[x[0]] * e) / g.total : 0) + "%", bar: x[2] }));
+    const inits = lvl === 2 ? scope.map((f) => { const fx = [["Tracker status", f.tracker_status], [(D.meta && D.meta.owner_label) || "Owner", f.owner], [(D.meta && D.meta.entity_label) || "Entity", f.entity], ["Units", f.units == null ? "" : String(f.units)], ["POC year", f.poc_year], ["POC cost", f.poc_cost], ["Funded by", f.funded_by], ["Innovation field", f.innovation_field]].filter((x) => x[1]).map((x) => ({ k: x[0], v: x[1] })); const fv = this.vidsOf([f]); return { hasVids: fv.length > 0, vidCount: fv.length + (fv.length === 1 ? " clip" : " clips"), vids: fv.map((v, k) => ({ poster: v.poster || "", title: v.title || "Clip " + (k + 1), dur: this.fmtDur(v.duration), label: "Play " + (v.title || "clip " + (k + 1)) + " (" + this.fmtDur(v.duration) + ")", play: () => this.openPlayer(fv, k) })), id: f.id, category: f.category, useCase: f.use_case, vm: [f.vendor, f.model].filter(Boolean).join(" · ") || "Vendor and model not yet recorded", icon: this.iconU(f.robot_type, T[f.robot_type].ink), tstatus: LBL[f.status], sg: G[f.status], stage: f.stage, hasStage: !!f.stage, stageBg: f.stage === "Scaling" ? "var(--p12102A,#12102A)" : "var(--pEDEDEA,#EDEDEA)", stageFg: f.stage === "Scaling" ? "var(--pFFFFFF,#FFFFFF)" : "var(--p12102A,#12102A)", facts: fx, update: this.bullets(f.update), hasUpdate: !!(f.update || "").trim(), desc: f.description, hasDesc: !!f.description, next: f.next_steps, hasNext: !!f.next_steps, empty: !f.update && !f.description }; }) : [];
     const meta = lvl === 2 ? [{ k: "District", v: dist.name }, { k: "Asset type", v: ast.asset_type }, { k: "Deployments", v: nInit(ast.id) }] : [];
 
     const crumbs = [{ label: "Portfolio", go: () => this.goPortfolio() }];
@@ -1785,22 +1820,24 @@ class Component extends DCLogic {
 
     const isEmpty = g.total === 0;
     const hv = s.hov;
+    const curMode = s.mode || window.RR_MODE || "rc";
     const plS = s.pl, plV = plS ? plS.list[plS.i] : null, plF = plV ? plV.f : null;
     const plW = Number(plV && plV.width) || 9, plH = Number(plV && plV.height) || 16, plWide = plW > plH;
-    const player = plV ? { open: true, ar: plW + " / " + plH, vh: plWide ? "auto" : "min(82vh,780px)", vw: plWide ? "min(62vw,1040px)" : "auto", vmw: plWide ? "62vw" : "55vw", src: plV.src, poster: plV.poster || "", caption: plV.title || "", over: "#" + plF.id + " · " + LBL[plF.status], heading: plF.use_case, vm: [plF.vendor, plF.model].filter(Boolean).join(" · "), site: (A[plF.asset_id] ? A[plF.asset_id].name + " · " + DI[A[plF.asset_id].district_id].name : ""),
+    const player = plV ? { open: true, ar: plW + " / " + plH, vh: plWide ? "auto" : "min(82vh,780px)", vw: plWide ? "min(62vw,1040px)" : "auto", vmw: plWide ? "62vw" : "55vw", src: plV.src, poster: plV.poster || "", caption: plV.title || "", over: "#" + plF.id + " · " + LBL[plF.status], heading: plF.use_case, vm: [plF.vendor, plF.model].filter(Boolean).join(" · "), site: [plV.siteName, plV.distName].filter(Boolean).join(" · "),
       clip: plS.list.length > 1 ? "Clip " + (plS.i + 1) + " of " + plS.list.length : "", multi: plS.list.length > 1, prev: () => this.stepPlayer(-1), next: () => this.stepPlayer(1), close: () => this.closePlayer(),
-      canOpen: !(lvl === 2 && s.a === plF.asset_id), openDep: () => { const aid = plF.asset_id; this.setState({ pl: null, gal: false }); this.goAsset(aid); },
-      thumbs: plS.list.length > 1 ? plS.list.map((v, k) => ({ poster: v.poster || "", label: "Play " + (v.title || "clip " + (k + 1)), go: () => this.setState({ pl: { list: plS.list, i: k } }), bd: k === plS.i ? "#DCE7F6" : "transparent", op: k === plS.i ? "1" : "0.6" })) : [] } : { open: false, thumbs: [] };
+      canOpen: !(lvl === 2 && s.a === plF.asset_id && plV.mode === curMode), openDep: () => { const aid = plF.asset_id, md = plV.mode; this.setState({ pl: null, gal: false }); this.setMode(md, () => { this.goAsset(aid); }); },
+      thumbs: plS.list.length > 1 ? plS.list.map((v, k) => ({ poster: v.poster || "", label: "Play " + (v.title || "clip " + (k + 1)), go: () => this.setState({ pl: { list: plS.list, i: k } }), bd: k === plS.i ? "var(--acc3,#DCE7F6)" : "transparent", op: k === plS.i ? "1" : "0.6" })) : [] } : { open: false, thumbs: [] };
     const SECS = (D.meta && D.meta.video_sections && D.meta.video_sections.length) ? D.meta.video_sections : [{ id: "all", label: "All footage" }];
     const secOf = (v) => (SECS.some((x) => x.id === v.section) ? v.section : SECS[0].id);
-    const galAll = this.vidsOf(rows), galSec = SECS.some((x) => x.id === s.galTab) ? s.galTab : SECS[0].id;
+    const galOther = Object.keys(window.RR_DATASETS || {}).filter((k) => k !== curMode && window.RR_DATASETS[k]).reduce((acc, k) => acc.concat(this.vidsOf(window.RR_DATASETS[k].fleet, window.RR_DATASETS[k], k)), []);
+    const galAll = this.vidsOf(rows).concat(galOther), galSec = SECS.some((x) => x.id === s.galTab) ? s.galTab : SECS[0].id;
     const galList = galAll.filter((v) => secOf(v) === galSec);
     const galSecObj = SECS.find((x) => x.id === galSec);
-    const galTabs = SECS.map((x) => { const n = galAll.filter((v) => secOf(v) === x.id).length, on = x.id === galSec; return { label: x.label, n: n ? String(n) : "Soon", go: () => this.setState({ galTab: x.id }), sel: String(on), bg: on ? "#769CD2" : "transparent", fg: on ? "#12102A" : "#FFFFFF", bd: on ? "#769CD2" : "rgba(255,255,255,0.25)", nbg: on ? "rgba(18,16,42,0.18)" : "rgba(118,156,210,0.2)" }; });
+    const galTabs = SECS.map((x) => { const n = galAll.filter((v) => secOf(v) === x.id).length, on = x.id === galSec; return { label: x.label, n: n ? String(n) : "Soon", go: () => this.setState({ galTab: x.id }), sel: String(on), bg: on ? "var(--acc,#769CD2)" : "transparent", fg: on ? "#12102A" : "#FFFFFF", bd: on ? "var(--acc,#769CD2)" : "rgba(255,255,255,0.25)", nbg: on ? "rgba(18,16,42,0.18)" : "rgba(var(--accRGB,118,156,210),0.2)" }; });
     const galDeps = new Set(galList.map((v) => v.f.asset_id)).size;
     const gallery = { open: !!s.gal, close: () => this.setState({ gal: false }), tabs: galTabs, soon: !galAll.filter((v) => secOf(v) === galSec).length && !!(galSecObj && galSecObj.coming_soon), soonTitle: (galSecObj && galSecObj.label) || "", soonText: (galSecObj && galSecObj.coming_soon) || "", empty: !galList.length && !(galSecObj && galSecObj.coming_soon && !galAll.filter((v) => secOf(v) === galSec).length), filtered: fChipsOn,
       sub: (!galAll.filter((v) => secOf(v) === galSec).length && galSecObj && galSecObj.coming_soon) ? galSecObj.label + " · coming soon" : galList.length + (galList.length === 1 ? " video" : " videos") + " · " + galDeps + (galDeps === 1 ? " site" : " sites") + (fChipsOn ? " · matching your filters" : ""),
-      items: galList.map((v, k) => ({ poster: v.poster || "", dur: this.fmtDur(v.duration), heading: v.f.use_case, caption: v.title || "", site: A[v.f.asset_id].name, status: LBL[v.f.status], label: "Play " + (v.title || "") + ", " + v.f.use_case + " at " + A[v.f.asset_id].name, play: () => this.openPlayer(galList, k) })) };
+      items: galList.map((v, k) => ({ poster: v.poster || "", dur: this.fmtDur(v.duration), heading: v.f.use_case, caption: v.title || "", site: v.siteName, status: LBL[v.f.status], label: "Play " + (v.title || "") + ", " + v.f.use_case + " at " + v.siteName, play: () => this.openPlayer(galList, k) })) };
     const watchN = galAll.length;
     const remoteDs = D.districts.filter((d) => d.remote);
     const inRemote = !!(dist && dist.remote);
@@ -1820,7 +1857,7 @@ class Component extends DCLogic {
       clearFilters: () => { this.setState({ vid: false, types: [], status: "all", dists: [] }); this.kick(); },
       typeChips: D.robot_types.map((t) => { const on = s.types.includes(t.id); return { label: t.label, icon: this.iconU(t.id, on ? t.color : "#C9D6EA"), toggle: () => this.toggleType(t.id), pressed: String(on), bd: on ? t.color : "rgba(255,255,255,0.18)", bg: on ? "rgba(118,156,210,0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
       statusOpts: [["all", "All", "All statuses"], ["deployed", "Live", "Solid · launched"], ["pilot", "Testing", "Broken · tested or testing in progress"], ["planned", "Planned", "Outline · test pending"]].map((o) => { const on = s.status === o[0]; return { label: o[1], tip: o[2], g: o[0] === "all" ? "" : on ? this.nodeU(o[0], INK) : GL[o[0]], hasG: o[0] !== "all", pressed: String(on), bg: on ? "#DCE7F6" : "transparent", fg: on ? "#12102A" : "rgba(255,255,255,0.8)", go: () => { this.setState({ status: o[0] }); this.kick(); } }; }),
-      distChips: D.districts.map((d) => { const on = s.dists.includes(d.id); return { label: d.name, toggle: () => this.toggleDist(d.id), pressed: String(on), bd: on ? "#9DB9E0" : "rgba(255,255,255,0.18)", bg: on ? "rgba(118,156,210,0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
+      distChips: D.districts.map((d) => { const on = s.dists.includes(d.id); return { label: d.name, toggle: () => this.toggleDist(d.id), pressed: String(on), bd: on ? "var(--acc2,#9DB9E0)" : "rgba(255,255,255,0.18)", bg: on ? "rgba(var(--accRGB,118,156,210),0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
       legendTypes: D.robot_types.map((t) => ({ label: t.label, icon: this.iconU(t.id, t.color) })),
       legendOpen: s.legend, legendOpenS: String(s.legend), legendSign: s.legend ? "−" : "+", toggleLegend: () => this.setState((st) => ({ legend: !st.legend })),
       lvlTag: ["Lvl 01 · Portfolio", "Lvl 02 · District", "Lvl 03 · Asset"][lvl],
@@ -1828,23 +1865,29 @@ class Component extends DCLogic {
       mapSub: lvl === 0 ? "Select a district to drill in" : lvl === 1 ? (dist.geometry ? "Select a location node" : "These items have no fixed map location") : (ast.lat == null ? "No fixed map location" : dist.name + " · " + ast.lat.toFixed(4) + "°N " + ast.lng.toFixed(4) + "°E"),
       asideRef: this.asideRef || (this.asideRef = (el) => { this.asideEl = el; }), canBack: lvl > 0, back: () => this.back(), crumbs, picker, stepNo, stepTxt, fInfo, unitsTotal: uT.n, unitsSub: uT.unk ? "+ " + uT.unk + " deployments uncounted" : "All deployments counted", unitsTip: "Sum of stated units across " + uT.k + " deployments. " + uT.unk + " deployments have no unit count in the tracker yet.",
       isDark: this.theme() === "dark", isLight: this.theme() === "light", setDark: () => this.setTheme("dark"), setLight: () => this.setTheme("light"),
-      dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
+      dkBg: this.theme() === "dark" ? "var(--acc,#769CD2)" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "var(--acc3,#DCE7F6)", ltBg: this.theme() === "light" ? "var(--acc,#769CD2)" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "var(--acc3,#DCE7F6)",
       player, gallery, watchN, openGallery: () => this.setState({ gal: true }), vstop: (ev) => ev.stopPropagation(), vidRef: this.vidRef,
-      vidOn: !!s.vid, vidBg: s.vid ? "rgba(118,156,210,0.16)" : "transparent", vidBd: s.vid ? "#9DB9E0" : "rgba(255,255,255,0.18)", vidPressed: String(!!s.vid), toggleVid: () => { this.setState({ vid: !s.vid }); this.kick(); },
+      vidOn: !!s.vid, vidBg: s.vid ? "rgba(var(--accRGB,118,156,210),0.16)" : "transparent", vidBd: s.vid ? "var(--acc2,#9DB9E0)" : "rgba(255,255,255,0.18)", vidPressed: String(!!s.vid), toggleVid: () => { this.setState({ vid: !s.vid }); this.kick(); },
       fWrapRef: this.fWrapRef || (this.fWrapRef = (el) => { this.fWrapEl = el; }), fOpenS: String(!!s.fOpen), fCaret: s.fOpen ? 180 : 0, fN: String(fChips.length), fNone: !fChips.length,
-      fBtnBg: s.fOpen || fChips.length ? "rgba(118,156,210,0.16)" : "transparent", fBtnBd: s.fOpen || fChips.length ? "#9DB9E0" : "rgba(255,255,255,0.22)",
+      fBtnBg: s.fOpen || fChips.length ? "rgba(var(--accRGB,118,156,210),0.16)" : "transparent", fBtnBd: s.fOpen || fChips.length ? "var(--acc2,#9DB9E0)" : "rgba(255,255,255,0.22)",
       toggleF: () => this.setState({ fOpen: !s.fOpen }), closeF: () => this.setState({ fOpen: false }),
       fShowN: (() => { const n = this.agg(rows).total; return n + (n === 1 ? " site" : " sites"); })(),
+      modeOpts: (window.RR_MODES || []).map((x) => { const on = x.id === (s.mode || window.RR_MODE || "rc"); return { label: x.label, short: x.short, tip: "Show the " + x.label + " map", sel: String(on), go: () => this.setMode(x.id), bg: on ? "var(--acc,#769CD2)" : "transparent", fg: on ? "#12102A" : "rgba(255,255,255,0.85)", dot: on ? "#12102A" : (x.id === "construction" ? "#5FB37F" : "#769CD2") }; }),
       heroUnit: lvl === 2 ? "Deployments" : "Sites", remote, sumTag: SUM.tagline, sumPre: SUM.pre, sumNum: SUM.num, sumPost: SUM.post, sumHasNum: SUM.hasNum, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: lvl === 2 ? this.ringU(g, 150, 66, 7) : "", inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
-      scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,
-      hoverScan: hv ? React.createElement("div", { key: "hs" + hv.k, style: { position: "absolute", left: hv.x, top: hv.y, width: hv.w, height: hv.h, clipPath: hv.clip, WebkitClipPath: hv.clip, zIndex: 1, pointerEvents: "none", overflow: "hidden" } }, React.createElement("div", { style: { position: "absolute", left: 0, right: 0, height: "45%", top: "-45%", background: "linear-gradient(180deg,rgba(118,156,210,0) 0%,rgba(118,156,210,0.2) 85%,rgba(220,231,246,0.85) 100%)", animation: "rrSweep 1.1s cubic-bezier(.4,0,.2,1) forwards" } })) : null
+      scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(var(--accRGB,118,156,210),0),var(--acc3,#DCE7F6) 50%,rgba(var(--accRGB,118,156,210),0))", boxShadow: "0 0 18px 4px rgba(var(--accRGB,118,156,210),0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,
+      hoverScan: hv ? React.createElement("div", { key: "hs" + hv.k, style: { position: "absolute", left: hv.x, top: hv.y, width: hv.w, height: hv.h, clipPath: hv.clip, WebkitClipPath: hv.clip, zIndex: 1, pointerEvents: "none", overflow: "hidden" } }, React.createElement("div", { style: { position: "absolute", left: 0, right: 0, height: "45%", top: "-45%", background: "linear-gradient(180deg,rgba(var(--accRGB,118,156,210),0) 0%,rgba(var(--accRGB,118,156,210),0.2) 85%,rgba(220,231,246,0.85) 100%)", animation: "rrSweep 1.1s cubic-bezier(.4,0,.2,1) forwards" } })) : null
     });
   }
 }
 
 const ICON = {
+  painting: '<rect x="4" y="3.5" width="13" height="5" rx="1"/><path d="M17 6h2.5v4.5H11v3"/><rect x="9.5" y="13.5" width="3" height="7" rx="0.8"/>',
+  plastering: '<path d="M4 15.5h12l2.5-3H6.5z"/><path d="M11 12.5V9"/><path d="M8.5 9h5v-3.5h-5z"/><path d="M3.5 19.5h17"/>',
+  tiling: '<rect x="4" y="4" width="7" height="7"/><rect x="13" y="4" width="7" height="7"/><rect x="4" y="13" width="7" height="7"/><rect x="13" y="13" width="7" height="7"/>',
+  levelling: '<rect x="2.5" y="9" width="19" height="6" rx="1"/><rect x="9.5" y="10.5" width="5" height="3" rx="1.5"/><path d="M12 10.5v3"/><path d="M5 18.5h14"/>',
+  finishing: '<path d="M5 9h9v5H5z"/><path d="M14 10.5h3.5"/><path d="M19.5 9.5v2.5M21 8.5v4.5M18 8v6"/><path d="M8 14v5.5h3"/>',
   cleaning: '<rect x="4.5" y="5" width="15" height="10.5" rx="2"/><path d="M8 9.5h8"/><circle cx="8" cy="18.5" r="1.8"/><circle cx="16" cy="18.5" r="1.8"/>',
   sweeping: '<path d="M3 20.5h18"/><path d="M15.5 3.5l-3.5 9"/><path d="M8.5 12.5h7l1.8 5.2H6.7z"/><path d="M10.3 17.7l.4-2.4M13.7 17.7l-.3-2.4"/>',
   security: '<path d="M12 3l7 2.8v5.4c0 4.6-3 7.9-7 9.8-4-1.9-7-5.2-7-9.8V5.8z"/><circle cx="12" cy="11" r="2.4"/><path d="M12 13.4V16"/>',
@@ -1883,16 +1926,16 @@ function splitHtml(g) {
     [["deployed", "live"], ["pilot", "testing"], ["planned", "planned"]].map((x) => '<span style="display:flex;align-items:center;gap:4px">' + glyphHtml(x[0]) + g[x[0]] + " " + x[1] + "</span>").join("") + "</span>";
 }
 function miniTip(label, hint) {
-  return '<div style="display:flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:0.02em">' + label + (hint ? '<span style="width:1px;height:10px;background:rgba(157,185,224,0.4)"></span><span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0">' + hint + ' →</span>' : "") + "</div>";
+  return '<div style="display:flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:0.02em">' + label + (hint ? '<span style="width:1px;height:10px;background:rgba(157,185,224,0.4)"></span><span style="font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">' + hint + ' →</span>' : "") + "</div>";
 }
 function tipHtml(title, g, hint) {
-  return '<div style="display:flex;flex-direction:column;gap:5px"><b style="font-size:12px;font-weight:500">' + title + '</b><span style="font-size:11px;color:rgba(255,255,255,0.82)">' + g.total + ' robots' + (g.sample ? ' <span style="color:#F2A27C;font-size:8.5px;letter-spacing:0.14em">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g) + '<i style="font-style:normal;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0">' + hint + "</i></div>";
+  return '<div style="display:flex;flex-direction:column;gap:5px"><b style="font-size:12px;font-weight:500">' + title + '</b><span style="font-size:11px;color:rgba(255,255,255,0.82)">' + g.total + ' robots' + (g.sample ? ' <span style="color:#F2A27C;font-size:8.5px;letter-spacing:0.14em">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g) + '<i style="font-style:normal;font-size:9px;letter-spacing:0.18em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">' + hint + "</i></div>";
 }
 function badgeHtml(d, g, compact, dim) {
-  const tk = (p) => '<span style="position:absolute;' + p + ';width:6px;height:6px;border-color:#DCE7F6;border-style:solid;border-width:0"></span>';
-  return '<div style="position:absolute;left:0;top:0;transform:' + ({ right: "translate(calc(-100% - 8px),-50%)", left: "translate(8px,-50%)", top: "translate(-50%,calc(-100% - 8px))", bottom: "translate(-50%,8px)" }[d.badge_align] || "translate(-50%,-50%)") + ';white-space:nowrap;background:rgba(18,16,42,0.9);border:1px solid rgba(118,156,210,0.55);padding:' + (compact ? "6px 9px" : "9px 12px 10px") + ";display:flex;flex-direction:column;gap:4px;font-family:Poppins,sans-serif;color:#fff;cursor:pointer;opacity:" + (dim ? 0.5 : 1) + ';transition:opacity .4s;box-shadow:0 10px 30px rgba(0,0,0,0.4)">' +
+  const tk = (p) => '<span style="position:absolute;' + p + ';width:6px;height:6px;border-color:var(--acc3,#DCE7F6);border-style:solid;border-width:0"></span>';
+  return '<div style="position:absolute;left:0;top:0;transform:' + ({ right: "translate(calc(-100% - 8px),-50%)", left: "translate(8px,-50%)", top: "translate(-50%,calc(-100% - 8px))", bottom: "translate(-50%,8px)" }[d.badge_align] || "translate(-50%,-50%)") + ';white-space:nowrap;background:rgba(18,16,42,0.9);border:1px solid rgba(var(--accRGB,118,156,210),0.55);padding:' + (compact ? "6px 9px" : "9px 12px 10px") + ";display:flex;flex-direction:column;gap:4px;font-family:Poppins,sans-serif;color:#fff;cursor:pointer;opacity:" + (dim ? 0.5 : 1) + ';transition:opacity .4s;box-shadow:0 10px 30px rgba(0,0,0,0.4)">' +
     tk("left:-1px;top:-1px;border-left-width:1px;border-top-width:1px") + tk("right:-1px;bottom:-1px;border-right-width:1px;border-bottom-width:1px") +
-    '<span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:#9DB9E0">' + d.name + "</span>" +
+    '<span style="font-size:9px;font-weight:500;letter-spacing:0.24em;text-transform:uppercase;color:var(--acc2,#9DB9E0)">' + d.name + "</span>" +
     (compact ? '<span style="font-size:15px;font-weight:300;line-height:1">' + pad(g.total) + ' <span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.7)">' + (g.total === 1 ? "SITE" : "SITES") + '</span></span>'
       : '<span style="display:flex;align-items:baseline;gap:8px"><b style="font-size:28px;font-weight:200;line-height:1;letter-spacing:-0.02em">' + pad(g.total) + '</b><span style="font-size:9px;letter-spacing:0.16em;color:rgba(255,255,255,0.72)">' + (g.total === 1 ? "SITE" : "SITES") + '</span>' + (g.sample ? '<span style="font-size:8px;font-weight:600;letter-spacing:0.14em;color:#F2A27C">INCL. SAMPLE</span>' : '') + '</span>' + splitHtml(g)) +
     "</div>";
@@ -1900,13 +1943,13 @@ function badgeHtml(d, g, compact, dim) {
 function markerHtml(a, g, on, dim, ly, sc) {
   sc = sc || 1;
   const n = g.total, r = Math.round((10 + Math.sqrt(Math.min(n, 12)) * 4.5) * sc), S = 2 * r + Math.round(16 * sc), c = S / 2, R = r + Math.round(4 * sc), side = ly.side || "right", dx = Math.round(ly.dx), dy = Math.round(ly.dy), moved = Math.hypot(dx, dy) > 2;
-  const lead = moved ? '<svg width="' + S + '" height="' + S + '" style="position:absolute;left:0;top:0;overflow:visible;pointer-events:none"><line x1="' + c + '" y1="' + c + '" x2="' + (c - dx) + '" y2="' + (c - dy) + '" stroke="#9DB9E0" stroke-opacity="0.75" stroke-width="1" stroke-dasharray="2 3"/><circle cx="' + (c - dx) + '" cy="' + (c - dy) + '" r="2.5" fill="#12102A" stroke="#DCE7F6" stroke-width="1"/></svg>' : "";
+  const lead = moved ? '<svg width="' + S + '" height="' + S + '" style="position:absolute;left:0;top:0;overflow:visible;pointer-events:none"><line x1="' + c + '" y1="' + c + '" x2="' + (c - dx) + '" y2="' + (c - dy) + '" stroke-opacity="0.75" stroke-width="1" stroke-dasharray="2 3" style="stroke:var(--acc2,#9DB9E0)"/><circle cx="' + (c - dx) + '" cy="' + (c - dy) + '" r="2.5" fill="#12102A" stroke-width="1" style="stroke:var(--acc3,#DCE7F6)"/></svg>' : "";
   const fs = Math.max(10, Math.round(12 * sc)), gp = Math.round(4 * sc);
   const pos = side === "left" ? "right:" + (S - (S / 2 - r) + gp) + "px;top:50%;transform:translateY(-50%);" : side === "top" ? "left:50%;bottom:" + (S - (S / 2 - r) + gp) + "px;transform:translateX(-50%);" : side === "bottom" ? "left:50%;top:" + (S - (S / 2 - r) + gp) + "px;transform:translateX(-50%);" : "left:" + (S - (S / 2 - r) + gp) + "px;top:50%;transform:translateY(-50%);";
   const html = '<div style="position:relative;width:' + S + "px;height:" + S + "px;opacity:" + (dim ? 0.4 : n ? 1 : 0.45) + ';transition:opacity .4s;font-family:Poppins,sans-serif;cursor:pointer">' +
-    lead + (on ? '<span style="position:absolute;inset:0;border-radius:50%;border:1px solid #DCE7F6;animation:rrPulse 1.9s ease-out infinite"></span>' : "") +
+    lead + (on ? '<span style="position:absolute;inset:0;border-radius:50%;border:1px solid var(--acc3,#DCE7F6);animation:rrPulse 1.9s ease-out infinite"></span>' : "") +
     ringSvg(g, S, R, true, Math.max(2, 2.6 * sc)) +
-    '<span style="position:absolute;left:' + (c - r + 3) + "px;top:" + (c - r + 3) + "px;width:" + (2 * r - 6) + "px;height:" + (2 * r - 6) + "px;border-radius:50%;background:" + (on ? "#DCE7F6" : "#12102A") + ";border:1px solid rgba(157,185,224,0.85);box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:" + Math.max(9, Math.round(11 * sc)) + "px;font-weight:500;color:" + (on ? "#12102A" : "#fff") + ';font-variant-numeric:tabular-nums">' + pad(n) + "</span>" +
+    '<span style="position:absolute;left:' + (c - r + 3) + "px;top:" + (c - r + 3) + "px;width:" + (2 * r - 6) + "px;height:" + (2 * r - 6) + "px;border-radius:50%;background:" + (on ? "var(--acc3,#DCE7F6)" : "#12102A") + ";border:1px solid rgba(157,185,224,0.85);box-sizing:border-box;display:flex;align-items:center;justify-content:center;font-size:" + Math.max(9, Math.round(11 * sc)) + "px;font-weight:500;color:" + (on ? "#12102A" : "#fff") + ';font-variant-numeric:tabular-nums">' + pad(n) + "</span>" +
     '<span style="position:absolute;' + pos + 'white-space:nowrap;pointer-events:none;font-size:' + fs + 'px;line-height:1.2;font-weight:500;color:#fff;padding:2px 6px;background:rgba(11,10,31,0.72);border:1px solid rgba(157,185,224,0.25)">' + a.short + "</span></div>";
   return { html, S, dx, dy };
 }

@@ -1450,6 +1450,12 @@ class Component extends DCLogic {
     this.raf = requestAnimationFrame(step);
     clearTimeout(this.animT); this.animT = setTimeout(() => { if (this.state.anim < 1) { cancelAnimationFrame(this.raf); this.setState({ anim: 1 }); } }, 1000);
   }
+  masterReset(extra) {
+    this.setState(Object.assign({ vid: false, types: [], status: "all", dists: [], q: "", fOpen: false, legend: false, gal: false, pl: null, hov: null }, extra || {}));
+    this.goPortfolio();
+    // Always fly back to the starting view, even if already on the overview after zooming or panning.
+    clearTimeout(this.resetT); this.resetT = setTimeout(() => { if (this.mapOk()) { this.map.stop(); this.flyUntil = Date.now() + 1400; this.flushSoon(1450); this.fitAll(true); } }, 60);
+  }
   goPortfolio() { this.setState({ level: 0, d: null, a: null, q: "" }); this.kick(true); }
   goDistrict(id) { this.setState({ level: 1, d: id, a: null, q: "" }); this.kick(); }
   goAsset(id) { this.setState({ level: 2, d: this.A[id].district_id, a: id, q: "" }); this.kick(); }
@@ -1848,7 +1854,7 @@ class Component extends DCLogic {
       onQFocus: () => this.setState({ qFocus: true }), onQBlur: () => setTimeout(() => this.setState({ qFocus: false }), 120),
       onQKey: (ev) => { if (ev.key === "Enter" && results[0]) results[0].go(); if (ev.key === "Escape") this.setState({ q: "" }); },
       asOf: D.meta.data_as_of, source: D.meta.source, sampleNote: D.meta.sample_note,
-      resetAll: () => { this.setState({ vid: false, types: [], status: "all", dists: [], q: "", tab: "map" }); this.goPortfolio(); },
+      resetAll: () => this.masterReset({ tab: "map" }),
       clearFilters: () => { this.setState({ vid: false, types: [], status: "all", dists: [] }); this.kick(); },
       typeChips: D.robot_types.map((t) => { const on = s.types.includes(t.id); return { label: t.label, icon: this.iconU(t.id, on ? t.color : "#C9D6EA"), toggle: () => this.toggleType(t.id), pressed: String(on), bd: on ? t.color : "rgba(255,255,255,0.18)", bg: on ? "rgba(118,156,210,0.16)" : "transparent", fg: on ? "#FFFFFF" : "rgba(255,255,255,0.8)" }; }),
       statusOpts: [["all", "All", "All statuses"], ["deployed", "Live", "Solid · launched, or tested and launched"], ["pilot", "Testing", "Broken · tested or testing in progress"], ["planned", "Planned", "Outline · test pending"]].map((o) => { const on = s.status === o[0]; return { label: o[1], tip: o[2], g: o[0] === "all" ? "" : on ? this.nodeU(o[0], INK) : GL[o[0]], hasG: o[0] !== "all", pressed: String(on), bg: on ? "#DCE7F6" : "transparent", fg: on ? "#12102A" : "rgba(255,255,255,0.8)", go: () => { this.setState({ status: o[0] }); this.kick(); } }; }),

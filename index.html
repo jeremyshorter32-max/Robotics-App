@@ -1497,7 +1497,7 @@ class Component extends DCLogic {
     const sz = m.getSize(); if (!sz || !sz.x || !sz.y) return;
     const px = (v, f) => Math.round(Math.min(v, sz.x * f)), py = (v, f) => Math.round(Math.min(v, sz.y * f));
     const hasRemote = window.FLEET_DATA.districts.some((d) => d.remote);
-    let o = { paddingTopLeft: [px(190, 0.2), py(150, 0.2)], paddingBottomRight: [px(200, 0.2), py(hasRemote ? 175 : 120, hasRemote ? 0.22 : 0.16)] };
+    let o = { paddingTopLeft: [px(190, 0.2), py(150, 0.2)], paddingBottomRight: [px(200, 0.2), hasRemote ? py(185, 0.42) : py(120, 0.16)] };
     const z = m.getBoundsZoom(this.allB, false, window.L.point(o.paddingTopLeft[0] + o.paddingBottomRight[0], o.paddingTopLeft[1] + o.paddingBottomRight[1]));
     if (!isFinite(z)) o = { padding: [40, 40] };
     if (anim) m.flyToBounds(this.allB, Object.assign(o, { duration: 1.15, easeLinearity: 0.2 })); else m.fitBounds(this.allB, o);

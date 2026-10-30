@@ -55,7 +55,15 @@ jobs:
           git add data/intel-feed.json data/intel-feed.js
           if git diff --cached --quiet; then
             echo "No new edition to publish."
-          else
-            git commit -m "Market Pulse: weekly robotics edition"
-            git push
+            exit 0
           fi
+          git commit -m "Market Pulse: weekly robotics edition"
+          # Someone may have pushed to main while the edition was being built (for example a
+          # fleet map update). Catch up with their changes and try again rather than fail.
+          for attempt in 1 2 3 4 5; do
+            if git push; then exit 0; fi
+            echo "Push rejected (attempt $attempt); catching up with main and retrying."
+            sleep $((attempt * 5))
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+          done
+          echo "Could not publish after 5 attempts." && exit 1

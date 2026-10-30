@@ -59,7 +59,7 @@ window.FLEET_DATA = {
     "label": "Tech partners"
    }
   ],
-  "data_as_of": "5 Oct 2026",
+  "data_as_of": "30 Oct 2026",
   "source": "Aldar robotics initiative tracker, items 07 to 23; Pudu cleaning rollout (30 planned deployments)"
  },
  "robot_types": [

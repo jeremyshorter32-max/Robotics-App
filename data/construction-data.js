@@ -1954,17 +1954,6 @@ window.CONSTRUCTION_DATA = {
    "coord_approx": true
   },
   {
-   "id": "saadiyat-grove",
-   "name": "Saadiyat Grove",
-   "short": "Saadiyat Grove",
-   "district_id": "saadiyat",
-   "asset_type": "Mixed-use",
-   "lat": 24.5355,
-   "lng": 54.4036,
-   "label_side": "left",
-   "coord_approx": true
-  },
-  {
    "id": "mbz-school",
    "name": "MBZ School",
    "short": "MBZ School",
@@ -1985,6 +1974,17 @@ window.CONSTRUCTION_DATA = {
    "lng": 54.7183,
    "label_side": "right",
    "coord_approx": true
+  },
+  {
+   "id": "yas-acres",
+   "name": "Yas Acres",
+   "short": "Yas Acres",
+   "district_id": "yas",
+   "asset_type": "Residential",
+   "lat": 24.5048,
+   "lng": 54.6007,
+   "label_side": "left",
+   "coord_approx": false
   }
  ],
  "fleet": [
@@ -2220,7 +2220,7 @@ window.CONSTRUCTION_DATA = {
    "robot_type": "inspection",
    "vendor": "Solinas",
    "model": "Endobot 90 & Endobot 250",
-   "asset_id": "saadiyat-grove",
+   "asset_id": "yas-acres",
    "owner": "Mohamed Maharoof",
    "tracker_status": "Test Pending",
    "status": "planned",

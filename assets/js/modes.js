@@ -8,8 +8,8 @@
     construction: { m: "#5FB37F", l: "#8FD3A8", xl: "#D7F2E1", ink: "#2E8B57", deep: "#1E4D36", rgb: "95,179,127" }
   };
   window.RR_MODES = [
-    { id: "rc", label: "Residential & Commercial", short: "Res & Comm" },
-    { id: "construction", label: "Construction", short: "Construction" }
+    { id: "construction", label: "Construction", short: "Construction" },
+    { id: "rc", label: "Residential & Commercial", short: "Res & Comm" }
   ];
   window.RR_DATASETS = { rc: window.FLEET_DATA, construction: window.CONSTRUCTION_DATA };
   window.RR_applyAccent = function (mode) {

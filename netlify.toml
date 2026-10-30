@@ -9,8 +9,25 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
-# Fonts, images and libraries rarely change; let browsers cache them.
+# Fonts, libraries, images and videos rarely change; let browsers cache them.
+# (assets/js and data/ are left out so figure and data updates show straight away.)
 [[headers]]
-  for = "/assets/*"
+  for = "/assets/vendor/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/assets/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/assets/icons/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+[[headers]]
+  for = "/assets/video/*"
   [headers.values]
     Cache-Control = "public, max-age=604800"

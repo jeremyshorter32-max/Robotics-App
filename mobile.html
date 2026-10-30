@@ -22,7 +22,7 @@
 </script>
 <script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react-18.3.1.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom-18.3.1.production.min.js"};</script>
 <title>Aldar Robotics Deployments</title>
-<script src="assets/js/summary.js"></script>
+<script src="assets/js/summary.js?v=20261030b"></script>
 <script src="assets/vendor/dc-runtime.js"></script>
 </head>
 <body>
@@ -874,14 +874,10 @@ html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
       <span style="font-size:15px;font-weight:500;color:#FFFFFF;line-height:1.25">Robotics Fleet</span>
       <span style="font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:#9DB9E0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.4">Command view · Portfolio</span>
     </div>
-    <button sc-camel-on-click="{{ goMenu }}" aria-label="{{ unitsAria }}" style="flex:none;display:flex;align-items:center;gap:8px;min-height:44px;padding:0 0 0 12px;border:0;border-left:1px solid rgba(118,156,210,0.3);background:transparent;font-family:Poppins,sans-serif;cursor:pointer;text-align:left">
-      <span style="font-size:30px;font-weight:600;line-height:1;color:#FFFFFF;letter-spacing:-0.03em;font-variant-numeric:tabular-nums">{{ unitsTotal }}</span>
-      <span style="font-size:10px;font-weight:600;letter-spacing:0.16em;text-transform:uppercase;color:#DCE7F6;line-height:1.3">Robotic<br>units</span>
-    </button>
   </header>
 
   <section aria-label="About this platform and key figures" style="flex:none;position:relative;z-index:1300;background:#100E28;border-bottom:1px solid rgba(118,156,210,0.16);padding:10px 0 10px">
-    <p style="margin:0 calc(env(safe-area-inset-right) + 16px) 8px calc(env(safe-area-inset-left) + 16px);font-size:12.5px;font-weight:300;line-height:1.45;color:rgba(255,255,255,0.84);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">{{ sumTag }}</p>
+    <p style="margin:0 calc(env(safe-area-inset-right) + 16px) 8px calc(env(safe-area-inset-left) + 16px);font-size:12.5px;font-weight:300;line-height:1.45;color:rgba(255,255,255,0.84);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden">{{ sumPre }}<sc-if value="{{ sumHasNum }}" hint-placeholder-val="{{ false }}"><b title="{{ unitsTip }}" style="font-weight:700;color:#F2C14E;font-size:1.4em;line-height:1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap">{{ sumNum }}</b></sc-if>{{ sumPost }}</p>
     <div style="display:flex;align-items:stretch;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;overscroll-behavior-x:contain;padding:0 calc(env(safe-area-inset-right) + 16px) 0 calc(env(safe-area-inset-left) + 16px)">
       <sc-for list="{{ sumItems }}" as="m" hint-placeholder-count="6">
         <div style="flex:none;display:flex;flex-direction:column;gap:3px;padding:0 14px 0 {{ m.pl }};border-left:{{ m.bl }}">
@@ -1888,7 +1884,7 @@ class Component extends DCLogic {
       dkBg: this.theme() === "dark" ? "#769CD2" : "transparent", dkFg: this.theme() === "dark" ? "#12102A" : "#DCE7F6", ltBg: this.theme() === "light" ? "#769CD2" : "transparent", ltFg: this.theme() === "light" ? "#12102A" : "#DCE7F6",
       player, gallery, watchN, openGallery: () => this.setState({ gal: true }), vstop: (ev) => ev.stopPropagation(), vidRef: this.vidRef,
       vidOn: !!s.vid, vidBg: s.vid ? "var(--pF2F5FA,#F2F5FA)" : "transparent", vidBd: s.vid ? "#769CD2" : "rgba(var(--pInk,11,11,11),0.18)", vidPressed: String(!!s.vid), toggleVid: () => { this.setState({ vid: !s.vid }); this.kick(); },
-      heroUnit: lvl === 2 ? "Deployments" : "Sites", remote, sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
+      heroUnit: lvl === 2 ? "Deployments" : "Sites", remote, sumTag: SUM.tagline, sumPre: SUM.pre, sumNum: SUM.num, sumPost: SUM.post, sumHasNum: SUM.hasNum, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: this.ringU(g, 76, 33, 4), hasAny: !isEmpty, inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
       scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,

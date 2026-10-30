@@ -10,6 +10,7 @@
    tracker_status keeps the tracker wording verbatim.
    units = robot count stated in tracker text, null when not stated.
    meta.tagline = one-line description shown at the top of the page.
+     {units} in it is replaced by the total robot count, shown bold in gold.
    meta.metrics = the key-figures bar, in display order. Each item is
      {"key": ..., "label": ...}. Keys (calculated from fleet automatically):
      sites, sites_live, sites_testing, sites_planned (each site once, under
@@ -34,7 +35,7 @@
    ========================================================================== */
 window.FLEET_DATA = {
  "meta": {
-  "tagline": "Aldar's view of robotics across its Abu Dhabi portfolio: what's live, in testing and planned, asset by asset.",
+  "tagline": "Aldar's view of {units} robotic units across its Abu Dhabi portfolio: what's live, in testing and planned, asset by asset.",
   "metrics": [
    {
     "key": "sites",

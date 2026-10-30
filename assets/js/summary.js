@@ -50,5 +50,7 @@ window.RR_SUMMARY = function (D) {
     if (v == null) return null;
     return { label: m.label || m.key, value: String(v), hint: m.hint || hints[m.key] || "" };
   }).filter(Boolean);
-  return { tagline: meta.tagline || "", items: items };
+  // The tagline can include {units}: it is replaced by the robot count, which the page highlights.
+  var tag = meta.tagline || "", at = tag.indexOf("{units}"), num = calc.units.toLocaleString("en-US");
+  return { tagline: tag.replace("{units}", num), pre: at < 0 ? tag : tag.slice(0, at), num: at < 0 ? "" : num, post: at < 0 ? "" : tag.slice(at + 7), hasNum: at >= 0, items: items };
 };

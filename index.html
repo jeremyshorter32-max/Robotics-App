@@ -21,7 +21,7 @@
 })();
 </script>
 <script>window.__resources = {"https://unpkg.com/react@18.3.1/umd/react.production.min.js": "assets/vendor/react-18.3.1.production.min.js", "https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js": "assets/vendor/react-dom-18.3.1.production.min.js"};</script>
-<script src="assets/js/summary.js"></script>
+<script src="assets/js/summary.js?v=20261030b"></script>
 <script src="assets/vendor/dc-runtime.js"></script>
 </head>
 <body>
@@ -911,19 +911,12 @@ button:focus-visible,input:focus-visible{outline:2px solid #769CD2;outline-offse
       <div class="rr-asof" style="display:flex;flex-direction:column;align-items:flex-end;gap:2px">
         <span style="font-size:9px;font-weight:500;letter-spacing:0.22em;text-transform:uppercase;color:#9DB9E0;display:flex;align-items:center;gap:8px"><span style="width:6px;height:6px;border-radius:50%;background:#769CD2;animation:rrBlink 2.4s infinite"></span>Data as of {{ asOf }}</span>
       </div>
-      <div title="{{ unitsTip }}" style="display:flex;align-items:center;gap:12px;padding-left:18px;border-left:1px solid rgba(118,156,210,0.3)">
-        <span style="font-size:36px;font-weight:600;line-height:1;color:#FFFFFF;letter-spacing:-0.03em;font-variant-numeric:tabular-nums">{{ unitsTotal }}</span>
-        <span style="display:flex;flex-direction:column;gap:2px">
-          <span style="font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;color:#DCE7F6">Robotic units</span>
-          <span class="rr-usub" style="font-size:10px;color:rgba(255,255,255,0.66);white-space:nowrap">{{ unitsSub }}</span>
-        </span>
-      </div>
       <button sc-camel-on-click="{{ resetAll }}" style="background:transparent;border:1px solid rgba(255,255,255,0.28);color:#FFFFFF;font-family:Poppins,sans-serif;font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;padding:9px 14px;white-space:nowrap;cursor:pointer;display:flex;align-items:center;gap:8px" style-hover="border-color:#769CD2;color:#9DB9E0"><svg sc-camel-view-box="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 12a8 8 0 1 0 2.4-5.7"></path><path d="M4 4v4h4"></path></svg>Reset<span class="rr-rlong"> to portfolio</span></button>
     </div>
   </header>
 
   <section aria-label="About this platform and key figures" style="position:relative;z-index:1050;display:flex;align-items:center;gap:12px 32px;padding:12px 24px;background:#100E28;border-bottom:1px solid rgba(118,156,210,0.16);flex-wrap:wrap">
-    <p style="margin:0;flex:1 1 340px;min-width:0;font-size:13px;font-weight:300;line-height:1.5;color:rgba(255,255,255,0.84)">{{ sumTag }}</p>
+    <p style="margin:0;flex:1 1 340px;min-width:0;font-size:13px;font-weight:300;line-height:1.5;color:rgba(255,255,255,0.84)">{{ sumPre }}<sc-if value="{{ sumHasNum }}" hint-placeholder-val="{{ false }}"><b title="{{ unitsTip }}" style="font-weight:700;color:#F2C14E;font-size:1.45em;line-height:1;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;white-space:nowrap">{{ sumNum }}</b></sc-if>{{ sumPost }}</p>
     <div style="display:flex;align-items:center;flex-wrap:wrap;row-gap:8px">
       <sc-for list="{{ sumItems }}" as="m" hint-placeholder-count="6">
         <div title="{{ m.hint }}" style="display:flex;align-items:baseline;gap:8px;padding:2px 18px 2px {{ m.pl }};border-left:{{ m.bl }}">
@@ -1689,7 +1682,7 @@ class Component extends DCLogic {
   renderVals0() {
     if (!window.FLEET_DATA || !window.FLEET_DATA.fleet) {
       clearTimeout(this.dataWait); this.dataWait = setTimeout(() => this.forceUpdate(), 50);
-      return { sumTag: "", sumItems: [], fInfo: { chips: [] }, fNone: true, asOf: "", unitsTotal: "", unitsSub: "", mapSub: "", hero: { big: "", label: "", sub: "", bar: [], extra: [] }, crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [], count: "" }, glyph: {} };
+      return { sumTag: "", sumPre: "", sumNum: "", sumPost: "", sumHasNum: false, sumItems: [], fInfo: { chips: [] }, fNone: true, asOf: "", unitsTotal: "", unitsSub: "", mapSub: "", hero: { big: "", label: "", sub: "", bar: [], extra: [] }, crumbs: [], typeChips: [], statusOpts: [], distChips: [], legendTypes: [], typeRows: [], sortCols: [], league: [], assetRows: [], fleetRows: [], splitLegend: [], inits: [], meta: [], results: [], picker: { opts: [] }, fInfo: { chips: [], count: "" }, glyph: {} };
     }
     const uT = (window.FLEET_DATA.fleet || []).reduce((o, f) => { if (f.units == null || isNaN(f.units)) o.unk++; else { o.n += Number(f.units); o.k++; } return o; }, { n: 0, k: 0, unk: 0 });
     const s = this.state, D = window.FLEET_DATA;
@@ -1825,7 +1818,7 @@ class Component extends DCLogic {
       fBtnBg: s.fOpen || fChips.length ? "rgba(118,156,210,0.16)" : "transparent", fBtnBd: s.fOpen || fChips.length ? "#9DB9E0" : "rgba(255,255,255,0.22)",
       toggleF: () => this.setState({ fOpen: !s.fOpen }), closeF: () => this.setState({ fOpen: false }),
       fShowN: (() => { const n = this.agg(rows).total; return n + (n === 1 ? " site" : " sites"); })(),
-      heroUnit: lvl === 2 ? "Deployments" : "Sites", remote, sumTag: SUM.tagline, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
+      heroUnit: lvl === 2 ? "Deployments" : "Sites", remote, sumTag: SUM.tagline, sumPre: SUM.pre, sumNum: SUM.num, sumPost: SUM.post, sumHasNum: SUM.hasNum, sumItems, hero, glyph: G, isEmpty, showTypes: !isEmpty && lvl < 2, showL0: !isEmpty && lvl === 0, showL1: lvl === 1, showL2: !isEmpty && lvl === 2,
       typeRows, sortCols, league, assetRows, assetCount: distAssets.length + (distAssets.length === 1 ? " asset" : " assets"),
       fleetRows, splitLegend, ringBig: lvl === 2 ? this.ringU(g, 150, 66, 7) : "", inits, initCount: lvl === 2 ? nInit(ast.id) : "", heroSample: false, meta,
       scanLine: s.mapReady ? React.createElement("div", { key: "scan" + s.scanKey, style: { position: "absolute", left: 0, right: 0, top: 0, height: "1px", zIndex: 2, pointerEvents: "none", background: "linear-gradient(90deg,rgba(118,156,210,0),#DCE7F6 50%,rgba(118,156,210,0))", boxShadow: "0 0 18px 4px rgba(118,156,210,0.45)", animation: "rrScanY 1.4s cubic-bezier(.4,0,.2,1) forwards" } }) : null,

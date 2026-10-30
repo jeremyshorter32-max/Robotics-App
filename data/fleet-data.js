@@ -23,6 +23,9 @@
      {"src": "assets/video/<file>.mp4", "poster": "assets/video/<file>.jpg",
       "title": "Short caption", "duration": seconds,
      "width": pixels, "height": pixels}  (width/height set the player shape)
+     Optional "section": which tab of the Watch deployments gallery it sits
+     in (ids from meta.video_sections; default = the first section). A
+     section with no videos shows its "coming_soon" message.
    coord_approx = true -> map point estimated, confirm location.
    Districts: OpenStreetMap outlines (Nominatim, ODbL), lightly simplified.
    Al Reem Island (island outline), Al Raha (administrative area, shown as
@@ -63,7 +66,18 @@ window.FLEET_DATA = {
    }
   ],
   "data_as_of": "30 Oct 2026",
-  "source": "Aldar robotics initiative tracker, items 07 to 23; Pudu cleaning rollout (30 planned deployments)"
+  "source": "Aldar robotics initiative tracker, items 07 to 23; Pudu cleaning rollout (30 planned deployments)",
+  "video_sections": [
+   {
+    "id": "residential-commercial",
+    "label": "Residential & Commercial"
+   },
+   {
+    "id": "construction",
+    "label": "Construction",
+    "coming_soon": "Construction footage is on its way. Videos of robots on Aldar construction sites will appear here soon."
+   }
+  ]
  },
  "robot_types": [
   {
@@ -4690,7 +4704,8 @@ window.FLEET_DATA = {
      "width": 464,
      "height": 832,
      "title": "Climbing stairs",
-     "duration": 7
+     "duration": 7,
+     "section": "residential-commercial"
     },
     {
      "src": "assets/video/07-analog-spot-02.mp4",
@@ -4698,7 +4713,8 @@ window.FLEET_DATA = {
      "width": 464,
      "height": 832,
      "title": "Exterior walk-round",
-     "duration": 8
+     "duration": 8,
+     "section": "residential-commercial"
     },
     {
      "src": "assets/video/07-analog-spot-03.mp4",
@@ -4706,7 +4722,8 @@ window.FLEET_DATA = {
      "width": 464,
      "height": 832,
      "title": "Interior inspection",
-     "duration": 19
+     "duration": 19,
+     "section": "residential-commercial"
     }
    ]
   },
@@ -4775,7 +4792,8 @@ window.FLEET_DATA = {
      "width": 848,
      "height": 474,
      "title": "Car park scrubbing run",
-     "duration": 70
+     "duration": 70,
+     "section": "residential-commercial"
     },
     {
      "src": "assets/video/09b-pudu-adgm-02.mp4",
@@ -4783,7 +4801,8 @@ window.FLEET_DATA = {
      "width": 478,
      "height": 850,
      "title": "Ramp and lane cleaning",
-     "duration": 29
+     "duration": 29,
+     "section": "residential-commercial"
     },
     {
      "src": "assets/video/09b-pudu-adgm-03.mp4",
@@ -4791,7 +4810,8 @@ window.FLEET_DATA = {
      "width": 848,
      "height": 474,
      "title": "One-way lane pass",
-     "duration": 10
+     "duration": 10,
+     "section": "residential-commercial"
     }
    ]
   },
@@ -4880,7 +4900,8 @@ window.FLEET_DATA = {
      "width": 960,
      "height": 536,
      "title": "Floor scrubbing at Yas Mall",
-     "duration": 12
+     "duration": 12,
+     "section": "residential-commercial"
     }
    ]
   },
@@ -4947,7 +4968,8 @@ window.FLEET_DATA = {
      "width": 540,
      "height": 960,
      "title": "Crawler cleaning the glass fa\u00e7ade",
-     "duration": 16
+     "duration": 16,
+     "section": "residential-commercial"
     }
    ]
   },
@@ -5185,7 +5207,8 @@ window.FLEET_DATA = {
      "width": 640,
      "height": 360,
      "title": "Concierge and wayfinding",
-     "duration": 16
+     "duration": 16,
+     "section": "residential-commercial"
     }
    ]
   },

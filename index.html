@@ -1476,7 +1476,8 @@ class Component extends DCLogic {
   toggleDist(id) { this.setState((s) => ({ dists: s.dists.includes(id) ? s.dists.filter((x) => x !== id) : s.dists.concat(id) })); this.kick(); }
 
   buildLayers(rebuild) {
-    const L = window.L, map = this.map, D = window.FLEET_DATA; this.idx(D);
+    // Build with the same Leaflet copy the map was created with.
+    const L = this.LL || window.L, map = this.map, D = window.FLEET_DATA; this.idx(D);
     if (rebuild) {
       Object.values(this.polys || {}).forEach((p) => map.removeLayer(p));
       Object.values(this.badges || {}).forEach((b) => { if (map.hasLayer(b)) map.removeLayer(b); });
@@ -1523,7 +1524,7 @@ class Component extends DCLogic {
   }
   initMap() {
     if (this.map) return;
-    const L = window.L, D = window.FLEET_DATA; this.idx(D);
+    const L = (this.LL = window.L), D = window.FLEET_DATA; this.idx(D);
     const map = (this.map = L.map(this.mapEl, { zoomControl: false, attributionControl: true, zoomSnap: 0.25, zoomDelta: 0.5, minZoom: 9, maxZoom: 18, wheelPxPerZoomLevel: 120 }));
     L.control.zoom({ position: "bottomright" }).addTo(map);
     map.setView([24.47, 54.47], 11, { animate: false });
@@ -1830,7 +1831,7 @@ class Component extends DCLogic {
     const SECS = (D.meta && D.meta.video_sections && D.meta.video_sections.length) ? D.meta.video_sections : [{ id: "all", label: "All footage" }];
     const secOf = (v) => (SECS.some((x) => x.id === v.section) ? v.section : SECS[0].id);
     const galOther = Object.keys(window.RR_DATASETS || {}).filter((k) => k !== curMode && window.RR_DATASETS[k]).reduce((acc, k) => acc.concat(this.vidsOf(window.RR_DATASETS[k].fleet, window.RR_DATASETS[k], k)), []);
-    const galAll = this.vidsOf(rows).concat(galOther), galSec = SECS.some((x) => x.id === s.galTab) ? s.galTab : SECS[0].id;
+    const galAll = this.vidsOf(rows).concat(galOther), galSec = SECS.some((x) => x.id === s.galTab) ? s.galTab : (curMode === "construction" && SECS.some((x) => x.id === "construction") ? "construction" : SECS[0].id);
     const galList = galAll.filter((v) => secOf(v) === galSec);
     const galSecObj = SECS.find((x) => x.id === galSec);
     const galTabs = SECS.map((x) => { const n = galAll.filter((v) => secOf(v) === x.id).length, on = x.id === galSec; return { label: x.label, n: n ? String(n) : "Soon", go: () => this.setState({ galTab: x.id }), sel: String(on), bg: on ? "var(--acc,#769CD2)" : "transparent", fg: on ? "#12102A" : "#FFFFFF", bd: on ? "var(--acc,#769CD2)" : "rgba(255,255,255,0.25)", nbg: on ? "rgba(18,16,42,0.18)" : "rgba(var(--accRGB,118,156,210),0.2)" }; });

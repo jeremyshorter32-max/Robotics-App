@@ -65,3 +65,10 @@ To add a video:
 1. Put the web-ready file and a preview image in `assets/video/` (e.g. `07-analog-spot-01.mp4` and `.jpg`). Keep clips short, silent, H.264 MP4 with "faststart", about 1–2 MB each. Portrait and landscape both work; set `width` and `height` so the player takes the right shape.
 2. In `data/fleet-data.js`, add it to that deployment's `videos` list:
    `{"src": "assets/video/<file>.mp4", "poster": "assets/video/<file>.jpg", "title": "Short caption", "duration": 12}`
+
+## Map layers: Residential & Commercial and Construction
+The switch at the top swaps between two layers, each with its own data:
+- `data/fleet-data.js`: Residential & Commercial (blue).
+- `data/construction-data.js`: Construction trials (green accents and map tint).
+
+`assets/js/modes.js` holds the layer list and colours. Adding `?map=construction` to the address opens straight into the construction layer. Videos tagged `"section": "construction"` appear in the Construction tab of the Watch deployments gallery from either layer.

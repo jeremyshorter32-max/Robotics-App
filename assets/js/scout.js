@@ -354,7 +354,7 @@
     var list = filtered();
     $("count").textContent = list.length + " of " + P.length + " providers";
     $("list").innerHTML = list.length ? list.map(function (p, i) { return row(p, i + 1); }).join("")
-      : '<li class="empty">No providers match. Loosen a filter, or note the need for a new scout.</li>';
+      : '<li class="empty">No providers in Scout match yet. Use <b>Scout the web</b> above to search Google News for new ones.</li>';
   }
 
   /* ---------- view: matrix ---------- */

@@ -48,6 +48,12 @@ Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`
 - **Links:** every view, filter, comparison and profile is in the address bar, so copy the link to share it. CSV export on the Providers view.
 - **Updating providers:** edit `intel/scout/providers.json` (or ask Claude to research and add providers), then run `python intel/scout_build.py`. It checks every record (ids, categories, scores 0 to 5, links, fleet vendor names) before writing `data/scout-providers.js`.
 - **Changing the strategy:** edit `data/scout-strategy.js`. Every ranking updates on the next page load, with no new research needed.
+- **Scout the web (free):** type a need, such as *robotic painting*, and press **Scout the web**.
+  - **Live search:** 10 Google News searches run through `netlify/functions/scout-news.mjs`, covering English, the UAE edition and Chinese over the last two years.
+  - **Results:** the companies named in on-topic headlines are listed, with those already in Scout shown separately.
+  - **Google searches:** ready-made searches, in six languages, open in Google.
+  - **Research list:** **+ To research** adds a company to a list kept in your browser. Copy or email that list to Claude to get full profiles added.
+  - **Search terms:** the terms, translations and off-topic words are in `data/scout-strategy.js` under `web_scout`.
 - Plan and roadmap: `docs/market-pulse-scout/`.
 
 ## Market Pulse (weekly robotics intelligence)

@@ -340,5 +340,298 @@ window.SCOUT_STRATEGY = {
     }
    ]
   }
- ]
+ ],
+ "web_scout": {
+  "_readme": "Scout the web (free): terms used to build Google News and Google searches for a typed need. 'match' is a pattern tried against the search text; the first match supplies English variants, context words that keep results on Aldar-relevant uses, and translations for Chinese, Japanese, Korean, German and Arabic searches. 'avoid' lists words that mark a headline as off-topic for Aldar (for example sports-field or car painting).",
+  "filler": "solutions?|providers?|companies|company|vendors?|suppliers?|technology|technologies|systems?|tools?|options|for|the|and|of|in|best|top",
+  "gcc_words": "UAE|Dubai|Abu Dhabi|Saudi|Riyadh|NEOM|Qatar|Doha|Kuwait|Bahrain|Oman|GCC|Gulf|Middle East|Sharjah",
+  "terms": [
+   {
+    "id": "painting",
+    "match": "paint|spray",
+    "cat": "construction",
+    "en": [
+     "painting robot",
+     "wall painting robot",
+     "spray painting robot construction"
+    ],
+    "ctx": "construction OR building OR wall OR interior OR contractor",
+    "zh": "喷涂机器人",
+    "ja": "塗装ロボット",
+    "ko": "도장 로봇",
+    "de": "Malerroboter",
+    "ar": "روبوت طلاء",
+    "avoid": "field|football|soccer|sports?|athletic|stadium|art|artist|artwork|portrait|ink|canvas|car|cars|automotive|car-body|vehicle|collision|ship|hull|shipyard|road|roads|line marking|gundam|toy|trump|music|drinks|nail|tattoo"
+   },
+   {
+    "id": "plastering",
+    "match": "plaster",
+    "cat": "construction",
+    "en": [
+     "plastering robot",
+     "wall plastering robot"
+    ],
+    "ctx": "construction OR building OR wall",
+    "zh": "抹灰机器人",
+    "de": "Verputzroboter",
+    "avoid": "art|toy|surgery|cast"
+   },
+   {
+    "id": "drywall",
+    "match": "drywall|gypsum",
+    "cat": "construction",
+    "en": [
+     "drywall robot",
+     "drywall finishing robot"
+    ],
+    "ctx": "construction OR building OR interior"
+   },
+   {
+    "id": "tiling",
+    "match": "\\btil(e|es|ing)\\b",
+    "cat": "construction",
+    "en": [
+     "tiling robot",
+     "tile laying robot"
+    ],
+    "ctx": "construction OR building OR floor",
+    "zh": "铺砖机器人"
+   },
+   {
+    "id": "screed",
+    "match": "screed|levell?ing|concrete",
+    "cat": "construction",
+    "en": [
+     "concrete screeding robot",
+     "concrete levelling robot"
+    ],
+    "ctx": "construction OR site OR floor",
+    "zh": "地坪整平机器人"
+   },
+   {
+    "id": "layout",
+    "match": "layout|marking|setting.out",
+    "cat": "construction",
+    "en": [
+     "construction layout robot",
+     "layout marking robot"
+    ],
+    "ctx": "construction OR site OR jobsite",
+    "zh": "放线机器人"
+   },
+   {
+    "id": "brick",
+    "match": "brick|masonry",
+    "cat": "construction",
+    "en": [
+     "bricklaying robot"
+    ],
+    "ctx": "construction OR building OR site",
+    "zh": "砌砖机器人",
+    "de": "Maurerroboter"
+   },
+   {
+    "id": "rebar",
+    "match": "rebar",
+    "cat": "construction",
+    "en": [
+     "rebar tying robot"
+    ],
+    "ctx": "construction OR site",
+    "zh": "钢筋绑扎机器人"
+   },
+   {
+    "id": "print3d",
+    "match": "3d.?print",
+    "cat": "construction",
+    "en": [
+     "construction 3D printing",
+     "3D printed homes robot"
+    ],
+    "ctx": "construction OR building OR homes",
+    "zh": "建筑3D打印"
+   },
+   {
+    "id": "facade",
+    "match": "fa[cç]ade|window|curtain.wall|high.?rise|glass",
+    "cat": "facade",
+    "en": [
+     "facade cleaning robot",
+     "window cleaning robot building",
+     "facade cleaning drone"
+    ],
+    "ctx": "building OR tower OR high-rise OR skyscraper",
+    "zh": "幕墙清洗机器人",
+    "ja": "窓拭きロボット",
+    "de": "Fassadenreinigung Roboter",
+    "ar": "روبوت تنظيف الواجهات",
+    "avoid": "home|household|deal|pool|car|aquarium|phone"
+   },
+   {
+    "id": "solar",
+    "match": "solar",
+    "cat": "facade",
+    "en": [
+     "solar panel cleaning robot"
+    ],
+    "ctx": "solar OR rooftop OR PV",
+    "zh": "光伏清扫机器人",
+    "avoid": "space|satellite|mars"
+   },
+   {
+    "id": "floor",
+    "match": "floor|scrub|vacuum|clean|sweep|janitor",
+    "cat": "cleaning",
+    "en": [
+     "commercial cleaning robot",
+     "floor scrubber robot",
+     "autonomous cleaning robot"
+    ],
+    "ctx": "commercial OR mall OR office OR airport OR facility",
+    "zh": "商用清洁机器人",
+    "ja": "清掃ロボット",
+    "ko": "청소 로봇",
+    "de": "Reinigungsroboter",
+    "ar": "روبوت تنظيف",
+    "avoid": "home|household|consumer|robot vacuum|robovac|deal|pool|lawn|kitchen|dish|laundry|toilet|litter"
+   },
+   {
+    "id": "security",
+    "match": "secur|patrol|guard|surveillance",
+    "cat": "security",
+    "en": [
+     "security robot",
+     "patrol robot"
+    ],
+    "ctx": "security OR patrol OR mall OR community OR campus",
+    "zh": "安防巡逻机器人",
+    "ja": "警備ロボット",
+    "ko": "순찰 로봇",
+    "de": "Sicherheitsroboter",
+    "ar": "روبوت أمني",
+    "avoid": "toy|movie|film|game|cyber|software|password"
+   },
+   {
+    "id": "delivery",
+    "match": "deliver|last.?mile|parcel|courier",
+    "cat": "delivery",
+    "en": [
+     "delivery robot",
+     "autonomous delivery vehicle"
+    ],
+    "ctx": "delivery OR residential OR community OR last-mile",
+    "zh": "无人配送车",
+    "ja": "配送ロボット",
+    "ko": "배송 로봇",
+    "de": "Lieferroboter",
+    "ar": "روبوت توصيل",
+    "avoid": "food court|pizza toy|movie"
+   },
+   {
+    "id": "pipe",
+    "match": "pipe|cavity|duct|sewer",
+    "cat": "inspection",
+    "en": [
+     "pipe inspection robot",
+     "duct inspection robot"
+    ],
+    "ctx": "inspection OR building OR pipe",
+    "zh": "管道检测机器人"
+   },
+   {
+    "id": "quadruped",
+    "match": "quadruped|robot.dog|legged",
+    "cat": "inspection",
+    "en": [
+     "quadruped robot",
+     "robot dog inspection"
+    ],
+    "ctx": "inspection OR security OR site OR industrial",
+    "zh": "四足机器人",
+    "ja": "四足歩行ロボット"
+   },
+   {
+    "id": "drone",
+    "match": "drone|uav",
+    "cat": "inspection",
+    "en": [
+     "inspection drone",
+     "drone building inspection"
+    ],
+    "ctx": "inspection OR building OR roof OR facade OR thermal",
+    "zh": "无人机巡检",
+    "ja": "点検ドローン",
+    "ar": "طائرة بدون طيار فحص",
+    "avoid": "military|strike|attack|war|missile|kamikaze|ukraine|russia|army"
+   },
+   {
+    "id": "inspection",
+    "match": "inspect|survey|thermal|snag",
+    "cat": "inspection",
+    "en": [
+     "inspection robot",
+     "building inspection robot"
+    ],
+    "ctx": "inspection OR building OR site OR facility",
+    "zh": "巡检机器人",
+    "ja": "点検ロボット",
+    "ko": "점검 로봇",
+    "de": "Inspektionsroboter",
+    "ar": "روبوت فحص"
+   },
+   {
+    "id": "humanoid",
+    "match": "humanoid|concierge|reception|wayfinding|greet|guest",
+    "cat": "humanoids",
+    "en": [
+     "humanoid robot",
+     "service robot concierge",
+     "reception robot"
+    ],
+    "ctx": "humanoid OR service OR hospitality OR retail OR mall",
+    "zh": "人形机器人",
+    "ja": "ヒューマノイド",
+    "ko": "휴머노이드",
+    "de": "humanoider Roboter",
+    "ar": "روبوت بشري",
+    "avoid": "movie|film|game|toy|anime"
+   },
+   {
+    "id": "lift",
+    "match": "lift|elevator|fleet|interop|orchestrat",
+    "cat": "physical_ai",
+    "en": [
+     "robot elevator integration",
+     "robot fleet management"
+    ],
+    "ctx": "robot OR building OR fleet",
+    "zh": "机器人梯控"
+   },
+   {
+    "id": "landscaping",
+    "match": "lawn|landscap|garden|mow|irrigat",
+    "cat": "cleaning",
+    "en": [
+     "robotic mower commercial",
+     "landscaping robot"
+    ],
+    "ctx": "commercial OR landscaping OR golf OR park",
+    "zh": "割草机器人",
+    "ja": "芝刈りロボット",
+    "de": "Mähroboter",
+    "avoid": "home|household|deal|garden gnome"
+   },
+   {
+    "id": "parking",
+    "match": "parking|valet|charging",
+    "cat": "delivery",
+    "en": [
+     "parking robot",
+     "EV charging robot"
+    ],
+    "ctx": "parking OR garage OR EV",
+    "zh": "停车机器人"
+   }
+  ]
+ }
 };

@@ -3,6 +3,10 @@
   publish = "."
   command = ""
 
+# Small server functions (free on our plan). scout-news.mjs powers "Scout the web" on scout.html.
+[functions]
+  directory = "netlify/functions"
+
 [[headers]]
   for = "/*"
   [headers.values]

@@ -292,6 +292,55 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
 .srcs small{color:var(--muted)}
 .pscroll .ps:last-child{margin-top:16px}
 
+
+/* ---------- Scout the web ---------- */
+.ws{padding:16px 18px;margin-bottom:16px;border-left:3px solid var(--gold)}
+.ws-top{display:flex;gap:16px;align-items:flex-start;justify-content:space-between}
+.ws h2{margin:0;font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;line-height:1.35}
+.ws h2 svg{flex:none;color:var(--accent-ink)}
+.ws-t p{margin:4px 0 0;font-size:13px;color:var(--muted);max-width:720px}
+.wsgo{flex:none;border:0;background:var(--navy);color:#fff;padding:11px 18px;font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap}
+.wsgo:hover{background:#26234F}
+.wsgo:disabled{opacity:.6;cursor:progress}
+.ws-dig{display:flex;gap:6px 10px;flex-wrap:wrap;align-items:baseline;margin-top:12px;font-size:12.5px;color:var(--muted)}
+.ws-links{display:contents}
+.ws-links a{color:var(--accent-ink);font-weight:500;text-decoration:none;border-bottom:1px solid rgba(63,111,174,.3)}
+.ws-links a:hover{border-bottom-color:var(--accent-ink)}
+.ws-wait{margin-top:14px;padding:14px;background:#F8F9FB;font-size:13.5px;color:var(--ink-2)}
+.ws-wait.err{background:#FBE9E1;color:#7A3412}
+.ws-sum{margin:14px 0 6px;font-size:13px;color:var(--ink-2)}
+.ws h4{margin:14px 0 8px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.ws h4 small{font-weight:500;color:var(--ink)}
+.ws-known{display:flex;gap:6px;flex-wrap:wrap}
+.ws-cos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.ws-cos li{display:flex;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid var(--line);background:#fff}
+.ws-cn{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ws-cn b{font-size:14.5px;display:inline}
+.ws-cn .flag{align-self:flex-start;margin:2px 0}
+.ws-cn small{font-size:12px;color:var(--muted)}
+.ws-ev{font-size:12.5px;color:var(--ink-2);text-decoration:none;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ws-ev:hover{color:var(--accent-ink);text-decoration:underline}
+.ws-act{display:flex;flex-direction:column;gap:6px;flex:none}
+.ws-act .abtn{justify-content:center;text-decoration:none;font-size:12px;padding:6px 10px;white-space:nowrap}
+.ws-act .abtn[aria-pressed="true"]{background:#E3F3EA;border-color:var(--good);color:var(--good)}
+.ws-arts{margin-top:12px}
+.ws-arts summary{cursor:pointer;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.ws-arts summary small{color:var(--ink);font-weight:500}
+.ws-list{list-style:none;margin:8px 0 0;padding:0}
+.ws-list li{display:flex;flex-direction:column;padding:7px 0;border-top:1px solid var(--line)}
+.ws-list a{font-size:13.5px;font-weight:500;text-decoration:none;color:var(--ink)}
+.ws-list a:hover{color:var(--accent-ink);text-decoration:underline}
+.ws-list small{font-size:12px;color:var(--muted)}
+.ws-todo{padding:12px 16px;margin-bottom:16px;border-left:3px solid var(--good)}
+.ws-todo-h{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.ws-todo h3{margin:0;font-size:14px;display:flex;gap:8px;align-items:center}
+.ws-todo h3 .n{font-size:11px;background:var(--good);color:#fff;padding:0 7px;border-radius:9px;line-height:18px}
+.ws-todo-a{display:flex;gap:6px;align-items:center}
+.ws-todo ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.ws-todo li{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line-2);padding:4px 4px 4px 10px;font-size:13px;background:#fff}
+.ws-todo li small{color:var(--muted);font-size:11.5px}
+.x.sm2{width:22px;height:22px;font-size:14px}
+
 /* ---------- Responsive ---------- */
 @media (max-width: 1080px){
   .hero-in{grid-template-columns:1fr}
@@ -333,6 +382,13 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
   .prow .fit{grid-column:2;grid-row:1;flex-direction:column;gap:4px}
   .prow .cmp{grid-column:1 / -1;justify-self:start}
   .quads{grid-template-columns:1fr}
+  .ws{padding:14px}
+  .ws-top{flex-direction:column;gap:10px}
+  .wsgo{width:100%}
+  .ws-cos{grid-template-columns:1fr}
+  .ws-cos li{flex-direction:column}
+  .ws-act{flex-direction:row}
+  .ws-todo li small{display:none}
   .mxwrap{padding:12px 8px 8px}
   .mx .dl{display:none}
   .ph{flex-direction:column;gap:12px}
@@ -423,6 +479,23 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
   </section>
 
   <section id="view-providers" aria-label="Providers">
+    <section class="card ws" id="ws" hidden aria-labelledby="wsH">
+      <div class="ws-top">
+        <div class="ws-t">
+          <h2 id="wsH"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.5 4 5.6 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.6-4-9s1.4-6.5 4-9z"/></svg>Scout the web for “<span id="wsQ"></span>”</h2>
+          <p>Searches Google News live, across the last two years, in English, the UAE edition and Chinese, and picks out the companies in the headlines. <span id="wsTerm" class="muted"></span></p>
+        </div>
+        <button type="button" class="wsgo" id="wsGo">Scout the web</button>
+      </div>
+      <div class="ws-dig"><span>Dig deeper on Google:</span><span id="wsDig" class="ws-links"></span></div>
+      <div id="wsOut"></div>
+    </section>
+    <aside class="card ws-todo" id="wsTodo" hidden aria-labelledby="wsTodoH">
+      <div class="ws-todo-h"><h3 id="wsTodoH">To research <span class="n" id="wsTodoN"></span></h3>
+        <span class="ws-todo-a"><button type="button" class="abtn" id="wsCopy">Copy as a request</button><button type="button" class="abtn" id="wsMail">Email</button><button type="button" class="linkbtn" id="wsClear">Clear</button></span></div>
+      <ul id="wsTodoList"></ul>
+      <p class="note">Kept in this browser. Send the list to Claude to research full profiles, with scores and sources, and add them to Scout.</p>
+    </aside>
     <div class="lhead">
       <b id="count"></b>
       <div class="acts">
@@ -490,11 +563,12 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
   </div>
 </div>
 
-<script src="data/scout-strategy.js?v=20261031b"></script>
+<script src="data/scout-strategy.js?v=20261031d"></script>
 <script src="data/scout-providers.js?v=20261031b"></script>
 <script src="data/fleet-data.js"></script>
 <script src="data/construction-data.js"></script>
 <script src="data/intel-feed.js"></script>
-<script src="assets/js/scout.js?v=20261031b"></script>
+<script src="assets/js/scout.js?v=20261031c"></script>
+<script src="assets/js/scout-web.js?v=20261031h"></script>
 </body>
 </html>

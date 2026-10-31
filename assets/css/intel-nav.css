@@ -1,0 +1,13 @@
+/* Market Intelligence switch shared by Pulse (intel.html) and Scout (scout.html). */
+.inav{display:flex;align-items:stretch;border:1px solid rgba(255,255,255,0.2);margin-left:6px;flex:none}
+.inav a{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;color:rgba(255,255,255,0.72);text-decoration:none;font-size:12px;font-weight:500;letter-spacing:0.04em;white-space:nowrap}
+.inav a + a{border-left:1px solid rgba(255,255,255,0.2)}
+.inav a:hover{color:#fff;background:rgba(255,255,255,0.06)}
+.inav a[aria-current="page"]{background:#fff;color:#12102A}
+.inav a[aria-current="page"] svg{stroke:#12102A}
+@media (max-width: 760px){
+  .inav{margin-left:auto}
+  .inav a{padding:7px 10px;font-size:12px}
+  .inav + .right{margin-left:0}
+}
+@media print{.inav{display:none}}

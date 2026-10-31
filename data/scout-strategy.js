@@ -1,0 +1,344 @@
+/* ALDAR ROBOTICS SCOUT: strategy parameters (weights, knock-outs, verdict rules, presets).
+   Edit here to change how every provider is ranked; no new research is needed. */
+window.SCOUT_STRATEGY = {
+ "_readme": "Aldar Robotics Scout: preset strategy parameters. Pillar scores (0-5) come from research with evidence; the Fit Score, knock-outs, verdict and matrix are calculated in the browser from this file, so changing a weight re-ranks everything without new research. Draft weights: to be confirmed by the robotics team.",
+ "version": "2026-10-31-draft",
+ "strategy_summary": "Aldar deploys robotics across its communities, malls, offices, schools and construction sites in Abu Dhabi and the wider UAE, prioritising proven, safe technology that can be supported locally and operates in GCC heat and dust.",
+ "asset_types": [
+  "residential communities",
+  "retail malls",
+  "offices",
+  "schools",
+  "construction sites",
+  "hospitality"
+ ],
+ "priority_use_cases": [
+  {
+   "category": "construction",
+   "label": "Construction & site robotics",
+   "examples": [
+    "painting and plastering",
+    "layout marking",
+    "concrete levelling",
+    "drywall and interior finishing",
+    "site progress scanning"
+   ]
+  },
+  {
+   "category": "facade",
+   "label": "Façade & building maintenance",
+   "examples": [
+    "high-rise façade and window cleaning",
+    "solar panel cleaning"
+   ]
+  },
+  {
+   "category": "inspection",
+   "label": "Inspection & drones",
+   "examples": [
+    "quadruped site inspection",
+    "drone façade and roof inspection",
+    "hidden cavity inspection",
+    "thermal surveys"
+   ]
+  },
+  {
+   "category": "cleaning",
+   "label": "Floor cleaning",
+   "examples": [
+    "mall and office scrubbers",
+    "outdoor sweepers",
+    "car park cleaning"
+   ]
+  },
+  {
+   "category": "security",
+   "label": "Security & patrol",
+   "examples": [
+    "community patrol",
+    "car park patrol",
+    "perimeter drones"
+   ]
+  },
+  {
+   "category": "delivery",
+   "label": "Delivery & autonomous mobility",
+   "examples": [
+    "last-mile delivery in communities",
+    "autonomous shuttles",
+    "in-building delivery"
+   ]
+  },
+  {
+   "category": "humanoids",
+   "label": "Humanoids & guest engagement",
+   "examples": [
+    "concierge and wayfinding",
+    "reception",
+    "retail engagement"
+   ]
+  },
+  {
+   "category": "physical_ai",
+   "label": "Physical AI & platforms",
+   "examples": [
+    "fleet management",
+    "robot interoperability",
+    "BMS/FM integration platforms"
+   ]
+  }
+ ],
+ "knockouts": [
+  {
+   "id": "sanctions",
+   "label": "On a sanctions or restricted list (e.g. US entity list, UAE restrictions)"
+  },
+  {
+   "id": "no_product",
+   "label": "No working product: only renders or prototypes, no field use"
+  },
+  {
+   "id": "uae_blocked",
+   "label": "Cannot legally operate, import or be supported in the UAE"
+  }
+ ],
+ "pillars": [
+  {
+   "id": "fit",
+   "label": "Strategic fit",
+   "weight": 25,
+   "guide": "0 unrelated · 3 matches a priority use case · 5 matches a priority use case on our asset types with a clear Aldar site in mind"
+  },
+  {
+   "id": "readiness",
+   "label": "Technology readiness",
+   "weight": 20,
+   "guide": "0 concept · 1 prototype · 2 pilot · 3 early commercial · 4 commercial · 5 at scale with uptime data"
+  },
+  {
+   "id": "deployments",
+   "label": "Proven deployments",
+   "weight": 20,
+   "guide": "0 none · 1 one pilot · 3 several paid deployments · 5 many live deployments at comparable sites with named references"
+  },
+  {
+   "id": "gcc",
+   "label": "GCC readiness",
+   "weight": 15,
+   "guide": "0 no regional link · 2 distributor · 3 GCC customers · 4 local office/partner · 5 UAE deployments, heat/dust rated, approvals held"
+  },
+  {
+   "id": "commercial",
+   "label": "Commercial strength",
+   "weight": 10,
+   "guide": "funding, backers, revenue signals, headcount trend; 0 distressed · 5 well funded and growing"
+  },
+  {
+   "id": "integration",
+   "label": "Integration & safety",
+   "weight": 10,
+   "guide": "APIs/BMS/FM integration, safety certification (e.g. ISO 13482), cybersecurity, UAE data residency"
+  }
+ ],
+ "verdict": {
+  "shortlist": {
+   "min_score": 70,
+   "min_pillar": {
+    "deployments": 3
+   }
+  },
+  "watch": {
+   "min_score": 50
+  },
+  "pass": {
+   "below": 50
+  }
+ },
+ "confidence": {
+  "high": "3+ independent sources and at least one named customer",
+  "medium": "2 independent sources",
+  "low": "company's own claims only"
+ },
+ "limits": {
+  "max_providers_per_search": 15,
+  "deep_dive_top_n": 8,
+  "max_web_searches_per_search": 30,
+  "monthly_budget_usd": "TBC"
+ },
+ "maturity_stages": [
+  {
+   "n": 1,
+   "label": "Emerging",
+   "note": "Concept or prototype; no paying customers yet"
+  },
+  {
+   "n": 2,
+   "label": "Validating",
+   "note": "Pilots and first paying customers"
+  },
+  {
+   "n": 3,
+   "label": "Deploying",
+   "note": "Repeat commercial deployments"
+  },
+  {
+   "n": 4,
+   "label": "Scaling",
+   "note": "Hundreds of units or many sites, several markets"
+  },
+  {
+   "n": 5,
+   "label": "Established",
+   "note": "Market leader with large installed base"
+  }
+ ],
+ "gcc_levels": [
+  {
+   "id": "none",
+   "label": "No GCC link"
+  },
+  {
+   "id": "distributor",
+   "label": "Distributor only"
+  },
+  {
+   "id": "gcc_customers",
+   "label": "GCC customers"
+  },
+  {
+   "id": "local_office",
+   "label": "Local office or partner"
+  },
+  {
+   "id": "uae_deployments",
+   "label": "Deployed in the UAE"
+  }
+ ],
+ "quadrants": {
+  "split": {
+   "fit": 70,
+   "maturity": 3
+  },
+  "tr": {
+   "id": "deploy",
+   "label": "Deploy now",
+   "note": "Strong fit and mature: ready for a trial or scale-up"
+  },
+  "tl": {
+   "id": "fast",
+   "label": "Fast mover",
+   "note": "Strong fit, still maturing: pilot carefully, watch closely"
+  },
+  "br": {
+   "id": "proven",
+   "label": "Proven elsewhere",
+   "note": "Mature but a weaker fit for Aldar today"
+  },
+  "bl": {
+   "id": "early",
+   "label": "Early bet",
+   "note": "Early and weaker fit: track only"
+  }
+ },
+ "presets": [
+  {
+   "id": "deploy",
+   "label": "Deploy now",
+   "filters": [
+    {
+     "field": "quadrant",
+     "op": "any",
+     "values": [
+      "deploy"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "gccready",
+   "label": "GCC-ready",
+   "filters": [
+    {
+     "field": "gcc",
+     "op": "any",
+     "values": [
+      "local_office",
+      "uae_deployments"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "shortlist",
+   "label": "Shortlist",
+   "filters": [
+    {
+     "field": "verdict",
+     "op": "any",
+     "values": [
+      "shortlist"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "challengers",
+   "label": "Challengers to our vendors",
+   "filters": [
+    {
+     "field": "fleet",
+     "op": "any",
+     "values": [
+      "no"
+     ]
+    },
+    {
+     "field": "category",
+     "op": "any",
+     "values": [
+      "__fleet_categories__"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "recent",
+   "label": "Raised in the last 18 months",
+   "filters": [
+    {
+     "field": "funding_recent",
+     "op": "any",
+     "values": [
+      "yes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "ours",
+   "label": "Already working with Aldar",
+   "filters": [
+    {
+     "field": "fleet",
+     "op": "any",
+     "values": [
+      "yes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "raas",
+   "label": "Robot-as-a-service",
+   "filters": [
+    {
+     "field": "model",
+     "op": "any",
+     "values": [
+      "raas"
+     ]
+    }
+   ]
+  }
+ ]
+};

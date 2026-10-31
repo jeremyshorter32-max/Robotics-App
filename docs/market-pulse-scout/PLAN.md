@@ -1,12 +1,28 @@
 # Market Pulse → Robotics Scout: saved plan
 
-**Status:** parked. Nothing here is live and nothing on the website has changed.
+**Status:** build started 31 Oct 2026 on branch `scout-build`. Nothing is live until you say "make it live".
 **Saved:** 31 Oct 2026, on branch `plan/market-pulse-scout`.
 **To start:** say *"activate the Market Pulse scout plan"*. Work begins from this branch, starting with the decisions in section 9.
 
 > **Update, 31 Oct 2026:** see **`FEATURE-MAP.md`**, which maps each CB Insights feature to a free, robotics-specific version. It sets the build order: free first, using the browser, GitHub, the Netlify Pro plan you already have, and your Claude plan. The paid on-site AI search in sections 6 and 8 becomes an optional later upgrade.
 
 ---
+
+## Decision: Scout gets its own page (31 Oct 2026)
+
+Scout is built as **its own page (`scout.html`)**, not added into the Pulse page. Pulse and Scout share a header with *Market Intelligence: Pulse | Scout* tabs, so to users they feel like one product.
+
+- **Why separate:**
+  - **Different jobs.** Pulse is for reading the news. Scout is a working tool for search, scoring and the pipeline.
+  - **Different access.** Pulse stays open. Scout can sit behind a password later, because pipeline, notes and ratings will be confidential.
+  - **Speed.** Each page loads only what it needs, which matters most on phones.
+  - **Clean links** to individual providers and comparisons.
+  - **Lower risk.** Scout is built without touching Pulse, which the bot updates every week.
+- **How they connect:**
+  - Vendor names in Pulse stories link to their Scout profiles, and Pulse's "New vendors" section gets **Score in Scout**.
+  - Scout profiles show that provider's latest Pulse news.
+  - Both read the same research data behind the scenes.
+- **Rollback point** before the build: branch `rollback-before-scout` (main at a87384c).
 
 ## 1. What we want
 

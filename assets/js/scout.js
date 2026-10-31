@@ -497,7 +497,13 @@
       var g = (STRAT.gcc_levels || [])[v]; return g ? esc(g.label) : "–"; }, { num: true });
     addRow("Viability risk", ps.map(function (p) { return { low: 0, medium: 1, high: 2 }[p.viability_risk]; }), function (v) { return v == null ? "–" : ["Low", "Medium", "High"][v]; }, { num: true, low: true });
     addRow("Confidence", ps.map(function (p) { return p.confidence; }), function (v) { return esc(cap(v || "–")); });
-    addRow("Funding raised", ps.map(function (p) { return p.funding && p.funding.total_usd_m; }), function (v) { return v == null ? "Not disclosed" : "$" + v + "M"; }, { num: true });
+    addRow("Funding", ps.map(function (p) {
+      var f = p.funding || {};
+      if (f.total_usd_m != null) return "$" + f.total_usd_m + "M raised";
+      if (f.parent) return "Part of " + f.parent;
+      if (f.public) return "Listed company";
+      return "Not disclosed";
+    }), esc);
     addRow("Business model", ps.map(function (p) { return (p.business_model || []).map(function (b) { return { purchase: "Purchase", raas: "RaaS", service: "Service" }[b] || b; }).join(", "); }), esc);
     addRow("Head office", ps.map(function (p) { return p.hq_country; }), esc);
     addRow("With Aldar", ps.map(function (p) { return p._deployments.length; }), function (v) { return v ? v + " deployment" + (v > 1 ? "s" : "") : "–"; });

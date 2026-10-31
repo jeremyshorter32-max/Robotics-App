@@ -12,7 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="Aldar Robotics">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#12102A">
-<link rel="stylesheet" href="assets/css/intel-nav.css?v=20261031a">
+<link rel="stylesheet" href="assets/css/intel-nav.css?v=20261031e">
 <style>
 @font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url("assets/fonts/poppins-300-latin.woff2") format('woff2')}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/poppins-400-latin.woff2") format('woff2')}
@@ -562,6 +562,7 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
         (!n && w.article && /^https:\/\//.test(w.article.url || "") ? '<div class="vnote"><a href="' + esc(w.article.url) + '" target="_blank" rel="noopener" style="color:var(--accent-ink)">' + esc(w.article.title) + "</a> · " + esc(w.article.source) + "</div>" : "") + "</li>";
     }).join("") : '<li style="padding:10px 8px;color:var(--muted);font-size:13.5px">No news about our vendors this week.</li>';
     $("vwRest").textContent = quiet.length ? "No news: " + quiet.map(function (w) { return w.vendor; }).join(", ") + "." : "";
+    $("vwRest").innerHTML = esc($("vwRest").textContent) + (quiet.length ? " " : "") + '<a href="scout.html?f=fleet~any~yes" style="color:var(--accent-ink);font-weight:500;white-space:nowrap">See our vendors scored in Scout →</a>';
     var byHeadline = news.some(function (w) { return w.signal_by === "headlines"; });
     $("vwLeg").innerHTML = news.length ? ["positive", "risk", "mixed", "mention"].map(function (k) { return '<span><i class="sig ' + k + '"></i>' + SIGNAL[k] + "</span>"; }).join("") +
       (byHeadline ? '<span style="width:100%">Good news and risks are read from headlines.</span>' : "") : "";
@@ -611,7 +612,8 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
         return '<article class="ccard"><div class="chd"><div><div class="kick" style="--k:' + esc(c.color) + '"><span class="dot"></span><span class="c">' + esc(c.label) + "</span></div><h3>" + esc(x.name) + '</h3></div><span class="cv ' + esc(x.verdict) + '">' + esc(CVERDICT[x.verdict] || x.verdict) + "</span></div>" +
           "<p>" + esc(x.what) + "</p><p><b>Why it matters to us.</b> " + esc(x.why) + "</p>" +
           '<div class="scores">' + CRIT.map(function (k) { var n = sc[k[0]] || 0; return "<span>" + k[1] + '</span><span class="pips" aria-label="' + n + ' of 4">' + [1, 2, 3, 4].map(function (i) { return '<i class="' + (i <= n ? "f" : "") + '"></i>'; }).join("") + "</span>"; }).join("") + "</div>" +
-          '<div class="ctotal">Score <b>' + esc(x.total) + "</b> of 20</div>" +
+          '<div class="ctotal">Score <b>' + esc(x.total) + "</b> of 20" +
+            ' · <a href="scout.html?q=' + encodeURIComponent(x.name) + '" style="color:var(--accent-ink);font-weight:500">Score in Scout →</a></div>' +
           (x.source && /^https:\/\//.test(x.source.url || "") ? '<a class="src" href="' + esc(x.source.url) + '" target="_blank" rel="noopener"><span>' + esc(x.source.label || "Source") + '</span><svg viewBox="0 0 24 24" width="11" height="11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>' : "") +
           "</article>";
       }).join("") + "</div>";

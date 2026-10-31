@@ -19,6 +19,10 @@ Add `?view=desktop` to the address to force the desktop layout on a phone, or `?
 | `netlify.toml` | Netlify settings (no build step). |
 | `intel.html` | **Market Pulse**: weekly robotics market intelligence feed (works on desktop and phone). |
 | `data/intel-feed.json`, `data/intel-feed.js` | Market Pulse editions. Written by the weekly job; don't edit by hand. |
+| `scout.html` | **Robotics Scout**: search, score and compare robotics providers against Aldar's strategy (desktop and phone). |
+| `intel/scout/providers.json` | Scout provider research, the source of truth. Run `python intel/scout_build.py` after editing. |
+| `data/scout-providers.js` | Built from `providers.json` by `intel/scout_build.py`; don't edit by hand. |
+| `data/scout-strategy.js` | Scout scoring settings: pillar weights, knock-outs, verdict rules, matrix split and quick searches. |
 | `intel/` | The weekly job: `market_intel.py`, with `portfolio.py` (our vendors in the news) and `research.py` (Claude's web research), and their settings `config.json` and `portfolio.json`. |
 | `.github/workflows/market-intel.yml` | Runs the weekly job on GitHub. |
 
@@ -35,6 +39,16 @@ Every push to `main` redeploys automatically.
 ## Phone app (home screen)
 The site installs like an app. On iPhone, open it in Safari, tap **Share → Add to Home Screen**. It gets the Aldar logo as its icon, is named "Aldar Robotics", and opens full screen without the browser bar.
 Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`.
+
+## Robotics Scout (provider scouting)
+`scout.html` sits next to Market Pulse; the two pages share a *Pulse | Scout* switch in the header. It lists robotics providers ranked by the **Aldar Fit Score** (0 to 100), worked out in the browser from six pillars scored 0 to 5 by research: strategic fit 25%, technology readiness 20%, proven deployments 20%, GCC readiness 15%, commercial strength 10%, integration and safety 10%. Knock-out checks run first. Verdicts: Shortlist (70+ with deployments at least 3), Watch (50 to 69), Pass (under 50).
+
+- **Views:** Providers (search, quick searches, a filter builder with *is any of / is none of / is all of*), Fit × Maturity matrix, Category leaderboard, Compare (up to 5, print to PDF) and How scoring works (try other weights; they stay in your browser).
+- **Profiles** show Aldar's own trials (from the fleet map data), the score breakdown, maturity stage, GCC presence, spec sheet, funding, partners, alternatives, Market Pulse mentions and every source.
+- **Links:** every view, filter, comparison and profile is in the address bar, so copy the link to share it. CSV export on the Providers view.
+- **Updating providers:** edit `intel/scout/providers.json` (or ask Claude to research and add providers), then run `python intel/scout_build.py`. It checks every record (ids, categories, scores 0 to 5, links, fleet vendor names) before writing `data/scout-providers.js`.
+- **Changing the strategy:** edit `data/scout-strategy.js`. Every ranking updates on the next page load, with no new research needed.
+- Plan and roadmap: `docs/market-pulse-scout/`.
 
 ## Market Pulse (weekly robotics intelligence)
 `intel.html` is a short, social-feed style briefing for executives on what moved in robotics worldwide: trends, product launches, investments and deployments, sorted into categories that match the fleet. Each story has a two-line summary and a "why it matters for Aldar" line. Open it from the **Market pulse** button in the header (desktop) or the Menu tab (phone).

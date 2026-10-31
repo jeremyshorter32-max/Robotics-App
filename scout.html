@@ -13,7 +13,7 @@
 <meta name="apple-mobile-web-app-title" content="Aldar Robotics">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#12102A">
-<link rel="stylesheet" href="assets/css/intel-nav.css?v=20261031a">
+<link rel="stylesheet" href="assets/css/intel-nav.css?v=20261031e">
 <style>
 @font-face{font-family:'Poppins';font-style:normal;font-weight:300;font-display:swap;src:url("assets/fonts/poppins-300-latin.woff2") format('woff2')}
 @font-face{font-family:'Poppins';font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/poppins-400-latin.woff2") format('woff2')}
@@ -83,7 +83,7 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
 /* ---------- Search tools ---------- */
 .tools{display:flex;flex-direction:column;gap:12px;padding:14px 16px;margin-bottom:16px;scroll-margin-top:calc(var(--header-h) + 10px)}
 .srow{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.search{flex:1 1 320px;display:flex;align-items:center;gap:9px;border:1px solid var(--line-2);background:#fff;padding:0 12px;min-height:42px}
+.search{flex:1 1 280px;min-width:0;display:flex;align-items:center;gap:9px;border:1px solid var(--line-2);background:#fff;padding:0 12px;min-height:42px}
 .search:focus-within{border-color:var(--accent-ink)}
 .search input{flex:1;border:0;outline:0;font-size:15px;min-width:0;background:transparent;padding:9px 0}
 .tsel{display:inline-block;position:relative;flex:none}
@@ -237,6 +237,7 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
 .panel{background:var(--paper);width:min(880px,100%);height:100%;display:flex;flex-direction:column;box-shadow:-10px 0 40px rgba(18,16,42,.25)}
 .pbar{display:flex;align-items:center;gap:8px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line)}
 .pbar .grow{flex:1}
+.pbar .abtn{white-space:nowrap}
 .pscroll{overflow:auto;padding:22px 24px 40px;flex:1}
 .ph{display:flex;gap:20px;justify-content:space-between;align-items:flex-start}
 .ph h2{margin:6px 0 2px;font-size:26px;font-weight:600;letter-spacing:-0.015em}
@@ -318,6 +319,7 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
   .vtabs button{padding:12px 10px 11px;font-size:13.5px}
   main{padding:14px 16px 96px}
   .tools{padding:12px}
+  .search{flex-basis:100%}
   .fb-row{grid-template-columns:1fr auto;}
   .fb-row .tsel:nth-child(2){grid-column:1}
   .fb-row .fb-vals{grid-column:1 / -1}
@@ -336,6 +338,9 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
   .ph{flex-direction:column;gap:12px}
   .ph h2{font-size:22px}
   .pscroll{padding:16px 16px 40px}
+  .pbar{padding:8px 10px;gap:6px}
+  .pbar .abtn{padding:7px 9px;font-size:12px}
+  #pPrint{display:none}
   .wrow{grid-template-columns:1fr 44px}
   .wrow input{grid-column:1 / -1;grid-row:2}
   .wrow .wv{grid-row:1;grid-column:2}
@@ -485,11 +490,11 @@ main{max-width:1200px;margin:0 auto;padding:20px 24px 90px}
   </div>
 </div>
 
-<script src="data/scout-strategy.js?v=20261031a"></script>
+<script src="data/scout-strategy.js?v=20261031b"></script>
 <script src="data/scout-providers.js?v=20261031a"></script>
 <script src="data/fleet-data.js"></script>
 <script src="data/construction-data.js"></script>
 <script src="data/intel-feed.js"></script>
-<script src="assets/js/scout.js?v=20261031a"></script>
+<script src="assets/js/scout.js?v=20261031b"></script>
 </body>
 </html>

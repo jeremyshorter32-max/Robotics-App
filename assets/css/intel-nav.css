@@ -6,8 +6,18 @@
 .inav a[aria-current="page"]{background:#fff;color:#12102A}
 .inav a[aria-current="page"] svg{stroke:#12102A}
 @media (max-width: 760px){
+  .brand:has(+ .inav){flex:none}
+  .brand:has(+ .inav) > .sep,.brand:has(+ .inav) > span:not(.sep){display:none}
   .inav{margin-left:auto}
   .inav a{padding:7px 10px;font-size:12px}
   .inav + .right{margin-left:0}
+}
+@media (max-width: 400px){
+  .inav a{padding:7px 8px;gap:5px}
+  .top .sel select{max-width:100px}
+}
+@media (max-width: 350px){
+  .inav svg{display:none}
+  .top .sel select{max-width:92px}
 }
 @media print{.inav{display:none}}

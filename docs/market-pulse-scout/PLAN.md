@@ -4,6 +4,8 @@
 **Saved:** 31 Oct 2026, on branch `plan/market-pulse-scout`.
 **To start:** say *"activate the Market Pulse scout plan"*. Work begins from this branch, starting with the decisions in section 9.
 
+> **Update, 31 Oct 2026:** see **`FEATURE-MAP.md`**, which maps each CB Insights feature to a free, robotics-specific version. It sets the build order: free first, using the browser, GitHub, the Netlify Pro plan you already have, and your Claude plan. The paid on-site AI search in sections 6 and 8 becomes an optional later upgrade.
+
 ---
 
 ## 1. What we want

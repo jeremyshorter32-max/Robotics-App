@@ -96,7 +96,7 @@ def main() -> int:
     checked = max((p.get("checked") or "" for p in providers), default="") or date.today().isoformat()
     payload = {
         "meta": {
-            "title": "Aldar Robotics Scout",
+            "title": "Aldar Market Scout",
             "checked": date.fromisoformat(checked).strftime("%-d %b %Y"),
             "categories": cats,
             "count": len(providers),

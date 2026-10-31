@@ -1,4 +1,4 @@
-# CB Insights features → Aldar Robotics Scout (free build)
+# CB Insights features → Aldar Market Scout (free build)
 
 **Status:** build started 31 Oct 2026 on branch `scout-build`. See the page decision in `PLAN.md`.
 **Saved:** 31 Oct 2026, on branch `plan/market-pulse-scout`. It works alongside `PLAN.md`.

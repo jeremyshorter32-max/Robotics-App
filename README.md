@@ -19,7 +19,7 @@ Add `?view=desktop` to the address to force the desktop layout on a phone, or `?
 | `netlify.toml` | Netlify settings (no build step). |
 | `intel.html` | **Market Pulse**: weekly robotics market intelligence feed (works on desktop and phone). |
 | `data/intel-feed.json`, `data/intel-feed.js` | Market Pulse editions. Written by the weekly job; don't edit by hand. |
-| `scout.html` | **Robotics Scout**: search, score and compare robotics providers against Aldar's strategy (desktop and phone). |
+| `scout.html` | **Market Scout**: search, score and compare robotics providers against Aldar's strategy (desktop and phone). |
 | `intel/scout/providers.json` | Scout provider research, the source of truth. Run `python intel/scout_build.py` after editing. |
 | `data/scout-providers.js` | Built from `providers.json` by `intel/scout_build.py`; don't edit by hand. |
 | `data/scout-strategy.js` | Scout scoring settings: pillar weights, knock-outs, verdict rules, matrix split and quick searches. |
@@ -40,7 +40,7 @@ Every push to `main` redeploys automatically.
 The site installs like an app. On iPhone, open it in Safari, tap **Share → Add to Home Screen**. It gets the Aldar logo as its icon, is named "Aldar Robotics", and opens full screen without the browser bar.
 Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`.
 
-## Robotics Scout (provider scouting)
+## Market Scout (provider scouting)
 `scout.html` sits next to Market Pulse; the two pages share a *Pulse | Scout* switch in the header. It lists robotics providers ranked by the **Aldar Fit Score** (0 to 100), worked out in the browser from six pillars scored 0 to 5 by research: strategic fit 25%, technology readiness 20%, proven deployments 20%, GCC readiness 15%, commercial strength 10%, integration and safety 10%. Knock-out checks run first. Verdicts: Shortlist (70+ with deployments at least 3), Watch (50 to 69), Pass (under 50).
 
 - **Views:** Providers (search, quick searches, a filter builder with *is any of / is none of / is all of*), Fit × Maturity matrix, Category leaderboard, Compare (up to 5, print to PDF) and How scoring works (try other weights; they stay in your browser).

@@ -10,7 +10,7 @@
 
 ## Decision: Scout gets its own page (31 Oct 2026)
 
-Scout is built as **its own page (`scout.html`)**, not added into the Pulse page. Pulse and Scout share a header with *Market Intelligence: Pulse | Scout* tabs, so to users they feel like one product.
+Scout is built as **its own page (`scout.html`)**, not added into the Pulse page. Pulse and Scout share a header with a *Pulse | Scout* switch, and Scout is named **Market Scout** to pair with Market Pulse, so to users they feel like one product.
 
 - **Why separate:**
   - **Different jobs.** Pulse is for reading the news. Scout is a working tool for search, scoring and the pipeline.

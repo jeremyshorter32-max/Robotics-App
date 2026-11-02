@@ -34,7 +34,8 @@
     ["Floor scrubbing robots for malls", "cleaning"],
     ["Drone inspection of building façades", "inspection"],
     ["Humanoid concierge for retail and hospitality", "humanoids"],
-    ["Robots that use lifts and doors in our buildings", "physical_ai"]
+    ["Robots that use lifts and doors in our buildings", "physical_ai"],
+    ["Knightscope", "security"]
   ];
 
   /* ---------- our deployments ---------- */
@@ -70,7 +71,15 @@
       // fall back to category names and keywords
       if (named.length) cat = (named[0].categories || [])[0];
     }
-    return { q: q, as: as || null, P: P, term: P.term, cat: cat, stems: stems, named: named, re: P.term ? new RegExp(P.term.match, "i") : null };
+    // Is this a company or a topic?
+    var mode = "topic";
+    var bestNamed = named.slice().sort(function (a, b) { return nameCoverage(q, b) - nameCoverage(q, a); })[0];
+    if (as === "company") mode = bestNamed ? "provider" : "company";
+    else if (as) mode = "topic";
+    else if (bestNamed && nameCoverage(q, bestNamed) >= 0.6) mode = "provider";
+    else if (!(P.ranked && P.ranked.length && P.ranked[0].pick) && looksLikeName(q)) mode = "company";
+    if (mode === "provider") { named = [bestNamed]; cat = (bestNamed.categories || [])[0]; }
+    return { q: q, as: as || null, mode: mode, P: P, term: P.term, cat: cat, stems: stems, named: named, re: P.term ? new RegExp(P.term.match, "i") : null };
   }
 
   /* ---------- match the provider memory ---------- */
@@ -144,12 +153,14 @@
   /* ---------- build the brief (data) ---------- */
   function build(q, web, as) {
     var U = understand(q, as);
+    if (U.mode === "provider") return buildProvider(q, U, web);
+    if (U.mode === "company") return buildCompany(q, U, web);
     var provs = matchProviders(U);
     var fleet = matchFleet(U, provs);
     var live = provs.filter(function (m) { return !m.p._knock.length; });
     var shortlist = live.filter(function (m) { return m.p._verdict === "shortlist"; });
     var gccReady = live.filter(function (m) { return m.p.gcc && (m.p.gcc.level === "uae_deployments" || m.p.gcc.level === "local_office"); });
-    return { q: q, U: U, provs: provs, live: live, shortlist: shortlist, gcc: gccReady, fleet: fleet, strat: strategyFit(U),
+    return { mode: "topic", q: q, U: U, provs: provs, live: live, shortlist: shortlist, gcc: gccReady, fleet: fleet, strat: strategyFit(U),
       pulse: pulseNews(U, provs), web: web || null, at: Date.now() };
   }
 
@@ -216,7 +227,321 @@
     s.push("Save this brief and share the link with the robotics team for review.");
     return s;
   }
-  function uniqueArr(a) { var s = {}; return a.filter(function (x) { if (s[x]) return false; s[x] = 1; return true; }); }
+  function uniqueArr(a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); }
+
+  /* ==========================================================
+     Company and provider questions
+     ========================================================== */
+  var GENERIC_CO = /^(?:robotics?|robots?|robotic|company|co|inc|ltd|llc|corp|group|holdings|technologies|technology|tech|ai|systems?|the|for|in|of|and|with|to|about|on|at|a|an|is|are|who|what|tell|me|profile|vendor|provider|supplier)$/i;
+  var CORP_SUFFIX = /\b(?:robotics|robot|robots|technologies|technology|tech|ai|labs|automation|dynamics|systems|inc|ltd|llc|gmbh|corp|group|bots|industries)\.?$/i;
+  function nameCoverage(q, p) {
+    var names = [shortName(p)].concat(p.aliases || []).filter(function (n) { return n && n.length > 2; });
+    var rest = q;
+    names.forEach(function (n) { rest = rest.replace(new RegExp("\\b" + n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "ig"), " "); });
+    var all = (q.match(/[\p{L}\p{N}&.-]+/gu) || []).length || 1;
+    var left = (rest.match(/[\p{L}\p{N}&.-]+/gu) || []).filter(function (w) { return !GENERIC_CO.test(w); }).length;
+    return 1 - left / all;
+  }
+  function looksLikeName(q) {
+    var t = q.trim().replace(/[?!.]+$/, "");
+    var w = t.split(/\s+/);
+    if (!t || w.length > 4) return false;
+    if (w.some(function (x) { return /^(?:for|in|of|with|to|that|which|how|what|who|our|my|best|cheap|robots?)$/i.test(x); }) && !CORP_SUFFIX.test(t)) return false;
+    if (w.length === 1 && t.length >= 3) return true;
+    if (CORP_SUFFIX.test(t)) return true;
+    var caps = w.filter(function (x) { return /^[\p{Lu}\p{N}]/u.test(x); }).length;
+    return caps >= Math.ceil(w.length / 2) && /^[\p{Lu}]/u.test(t);
+  }
+  function catOf(id) { return CAT[id] || null; }
+  // Our vendors in an area: providers whose fleet-map deployments include that robot type.
+  function vendorsInCat(cat, exceptP) {
+    var types = TYPE_FOR[cat] || [];
+    var names = {};
+    FLEET.forEach(function (f) { if (types.indexOf(f.type) >= 0) names[f.vendor.replace(/\s*\+\s*other$/, "")] = 1; });
+    return CORE.providers.filter(function (o) {
+      if (o === exceptP) return false;
+      var fv = o.fleet_vendors || [];
+      if (types.length) return fv.some(function (v) { return names[v]; });
+      return o._deployments && o._deployments.length && (o.categories || []).indexOf(cat) >= 0;
+    }).sort(function (a, b) { return b._fit - a._fit; });
+  }
+  function peersInCat(cat) {
+    return CORE.providers.filter(function (o) { return !o._knock.length && (o.categories || [])[0] === cat; }).sort(function (a, b) { return b._fit - a._fit; });
+  }
+  function depCounts(list) {
+    var n = { deployed: 0, pilot: 0, planned: 0 };
+    list.forEach(function (d) { if (n[d.status] != null) n[d.status]++; });
+    return n;
+  }
+  function depText(list) {
+    var n = depCounts(list), parts = [];
+    if (n.deployed) parts.push(n.deployed + " live");
+    if (n.pilot) parts.push(n.pilot + " testing");
+    if (n.planned) parts.push(n.planned + " planned");
+    return parts.join(", ") || "none";
+  }
+  function pillarDiff(a, b) {
+    var best = null, worst = null;
+    (STRAT.pillars || []).forEach(function (pl) {
+      var x = (a.pillars && a.pillars[pl.id] && a.pillars[pl.id].score) || 0, y = (b.pillars && b.pillars[pl.id] && b.pillars[pl.id].score) || 0;
+      var d = x - y;
+      if (!best || d > best.d) best = { pl: pl, d: d };
+      if (!worst || d < worst.d) worst = { pl: pl, d: d };
+    });
+    return { best: best, worst: worst };
+  }
+  function buildProvider(q, U, web) {
+    var p = U.named[0], cat = (p.categories || [])[0];
+    var peers = peersInCat(cat);
+    var rank = peers.indexOf(p) + 1;
+    var ours = vendorsInCat(cat, p);
+    var fleetArea = FLEET.filter(function (f) { return (TYPE_FOR[cat] || []).indexOf(f.type) >= 0; });
+    var alts = peers.filter(function (o) { return o !== p; }).slice(0, 4);
+    return { mode: "provider", q: q, U: U, p: p, cat: cat, peers: peers, rank: rank, ours: ours, fleet: fleetArea, alts: alts,
+      pulse: pulseNews({ re: null, term: null, cat: null }, [{ p: p }]), web: web || null, at: Date.now() };
+  }
+  function buildCompany(q, U, web) {
+    var name = q.trim().replace(/[?!.]+$/, "");
+    var inferred = null, cat = null;
+    if (web && web.inferred) { inferred = WEB.terms.filter(function (t) { return t.id === web.inferred; })[0] || null; cat = inferred ? inferred.cat : web.cat || null; }
+    var ours = cat ? vendorsInCat(cat, null) : [];
+    var peers = cat ? peersInCat(cat).slice(0, 5) : [];
+    var fleetArea = cat ? FLEET.filter(function (f) { return (TYPE_FOR[cat] || []).indexOf(f.type) >= 0; }) : [];
+    return { mode: "company", q: q, U: U, name: name, inferred: inferred, cat: cat, ours: ours, peers: peers, fleet: fleetArea, web: web || null, at: Date.now() };
+  }
+
+  /* ---------- live news about one company ---------- */
+  function companySearches(name, p) {
+    var n = '"' + name + '"', W = " when:2y";
+    var alias = p && (p.aliases || []).filter(function (a) { return a && a.length > 3 && a.toLowerCase() !== name.toLowerCase(); })[0];
+    var s = [["US", n + W], ["US", n + " robot OR robotics OR robots" + W], ["US", n + " raises OR funding OR investment OR acquires" + W],
+      ["US", n + " partnership OR deploys OR customer OR contract OR launches" + W], ["AE", n + W], ["GB", n + W]];
+    if (alias) s.push(["US", '"' + alias + '"' + W]);
+    if (p && p.hq_country === "China") s.push(["ZH", n + W]);
+    return s.slice(0, 10);
+  }
+  function fetchCompany(name, p) {
+    var S = companySearches(name, p);
+    var url = "/api/scout-news?" + S.map(function (s) { return "s=" + encodeURIComponent(s[0] + "|" + s[1]); }).join("&");
+    var names = [name].concat(p ? [shortName(p)].concat(p.aliases || []) : []).filter(function (n) { return n && n.length > 2; });
+    var re = new RegExp("\\b(" + names.map(function (n) { return n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); }).join("|") + ")\\b", "i");
+    return fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); }).then(function (j) {
+      var items = (j.items || []).filter(function (it) { return re.test(it.title); });
+      var votes = {};
+      items.forEach(function (it) {
+        var r = WEB.rankTerms(it.title).filter(function (x) { return x.pick; })[0];
+        if (r) votes[r.t.id] = (votes[r.t.id] || 0) + 1;
+      });
+      var bestId = Object.keys(votes).sort(function (a, b) { return votes[b] - votes[a]; })[0];
+      var pick = bestId && votes[bestId] >= 2 ? { t: WEB.terms.filter(function (t) { return t.id === bestId; })[0] } : null;
+      var gcc = new RegExp("\\b(" + ((STRAT.web_scout && STRAT.web_scout.gcc_words) || "UAE|Dubai|Saudi") + ")\\b", "i");
+      return {
+        mode: "company", checked: j.checked, total: items.length, inferred: pick ? pick.t.id : null,
+        gccNews: items.filter(function (it) { return gcc.test(it.title); }).length,
+        articles: items.slice(0, 14).map(function (it) { return { title: it.title, link: it.link, source: it.source, published: it.published }; }),
+        companies: []
+      };
+    });
+  }
+
+  /* ---------- contact and outreach ---------- */
+  function outreachText(name, areaLabel, p) {
+    var prod = p && p.products && p.products.length ? p.products.slice(0, 3).join(", ") : "your solutions";
+    return {
+      subject: "Aldar Robotics: introduction and request for information",
+      body: "Hello " + name + " team,\n\n" +
+        "I am with the Robotics team at Aldar Properties in Abu Dhabi. We deploy robotics across our communities, malls, offices, schools and construction sites" +
+        (areaLabel ? ", and we are reviewing providers for " + areaLabel.toLowerCase() : "") + ".\n\n" +
+        "We would like to learn more about " + prod + ", in particular:\n" +
+        "- live deployments at comparable sites, with references we could speak to\n" +
+        "- presence and support in the UAE and GCC, and performance in heat and dust\n" +
+        "- safety certification, integration (lifts, doors, BMS/FM systems) and data handling\n" +
+        "- commercial models (purchase, robot-as-a-service or operated service)\n\n" +
+        "Could you share a capability deck and suggest a time for an introductory call?\n\n" +
+        "Kind regards,\n\nAldar Robotics team\n"
+    };
+  }
+  function mailto(to, o) { return "mailto:" + (to || "") + "?subject=" + encodeURIComponent(o.subject) + "&body=" + encodeURIComponent(o.body); }
+  function contactCard(name, p, areaLabel) {
+    var c = (p && p.contact) || {};
+    var site = c.website || (p && p.website) || null;
+    var o = outreachText(name, areaLabel, p);
+    var rows = [];
+    var link = function (u, t) { return '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(t || u.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")) + "</a>"; };
+    if (site) rows.push(["Website", link(site)]);
+    if (c.contact_page) rows.push(["Contact page", link(c.contact_page, "Contact form / page")]);
+    if (c.email) rows.push(["Email", '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>"]);
+    if (c.phone) rows.push(["Phone", '<a href="tel:' + esc(String(c.phone).replace(/[^\d+]/g, "")) + '">' + esc(c.phone) + "</a>"]);
+    if (c.hq_address) rows.push(["Head office", esc(c.hq_address)]);
+    if (c.linkedin) rows.push(["LinkedIn", link(c.linkedin, "Company page")]);
+    var reg = (c.regional || []).filter(function (r) { return r && r.name; });
+    var regHtml = reg.length ? '<div class="regional"><h3>Regional and GCC routes</h3>' + reg.map(function (r) {
+      return '<div class="rg"><b>' + esc(r.name) + "</b>" + (r.role || r.region ? "<small>" + esc([r.role, r.region].filter(Boolean).join(" · ")) + "</small>" : "") +
+        '<span class="rgl">' + [r.url ? link(r.url, "Website") : "", r.email ? '<a href="mailto:' + esc(r.email) + '">' + esc(r.email) + "</a>" : "", r.phone ? esc(r.phone) : ""].filter(Boolean).join(" · ") + "</span></div>";
+    }).join("") + "</div>" : (p && p.partners && p.partners.length ? '<div class="regional"><h3>Known partners</h3><p>' + esc(p.partners.join(", ")) + "</p></div>" : "");
+    var g = WEB.google;
+    var finders = '<div class="digs"><span>Find more:</span>' +
+      (site ? "" : '<a href="' + esc(g(name + " official website robotics")) + '" target="_blank" rel="noopener">Official website</a>') +
+      '<a href="' + esc(g(name + " robotics contact sales email")) + '" target="_blank" rel="noopener">Sales contact</a>' +
+      '<a href="' + esc(g(name + " UAE OR Dubai OR \"Abu Dhabi\" distributor OR partner")) + '" target="_blank" rel="noopener">UAE partner</a>' +
+      '<a href="' + esc(g("site:linkedin.com/company " + name)) + '" target="_blank" rel="noopener">LinkedIn</a></div>';
+    var mainTo = c.email || (reg.filter(function (r) { return r.email; })[0] || {}).email || "";
+    return '<div class="contact">' +
+      (rows.length ? '<dl class="cdl">' + rows.map(function (r) { return "<dt>" + r[0] + "</dt><dd>" + r[1] + "</dd>"; }).join("") + "</dl>" :
+        '<p class="empty">No contact details on file yet. Use the searches below, or add the company to the research list.</p>') +
+      regHtml + (c.note ? '<p class="note">' + esc(c.note) + "</p>" : "") +
+      '<div class="reach"><a class="rbtn primary" href="' + esc(mailto(mainTo, o)) + '">' +
+        '<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 6h18v12H3z"/><path d="M3 7l9 6 9-6"/></svg>' +
+        (mainTo ? "Draft email to " + esc(mainTo) : "Draft an outreach email") + "</a>" +
+        (c.contact_page ? '<a class="rbtn" href="' + esc(c.contact_page) + '" target="_blank" rel="noopener">Open contact form</a>' : "") +
+        '<button type="button" class="rbtn" data-act="copy-outreach">Copy outreach note</button></div>' +
+      finders + (c.sources && c.sources.length ? '<p class="note">Contact details from: ' + c.sources.slice(0, 3).map(function (u) { return link(u, host(u)); }).join(", ") + ". Public company contacts only; check before sending.</p>" : "") +
+      "</div>";
+  }
+  function host(u) { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return u; } }
+
+  /* ---------- provider brief ---------- */
+  function compareTable(target, others, noYou) {
+    var rows = [target].concat(others).slice(0, 6);
+    var pls = STRAT.pillars || [];
+    return '<div class="tscroll"><table class="cmpx"><thead><tr><th>Provider</th><th>Score</th><th>Verdict</th><th>Maturity</th><th>GCC presence</th>' +
+      pls.map(function (pl) { return '<th class="pl" title="' + esc(pl.label) + '">' + esc(pl.label.split(" ")[0]) + "</th>"; }).join("") + "<th>With Aldar</th></tr></thead><tbody>" +
+      rows.map(function (o) {
+        return '<tr class="' + (o === target && !noYou ? "me" : "") + '"><td><button type="button" class="lnk" data-open="' + esc(o.id) + '">' + esc(shortName(o)) + "</button>" + (o === target && !noYou ? ' <span class="you">this provider</span>' : "") + "</td>" +
+          '<td class="num"><b>' + o._fit + "</b></td><td>" + CORE.verdictPill(o) + "</td><td>" + esc(CORE.matLabel(o)) + "</td><td>" + esc(CORE.gccLabel(o)) + "</td>" +
+          pls.map(function (pl) { var s = o.pillars && o.pillars[pl.id] ? o.pillars[pl.id].score : null; return '<td class="num">' + (s == null ? "–" : CORE.dots(s)) + "</td>"; }).join("") +
+          "<td>" + (o._deployments && o._deployments.length ? esc(depText(o._deployments)) : "–") + "</td></tr>";
+      }).join("") + "</tbody></table></div>";
+  }
+  function providerRead(B) {
+    var p = B.p, c = catOf(B.cat), area = c ? lowerFirst(c.label) : "its area";
+    var out = [];
+    var mine = p._deployments && p._deployments.length;
+    out.push("<b>" + esc(shortName(p)) + "</b> is in Scout's memory with an Aldar Fit Score of <b>" + p._fit + "</b> (" + esc(CORE.verdicts[p._verdict].label) + "). " +
+      (B.rank ? "It ranks <b>#" + B.rank + " of " + B.peers.length + "</b> researched providers in " + esc(area) + "." : "") +
+      (mine ? " It is <b>already working with Aldar</b> (" + esc(depText(p._deployments)) + ")." : " It is <b>not yet working with Aldar</b>."));
+    var cmp = mine ? B.alts.slice(0, 3) : B.ours.slice(0, 3);
+    if (cmp.length) {
+      out.push((mine ? "Against the strongest challengers in " + esc(area) + ": " : "Compared with the vendors we already use in " + esc(area) + ": ") + cmp.map(function (o) {
+        var d = p._fit - o._fit, pd = pillarDiff(p, o);
+        var lead = d > 0 ? "<b>" + d + " points ahead of</b> " : d < 0 ? "<b>" + (-d) + " points behind</b> " : "level with ";
+        var why = d >= 0 && pd.best.d > 0 ? " (stronger on " + esc(pd.best.pl.label.toLowerCase()) + ")" : d < 0 && pd.worst.d < 0 ? " (weaker on " + esc(pd.worst.pl.label.toLowerCase()) + ")" : "";
+        return lead + esc(shortName(o)) + " (" + o._fit + ")" + why;
+      }).join("; ") + ".");
+    } else {
+      out.push(mine ? "There are no other researched providers in " + esc(area) + " to compare against yet." : "Aldar has no current vendor in " + esc(area) + ", so " + esc(shortName(p)) + " would be compared against the strongest researched alternatives below.");
+    }
+    var pl = p.pillars || {}, strong = [], weak = [];
+    (STRAT.pillars || []).forEach(function (x) { var s = pl[x.id] && pl[x.id].score; if (s >= 4) strong.push(x.label.toLowerCase()); if (s != null && s <= 2) weak.push(x.label.toLowerCase()); });
+    out.push("As a candidate: " + (strong.length ? "strong on " + esc(listJoin(strong)) : "no standout strengths") + (weak.length ? "; weaker on " + esc(listJoin(weak)) : "") +
+      ". Maturity: " + esc(CORE.matLabel(p).replace(/^\d · /, "")) + "; " + esc(lowerFirst(CORE.gccLabel(p))) + "; vendor viability risk " + esc(p.viability_risk || "unknown") + "." +
+      (p._knock.length ? " <b>Note: it fails a knock-out check</b> (see the profile)." : ""));
+    return out;
+  }
+  function providerNext(B) {
+    var p = B.p, s = [];
+    var mine = p._deployments && p._deployments.length;
+    if (p._knock.length) s.push("Resolve the knock-out flag (" + p._knock.join(", ").replace(/_/g, " ") + ") with procurement and legal before any engagement.");
+    if (mine) s.push("Review the results of our " + shortName(p) + " deployments before expanding; benchmark them against " + (B.alts[0] ? shortName(B.alts[0]) : "the strongest alternative") + ".");
+    else s.push("Reach out using the contact routes above with the outreach note, and request a capability deck and references.");
+    if (!(p.gcc && (p.gcc.level === "uae_deployments" || p.gcc.level === "local_office"))) s.push("Confirm a UAE partner, local support and heat and dust ratings before any trial.");
+    if (B.ours[0] && !mine) s.push("Set up a side-by-side trial against " + shortName(B.ours[0]) + " (our current vendor) on the same site and KPIs.");
+    if (p._verdict !== "shortlist") s.push("Ask for evidence that would lift its weakest scores, such as named references and certifications, before shortlisting.");
+    s.push("Save this brief and share it with the robotics team.");
+    return s;
+  }
+  function companyNews(W) {
+    if (!W) return '<div class="webwait"><div class="orb sm" aria-hidden="true"><span></span></div>Scanning the news…</div>';
+    if (W.error) return '<p class="empty">The live news scan did not answer (' + esc(W.error) + ").</p>";
+    if (!W.articles || !W.articles.length) return '<p class="empty">No news headlines naming this company in the last two years.</p>';
+    return '<ul class="sig">' + W.articles.slice(0, 10).map(function (n) {
+      return '<li><a href="' + esc(n.link) + '" target="_blank" rel="noopener">' + esc(n.title) + "</a><small>" + esc([n.source, fmtDate(n.published)].filter(Boolean).join(" · ")) + "</small></li>";
+    }).join("") + "</ul>";
+  }
+  function headActions(B, kicker) {
+    var saved = isSaved(B.q);
+    return '<div class="bacts">' +
+      '<button type="button" class="bact" data-act="save" title="Save this brief" aria-label="Save this brief" aria-pressed="' + saved + '"><svg viewBox="0 0 24 24" width="13" height="13" fill="' + (saved ? "currentColor" : "none") + '" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></svg><span class="lbl">' + (saved ? "Saved" : "Save") + "</span></button>" +
+      '<button type="button" class="bact" data-act="share" title="Share a link to this brief" aria-label="Share a link to this brief"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg><span class="lbl">Share</span></button>' +
+      '<button type="button" class="bact" data-act="pdf" title="Download as PDF" aria-label="Download as PDF"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span class="lbl">PDF</span></button>' +
+      '<button type="button" class="bact" data-act="md" title="Download as a text file" aria-label="Download as a text file"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M6 3h9l4 4v14H6z"/><path d="M15 3v4h4"/></svg><span class="lbl">Text</span></button>' +
+      '<button type="button" class="bact primary" data-act="new" title="Start a new scout" aria-label="Start a new scout"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg><span class="lbl">New scout</span></button></div>';
+  }
+  function renderProvider(B) {
+    var p = B.p, c = catOf(B.cat), U = B.U, mineP = !!(p._deployments && p._deployments.length);
+    var tags = [];
+    if (c) tags.push('<span class="btag" style="--c:' + esc(c.color) + '"><i></i>' + esc(c.label) + "</span>");
+    tags.push(readAs(U));
+    if (p._deployments && p._deployments.length) tags.push('<span class="btag pri">Working with Aldar</span>');
+    var html =
+      '<header class="bhead"><div><div class="beyebrow"><span class="dot"></span>Provider brief · ' + esc(fmtDate(B.at)) + "</div>" +
+        '<h1 id="bTitle">' + esc(shortName(p)) + '<small class="bsub">' + esc([p.hq_country, p.founded ? "founded " + p.founded : null].filter(Boolean).join(" · ")) + "</small></h1>" +
+        '<div class="btags">' + tags.join("") + "</div></div>" + headActions(B) + "</header>" +
+      '<div class="paper"><div class="bbody">' +
+        '<section class="bcard"><h2>Scout’s read</h2><div class="read"><div class="txt"><p>' + esc(p.what || "") + "</p>" + providerRead(B).map(function (x) { return "<p>" + x + "</p>"; }).join("") + "</div>" +
+          '<div class="cand"><div class="cring">' + CORE.ring(p._fit, 96) + "<div>" + CORE.verdictPill(p) + "<small>Aldar Fit Score</small><small>Confidence: " + esc(cap1(p.confidence || "unknown")) + "</small></div></div>" +
+            '<div class="tiles">' +
+              '<div class="tile"><b>' + (B.rank ? "#" + B.rank : "–") + "</b><span>of " + B.peers.length + " in " + esc(c ? c.label : "area") + "</span></div>" +
+              '<div class="tile"><b>' + (p.maturity || "–") + "</b><span>" + esc(((CORE.maturity[p.maturity] || {}).label) || "Maturity") + " (of 5)</span></div>" +
+              '<div class="tile"><b>' + (p._deployments ? p._deployments.length : 0) + "</b><span>Aldar deployments</span></div>" +
+              '<div class="tile gold"><b>' + esc(cap1(p.viability_risk || "–")) + "</b><span>Viability risk</span></div>" +
+            '</div><button type="button" class="rbtn wide" data-open="' + esc(p.id) + '">Open the full profile and sources</button></div></div></section>' +
+        '<section class="bcard"><h2>How it compares with our deployments</h2><p class="sub">' +
+          (mineP ? esc(shortName(p)) + " is already an Aldar vendor in this area. Here it is against our other vendors there and the strongest challengers." :
+            B.ours.length ? "This provider against the vendors Aldar already uses in " + esc(c ? lowerFirst(c.label) : "this area") + "." : "Aldar has no current vendor in this area; compared with the strongest researched alternatives.") + "</p>" +
+          compareTable(p, mineP ? uniqueArr(B.ours.slice(0, 2).concat(B.alts.slice(0, 3))).slice(0, 5) : B.ours.length ? B.ours.slice(0, 4) : B.alts.slice(0, 4)) +
+          (B.fleet.length ? '<p class="note">Aldar has ' + plural(B.fleet.length, "deployment") + " in " + esc(c ? lowerFirst(c.label) : "this area") + " (" + esc(depText(B.fleet)) + ") across " + esc(listJoin(uniqueVendors(B.fleet).slice(0, 5))) + '. <a href="index.html">Open the fleet map</a></p>' : "") + "</section>" +
+        '<section class="bcard half"><h2>Contact and reach-out</h2><p class="sub">Public company contact routes, so the team can follow through.</p>' + contactCard(shortName(p), p, c ? c.label : "") + "</section>" +
+        '<section class="bcard half"><h2>In the news</h2><p class="sub">Market Pulse and a live Google News scan for this company.</p><div id="sigBox">' +
+          (B.pulse.length ? '<ul class="sig">' + B.pulse.map(function (n) { return '<li><a href="' + esc(n.link) + '" target="_blank" rel="noopener"><span class="tagp">Pulse</span>' + esc(n.title) + "</a><small>" + esc([n.source, fmtDate(n.published)].filter(Boolean).join(" · ")) + "</small></li>"; }).join("") + "</ul>" : "") +
+          companyNews(B.web) + "</div></section>" +
+        '<section class="bcard"><h2>Alternatives to consider <span class="n">' + B.alts.length + "</span></h2>" +
+          (B.alts.length ? '<div class="pgrid2">' + B.alts.map(function (o, i) { return provCard({ p: o }, i); }).join("") + "</div>" : '<p class="empty">No other researched providers in this area yet.</p>') + "</section>" +
+        '<section class="bcard"><h2>Suggested next steps</h2><ol class="next">' + providerNext(B).map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></section>" +
+        '<p class="method"><b>How this brief was made.</b> The provider’s scores come from Scout’s provider memory (researched profiles with sources, checked ' + esc(p.checked || "") + "). Comparisons use the Aldar Fit Score weights in Scout’s strategy settings and our deployments on the fleet map. News comes from Market Pulse and a live Google News scan. Contact details are public company contacts; check before sending.</p>" +
+      "</div></div>";
+    $("brief").innerHTML = html;
+  }
+  function renderCompany(B) {
+    var U = B.U, c = catOf(B.cat), W = B.web || {};
+    var tags = [];
+    if (c) tags.push('<span class="btag" style="--c:' + esc(c.color) + '"><i></i>Likely ' + esc(c.label) + "</span>");
+    tags.push(readAs(U));
+    tags.push('<span class="btag">Not yet in Scout’s memory</span>');
+    var read = [];
+    read.push("<b>" + esc(B.name) + "</b> is not in Scout’s provider memory yet, so it has no Fit Score. Here is what the market says, and how it would be judged.");
+    if (W.articles) read.push(W.total ? "The live news scan found <b>" + plural(W.total, "headline") + "</b> naming it in the last two years" + (W.gccNews ? ", " + W.gccNews + " mentioning the Gulf" : "") + "." : "The live news scan found <b>no headlines</b> naming it in the last two years. Check the spelling, or look it up with the searches below.");
+    if (B.inferred) read.push("From the headlines it looks like a <b>" + esc(B.inferred.en[0]) + "</b> provider (" + esc(c ? c.label : "") + "). If that is wrong, change <b>Read as</b> above.");
+    if (B.ours.length) read.push("In that area Aldar already works with " + esc(listJoin(B.ours.slice(0, 3).map(function (o) { return shortName(o) + " (Fit " + o._fit + ")"; }))) + ". Those are the bar it would need to beat.");
+    read.push("To score it properly, add it to the research list: Claude will build a full profile with scores, sources and contacts.");
+    var html =
+      '<header class="bhead"><div><div class="beyebrow"><span class="dot"></span>Company lookup · ' + esc(fmtDate(B.at)) + "</div>" +
+        '<h1 id="bTitle">' + esc(B.name) + "</h1>" + '<div class="btags">' + tags.join("") + "</div></div>" + headActions(B) + "</header>" +
+      '<div class="paper"><div class="bbody">' +
+        '<section class="bcard"><h2>Scout’s read</h2><div class="read"><div class="txt">' + read.map(function (x) { return "<p>" + x + "</p>"; }).join("") + "</div>" +
+          '<div class="cand"><div class="tiles"><div class="tile"><b>' + (W.total || 0) + "</b><span>Headlines naming it</span></div>" +
+          '<div class="tile"><b>' + (W.gccNews || 0) + "</b><span>Mention the Gulf</span></div>" +
+          '<div class="tile"><b>' + B.fleet.length + "</b><span>Aldar deployments in this area</span></div>" +
+          '<div class="tile gold"><b>–</b><span>Fit Score (research to add)</span></div></div>' +
+          '<button type="button" class="rbtn wide primary" data-todo="' + esc(B.name) + '" data-todo-q="' + esc(B.q) + '">+ To research</button></div></div></section>' +
+        '<section class="bcard half"><h2>In the news</h2><p class="sub">Live Google News headlines naming this company.</p>' + companyNews(W) + "</section>" +
+        '<section class="bcard half"><h2>Contact and reach-out</h2><p class="sub">Not researched yet: find the official routes, then draft an approach.</p>' + contactCard(B.name, null, c ? c.label : "") + "</section>" +
+        '<section class="bcard"><h2>How it would be judged</h2><p class="sub">Questions to answer before it can be compared with our vendors' + (B.ours.length ? " (" + esc(listJoin(B.ours.slice(0, 3).map(shortName))) + ")" : "") + ".</p>" +
+          '<ul class="good">' + goodLooks() + "</ul>" +
+          (function () {
+            var bar = uniqueArr(B.ours.concat(B.peers)).slice(0, 5);
+            return bar.length ? '<p class="sub" style="margin-top:14px">The bar in this area' + (B.ours.length ? " (our vendors first)" : "") + ":</p>" + compareTable(bar[0], bar.slice(1), true) : "";
+          })() + "</section>" +
+        '<section class="bcard"><h2>Suggested next steps</h2><ol class="next">' +
+          ["Add " + B.name + " to the research list and send it to Claude for a full profile, scores and contacts.",
+           "Visit its website and LinkedIn page (searches above) to confirm what it makes and where it operates.",
+           B.ours[0] ? "If it looks relevant, compare it against " + shortName(B.ours[0]) + ", our current vendor in this area." : "If it looks relevant, ask for references at comparable sites and a UAE support route.",
+           "Save this lookup to come back to it."].map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ol></section>" +
+        '<p class="method"><b>How this lookup was made.</b> A live scan of Google News for the company name over the last two years; the likely area is read from the headlines. Aldar comparisons come from the fleet map and Scout’s provider memory.</p>' +
+      "</div></div>";
+    $("brief").innerHTML = html;
+    refreshTodo();
+  }
 
   /* ---------- render ---------- */
   function goodLooks() {
@@ -320,13 +645,19 @@
       var ts = WEB.terms.filter(function (t) { return t.cat === c.id && ranked.indexOf(t) < 0; });
       return ts.length ? '<optgroup label="' + esc(c.label) + '">' + ts.map(opt).join("") + "</optgroup>" : "";
     }).join("");
-    return '<label class="btag asel" title="Not what you meant? Pick the right use case and Scout will re-scout">Read as' +
+    var co = U.mode === "provider" || U.mode === "company";
+    if (co) cur = "company";
+    var coName = U.mode === "provider" ? shortName(U.named[0]) : U.q;
+    return '<label class="btag asel" title="Not what you meant? Pick the right reading and Scout will re-scout">Read as' +
       '<select data-act="as" aria-label="Read this question as">' +
+        '<optgroup label="A company"><option value="company"' + (co ? " selected" : "") + ">Company: " + esc(coName.length > 40 ? coName.slice(0, 39) + "…" : coName) + "</option></optgroup>" +
         (ranked.length ? '<optgroup label="Best matches for your words">' + ranked.map(opt).join("") + "</optgroup>" : "") + groups +
         '<optgroup label="Other"><option value="none"' + (cur === "none" ? " selected" : "") + ">Nothing specific (exploratory)</option></optgroup>" +
       '</select><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></label>';
   }
   function render(B) {
+    if (B.mode === "provider") return renderProvider(B);
+    if (B.mode === "company") return renderCompany(B);
     var U = B.U, c = U.cat && CAT[U.cat];
     var saved = isSaved(B.q);
     var tags = [];
@@ -430,32 +761,46 @@
     var draw = function () { $("steps").innerHTML = stepHtml(st); };
     var U = understand(q, opts.as);
     var B0 = build(q, null, opts.as);
+    var coMode = U.mode === "provider" || U.mode === "company";
+    var coName = U.mode === "provider" ? shortName(U.named[0]) : q.replace(/[?!.]+$/, "");
     var webP = opts.web ? Promise.resolve({ snap: opts.web }) :
-      WEB.fetchWeb(q, opts.as).then(function (r) { return { snap: snapshot(r) }; }).catch(function (e) { return { snap: { error: e.message || "no answer" } }; });
+      (coMode ? fetchCompany(coName, U.mode === "provider" ? U.named[0] : null).then(function (snap) { return { snap: snap }; }) :
+      WEB.fetchWeb(q, opts.as).then(function (r) { return { snap: snapshot(r) }; })).catch(function (e) { return { snap: { error: e.message || "no answer" } }; });
     var seq = Promise.resolve();
     var fast = !!opts.fast;
     var T = function (ms) { return wait(fast ? 60 : ms); };
     var nFleet = FLEET.length, nMem = CORE.providers.length;
-    var reading = U.term ? termLabel(U.term) : "nothing specific, so this is exploratory";
-    [["read", "Working out what is being scouted, and which focus area it belongs to…", "Read as: " + reading, 1300],
-     ["fleet", "Looking through " + nFleet + " deployments and trials on the fleet map…", plural(B0.fleet.length, "deployment") + " in this area", 1300],
-     ["strategy", "Matching it to the eight focus areas and named use cases in Aldar’s robotics strategy…", B0.strat.named ? "named use case: " + B0.strat.named : B0.strat.pri ? "focus area: " + B0.strat.pri.label : "not a named focus area", 1300],
-     ["memory", "Comparing " + nMem + " researched providers and ranking them by Aldar Fit Score…", plural(B0.live.length, "matching provider"), 1300]].forEach(function (x) {
+    var reading = U.mode === "provider" ? "company: " + coName + " (in Scout's memory)" : U.mode === "company" ? "company: " + coName + " (not yet in Scout's memory)" : U.term ? termLabel(U.term) : "nothing specific, so this is exploratory";
+    var steps;
+    if (coMode) {
+      var pp = U.named[0];
+      var area = pp ? catOf((pp.categories || [])[0]) : null;
+      steps = [["read", "Working out whether this is a company or a technology area…", "Read as " + reading, 1300],
+        ["fleet", "Looking through " + nFleet + " deployments for this company and its area…", pp ? (pp._deployments && pp._deployments.length ? plural(pp._deployments.length, "Aldar deployment") : "not yet deployed by Aldar") : "area to be read from the news", 1300],
+        ["strategy", "Checking where it fits in Aldar’s robotics strategy…", area ? area.label : "to be read from the news", 1300],
+        ["memory", pp ? "Ranking it against " + nMem + " researched providers and our current vendors…" : "Searching " + nMem + " researched providers for this name…", pp ? "Fit " + pp._fit + ", " + CORE.verdicts[pp._verdict].label.toLowerCase() : "not in memory yet", 1300]];
+    } else {
+      steps = [["read", "Working out what is being scouted, and which focus area it belongs to…", "Read as: " + reading, 1300],
+        ["fleet", "Looking through " + nFleet + " deployments and trials on the fleet map…", plural(B0.fleet.length, "deployment") + " in this area", 1300],
+        ["strategy", "Matching it to the eight focus areas and named use cases in Aldar’s robotics strategy…", B0.strat.named ? "named use case: " + B0.strat.named : B0.strat.pri ? "focus area: " + B0.strat.pri.label : "not a named focus area", 1300],
+        ["memory", "Comparing " + nMem + " researched providers and ranking them by Aldar Fit Score…", plural(B0.live.length, "matching provider"), 1300]];
+    }
+    steps.forEach(function (x) {
       seq = seq.then(function () { st[x[0]] = { cls: "on", doing: x[1] }; draw(); return T(x[3]); })
         .then(function () { st[x[0]] = { cls: "ok", note: x[2] }; draw(); return T(250); });
     });
     var t0;
     return seq.then(function () {
       t0 = Date.now();
-      st.web = { cls: "on", doing: opts.web ? "Using the scan saved with this brief…" : "Running 10 Google News searches across English, UAE and Chinese editions, and picking out the companies named…" }; draw();
+      st.web = { cls: "on", doing: opts.web ? "Using the scan saved with this brief…" : coMode ? "Searching Google News for headlines naming " + coName + "…" : "Running 10 Google News searches across English, UAE and Chinese editions, and picking out the companies named…" }; draw();
       return webP;
     }).then(function (res) {
       var left = Math.max(0, (fast ? 0 : 1800) - (Date.now() - t0));
       return wait(left).then(function () { return res; });
     }).then(function (res) {
       var snap = res.snap;
-      st.web = snap.error ? { cls: "warn", note: "did not answer" } : { cls: "ok", note: plural(snap.total || 0, "article") + ", " + plural((snap.companies || []).length, "new company", "new companies") };
-      st.write = { cls: "on", doing: "Pulling it together: Aldar experience, strategy fit, best-fit providers, new names and next steps…" }; draw();
+      st.web = snap.error ? { cls: "warn", note: "did not answer" } : coMode ? { cls: "ok", note: plural(snap.total || 0, "headline") + " naming it" } : { cls: "ok", note: plural(snap.total || 0, "article") + ", " + plural((snap.companies || []).length, "new company", "new companies") };
+      st.write = { cls: "on", doing: coMode ? "Pulling it together: candidate strength, comparison with our vendors, contacts and next steps…" : "Pulling it together: Aldar experience, strategy fit, best-fit providers, new names and next steps…" }; draw();
       return T(1100).then(function () { return snap; });
     }).then(function (snap) {
       current = build(q, snap, opts.as);
@@ -478,7 +823,7 @@
     var i = L.findIndex(function (b) { return b.q.toLowerCase() === current.q.toLowerCase(); });
     if (i >= 0) { L.splice(i, 1); toast("Removed from saved scouts"); }
     else {
-      L.unshift({ q: current.q, as: current.U.as, at: current.at, web: current.web && !current.web.error ? current.web : null, cat: current.U.cat });
+      L.unshift({ q: current.q, as: current.U.as || (current.mode !== "topic" ? "company" : null), at: current.at, web: current.web && !current.web.error ? current.web : null, cat: current.U.cat });
       toast("Saved. Find it on the Scout home page");
     }
     store("briefs", L.slice(0, 30));
@@ -547,6 +892,7 @@
   }
   function markdown(B) {
     var L = [];
+    if (B.mode !== "topic") return markdownCo(B);
     var strip = function (h) { return h.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">"); };
     L.push("# Scout brief: " + B.q, "", "Aldar Market Scout · " + fmtDate(B.at) + " · Read as: " + (B.U.term ? termLabel(B.U.term) : "nothing specific (exploratory)"), "");
     L.push("## Scout's read", "");
@@ -566,6 +912,32 @@
     L.push("", "## Suggested next steps", "");
     nextSteps(B).forEach(function (s, i) { L.push((i + 1) + ". " + s); });
     L.push("", "---", "Open this scout: " + location.origin + location.pathname + "?q=" + encodeURIComponent(B.q));
+    return L.join("\n");
+  }
+  function markdownCo(B) {
+    var strip = function (h) { return h.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">"); };
+    var L = [], p = B.p, c = catOf(B.cat);
+    var name = p ? shortName(p) : B.name;
+    L.push("# " + (p ? "Provider brief" : "Company lookup") + ": " + name, "", "Aldar Market Scout · " + fmtDate(B.at) + (c ? " · " + c.label : ""), "");
+    L.push("## Scout's read", "");
+    if (p) { L.push(p.what || "", ""); providerRead(B).forEach(function (x) { L.push(strip(x), ""); }); }
+    else L.push(B.name + " is not yet in Scout's provider memory." + (B.inferred ? " Likely area: " + B.inferred.en[0] + "." : ""), "");
+    if (p) {
+      L.push("## Compared with our vendors", "", "| Provider | Fit | Verdict | Maturity | GCC | With Aldar |", "|---|---|---|---|---|---|");
+      [p].concat(B.ours.length ? B.ours.slice(0, 4) : B.alts.slice(0, 4)).forEach(function (o) { L.push("| " + shortName(o) + " | " + o._fit + " | " + CORE.verdicts[o._verdict].label + " | " + CORE.matLabel(o) + " | " + CORE.gccLabel(o) + " | " + (o._deployments && o._deployments.length ? depText(o._deployments) : "-") + " |"); });
+      L.push("");
+    }
+    var ct = (p && p.contact) || {};
+    L.push("## Contact", "");
+    [["Website", ct.website || (p && p.website)], ["Contact page", ct.contact_page], ["Email", ct.email], ["Phone", ct.phone], ["Head office", ct.hq_address], ["LinkedIn", ct.linkedin]].forEach(function (r) { if (r[1]) L.push("- " + r[0] + ": " + r[1]); });
+    (ct.regional || []).forEach(function (r) { L.push("- " + [r.role, r.region].filter(Boolean).join(", ") + ": " + r.name + (r.email ? ", " + r.email : "") + (r.phone ? ", " + r.phone : "") + (r.url ? ", " + r.url : "")); });
+    if (!ct.email && !ct.phone && !ct.website && !(p && p.website)) L.push("- Not researched yet.");
+    var o = outreachText(name, c ? c.label : "", p);
+    L.push("", "## Outreach note", "", "Subject: " + o.subject, "", o.body);
+    if (B.web && B.web.articles && B.web.articles.length) { L.push("## In the news", ""); B.web.articles.slice(0, 8).forEach(function (a) { L.push("- " + a.title + " (" + a.link + ")"); }); L.push(""); }
+    L.push("## Suggested next steps", "");
+    (p ? providerNext(B) : ["Add " + B.name + " to the research list for a full profile."]).forEach(function (x, i) { L.push((i + 1) + ". " + x); });
+    L.push("", "---", "Open this brief: " + location.origin + location.pathname + "?q=" + encodeURIComponent(B.q) + (B.U.as ? "&as=" + encodeURIComponent(B.U.as) : ""));
     return L.join("\n");
   }
   function download(name, text, type) {
@@ -616,6 +988,13 @@
     else if (a === "pdf") window.print();
     else if (a === "md") download("scout-brief-" + slug(current.q) + ".md", markdown(current), "text/markdown;charset=utf-8");
     else if (a === "rescan") scout(current.q, { as: current.U.as });
+    else if (a === "copy-outreach") {
+      var pp = current.p, cc = catOf(current.cat);
+      var o = outreachText(pp ? shortName(pp) : current.name, cc ? cc.label : "", pp);
+      var txt = "Subject: " + o.subject + "\n\n" + o.body;
+      if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { toast("Outreach note copied"); }, function () { prompt("Copy this note", txt); });
+      else prompt("Copy this note", txt);
+    }
     else if (a === "todo-copy") {
       var txt = WEB.todoText();
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { toast("Research request copied"); }, function () { prompt("Copy this request", txt); });

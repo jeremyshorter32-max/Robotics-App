@@ -129,7 +129,23 @@
    "WEIBUILD",
    "WeBuild"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.we-i-build.com/en",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Shanghai, China",
+   "regional": [],
+   "sources": [
+    "https://pitchbook.com/profiles/company/466642-18",
+    "https://www.imda.gov.sg/resources/innovative-tech-companies-directory/weibuild",
+    "https://we-i-build.com/en/aboutus/"
+   ],
+   "note": "No general/sales email or switchboard was found. The IMDA Singapore directory lists only a named individual's contact, which was left out on purpose. The company site could not be fetched from this session.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "myro",
@@ -261,7 +277,32 @@
    "MYRO",
    "Myro"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": null,
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Dubai, UAE (part of Mojay Global Holding Limited, DIFC, Dubai)",
+   "regional": [
+    {
+     "name": "Mojay Global Holding Limited (parent)",
+     "region": "UAE",
+     "role": "Parent company (DIFC, Dubai)",
+     "url": "https://www.mojay.com",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.zawya.com/en/press-release/emaar-properties-commissions-myro-internationals-automated-painting-robotnbsp-xmn8evir",
+    "https://gulfnews.com/business/corporate-news/mojay-global-holding-nurtures-innovation-and-growth-worldwide-from-the-uae-1.1637843262005",
+    "https://mid-east.info/myro-international-hosts-live-demos-at-the-gitex-technology-week"
+   ],
+   "note": "No MYRO-specific website, email or phone found. Press releases point to parent Mojay Global Holding (mojay.com). Only contacts in press releases were PR-agency staff (excluded). Some sources link MYRO's robot to Eternal Robotics (India).",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "fangshi-robotics",
@@ -387,7 +428,23 @@
   "aliases": [
    "Fangshi"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://fangshitech.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Beijing, China (Beijing Fangshi Robotics Co., Ltd.; R&D/production/sales/service centres in Beijing, Jinan, Suzhou, Huzhou, Foshan)",
+   "regional": [],
+   "sources": [
+    "https://pitchhub.36kr.com/project/1678473168450569",
+    "https://www.36kr.com/p/3807039782116865",
+    "https://dealroom.co/companies/fangshi-robotics/"
+   ],
+   "note": "Website domain fangshitech.com comes from a third-party (36Kr PitchHub) listing and is unconfirmed. No public email or phone found; the WeChat official account is the main channel. Earlier entity name may be Suzhou Fangshi Technology. No GCC route found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "partner-robotics-pavepal",
@@ -520,7 +577,23 @@
    "PavePal",
    "Partner Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": null,
+   "contact_page": null,
+   "linkedin": null,
+   "email": "info@partnerrobotics.com",
+   "phone": null,
+   "hq_address": "Dongguan, China (registered as Paitner (Dongguan) Robotics Technology)",
+   "regional": [],
+   "sources": [
+    "https://www.aap.com.au/aapreleases/cision20251110ae19583",
+    "https://www.roboticstomorrow.com/news/2025/11/10/partner-robotics-raises-series-a-funding-to-deploy-robots-on-construction-sites-worldwide/25786/",
+    "https://app.dealroom.co/companies/paitner_dongguan_robotics_technology"
+   ],
+   "note": "Email from the Nov 2025 Series A press release (PR Newswire/AAP). Official homepage not confirmed (domain partnerrobotics.com implied by the email). Middle East is named as a primary market, but no GCC distributor was found. The +971 number in the Arabic PR Newswire version belongs to PR Newswire, so it is not recorded.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "okibo",
@@ -645,7 +718,23 @@
   "aliases": [
    "Okibo"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://okibo.com",
+   "contact_page": "https://okibo.com/contact/",
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Granit Street 5, Petah Tikva, Israel (US office: Englewood, NJ)",
+   "regional": [],
+   "sources": [
+    "https://startupim.com/company/okibo",
+    "https://www.cbinsights.com/company/okibo",
+    "https://innovationisrael.org.il/en/importWinner/515802890"
+   ],
+   "note": "Contact is via the web form or a demo booking. The only emails and phones found belong to named individuals, so they were left out. The company says its sales focus is Europe.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "legend-robot",
@@ -765,7 +854,32 @@
   "aliases": [
    "Legend Robot"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": null,
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Shenzhen, China (legal entity: Shenzhen Legend Robot Technology Co., Ltd., per UK trademark filing)",
+   "regional": [
+    {
+     "name": "Furnishing House",
+     "region": "Saudi Arabia",
+     "role": "Deployment partner (Qiddiya project, Riyadh)",
+     "url": null,
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.tradearabia.com/News/466964/Legend-Robot-to-unveil-Its-mobile-paint-spraying-robot-at-Big-5-Construct-Saudi",
+    "https://www.ipo.gov.uk/tm/t-tmj/tm-journals/2026-002/UK00004313267.html",
+    "https://www.yourwyominglink.com/legend-robot-unveils-how-its-mobile-continuous-spraying-technology-accelerates-vision-2030-gigaprojects-at-big/article_20c66759-a6e6-5ebf-8a03-8087a849a91f.html"
+   ],
+   "note": "Company domain appears to be legendrobot.com (seen only in a named marketing director's press-contact email, which was excluded as personal); official site not confirmed. Exhibited at Big 5 Construct Saudi. No generic company email/phone found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "dusty-robotics",
@@ -889,7 +1003,23 @@
   "aliases": [
    "Dusty Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.dustyrobotics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 650-618-6285",
+   "hq_address": "909 San Rafael Ave, Mountain View, CA 94043, USA",
+   "regional": [],
+   "sources": [
+    "https://www.forconstructionpros.com/construction-technology/company/22885947/dusty-robotics",
+    "https://www.ironpros.com/home/company/22885947/dusty-robotics",
+    "https://craft.co/dusty-robotics"
+   ],
+   "note": "Phone and address are from trade directories, not the company site (which could not be fetched). One directory gives +1 650-614-7600 instead. No published generic email was found; use the website contact/demo form. No GCC route found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "hp-siteprint",
@@ -1005,7 +1135,32 @@
   "aliases": [
    "SitePrint"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.hp.com/us-en/printers/site-print/layout-robot/where-to-buy.html",
+   "contact_page": "https://www.hp.com/emea_middle_east-en/contact-hp/office-locations.html",
+   "linkedin": null,
+   "email": null,
+   "phone": "+971 4 2792799",
+   "hq_address": "HP Middle East: Building 14, Dubai Internet City, Dubai, UAE (HP Inc. global HQ: Palo Alto, USA)",
+   "regional": [
+    {
+     "name": "HP Middle East office (Dubai Internet City)",
+     "region": "UAE",
+     "role": "Regional office",
+     "url": "https://www.hp.com/emea_middle_east-en/contact-hp/office-locations.html",
+     "email": null,
+     "phone": "+971 4 2792799"
+    }
+   ],
+   "sources": [
+    "https://www.hp.com/us-en/printers/site-print/layout-robot/where-to-buy.html",
+    "https://www.hp.com/emea_middle_east-en/contact-hp/office-locations.html",
+    "https://www.hp.com/emea_middle_east-ar/contact-hp/office-locations.html"
+   ],
+   "note": "The phone is HP's general Middle East office line, not a SitePrint-specific line. The Arabic page lists +971 4 3916000 instead. The SitePrint where-to-buy page has a 'Middle East' region option, but no named UAE reseller appeared in search results. hp.com could not be fetched directly.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "fbr-hadrian",
@@ -1130,7 +1285,22 @@
   "aliases": [
    "Hadrian X"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.fbr.com.au",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+61 8 9380 0240",
+   "hq_address": "122 Sultana Road West, High Wycombe, Perth WA 6057, Australia",
+   "regional": [],
+   "sources": [
+    "https://stockanalysis.com/quote/asx/FBR/company",
+    "https://www.marketscreener.com/quote/stock/FBR-LIMITED-24827098/company/"
+   ],
+   "note": "The phone and address come from stock-data profiles. No general email was found, and the company site could not be fetched.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "thub-towercraft",
@@ -1258,7 +1428,40 @@
    "Towercraft",
    "TowerCraft"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://thubtechnologies.io",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "London, UK",
+   "regional": [
+    {
+     "name": "Towercraft Cleaning Services L.L.C",
+     "region": "UAE (Sharjah)",
+     "role": "UAE operating company",
+     "url": "https://www.towercraft.io",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Towercraft UK Ltd",
+     "region": "UK (London)",
+     "role": "UK operating company",
+     "url": "https://www.towercraft.io",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.caplight.com/company/thubtechnologies",
+    "https://emiratesgbc.org/?p=11966",
+    "https://www.skyscrapercenter.com/company/36027"
+   ],
+   "note": "Product brand Towercraft (towercraft.io). UAE entity in Sharjah listed in Emirates GBC directory; only phone shown there was a named executive's mobile (excluded). Websites taken from directory listings, not fetched.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "barqair",
@@ -1377,7 +1580,23 @@
   "aliases": [
    "BarqAir"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://barqair.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Abu Dhabi, UAE",
+   "regional": [],
+   "sources": [
+    "https://village.ai/company/barqair",
+    "https://www.wam.ae/en/article/hszrdo8r-uaes-1st-drone-delivery-service-provider-barq-ev",
+    "https://www.businesswire.com/news/home/20260108165557/en/Barq-Group-Signs-Initial-Agreement-With-Elroy-Air-to-Set-Up-%24200M-Joint-Venture-for-Chaparral-Manufacturing-and-Services-in-Abu-Dhabi"
+   ],
+   "note": "UAE-based (Abu Dhabi, founded 2021 per Village.ai) and appears linked to BARQ EV / Barq Group. barqair.com could not be fetched and no public email or phone was found in search results. Check barqair.com/contact directly.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "ktv-working-drone",
@@ -1505,7 +1724,40 @@
   "aliases": [
    "KTV Working Drone"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://ktvworkingdrone.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Hanøytangen 111, Askøy (near Bergen), Norway",
+   "regional": [
+    {
+     "name": "KTV Working Drone Cleaning Services",
+     "region": "UAE (Abu Dhabi)",
+     "role": "Sub-franchisee",
+     "url": "https://ktvworkingdrone.com/?p=6400",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "KTV Working Drone Aerial Services",
+     "region": "UAE (Dubai)",
+     "role": "Sub-franchisee",
+     "url": "https://ktvworkingdrone.com/?p=6400",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://ktvworkingdrone.com/?p=6400",
+    "https://ktvworkingdrone.com/?p=10846",
+    "https://ktvworkingdrone.com/fr/?p=6744"
+   ],
+   "note": "Site has a Contact page, but its email and phone were not visible in search results, and the site could not be fetched. UAE sub-franchises were announced in Sept 2024 with no published contact details.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "skyline-robotics",
@@ -1630,7 +1882,23 @@
    "Skyline Robotics",
    "Ozmo"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.skylinerobotics.com",
+   "contact_page": "https://www.skylinerobotics.com/contact-us",
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "New York, NY, USA (directory lists 120 Broadway, 36th floor; also has operations in Israel)",
+   "regional": [],
+   "sources": [
+    "https://techbullion.com/skyline-robotics-receives-investment-from-durst-ventures-as-it-expands-automated-window-washing/",
+    "https://slimpages.startupim.com/neo_company_page/skyline-robotics",
+    "https://builtworlds.com/companies/skyline-robotics/"
+   ],
+   "note": "Enquiries go through the contact-us form. The only other contact found is an outdated PR-agency media contact, which was left out. The service is sold as robot-as-a-service.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "lucid-bots",
@@ -1751,7 +2019,22 @@
   "aliases": [
    "Lucid Bots"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.lucidbots.com",
+   "contact_page": "https://www.lucidbots.com/contact",
+   "linkedin": null,
+   "email": "sales@lucidbots.com",
+   "phone": "+1 980-498-1894",
+   "hq_address": "6601-A Northpark Blvd., Charlotte, NC 28216, USA",
+   "regional": [],
+   "sources": [
+    "https://www.lucidbots.com/llms.txt",
+    "https://job-boards.greenhouse.io/lucidbots/jobs/4545949008"
+   ],
+   "note": "No UAE/GCC distributor found; US rentals via Sunbelt Rentals. Demo requests via contact page.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "serbot",
@@ -1868,7 +2151,25 @@
   "aliases": [
    "Serbot"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://serbot.ch",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Galgenried 22, 6370 Stans, Switzerland (other sources: Buochs, Nidwalden)",
+   "regional": [],
+   "sources": [
+    "https://www.glassonweb.com/directory/serbot-ag",
+    "https://www.cbinsights.com/company/serbot",
+    "https://heppenstall.ch/en/home/our-company/affiliated-companies",
+    "https://getkoala.com/companies/serbot.ch",
+    "https://www.moneyhouse.ch/it/company/serbot-ag-4848479291"
+   ],
+   "note": "CAUTION: Moneyhouse lists a 'Serbot AG in Liquidation' (Cham, ZG), so the company may be wound up or restructured; verify on Zefix. Affiliated with the Heppenstall group. No email or phone found. It had historic Dubai facade-cleaning projects, but no current GCC partner was found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "ecoppia",
@@ -1995,7 +2296,32 @@
   "aliases": [
    "Ecoppia"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.ecoppia.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "info@ecoppia.com",
+   "phone": null,
+   "hq_address": "4 HaBarzel St, Ramat HaHayal, Tel Aviv, Israel",
+   "regional": [
+    {
+     "name": "IFIICC (Indo-Israel-UAE trilateral business body)",
+     "region": "UAE",
+     "role": "Facilitator of Ecoppia's first UAE deal (not a distributor)",
+     "url": "https://gulfnews.com/business/israeli-robotic-solar-cleaning-company-ecoppia-signs-first-landmark-deal-in-the-uae-with-the-support-of-ifiicc-1.1620281182686",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://enterpriseleague.com/company/ecoppia",
+    "https://www.dmag.co.il/pub/paprika/india_israel22/90/",
+    "https://gulfnews.com/business/israeli-robotic-solar-cleaning-company-ecoppia-signs-first-landmark-deal-in-the-uae-with-the-support-of-ifiicc-1.1620281182686"
+   ],
+   "note": "The email and address come from third-party directories (Enterprise League, a 2022 Israel-India business guide). ecoppia.com could not be fetched to confirm them. No UAE office was found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "boston-dynamics",
@@ -2133,7 +2459,33 @@
   "aliases": [
    "Boston Dynamics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://bostondynamics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 617 868 5600",
+   "hq_address": "200 Smith St, Waltham, MA 02451, USA",
+   "regional": [
+    {
+     "name": "Analog (Analog Studios FZ LLC)",
+     "region": "UAE",
+     "role": "Sole certified reseller, integrator and service partner for the UAE",
+     "url": "https://analog.io",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.plunkettresearch.com/?p=1872550",
+    "https://www.therobotreport.com/boston-dynamics-partners-analog-deploy-robots-uae/",
+    "https://bostondynamics.com/news/analog-x-boston-dynamics-physical-intelligence-on-four-legs/",
+    "https://builtin.com/company/analog-1"
+   ],
+   "note": "In the UAE, go through Analog (Abu Dhabi, backed by G42). Analog's website comes from a job listing and should be checked. The HQ phone comes from Plunkett Research, not an official page.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "deep-robotics",
@@ -2270,7 +2622,41 @@
    "DEEP Robotics",
    "Deep Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.deeprobotics.cn",
+   "contact_page": "https://deeprobotics.cn/en/wap/company.html",
+   "linkedin": null,
+   "email": "partner@deeprobotics.cn",
+   "phone": null,
+   "hq_address": "Building 3, Zijin Dream Plaza, 36 Xinran Street, Xihu District, Hangzhou, Zhejiang, China",
+   "regional": [
+    {
+     "name": "Najim Systems",
+     "region": "Saudi Arabia",
+     "role": "Regional partner (agreement at LEAP24)",
+     "url": "https://najimsystems.com/?p=502",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "ASI",
+     "region": "USA/Canada",
+     "role": "Strategic distributor",
+     "url": "https://www.asipartner.com/?p=13947",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://deeprobotics.cn/en/wap/company.html",
+    "https://roboticstomorrow.com/company_directory/deep-robotics/13689",
+    "https://najimsystems.com/?p=502",
+    "https://business.mammothtimes.com/mammothtimes/article/getnews-2025-10-20-empowering-international-security-inspection-and-emergency-firefighting-deep-robotics-showcases-robotic-dog-solutions"
+   ],
+   "note": "Phone from company site (search snippet); partner@ email from a business directory. No named UAE distributor; company exhibits at GITEX Dubai and has a MENA sales function.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "anybotics",
@@ -2416,7 +2802,50 @@
   "aliases": [
    "ANYbotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.anybotics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "info@anybotics.com",
+   "phone": null,
+   "hq_address": "Hagenholzstrasse 83a, 8050 Zurich, Switzerland",
+   "regional": [
+    {
+     "name": "Sigma Enterprises (Mazrui group)",
+     "region": "UAE",
+     "role": "Reseller (ANYmal sales, support, training) since Sep 2023",
+     "url": "https://www.anybotics.com/news/sigma-enterprises-partnership/",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Sol7",
+     "region": "Oman",
+     "role": "Partner (purchase or RaaS)",
+     "url": "https://roboticstomorrow.com/news/2024/09/24/anybotics-strengthens-presence-in-oman-partnering-with-sol7/23210",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "West Bay Petroleum (WBP)",
+     "region": "Qatar",
+     "role": "Partner",
+     "url": "https://roboticsandautomationnews.com/2024/11/05/anybotics-and-qatars-west-bay-petroleum-partner-to-develop-industrial-inspection-solution/86798",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://developer.siemens.com/anybotics/contact.html",
+    "https://enterpriseleague.com/company/anybotics",
+    "https://prospectoo.com/company/ANYbotics-11012141/",
+    "https://www.anybotics.com/news/sigma-enterprises-partnership/",
+    "https://www.zawya.com/en/press-release/companies-news/anybotics-and-sigma-enterprises-announce-partnership-in-uae-qvnv50je"
+   ],
+   "note": "info@anybotics.com appears on the Siemens developer portal and Enterprise League. The address is from directories; other addresses (Weinbergstrasse 35, Räffelstrasse 25) also appear. Sigma Enterprises is the UAE route.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "unitree-robotics",
@@ -2588,7 +3017,32 @@
   "aliases": [
    "Unitree"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.unitree.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "sales_global@unitree.cc",
+   "phone": "+86-18767138485",
+   "hq_address": "3rd Floor, Block 1, 88 Dongliu Rd., Binjiang District, Hangzhou, China",
+   "regional": [
+    {
+     "name": "Ednex Automation (EdNex LLC)",
+     "region": "UAE (Dubai)",
+     "role": "Middle East partner (per Khaleej Times)",
+     "url": "https://www.khaleejtimes.com/uae/viral-robot-unitree-g1-cost-features?amp=1",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://messe.nikkei.co.jp/exhibitor/info/SS/en/22581",
+    "https://www.ifa-berlin.com/exhibitors/unitree",
+    "https://www.khaleejtimes.com/uae/viral-robot-unitree-g1-cost-features?amp=1"
+   ],
+   "note": "Email and address come from trade-show exhibitor listings (Nikkei, IFA Berlin), and the phone from the Nikkei listing. Other directories give +86 17621781139. unitree.com could not be fetched to confirm. No official Ednex website or contact was confirmed.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "airtech-uae",
@@ -2704,7 +3158,21 @@
    "AirTech"
   ],
   "aliases": [],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": null,
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "UAE",
+   "regional": [],
+   "sources": [
+    "https://resource.geospatialworld.net/company/air-tech"
+   ],
+   "note": "Only a Geospatial World profile was found, describing a UAE drone company that does construction monitoring, inspections and surveys. It shows no contact details. The company could not be matched with confidence.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "solinas-integrity",
@@ -2840,7 +3308,23 @@
   "aliases": [
    "Solinas"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.solinas.in",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "IITM Research Park, Kanagam Road, Taramani, Chennai, Tamil Nadu 600113, India",
+   "regional": [],
+   "sources": [
+    "https://psa.gov.in/CMS/web/sites/default/files/psa_custom_files/Solinas%20Integrity%20Pvt%20Limited.pdf",
+    "https://m.indiamart.com/solinas-intergrity-chennai",
+    "https://respark.iitm.ac.in/Solinas-Integrity"
+   ],
+   "note": "No company email found (one directory showed a personal Gmail, excluded). Phone is from IndiaMart and may be a marketplace-routed number. No GCC presence found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "skydio",
@@ -2968,7 +3452,23 @@
   "aliases": [
    "Skydio"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.skydio.com",
+   "contact_page": "https://support.skydio.com/",
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 855-463-5902",
+   "hq_address": "3000 Clearview Way, Bldg E, San Mateo, CA 94402, USA",
+   "regional": [],
+   "sources": [
+    "https://support.skydio.com/",
+    "https://bitscale.ai/directory/skydio",
+    "https://www.elliott.org/company-contacts/skydio-customer-service-contacts/"
+   ],
+   "note": "855-463-5902 is the sales line (weekdays 8am-2am ET, weekends 8am-6pm ET). press@skydio.com is press only. Skydio has EMEA channel resellers but none named in the UAE/GCC.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "dji-enterprise",
@@ -3108,7 +3608,44 @@
   "aliases": [
    "DJI"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://enterprise.dji.com",
+   "contact_page": "https://enterprise.dji.com/enterprise/contact-us",
+   "linkedin": null,
+   "email": "sales@aerosmart.ae",
+   "phone": "+971 4 223 8380",
+   "hq_address": "DJI Sky City, No.55 Xianyuan Road, Nanshan District, Shenzhen, China",
+   "regional": [
+    {
+     "name": "Aerosmart (Aero Smart UAV Trading L.L.C.)",
+     "region": "UAE",
+     "role": "Authorized DJI Enterprise dealer",
+     "url": "https://www.aerosmart.ae/enterprise-commercial-drones/",
+     "email": "sales@aerosmart.ae",
+     "phone": "+971 4 223 8380"
+    },
+    {
+     "name": "The Drone Centre (FEDS Group)",
+     "region": "MENA (Dubai, Expo City Technology & Innovation Hub)",
+     "role": "DJI Enterprise master dealer",
+     "url": "https://flytbase.com/partner/the-drone-centre",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.aerosmart.ae/?p=810",
+    "https://www.aerosmart.ae/enterprise-commercial-drones/",
+    "https://www.dji.com/contact",
+    "https://enterprise.dji.com/enterprise/contact-us",
+    "https://flytbase.com/partner/the-drone-centre",
+    "https://www.milipolqatar.com/visit/search/exhibitor/The-Drone-Centre",
+    "https://www.zawya.com/en/press-release/companies-news/dji-dock-3-unveiled-at-isprs-geospatial-week-2025-y6gb1afh"
+   ],
+   "note": "Top-level email and phone are for the UAE dealer Aerosmart (office 203, Al Tayer Commercial Bldg, Rolla St, Bur Dubai). DJI HQ: sales@dji.com and +86 755 26656677 (dji.com/contact). Enterprise enquiries go through a web form. The Drone Centre's site appears as 'The Drone Centre.ae' in a press release (exact domain not confirmed), so its email is not recorded.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "flyability",
@@ -3237,7 +3774,41 @@
   "aliases": [
    "Flyability"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.flyability.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "info@flyability.com",
+   "phone": "+41 21 311 55 00",
+   "hq_address": "Lausanne, Switzerland (sources give Route du Lac 3, 1094 Paudex/Lausanne, and EPFL Innovation Park, Building C)",
+   "regional": [
+    {
+     "name": "West Bay Petroleum Co. WLL (WBPS)",
+     "region": "Qatar",
+     "role": "Distributor",
+     "url": null,
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "HiTech Drone (Al Maroof group)",
+     "region": "Saudi Arabia",
+     "role": "Authorised reseller (Elios 2/3)",
+     "url": null,
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://enterpriseleague.com/company/flyability-1081384",
+    "https://prospeo.io/c/flyability",
+    "https://www.gccbusinessnews.com/wbps-distributor-of-flyability-drone-tech/",
+    "https://oilreviewafrica.com/technology/flyability-partners-with-hitech-drone-to-expand-use-of-drones"
+   ],
+   "note": "media@flyability.com is also published, for press. No UAE distributor was found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "percepto",
@@ -3361,7 +3932,22 @@
   "aliases": [
    "Percepto"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://percepto.co",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "8310 North Capital of Texas Highway, Austin, TX 78731, USA (per directories; R&D origin Israel)",
+   "regional": [],
+   "sources": [
+    "https://www.zoominfo.com/c/percepto/409411847",
+    "https://leadiq.com/c/percepto---autonomous-drones/5a1d9dae23000054008d8d9e"
+   ],
+   "note": "All values from third-party directories; official contact page not reachable. No UAE/GCC partner found (UAE drone firm airscope.ae republishes Percepto news but no reseller relationship confirmed).",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "gecko-robotics",
@@ -3487,7 +4073,43 @@
   "aliases": [
    "Gecko Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.geckorobotics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "info@geckorobotics.com",
+   "phone": "+1 888-350-8960",
+   "hq_address": "100 South Commons, Suite 145, Pittsburgh, PA 15212, USA; international HQ in UAE (Abu Dhabi)",
+   "regional": [
+    {
+     "name": "Gecko Robotics international HQ (UAE)",
+     "region": "UAE (Abu Dhabi)",
+     "role": "Regional HQ, set up 2022 under NextGenFDI",
+     "url": "https://www.wam.ae/en/details/1395303088828",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Al Masaood Energy",
+     "region": "UAE (Abu Dhabi)",
+     "role": "Partner (joint ADNOC Gas contract, 2024)",
+     "url": "https://www.geckorobotics.com/news/gecko-to-help-adnoc-gas-revolutionize-asset-operations-and-maintenance",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.zoominfo.com/c/gecko-robotics/373136190",
+    "https://datanyze.com/companies/gecko-robotics/373136190",
+    "https://www.wam.ae/en/details/1395303088828",
+    "https://arabianbusiness.com/industries/technology/us-based-gecko-robotics-to-set-up-international-hq-in-uae-under-nextgenfdi-initiative",
+    "https://www.geckorobotics.com/news/gecko-to-help-adnoc-gas-revolutionize-asset-operations-and-maintenance",
+    "https://semafor.com/article/02/17/2025/gecko-robotics-plans-to-double-uae-footprint"
+   ],
+   "note": "Email and phone come from data aggregators, not the company site, so verify them. The UAE team is active (Abu Dhabi roles, ADNOC work) but no UAE office address or phone was published.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "sindan-robotics",
@@ -3605,7 +4227,24 @@
    "SINDAN",
    "Sindan"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://sindan.ae",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "contactus@sindan.ae",
+   "phone": null,
+   "hq_address": "Abu Dhabi, UAE (also present in Shenzhen, China)",
+   "regional": [],
+   "sources": [
+    "https://www.zawya.com/en/press-release/companies-news/sindan-partners-with-am-conclave-to-advance-additive-manufacturing-in-the-mena-region-q8hl195x",
+    "https://village.ai/company/sindan-uae",
+    "https://gulfnews.com/uae/people/umex-and-simtex-boost-abu-dhabis-tech-and-defence-push-1.500417179",
+    "https://nyuad.nyu.edu/en/news/latest-news/community-life/2026/may/nyuad-signs-mou-with-sindan.html"
+   ],
+   "note": "Email from 2024 press releases (AM Conclave partnership). Sindan is a Mubadala-backed Abu Dhabi advanced manufacturing / AI hub that also shows humanoid and quadruped robots. Its own site could not be fetched.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "micropolis",
@@ -3781,7 +4420,22 @@
   "aliases": [
    "Micropolis"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://micropolis.ai",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+971 4 276 7008",
+   "hq_address": "Warehouse 1, Dar Alkhaleej Building, Dubai Production City, Dubai, UAE",
+   "regional": [],
+   "sources": [
+    "https://www.marketscreener.com/quote/stock/MICROPOLIS-AI-ROBOTICS-182941558/company/",
+    "https://www.iposcoop.com/ipo/micropolis-holdings-co"
+   ],
+   "note": "Listed on NYSE American as MCRP. Sources give both micropolis.ai and micropolis.ae as the website. The press-release emails were masked and could not be read.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "knightscope",
@@ -3903,7 +4557,23 @@
   "aliases": [
    "Knightscope"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.knightscope.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 650-924-1025",
+   "hq_address": "1070 Terra Bella Avenue, Mountain View, CA 94043, USA",
+   "regional": [],
+   "sources": [
+    "https://urlscan.io/result/63b1eee7-5e0d-45f0-8750-e1bc95b4d300/content",
+    "https://seekingalpha.com/filings/pdf/16201355",
+    "https://www.businesswire.com/news/home/20240708123286/en/"
+   ],
+   "note": "Phone/address from site footer capture and SEC filing. No verified sales email; contact via form on knightscope.com. No GCC presence found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "cobalt-robotics",
@@ -4030,7 +4700,24 @@
    "Cobalt Robotics",
    "Cobalt AI"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.cobaltai.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 650-781-3626",
+   "hq_address": "USA (sources conflict: San Francisco 526 2nd St; Fremont; San Mateo)",
+   "regional": [],
+   "sources": [
+    "https://connectplex.ai/contact/andrew-surujnarine-50457800",
+    "https://wiza.co/d/cobaltrobotics/6323/ken-wolff",
+    "https://builtin.com/company/cobalt-ai",
+    "https://dealroom.co/companies/cobalt-ai/"
+   ],
+   "note": "The phone is a single third-party directory listing (ConnectPlex), so treat it as low confidence. Sales enquiries go through the demo request form. One unverified source reports an acquisition by Eagle Eye Networks. No GCC route found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "asylon",
@@ -4154,7 +4841,23 @@
   "aliases": [
    "Asylon"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://asylonrobotics.com",
+   "contact_page": "https://asylonrobotics.com/company/news",
+   "linkedin": null,
+   "email": "info@asylonrobotics.com",
+   "phone": null,
+   "hq_address": "52 Buttonwood St, Norristown, PA 19401, USA",
+   "regional": [],
+   "sources": [
+    "https://asylonrobotics.com/company/news",
+    "https://automa.net/company/asylon",
+    "https://aeroleads.com/c/asylon"
+   ],
+   "note": "The official site sends demo and partnership requests through a web form. The email and address come from third-party directories only. Phone numbers seen were on people-search sites or belonged to named staff, so none are recorded. US channel partners: NOBLE, Safeware. No GCC route was found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "smp-robotics",
@@ -4277,7 +4980,31 @@
   "aliases": [
    "SMP Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://smprobotics.com",
+   "contact_page": "https://smprobotics.com/about_smp_robotics_company/smp_robotics_company_contact/",
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "SMP Robotics Systems Corp., Silicon Valley, California, USA",
+   "regional": [
+    {
+     "name": "Ejadah Asset Management Group",
+     "region": "UAE",
+     "role": "Operator/partner (security robot deployments in Dubai)",
+     "url": null,
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://smprobotics.com/about_smp_robotics_company/smp_robotics_company_contact/",
+    "https://smprobotics.com/uae/first-time-around-world-city-government-gave-permission-use-security-robots/"
+   ],
+   "note": "Has a dedicated UAE section on its site. Robots are approved by Dubai SIRA. Minimum order is 3 robots of one type.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "pudu-robotics",
@@ -4419,7 +5146,34 @@
    "Pudu",
    "BellaBot"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.pudurobotics.com",
+   "contact_page": "https://www.pudurobotics.com/become-our-partner",
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "11/F, Building 2A, Shenzhen International Inno Valley Phase 1, Dashi 1st Road, Nanshan District, Shenzhen 518300, China",
+   "regional": [
+    {
+     "name": "Proven Robotics (Proven Solution)",
+     "region": "Saudi Arabia",
+     "role": "Regional partner (launched Pudu robots in KSA)",
+     "url": "https://mid-east.info/proven-robotics-and-pudu-robotics-unveil-next-generation-robots-in-saudi-arabia",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://messe.nikkei.co.jp/exhibitor/info/RT/en/24843/",
+    "https://www.cbinsights.com/investor/pudu-technology",
+    "https://www.pudurobotics.com/become-our-partner",
+    "https://www.cxoinsightme.com/news/proven-robotics-pudu-robotics-launch-next-gen-robots-in-saudi-arabia",
+    "https://prospeo.io/c/proven-robotics-revenue"
+   ],
+   "note": "No official UAE distributor confirmed; Pudu routes enquiries via web form to local teams. No generic sales email verified.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "gausium",
@@ -4564,7 +5318,59 @@
    "Gausium",
    "Gaussian Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://gausium.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Shanghai, China",
+   "regional": [
+    {
+     "name": "Albariq Equipment LLC",
+     "region": "UAE / KSA / Qatar (Dubai Investment Park 2, Plot 597-633)",
+     "role": "Distributor",
+     "url": "https://gausium.com/news/special-guests-at-iftar-gaussian-cleaning-robots-showcased-at-albariq-equipments-annual-iftar-event/",
+     "email": null,
+     "phone": "+971 4 285 2386"
+    },
+    {
+     "name": "Inc Robotics",
+     "region": "Saudi Arabia / UAE",
+     "role": "Distributor",
+     "url": "https://gausium.com/news/gaussian-robotics-and-inc-robotics-co-exhibit-at-the-big-5-saudi/",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Acme",
+     "region": "Dubai / Middle East",
+     "role": "Partner",
+     "url": null,
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Gausium Hong Kong",
+     "region": "Hong Kong",
+     "role": "Regional office (Unit 212, Building 1E, HK Science Park, Shatin)",
+     "url": "https://prospeo.io/c/gausium-hong-kong-revenue",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://gausium.com/news/special-guests-at-iftar-gaussian-cleaning-robots-showcased-at-albariq-equipments-annual-iftar-event/",
+    "https://gausium.com/news/gaussian-robotics-and-inc-robotics-co-exhibit-at-the-big-5-saudi/",
+    "https://village.ai/company/albariq",
+    "https://prospeo.io/c/albariq-equipment-email-format",
+    "https://www.yellowpages-uae.com/uae/dubai/vacuum-equipment",
+    "https://www.zoominfo.com/c/inc-robotics/1320482480"
+   ],
+   "note": "No official Gausium HQ email or phone found. Use the UAE distributor Albariq Equipment (albariq.com; phone from Prospeo and Yellow Pages UAE). Inc Robotics website: incrobotics.com. The Inc Robotics link dates from 2022, so confirm it is still active.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "keenon-robotics",
@@ -4696,7 +5502,33 @@
   "aliases": [
    "Keenon"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.keenon.com/en/",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "global@keenon.com",
+   "phone": "+86 400 833 5808",
+   "hq_address": "Building 56, No.1000 Jinhai Road, Shanghai, China",
+   "regional": [
+    {
+     "name": "KAIR (Kanoo AI & Robotics LLC), Kanoo Group",
+     "region": "UAE (Dubai)",
+     "role": "Operator/distributor of KEENON robots (sale, rent, lease)",
+     "url": "https://kanoogroup.com/business/kair-kanoo-ai-and-robotics",
+     "email": "kair@kanoo.com",
+     "phone": "+971 4 507 2385"
+    }
+   ],
+   "sources": [
+    "https://kanoogroup.com/business/kair-kanoo-ai-and-robotics",
+    "https://automa.net/company/kanoo-ai-robotics-kair",
+    "https://www.prnewswire.com/in/news-releases/keenon-robotics-continues-global-lead-in-commercial-service-robot-market-securing-triple-no1-rankings-idc-reports-302509318.html",
+    "https://prospectoo.com/company/KeenonRoboticsCoLtd-29196817/"
+   ],
+   "note": "GCC route: KAIR, website www.kair-me.com, Kanoo Group Head Office, P.O. Box 290, Dubai. Keenon's global@ email is from PR Newswire releases. The HQ phone and address come from a data directory (unconfirmed).",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "lionsbot",
@@ -4836,7 +5668,34 @@
   "aliases": [
    "LionsBot"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.lionsbot.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+65 6595 4565",
+   "hq_address": "11 Changi South Street 3, #03-02, Singapore 486122",
+   "regional": [
+    {
+     "name": "Hygiene Tech (Hygiene Tech Cleaning Equipment Trading LLC)",
+     "region": "UAE",
+     "role": "UAE distributor/supplier",
+     "url": "https://www.hygienetech.net",
+     "email": null,
+     "phone": "+971 2 552 5473"
+    }
+   ],
+   "sources": [
+    "https://aeroleads.com/c/lionsbot",
+    "https://www.sgpbusiness.com/company/Lionsbot-International-Pte-Ltd",
+    "https://www.zawya.com/en/press-release/companies-news/emrill-launches-advanced-sustainable-cleaning-robot-in-partnership-with-dubai-festival-city-mall-oi0as362",
+    "https://www.zoominfo.com/c/hygiene-tech/347561973",
+    "https://stg.kezadgroup.com/en/case-studies/2024/9/25/hygiene-tech"
+   ],
+   "note": "Phone numbers conflict: another source gives +65 8188 6198. Hygiene Tech is at C-29 KEZAD Logistics Park, Abu Dhabi, and its phone and website come from ZoomInfo. No sales email was confirmed.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "avidbots",
@@ -4971,7 +5830,33 @@
   "aliases": [
    "Avidbots"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://avidbots.com",
+   "contact_page": "https://avidbots.com/company/worldwide/",
+   "linkedin": null,
+   "email": "sales@avidbots.com",
+   "phone": "+1-855-928-4326",
+   "hq_address": "45 Washburn Dr, Kitchener, ON N2R 1S1, Canada",
+   "regional": [
+    {
+     "name": "Al Yousuf Robotics (Al Yousuf LLC / Al Yousuf Smart Solutions)",
+     "region": "UAE",
+     "role": "Exclusive UAE distributor (reported 2018)",
+     "url": "https://www.alyousuf.com",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://avidbots.com/th/company/worldwide/",
+    "https://www.tradearabia.com/news/IND_339479.html",
+    "https://www.eyeofriyadh.com/news/details/al-yousuf-robotics-the-leading-edge-division-from-al-yousuf-llc",
+    "https://www.aeconline.ae/al-yousuf-sports-equipment/company.html"
+   ],
+   "note": "HQ contacts from Avidbots worldwide page. Al Yousuf distributor status dates from 2018; its phone/website are group-level and unconfirmed for the robotics division.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "brain-corp",
@@ -5102,7 +5987,23 @@
   "aliases": [
    "Brain Corp"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.braincorp.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 858-689-7600",
+   "hq_address": "10182 Telesis Ct, Suite 100, San Diego, CA 92121, USA",
+   "regional": [],
+   "sources": [
+    "https://www.plunkettresearch.com/company-profile/brain-corporation/",
+    "https://www.roboticstomorrow.com/company_directory/brain-corp/11525",
+    "https://www.braincorp.com/llms.txt"
+   ],
+   "note": "Phone is consistent across directories. An older address is 9401 Waples St #100. A marketing@braincorp.com appears in one directory only (not recorded as primary). Brain Corp sells through OEMs (e.g. Tennant), so no UAE distributor was found and the GCC route is likely via Tennant's regional channel.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "tennant",
@@ -5225,7 +6126,31 @@
   "aliases": [
    "Tennant"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.tennantco.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "info@dutcotennant.com",
+   "phone": "+1 763-540-1200",
+   "hq_address": "701 North Lilac Drive, Minneapolis, MN 55422, USA",
+   "regional": [
+    {
+     "name": "Dutco Tennant LLC (Dutco Group)",
+     "region": "UAE (Dubai, Abu Dhabi, Al Ain)",
+     "role": "UAE industrial supplier (Tennant authorization not confirmed)",
+     "url": "https://www.dutcotennant.com/blog/dutco-tennant-llc",
+     "email": "info@dutcotennant.com",
+     "phone": "+971 2 204 5111"
+    }
+   ],
+   "sources": [
+    "https://investors.tennantco.com/news/news-details/2019/Company-Profile-for-Tennant-Company-08-29-2019/default.aspx",
+    "https://www.dutcotennant.com/blog/dutco-tennant-llc"
+   ],
+   "note": "Phone is Tennant HQ's main line, from the company's own press profiles. The email belongs to Dutco Tennant LLC (UAE), whose status as an official Tennant distributor is NOT confirmed. Use tennantco.com's dealer locator to confirm. No Tennant corporate email was found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "trombia",
@@ -5349,7 +6274,23 @@
   "aliases": [
    "Trombia"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.trombia.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Pioneerinkatu 22, 70800 Kuopio, Finland",
+   "regional": [],
+   "sources": [
+    "https://pitchbook.com/profiles/company/468011-89",
+    "https://www.worldsweeper.com/Industry/Trombia3.19.html",
+    "https://kurrant.com/?p=47542"
+   ],
+   "note": "Now part of FAUN Umwelttechnik (via Snowek Oy), so the contact route may run through FAUN. The only email found belongs to a named individual and was left out.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "autogo-k2",
@@ -5484,7 +6425,22 @@
   "aliases": [
    "Autogo"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": null,
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Abu Dhabi, UAE (unit of K2)",
+   "regional": [],
+   "sources": [
+    "https://www.wam.ae/en/article/bmnwrt1-k2’s-autogo-signs-contract-with-baidu’s-apollo",
+    "https://enterpriseam.com/logistics/wp-json/wp/v2/posts/90451"
+   ],
+   "note": "No official contact details found. One source links AutoGo to the autogo.world domain (unconfirmed). Public service via the AutoGo app.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "neolix",
@@ -5624,7 +6580,41 @@
   "aliases": [
    "Neolix"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.neolix.ai",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Beijing, China (Kangsheng Industrial Park, E-Town, per third-party profile)",
+   "regional": [
+    {
+     "name": "K2",
+     "region": "UAE (Abu Dhabi)",
+     "role": "Local fleet operator / partner (Oct 2025)",
+     "url": "https://www.wam.ae/en/article/bm78mrw-k2-neolix-collaborate-advance-adoption-operations",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Noon",
+     "region": "UAE / KSA",
+     "role": "Customer / trial partner",
+     "url": "https://www.thenationalnews.com/business/technology/noon-com-to-trial-driverless-delivery-vans-in-dubai-and-abu-dhabi-1.889654",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://datacommons.dealroom.co/companies/neolix",
+    "https://briefglance.com/companies/neolix-beijing-technology-co-ltd",
+    "https://www.wam.ae/en/article/bm78mrw-k2-neolix-collaborate-advance-adoption-operations",
+    "https://kyodonewsprwire.jp/release/202607132429"
+   ],
+   "note": "No published email or phone found. The GCC route is via K2 (Abu Dhabi), which is the local operator of Neolix vehicles.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "ad-robotics",
@@ -5721,7 +6711,19 @@
    "AD Robotics"
   ],
   "aliases": [],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": null,
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "UAE (per input)",
+   "regional": [],
+   "sources": [],
+   "note": "Not found: searches returned no company identifiable as 'AD Robotics' in the UAE. Its full legal name or website is needed.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "yango-group",
@@ -5851,7 +6853,32 @@
   "aliases": [
    "Yango"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://yango.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+971 58 149 2187",
+   "hq_address": "Dubai, UAE (global operational office at Dubai Internet City)",
+   "regional": [
+    {
+     "name": "Yango Tech",
+     "region": "UAE",
+     "role": "Enterprise/robotics business unit",
+     "url": "https://yango-tech.com/",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://prospeo.io/c/yango-tech",
+    "https://www.dic.ae/media/press-release/yango-targets-worldwide-expansion-with-global-operational-office-launch-at-dic-in-2023",
+    "https://www.cxoinsightme.com/future/tech/yango-tech-launches-industrial-ai-agents-to-accelerate-uaes-digital-workforce-agenda/"
+   ],
+   "note": "The phone comes from the Prospeo aggregator and is not verified. The press releases list only a PR-agency media contact.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "cargox",
@@ -5972,7 +6999,22 @@
   "aliases": [
    "CargoX"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": null,
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "UAE",
+   "regional": [],
+   "sources": [
+    "https://www.zawya.com/business/investment/uae-driverless-delivery-firm-cargox-secures-250mln-funding-bbsnufim",
+    "https://www.wamda.com/en/2026/06/cargox-secures-250-million-led-bluefive-capital-driverless-logistics-expansion"
+   ],
+   "note": "UAE autonomous delivery firm (USD 250M raise led by BlueFive Capital, June 2026). No website or contact details found in coverage. Not to be confused with CargoX (Slovenian blockchain documents firm).",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "weride",
@@ -6110,7 +7152,58 @@
   "aliases": [
    "WeRide"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://weride.ai",
+   "contact_page": "https://ir.weride.ai/ir-resources/investor-faqs",
+   "linkedin": null,
+   "email": "pr@weride.ai",
+   "phone": "+86 20 2909 3388",
+   "hq_address": "21st Floor, Tower A, Guangzhou Life Science Innovation Center, No. 51 Luoxuan Road, Guangzhou International Biotech Island, Guangzhou 510005, China",
+   "regional": [
+    {
+     "name": "WeRide Middle East regional HQ",
+     "region": "UAE (Abu Dhabi, SAVI cluster, Masdar City)",
+     "role": "Regional HQ (announced with ADIO, Oct 2023)",
+     "url": "https://www.albawaba.net/business/pr/adio-collaborates-weride-set-regional-headquarters-savi-1537777",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Uber",
+     "region": "UAE (Abu Dhabi)",
+     "role": "Robotaxi platform partner",
+     "url": "https://autonews.gasgoo.com/articles/icv/2021853070743318529",
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "Tawasul Transport",
+     "region": "UAE",
+     "role": "Partner",
+     "url": null,
+     "email": null,
+     "phone": null
+    },
+    {
+     "name": "K2",
+     "region": "UAE",
+     "role": "Partner",
+     "url": null,
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://ir.weride.ai/ir-resources/investor-faqs",
+    "https://en.wikipedia.org/wiki/WeRide",
+    "https://www.prnewswire.com/ae/news-releases/weride-launches-fully-driverless-robotaxi-trial-operations-in-abu-dhabi-broadens-service-coverage-302457518.html",
+    "https://www.albawaba.net/business/pr/adio-collaborates-weride-set-regional-headquarters-savi-1537777",
+    "https://stoculator.com/stock/WRD/profile"
+   ],
+   "note": "pr@weride.ai is the media contact and ir@weride.ai is investor relations. No business-development email found. The phone comes from a financial-data site (unverified). The HQ address is from SEC filings.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "starship-technologies",
@@ -6238,7 +7331,22 @@
   "aliases": [
    "Starship Technologies"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.starship.xyz",
+   "contact_page": "https://www.starship.xyz/faq/",
+   "linkedin": null,
+   "email": "business@starship.co",
+   "phone": null,
+   "hq_address": "San Francisco, USA / Tallinn, Estonia",
+   "regional": [],
+   "sources": [
+    "https://www.starship.xyz/faq/",
+    "https://www.starship.xyz/contact/faq/"
+   ],
+   "note": "business@starship.co is the address for business and partnership enquiries, and help@starship.xyz is for customer support (both from the official FAQ). No GCC route was found. The HQ address is from the input, not verified.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "serve-robotics",
@@ -6356,7 +7464,22 @@
   "aliases": [
    "Serve Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.serverobotics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 818 860 1352",
+   "hq_address": "730 Broadway, Redwood City, CA 94063, USA",
+   "regional": [],
+   "sources": [
+    "https://capedge.com/filing/1832483/0001832483-25-000010/10K-2024FY",
+    "https://www.stockanalysis.com/stocks/serv/company/"
+   ],
+   "note": "The address and phone come from the SEC 10-K cover page. No public general email was found. Operates in the US only.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "x-human",
@@ -6478,7 +7601,21 @@
    "X-Human",
    "Lingkong"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://x-humanbot.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "info@gd-ldznkj.com",
+   "phone": null,
+   "hq_address": "Huangpu District, Guangzhou, China",
+   "regional": [],
+   "sources": [
+    "https://www.aap.com.au/aapreleases/cision20251124ae31902"
+   ],
+   "note": "Lingdu Intel-tech Development Co., Ltd; facade-cleaning robots (Lingyun Y3, Lingkong K3). Contacts from a Nov 2025 PR Newswire release, which also references LinkedIn/YouTube/Facebook accounts (URLs not captured). Not the same as X-Humanoid (Beijing).",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "ubtech",
@@ -6620,7 +7757,32 @@
    "UBTECH",
    "Ubtech"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.ubtrobot.com",
+   "contact_page": "https://www.commercial.ubtrobot.com/en/about-ubtech-robotics/",
+   "linkedin": null,
+   "email": "market@ubtrobot.com",
+   "phone": "+86 755 8347 4428",
+   "hq_address": "22F, Building C1, Nanshan Zhiyuan, No. 1002 Xueyuan Avenue, Nanshan District, Shenzhen, China",
+   "regional": [
+    {
+     "name": "Infini Capital (Abu Dhabi) JV",
+     "region": "UAE / Middle East",
+     "role": "Investor and planned JV (Middle East factory, R&D and regional HQ, Sep 2025)",
+     "url": "https://technode.com/2025/09/01/ubtech-plans-middle-east-mega-factory-after-1-billion-infini-capital-deal/",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.commercial.ubtrobot.com/en/about-ubtech-robotics/",
+    "https://technode.com/2025/09/01/ubtech-plans-middle-east-mega-factory-after-1-billion-infini-capital-deal/",
+    "https://www.etnet.com.hk/www/eng/futures/futures_news_detail.php?newsid=20261020328"
+   ],
+   "note": "Official site lists sales at market@ubtrobot.com and after-sales at aftersales@ubtrobot.com (hours Mon-Fri 9:00-18:30 UTC+8). An MOU with Ras Al Khaimah was reported in Oct 2026. No UAE office contact was published yet.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "engineered-arts",
@@ -6749,7 +7911,22 @@
    "Engineered Arts",
    "Ameca"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.engineeredarts.co.uk",
+   "contact_page": "https://media.engineeredarts.com/?p=14082",
+   "linkedin": null,
+   "email": "info@engineeredarts.com",
+   "phone": "+44 (0)1326 378 129",
+   "hq_address": "Church View Business Park, Bickland Water Road, Falmouth, Cornwall TR11 4FZ, United Kingdom",
+   "regional": [],
+   "sources": [
+    "https://media.engineeredarts.com/?p=14082",
+    "https://media.engineeredarts.com/?p=14357"
+   ],
+   "note": "From the company's own office listing pages. It also has London and Redwood City, CA offices using the same email. Visits are by appointment. No GCC route was found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "limx-dynamics",
@@ -6880,7 +8057,22 @@
   "aliases": [
    "LimX"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.limxdynamics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "Building E, Nanshan i Valley, Shenzhen 518000, China",
+   "regional": [],
+   "sources": [
+    "https://village.ai/company/limx-dynamics",
+    "https://autonews.gasgoo.com/articles/market-industry/limx-dynamics-establishes-regional-headquarters-and-smart-manufacturing-center-in-hefei-2090022687832563712"
+   ],
+   "note": "No public email or phone was found, so enquiries likely go through the website form. Has a regional HQ in Hefei. Investor Lestone Capital is in Abu Dhabi.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "pal-robotics",
@@ -7001,7 +8193,23 @@
   "aliases": [
    "PAL Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://pal-robotics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "marketing@pal-robotics.com",
+   "phone": "+34 934 145 347",
+   "hq_address": "C/ Pujades 77-79, 4th floor, door 4, 08005 Barcelona, Spain",
+   "regional": [],
+   "sources": [
+    "https://apps-robots.uc3m.es/capacidadestecnologicas/company/pal-robotics",
+    "https://roboticstomorrow.com/company_directory/pal-robotics/10734",
+    "https://suppliers.catalonia.com/detail/pal-robotics-sl/4045"
+   ],
+   "note": "Values from directories (consistent across several). No GCC partner found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "agility-robotics",
@@ -7130,7 +8338,23 @@
   "aliases": [
    "Agility Robotics"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.agilityrobotics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 541-738-8888",
+   "hq_address": "4698 Truax Drive SE, Salem, OR 97317, USA (RoboFab / HQ)",
+   "regional": [],
+   "sources": [
+    "https://komo.ai/directory/agility-robotics-offices",
+    "https://agilityrobotics.com/careers",
+    "https://en.wikipedia.org/wiki/Agility_Robotics"
+   ],
+   "note": "Phone is from aggregators (unverified). The careers page confirms Salem as HQ. Other sites list Corvallis/Tangent OR or a Pittsburgh office. No published generic email. No GCC route found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "richtech-robotics",
@@ -7260,7 +8484,23 @@
   "aliases": [
    "Richtech"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.richtechrobotics.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "press@richtechrobotics.com",
+   "phone": "+1 (866) 236-3835",
+   "hq_address": "4175 Cameron St. Ste 1, Las Vegas, NV 89103, USA",
+   "regional": [],
+   "sources": [
+    "https://richtechrobotics.gcs-web.com/shareholder-services/investor-faqs",
+    "https://richtechrobotics.com/resources/new-headquarters",
+    "https://www.zoominfo.com/c/richtech-robotics/1307081693"
+   ],
+   "note": "press@ (media) and ir@richtechrobotics.com (investors) come from the company's press releases. No sales email was found. The toll-free number is from directories. The company is expanding HQ to 2975 Lincoln Road, Las Vegas. No GCC route was found.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "inorbit",
@@ -7390,7 +8630,23 @@
   "aliases": [
    "InOrbit"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.inorbit.ai",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 650 396 9635",
+   "hq_address": "650 Castro St, Ste 120, Mountain View, CA 94041, USA",
+   "regional": [],
+   "sources": [
+    "https://builtwith.com/meta/inorbit.ai",
+    "https://www.automate.org/companies/inorbit-inc",
+    "https://www.cbinsights.com/investor/inorbit"
+   ],
+   "note": "Phone numbers conflict: CB Insights and Prospeo list +1 650 943 2325. No general email was found. Software platform for running robot fleets.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "formant",
@@ -7522,7 +8778,23 @@
   "aliases": [
    "Formant"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://formant.io",
+   "contact_page": null,
+   "linkedin": null,
+   "email": "pr@formant.io",
+   "phone": null,
+   "hq_address": "1999 Bryant St, San Francisco, CA 94110, USA",
+   "regional": [],
+   "sources": [
+    "https://www.businesswire.com/news/home/20250630008190/en",
+    "https://robotics247.com/company/Formant",
+    "https://dealroom.co/companies/formant/"
+   ],
+   "note": "pr@ is the press address; sales via 'Book a demo' on formant.io. No GCC partner found; Holman is a US fleet partner.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "kone",
@@ -7663,7 +8935,34 @@
   "aliases": [
    "KONE"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.kone.com",
+   "contact_page": "https://www.kone.com/en/contact.aspx",
+   "linkedin": null,
+   "email": null,
+   "phone": "+358 204 751",
+   "hq_address": "Keilasatama 3, P.O. Box 7, 02150 Espoo, Finland",
+   "regional": [
+    {
+     "name": "KONE (Middle East) LLC",
+     "region": "UAE (Dubai)",
+     "role": "Regional office",
+     "url": "https://www.kone.ae",
+     "email": null,
+     "phone": "+971 4 279 4500"
+    }
+   ],
+   "sources": [
+    "https://www.kone.com/en/contact.aspx",
+    "https://www.kone.in/about-kone/contact.html",
+    "https://www.yellowpages-uae.com/kone-middle-east-llc-106136",
+    "https://www.zoominfo.com/c/kone/1273402254",
+    "https://www.aeconline.ae/kone-middle-east-llc/company.html"
+   ],
+   "note": "KONE Middle East address: 41st Floor, U-Bora Tower, Business Bay, Dubai, PO Box 21474. Media enquiries: media@kone.com. Investor relations: investors@kone.com. No general sales email was found; use the contact form.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "nvidia-robotics",
@@ -7790,7 +9089,32 @@
    "GR00T",
    "Jetson Thor"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.nvidia.com",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": "+1 (408) 486-2000",
+   "hq_address": "2788 San Tomas Expressway, Santa Clara, CA 95051, USA",
+   "regional": [
+    {
+     "name": "TII-NVIDIA joint AI & Robotics Lab / NVIDIA AI Technology Center (Technology Innovation Institute)",
+     "region": "UAE (Abu Dhabi)",
+     "role": "Research partner (not a sales channel)",
+     "url": "https://tii.ae/node/4014",
+     "email": null,
+     "phone": null
+    }
+   ],
+   "sources": [
+    "https://www.robotics247.com/company/nvidia",
+    "https://tii.ae/node/4014",
+    "https://www.thenationalnews.com/future/technology/2025/09/22/nvidia-and-abu-dhabis-tii-launch-joint-ai-and-robotics-research-lab-to-accelerate-innovation"
+   ],
+   "note": "Platform vendor. Robotics (Isaac/Jetson) sales normally go through NVIDIA's 'contact sales' web form and its distributors. No dedicated robotics sales email or UAE sales office was found. The HQ phone is from a directory profile.",
+   "checked": "2026-11-02"
+  }
  },
  {
   "id": "physical-intelligence",
@@ -7914,6 +9238,21 @@
   "aliases": [
    "Physical Intelligence"
   ],
-  "checked": "2026-10-31"
+  "checked": "2026-10-31",
+  "contact": {
+   "website": "https://www.pi.website",
+   "contact_page": null,
+   "linkedin": null,
+   "email": null,
+   "phone": null,
+   "hq_address": "San Francisco, CA, USA",
+   "regional": [],
+   "sources": [
+    "https://en.wikipedia.org/wiki/Physical_Intelligence_Inc.",
+    "https://www.pi.website/join-us"
+   ],
+   "note": "No public business contact was found. This is a research-stage foundation-model company with no commercial sales channel.",
+   "checked": "2026-11-02"
+  }
  }
 ]

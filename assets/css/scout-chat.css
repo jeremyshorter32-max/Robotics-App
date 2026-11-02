@@ -263,6 +263,44 @@ main{position:relative;z-index:1}
 .webwait{display:flex;align-items:center;gap:10px;font-size:13px;color:var(--muted)}
 .toast{position:fixed;left:50%;top:76px;transform:translateX(-50%);z-index:80;background:var(--navy);color:#fff;padding:9px 16px;font-size:13px;border:1px solid rgba(157,185,224,.35);box-shadow:0 10px 30px rgba(0,0,0,.3)}
 
+
+/* ---------- Provider brief ---------- */
+.bhead h1 .bsub{display:block;margin-top:6px;font-size:14px;font-weight:400;letter-spacing:0;color:rgba(255,255,255,.6)}
+.cand{display:flex;flex-direction:column;gap:10px}
+.cring{display:flex;align-items:center;gap:14px;padding:4px 2px 6px}
+.cring .ring-n{font-size:24px}
+.cring small{display:block;font-size:12px;color:var(--muted);margin-top:4px}
+.rbtn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:9px 14px;border:1px solid var(--line-2);background:#fff;color:var(--ink);font-size:13px;font-weight:500;cursor:pointer;text-decoration:none;white-space:nowrap}
+.rbtn:hover{border-color:var(--accent-ink);color:var(--accent-ink)}
+.rbtn.primary{background:var(--navy);border-color:var(--navy);color:#fff}
+.rbtn.primary:hover{background:#26234F;color:#fff}
+.rbtn.wide{width:100%}
+.rbtn[aria-pressed="true"]{background:#E3F3EA;border-color:var(--good);color:var(--good)}
+.contact .cdl{display:grid;grid-template-columns:110px minmax(0,1fr);gap:7px 14px;margin:0 0 12px;font-size:14px}
+.contact .cdl dt{color:var(--muted);font-size:12.5px;padding-top:1px}
+.contact .cdl dd{margin:0;color:var(--ink);overflow-wrap:anywhere}
+.contact a{color:var(--accent-ink)}
+.regional{border-top:1px solid var(--line);padding-top:10px;margin-top:4px}
+.regional h3{margin:0 0 6px;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.regional p{margin:0;font-size:13.5px;color:var(--ink-2)}
+.rg{display:flex;flex-direction:column;padding:6px 0}
+.rg b{font-size:14px}
+.rg small{font-size:12px;color:var(--muted)}
+.rg .rgl{font-size:13px}
+.reach{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.cmpx{width:100%;border-collapse:collapse;font-size:12.5px;min-width:760px}
+.cmpx th,.cmpx td{padding:8px 7px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle;white-space:nowrap}
+.cmpx .dots i{width:6px;height:6px}
+.cmpx .dots{gap:2px}
+.cmpx td:nth-child(4),.cmpx td:nth-child(5),.cmpx td:last-child{white-space:normal;min-width:84px}
+.cmpx th{font-size:11.5px;font-weight:500;color:var(--muted);background:#F8F9FB}
+.cmpx th.pl{text-align:center}
+.cmpx td.num{text-align:center}
+.cmpx tr.me td{background:#FFF8E6}
+.cmpx .you{display:block;width:max-content;font-size:10px;font-weight:600;color:#8A6416;background:#FFF0C7;padding:0 6px;margin-top:2px}
+.cmpx .lnk{font-weight:600}
+.tscroll{overflow-x:auto}
+
 /* ---------- Profile drawer (same as provider memory) ---------- */
 .ov,.panel{color:var(--ink)}
 /* ---------- Profile ---------- */
@@ -368,6 +406,9 @@ main{position:relative;z-index:1}
   .newco .act{flex-direction:row}
   .tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
   .good li{grid-template-columns:1fr}
+  .contact .cdl{grid-template-columns:1fr;gap:2px}
+  .contact .cdl dd{margin-bottom:8px}
+  .reach .rbtn{flex:1 1 100%}
   .pc{grid-template-columns:auto minmax(0,1fr) auto;padding:12px}
   .stage-brief .dock{bottom:10px;width:calc(100% - 20px)}
   .ph{flex-direction:column;gap:12px}
@@ -383,7 +424,7 @@ main{position:relative;z-index:1}
   .asel svg{display:none}
   .asel select{color:#000}
   body{background:#fff;color:#000}
-  .top,.sky,.dock,.bacts,.toast,.home,.run,.newco .act,.todo,#profile{display:none!important}
+  .top,.sky,.dock,.bacts,.toast,.home,.run,.newco .act,.todo,#profile,.reach,.rbtn{display:none!important}
   body.print-profile > *:not(#profile){display:none!important}
   body.print-profile #profile{display:block!important;position:static}
   body.print-profile .ov{position:static;background:#fff;display:block}

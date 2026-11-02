@@ -535,6 +535,21 @@
   /* ---------- profile ---------- */
   function section(title, body) { return body ? '<section class="ps"><h3>' + title + "</h3>" + body + "</section>" : ""; }
   function list(a) { a = (a || []).filter(Boolean); return a.length ? "<ul>" + a.map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : ""; }
+  function contactHtml(c, site) {
+    c = c || {};
+    var rows = [];
+    var a = function (u, t) { return safeUrl(u) ? '<a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(t || host(u)) + "</a>" : ""; };
+    if (c.website || site) rows.push(["Website", a(c.website || site)]);
+    if (c.contact_page) rows.push(["Contact page", a(c.contact_page, "Contact form / page")]);
+    if (c.email) rows.push(["Email", '<a href="mailto:' + esc(c.email) + '">' + esc(c.email) + "</a>"]);
+    if (c.phone) rows.push(["Phone", esc(c.phone)]);
+    if (c.hq_address) rows.push(["Head office", esc(c.hq_address)]);
+    (c.regional || []).forEach(function (r) {
+      rows.push([esc([r.role, r.region].filter(Boolean).join(", ") || "Regional"), esc(r.name) + (r.email ? ' · <a href="mailto:' + esc(r.email) + '">' + esc(r.email) + "</a>" : "") + (r.phone ? " · " + esc(r.phone) : "") + (r.url ? " · " + a(r.url) : "")]);
+    });
+    if (!rows.length) return "";
+    return '<dl class="specs">' + rows.map(function (r) { return "<dt>" + r[0] + "</dt><dd>" + r[1] + "</dd>"; }).join("") + "</dl>" + (c.note ? '<p class="note">' + esc(c.note) + "</p>" : "");
+  }
   function alternatives(p) {
     var main = (p.categories || [])[0];
     return P.filter(function (o) { return o !== p && (o.categories || []).indexOf(main) >= 0; }).map(function (o) {
@@ -605,6 +620,7 @@
         section("GCC presence", "<p><b>" + esc(gccLabel(p)) + "</b>" + (p.gcc && p.gcc.note ? ". " + esc(p.gcc.note) : "") + "</p>" +
           (p.operates_in && p.operates_in.length ? '<p class="muted">Operates in: ' + esc(p.operates_in.join(", ")) + "</p>" : "")) +
         section("Partners", list(p.partners)) +
+        section("Contact", contactHtml(p.contact, p.website)) +
         section("Funding", list(fundTxt) + (p.business_model && p.business_model.length ? "<p><b>Sells as:</b> " + esc(p.business_model.map(function (b) { return { purchase: "Purchase", raas: "Robot-as-a-service / lease", service: "Operated service" }[b] || b; }).join(", ")) + "</p>" : "")) +
         section("Alternatives", alts.length ? '<ul class="alts">' + alts.map(function (a) {
           return '<li><button type="button" class="lnk" data-open="' + esc(a.p.id) + '">' + esc(a.p.name) + "</button><small>" + a.sim + "% similar · Fit " + a.p._fit + "</small></li>";

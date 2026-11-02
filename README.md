@@ -52,6 +52,15 @@ Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`
 - **New in the market:** companies named in a live Google News scan (`netlify/functions/scout-news.mjs`), with one-click Google searches in six languages. **+ To research** builds a list to send to Claude for full profiles.
 - **Market signals and next steps:** Market Pulse and news items, plus suggested actions.
 
+**Company names.** If the question names a company, Scout writes a **provider brief** instead.
+- **For a company in the provider memory:**
+  - its Fit Score and rank in its area, as a candidate;
+  - how it compares, pillar by pillar, with the vendors Aldar already uses in that area (or with challengers, if it is already our vendor);
+  - **public company contact routes**: website, contact page, email, phone, head office, and UAE or GCC partners, from `contact` in `intel/scout/providers.json`;
+  - a ready-made outreach email and note, live news, alternatives and next steps.
+- **For an unknown company:** a **company lookup** with live news about it and its likely area (read from the headlines). It shows the bar it would need to beat in that area, and a **+ To research** button.
+- **Switching the reading:** **Read as** switches between "a company" and any topic reading.
+
 **How Scout reads a question.** Every use case in `data/scout-strategy.js` (`web_scout.terms`) is scored against the question.
 - Each *match* word (the subject, such as *delivery*, *façade* or *painting*) scores 3. Each *weak* word (the setting, such as *high-rise*, *tower* or *cleaning*) scores 1.
 - The highest score wins. On a tie, the use case named first in the question wins.

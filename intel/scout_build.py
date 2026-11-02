@@ -76,6 +76,15 @@ def check(providers: list[dict], categories: set[str]) -> list[str]:
                 problems.append(f"{where}: bad source url {s.get('url')!r}")
         if p.get("website") and not URL_RE.match(p["website"]):
             problems.append(f"{where}: bad website {p['website']!r}")
+        c = p.get("contact") or {}
+        for k in ("website", "contact_page", "linkedin"):
+            if c.get(k) and not URL_RE.match(c[k]):
+                problems.append(f"{where}: bad contact {k} {c[k]!r}")
+        if c.get("email") and not re.match(r"^[\w.+-]+@[\w-]+(\.[\w-]+)+$", c["email"]):
+            problems.append(f"{where}: bad contact email {c['email']!r}")
+        for r in c.get("regional") or []:
+            if r.get("url") and not URL_RE.match(r["url"]):
+                problems.append(f"{where}: bad regional url {r['url']!r}")
         for v in p.get("fleet_vendors") or []:
             if v not in vendors:
                 problems.append(f"{where}: fleet vendor {v!r} is not in the fleet data")

@@ -562,7 +562,7 @@ details[open].card > summary .chev{transform:rotate(-135deg)}
         (!n && w.article && /^https:\/\//.test(w.article.url || "") ? '<div class="vnote"><a href="' + esc(w.article.url) + '" target="_blank" rel="noopener" style="color:var(--accent-ink)">' + esc(w.article.title) + "</a> · " + esc(w.article.source) + "</div>" : "") + "</li>";
     }).join("") : '<li style="padding:10px 8px;color:var(--muted);font-size:13.5px">No news about our vendors this week.</li>';
     $("vwRest").textContent = quiet.length ? "No news: " + quiet.map(function (w) { return w.vendor; }).join(", ") + "." : "";
-    $("vwRest").innerHTML = esc($("vwRest").textContent) + (quiet.length ? " " : "") + '<a href="scout.html?f=fleet~any~yes" style="color:var(--accent-ink);font-weight:500;white-space:nowrap">See our vendors scored in Scout →</a>';
+    $("vwRest").innerHTML = esc($("vwRest").textContent) + (quiet.length ? " " : "") + '<a href="scout-library.html?f=fleet~any~yes" style="color:var(--accent-ink);font-weight:500;white-space:nowrap">See our vendors scored in Scout →</a>';
     var byHeadline = news.some(function (w) { return w.signal_by === "headlines"; });
     $("vwLeg").innerHTML = news.length ? ["positive", "risk", "mixed", "mention"].map(function (k) { return '<span><i class="sig ' + k + '"></i>' + SIGNAL[k] + "</span>"; }).join("") +
       (byHeadline ? '<span style="width:100%">Good news and risks are read from headlines.</span>' : "") : "";

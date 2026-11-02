@@ -19,7 +19,8 @@ Add `?view=desktop` to the address to force the desktop layout on a phone, or `?
 | `netlify.toml` | Netlify settings (no build step). |
 | `intel.html` | **Market Pulse**: weekly robotics market intelligence feed (works on desktop and phone). |
 | `data/intel-feed.json`, `data/intel-feed.js` | Market Pulse editions. Written by the weekly job; don't edit by hand. |
-| `scout.html` | **Market Scout**: search, score and compare robotics providers against Aldar's strategy (desktop and phone). |
+| `scout.html` | **Market Scout**: chat-style scouting. Ask about a technology or problem and get a scout brief (desktop and phone). |
+| `scout-library.html` | **Provider memory**: every provider Scout has researched, with filters, matrix, compare and scoring. |
 | `intel/scout/providers.json` | Scout provider research, the source of truth. Run `python intel/scout_build.py` after editing. |
 | `data/scout-providers.js` | Built from `providers.json` by `intel/scout_build.py`; don't edit by hand. |
 | `data/scout-strategy.js` | Scout scoring settings: pillar weights, knock-outs, verdict rules, matrix split and quick searches. |
@@ -41,19 +42,23 @@ The site installs like an app. On iPhone, open it in Safari, tap **Share → Add
 Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`.
 
 ## Market Scout (provider scouting)
-`scout.html` sits next to Market Pulse; the two pages share a *Pulse | Scout* switch in the header. It lists robotics providers ranked by the **Aldar Fit Score** (0 to 100), worked out in the browser from six pillars scored 0 to 5 by research: strategic fit 25%, technology readiness 20%, proven deployments 20%, GCC readiness 15%, commercial strength 10%, integration and safety 10%. Knock-out checks run first. Verdicts: Shortlist (70+ with deployments at least 3), Watch (50 to 69), Pass (under 50).
+`scout.html` sits next to Market Pulse; the two pages share a *Pulse | Scout* switch in the header.
 
-- **Views:** Providers (search, quick searches, a filter builder with *is any of / is none of / is all of*), Fit × Maturity matrix, Category leaderboard, Compare (up to 5, print to PDF) and How scoring works (try other weights; they stay in your browser).
-- **Profiles** show Aldar's own trials (from the fleet map data), the score breakdown, maturity stage, GCC presence, spec sheet, funding, partners, alternatives, Market Pulse mentions and every source.
-- **Links:** every view, filter, comparison and profile is in the address bar, so copy the link to share it. CSV export on the Providers view.
-- **Updating providers:** edit `intel/scout/providers.json` (or ask Claude to research and add providers), then run `python intel/scout_build.py`. It checks every record (ids, categories, scores 0 to 5, links, fleet vendor names) before writing `data/scout-providers.js`.
-- **Changing the strategy:** edit `data/scout-strategy.js`. Every ranking updates on the next page load, with no new research needed.
-- **Scout the web (free):** type a need, such as *robotic painting*, and press **Scout the web**.
-  - **Live search:** 10 Google News searches run through `netlify/functions/scout-news.mjs`, covering English, the UAE edition and Chinese over the last two years.
-  - **Results:** the companies named in on-topic headlines are listed, with those already in Scout shown separately.
-  - **Google searches:** ready-made searches, in six languages, open in Google.
-  - **Research list:** **+ To research** adds a company to a list kept in your browser. Copy or email that list to Claude to get full profiles added.
-  - **Search terms:** the terms, translations and off-topic words are in `data/scout-strategy.js` under `web_scout`.
+**Scout is a chat-style search.** It opens on one question, *What should we scout today?* Type a technology, a problem or a focus area, for example *robotic painting for apartment interiors*. Scout then writes a **scout brief** from five sources:
+
+- **Aldar experience:** our live, testing and planned deployments in that area, from the fleet map data.
+- **Strategy fit:** whether it is a named use case or a focus area in Aldar's robotics strategy, and what a strong provider looks like by weight.
+- **Best-fit providers:** matches from the provider memory, ranked by the **Aldar Fit Score**, with each one's main strength and the thing to watch. A mini Fit × Maturity matrix sits alongside, and any provider opens its full profile.
+- **New in the market:** companies named in a live Google News scan (`netlify/functions/scout-news.mjs`), with one-click Google searches in six languages. **+ To research** builds a list to send to Claude for full profiles.
+- **Market signals and next steps:** Market Pulse and news items, plus suggested actions.
+
+Briefs can be **saved** (in this browser; they appear on the Scout home page), **shared** as a link (`scout.html?q=...` re-runs the scout), and **downloaded** as PDF (print) or a Markdown text file. Code: `assets/js/scout-chat.js` and `assets/css/scout-chat.css`.
+
+**Provider memory** (`scout-library.html`) lists every researched provider. Scout draws on it for every brief. It has search, a filter builder with *is any of / is none of / is all of*, a Fit × Maturity matrix, a category leaderboard, compare (up to 5, print to PDF), CSV export and *How scoring works*, where you can try other weights.
+
+- **Aldar Fit Score (0 to 100)** is worked out in the browser from six pillars scored 0 to 5 by research: strategic fit 25%, technology readiness 20%, proven deployments 20%, GCC readiness 15%, commercial strength 10%, integration and safety 10%. Knock-out checks run first. Verdicts: Shortlist (70+ with deployments at least 3), Watch (50 to 69), Pass (under 50).
+- **Updating providers:** edit `intel/scout/providers.json`, or ask Claude to research and add providers, then run `python intel/scout_build.py`. It checks every record before writing `data/scout-providers.js`.
+- **Changing the strategy:** edit `data/scout-strategy.js`, which holds the weights, knock-outs, verdict rules, quick searches and the `web_scout` search terms. Rankings update on the next page load.
 - Plan and roadmap: `docs/market-pulse-scout/`.
 
 ## Market Pulse (weekly robotics intelligence)

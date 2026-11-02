@@ -645,6 +645,7 @@
     renderRecent();
   }
   function renderRecent() {
+    if (!$("recentWrap")) return;
     var r = (store("recent") || []).filter(function (id) { return BYID[id]; });
     $("recentWrap").hidden = !r.length;
     $("recent").innerHTML = r.map(function (id) { return '<button type="button" class="lnk" data-open="' + esc(id) + '">' + esc(BYID[id].name) + "</button>"; }).join("");
@@ -652,6 +653,7 @@
 
   /* ---------- compare tray ---------- */
   function renderTray() {
+    if (!$("tray")) return;
     var n = state.compare.length;
     $("tray").hidden = !n || state.view === "compare";
     $("trayTxt").textContent = n + " selected to compare";
@@ -817,11 +819,32 @@
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape" && !$("profile").hidden) { closeProfile(); return; }
     if ((e.key === "Enter" || e.key === " ") && e.target.matches && e.target.matches("g.dot")) { e.preventDefault(); openProfile(e.target.getAttribute("data-open")); }
-    if (e.key === "/" && document.activeElement === document.body) { e.preventDefault(); $("q").focus(); }
+    if (e.key === "/" && document.activeElement === document.body && $("q")) { e.preventDefault(); $("q").focus(); }
   });
   $("profile").addEventListener("click", function (e) { if (e.target === $("profile")) closeProfile(); });
 
   /* ---------- start ---------- */
+  if (document.body.getAttribute("data-scout-mode") === "chat") {
+    // The chat page (scout.html) uses the scores and the profile drawer only.
+    state.view = "chat";
+    writeUrl = function () {
+      var u = new URLSearchParams(location.search);
+      if (state.profile) u.set("p", state.profile); else u.delete("p");
+      var s = u.toString();
+      try { history.replaceState(history.state, "", location.pathname + (s ? "?" + s : "")); } catch (e) {}
+    };
+    var sw = store("weights");
+    if (sw && sw.length === DEFAULT_W.length) state.w = sw;
+    rescore();
+    window.ScoutCore = {
+      providers: P, byId: BYID, cats: CAT, strategy: STRAT, weights: function () { return state.w.slice(); },
+      ring: ring, verdictPill: verdictPill, matLabel: matLabel, gccLabel: gccLabel, catChip: catChip, dots: dots,
+      openProfile: openProfile, closeProfile: closeProfile, esc: esc, quad: QUAD, verdicts: VERDICT, maturity: MAT
+    };
+    var p0 = new URLSearchParams(location.search).get("p");
+    if (BYID[p0]) setTimeout(function () { openProfile(p0); }, 0);
+    return;
+  }
   readUrl();
   render();
   if (state.profile) openProfile(state.profile);

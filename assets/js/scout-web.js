@@ -81,7 +81,7 @@
     "China", "Chinese", "US", "U\\.S\\.", "USA", "America", "American", "UK", "Britain", "British", "Europe", "European", "EU", "Japan", "Japanese", "Korea", "Korean", "South Korea", "India", "Indian", "Germany", "German", "France", "French",
     "Singapore", "Australia", "Canada", "UAE", "Dubai", "Abu Dhabi", "Saudi", "Saudi Arabia", "Qatar", "Gulf", "GCC", "Middle East", "Israel", "Israeli", "Russia", "Russian", "Taiwan", "Hong Kong", "Beijing", "Shanghai", "Shenzhen",
     "Government", "Ministry", "City", "Council", "Police", "Army", "Navy", "Military", "Construction", "Builders?", "Contractors?", "Developers?", "Researchers?", "Scientists?", "Engineers?", "Workers?", "Students?", "University", "Schools?",
-    "Abu", "LA", "Czech", "Angola", "Guadalajara", "Andhra", "Is", "Are", "Was", "Were", "Has", "Have", "Can", "Will", "Its", "His", "Her", "Their", "Sending", "Using", "Meet", "Inside", "From", "With", "After", "Before", "Behind", "North", "South", "East", "West", "Central", "Northern", "Southern", "Eastern", "Western", "KSA", "Business", "Booth",
+    "Sells", "Congress", "Senator", "Seven-Eleven", "Abu", "LA", "Czech", "Angola", "Guadalajara", "Andhra", "Is", "Are", "Was", "Were", "Has", "Have", "Can", "Will", "Its", "His", "Her", "Their", "Sending", "Using", "Meet", "Inside", "From", "With", "After", "Before", "Behind", "North", "South", "East", "West", "Central", "Northern", "Southern", "Eastern", "Western", "KSA", "Business", "Booth",
     "Hangzhou", "Taipei", "Dublin", "Salem", "London", "Paris", "Berlin", "Tokyo", "Seoul", "Mumbai", "Chennai", "Bengaluru", "Riyadh", "Doha", "NEOM", "Venezuela", "Brazil", "Mexico", "Spain", "Italy", "Sweden", "Norway", "Finland", "Denmark", "Netherlands", "Switzerland", "Austria", "Poland", "Turkey", "Egypt", "Africa", "Asia", "Montgomery", "Montgomery Co", "Montgomery County", "County", "Co", "State", "Federal", "National", "FIFA", "FIFA World Cup", "World Cup", "Olympics", "Amazon", "Google", "Apple", "Meta", "Microsoft", "Nvidia", "Tesla", "OpenAI", "Dog", "Star", "Raise", "Spring", "Mind", "Extend", "Logic", "Architect", "Prison Service", "Army", "Starbucks", "Walmart", "Village", "Airways",
     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "CES", "Here", "There", "It", "We", "You", "They", "He", "She", "Our", "Your", "Its"
   ].join("|") + ")$", "i");
@@ -127,7 +127,7 @@
     return null;
   }
   var NONLATIN = /[؀-ۿ぀-ヿ㐀-鿿가-힯]/;
-  var NOISE = /\b(?:deals?|sale|discount|\d+% off|prime day|black friday|cyber monday|reviews?|hands-on|buying guide|coupon|best .{0,40}(?:to buy|of 20\d\d|for 20\d\d)|vs\.?|market (?:size|share|report|worth|growth|forecast|outlook|analysis|to reach)|cagr|horoscope|gundam|super robot wars|action figure|collectible|lego|anime|cosplay)\b/i;
+  var NOISE = /\b(?:deals?|sale|discount|\d+% off|prime day|black friday|cyber monday|reviews?|hands-on|buying guide|coupon|best .{0,40}(?:to buy|of 20\d\d|for 20\d\d)|vs\.?|market (?:size|share|report|worth|growth|forecast|outlook|analysis|to reach)|cagr|horoscope|tried|hated|record low|bestselling|best-selling|favou?rites?|we tested|i test|tried and tested|add us on google|preferred source|gift guide|gadgets|gundam|super robot wars|action figure|collectible|lego|anime|cosplay)\b/i;
   var MACHINE = /robot|drone|autonom|automat|uav|3d.?print|humanoid|unmanned|self-driving|cobot/i;
   function topicTest(P) {
     var words = P.core.toLowerCase().split(/\s+/).filter(function (w) { return w.length > 3 && !/robot|autonom/.test(w); })
@@ -137,7 +137,8 @@
     return function (title) {
       if (NOISE.test(title) || (avoid && avoid.test(title))) return false;
       var low = title.toLowerCase();
-      var onTopic = (tre && tre.test(title)) || words.some(function (w) { return w.length > 2 && low.indexOf(w) >= 0; });
+      // With a known use case, the headline must name it; otherwise any of the typed words will do.
+      var onTopic = tre ? tre.test(title) : words.some(function (w) { return w.length > 2 && low.indexOf(w) >= 0; });
       return onTopic && MACHINE.test(title);
     };
   }
@@ -193,13 +194,17 @@
   function renderTodo() {
     var t = todo();
     var box = $("wsTodo");
-    if (!box) return;
+    document.dispatchEvent(new CustomEvent("scout:todo"));
+    if (!box) { refreshTodoButtons(); return; }
     box.hidden = !t.length;
     $("wsTodoN").textContent = t.length;
     $("wsTodoList").innerHTML = t.map(function (x) {
       return "<li><b>" + esc(x.name) + "</b><small>" + esc(x.need ? "for “" + x.need + "”" : "") + "</small>" +
         '<button type="button" class="x sm2" data-todo-rm="' + esc(x.name) + '" aria-label="Remove ' + esc(x.name) + '">×</button></li>';
     }).join("");
+    refreshTodoButtons();
+  }
+  function refreshTodoButtons() {
     Array.prototype.forEach.call(document.querySelectorAll("[data-todo]"), function (b) {
       var on = inTodo(b.getAttribute("data-todo"));
       b.setAttribute("aria-pressed", on);
@@ -286,7 +291,7 @@
     var t = e.target.closest("button");
     if (!t) return;
     if (t.id === "wsGo") { run(); return; }
-    if (t.hasAttribute("data-todo")) { toggleTodo(t.getAttribute("data-todo"), last ? last.q : $("q").value, t.getAttribute("data-todo-link")); return; }
+    if (t.hasAttribute("data-todo")) { toggleTodo(t.getAttribute("data-todo"), t.getAttribute("data-todo-q") || (last ? last.q : ($("q") ? $("q").value : "")), t.getAttribute("data-todo-link")); return; }
     if (t.hasAttribute("data-todo-rm")) { toggleTodo(t.getAttribute("data-todo-rm")); return; }
     if (t.id === "wsCopy") {
       var txt = todoText();
@@ -297,11 +302,20 @@
     if (t.id === "wsMail") { location.href = "mailto:?subject=" + encodeURIComponent("Market Scout: providers to research") + "&body=" + encodeURIComponent(todoText()); return; }
     if (t.id === "wsClear") { if (confirm("Clear the to-research list?")) setTodo([]); return; }
   });
-  document.addEventListener("input", function (e) { if (e.target.id === "q") renderPanel(); });
-  document.addEventListener("click", function (e) { if (e.target.closest("[data-view],[data-preset],#fbClear")) setTimeout(renderPanel, 0); });
+  document.addEventListener("input", function (e) { if (e.target.id === "q" && $("ws")) renderPanel(); });
+  document.addEventListener("click", function (e) { if ($("ws") && e.target.closest("[data-view],[data-preset],#fbClear")) setTimeout(renderPanel, 0); });
   document.addEventListener("keydown", function (e) { if (e.target.id === "q" && e.key === "Enter") { e.preventDefault(); if (($("q").value || "").trim().length >= 3) run(); } });
 
-  window.ScoutWeb = { plan: plan, namesIn: namesIn, analyse: analyse };
+  // Used by the chat page: run the live news scan and analyse it in one call.
+  function fetchWeb(q) {
+    var P = plan(q);
+    var url = API + "?" + P.searches.map(function (s) { return "s=" + encodeURIComponent(s[0] + "|" + s[1]); }).join("&");
+    return fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(function (j) { return { P: P, j: j, A: analyse(j.items || [], P) }; });
+  }
+  window.ScoutWeb = { plan: plan, namesIn: namesIn, analyse: analyse, fetchWeb: fetchWeb, digLinks: digLinks, google: g,
+    todo: todo, toggleTodo: toggleTodo, inTodo: inTodo, todoText: todoText, setTodo: setTodo, known: known };
+  if (!$("ws")) return;
   renderPanel();
   renderTodo();
   if (new URLSearchParams(location.search).get("web") === "1") run();

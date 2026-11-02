@@ -361,7 +361,7 @@ window.SCOUT_STRATEGY = {
     "ko": "도장 로봇",
     "de": "Malerroboter",
     "ar": "روبوت طلاء",
-    "avoid": "field|football|soccer|sports?|athletic|stadium|art|artist|artwork|portrait|ink|canvas|car|cars|automotive|car-body|vehicle|collision|ship|hull|shipyard|road|roads|line marking|gundam|toy|trump|music|drinks|nail|tattoo"
+    "avoid": "fields?|football|soccer|sports?|athletic|stadium|art|artist|artwork|portrait|ink|canvas|car|cars|automotive|car-body|vehicle|collision|ship|hull|shipyard|road|roads|line marking|gundam|toy|trump|music|drinks|nail|tattoo|portrait|king charles|museum|gallery|auction|campaign|election|surgery|medical"
    },
    {
     "id": "plastering",
@@ -465,7 +465,7 @@ window.SCOUT_STRATEGY = {
     "ja": "窓拭きロボット",
     "de": "Fassadenreinigung Roboter",
     "ar": "روبوت تنظيف الواجهات",
-    "avoid": "home|household|deal|pool|car|aquarium|phone"
+    "avoid": "home|household|deal|pool|car|aquarium|phone|winbot|hobot|hutt\\d*|window cleaner|ecovacs"
    },
    {
     "id": "solar",
@@ -493,7 +493,7 @@ window.SCOUT_STRATEGY = {
     "ko": "청소 로봇",
     "de": "Reinigungsroboter",
     "ar": "روبوت تنظيف",
-    "avoid": "home|household|consumer|robot vacuum|robovac|deal|pool|lawn|kitchen|dish|laundry|toilet|litter"
+    "avoid": "home|household|consumer|robot vacuums?|robovacs?|vacuums?|mops?|pool|pools|lawn|kitchen|dish|laundry|toilet|litter|roomba|roborock|dyson|deebot|eufy|shark|dreame|mova|narwal|irobot|underwater"
    },
    {
     "id": "security",

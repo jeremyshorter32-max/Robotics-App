@@ -22,11 +22,33 @@
   /* ---------- turn a typed need into searches ---------- */
   var FILLER = new RegExp("\\b(" + (WS.filler || "solutions?") + ")\\b", "gi");
   var GCC_RE = new RegExp("\\b(" + (WS.gcc_words || "UAE|Dubai|Saudi") + ")\\b", "i");
-  function plan(text) {
+  // Score every use case against the question (see web_scout._readme in data/scout-strategy.js).
+  function hits(re, text) {
+    var found = {}, first = Infinity, m;
+    var g = new RegExp(re, "gi");
+    while ((m = g.exec(text))) { found[m[0].toLowerCase()] = 1; first = Math.min(first, m.index); if (!m[0].length) g.lastIndex++; }
+    return { n: Object.keys(found).length, first: first };
+  }
+  function rankTerms(raw) {
+    var out = [];
+    (WS.terms || []).forEach(function (t) {
+      if (t.avoid && new RegExp("\\b(?:" + t.avoid + ")\\b", "i").test(raw)) return;
+      var a = hits(t.match, raw), b = t.weak ? hits(t.weak, raw) : { n: 0, first: Infinity };
+      var score = a.n * 3 + b.n;
+      if (!score) return;
+      out.push({ t: t, score: score, strong: a.n, first: Math.min(a.first, b.first), pick: a.n > 0 || b.n >= 2 });
+    });
+    out.sort(function (x, y) { return (y.pick - x.pick) || y.score - x.score || x.first - y.first; });
+    return out;
+  }
+  function plan(text, forced) {
     var raw = String(text || "").trim();
     var core = raw.replace(FILLER, " ").replace(/[^\p{L}\p{N}\s.&+-]/gu, " ").replace(/\s+/g, " ").trim() || raw;
+    var ranked = rankTerms(raw);
     var term = null;
-    (WS.terms || []).some(function (t) { if (new RegExp(t.match, "i").test(raw)) { term = t; return true; } return false; });
+    if (forced === "none") term = null;
+    else if (forced) term = (WS.terms || []).filter(function (t) { return t.id === forced; })[0] || null;
+    else term = ranked.length && ranked[0].pick ? ranked[0].t : null;
     var coreR = /robot|drone|autonom|humanoid|uav/i.test(core) ? core : core + " robot";
     var W = " when:2y";
     var s = [];
@@ -40,7 +62,7 @@
     s.push(["US", coreR + ' UAE OR Dubai OR "Abu Dhabi" OR Saudi OR Qatar' + W]);
     if (term && term.zh) s.push(["ZH", term.zh + W]);
     s.push(["GB", (term && term.en[1] ? term.en[1] : coreR) + W]);
-    return { raw: raw, core: core, coreR: coreR, term: term, searches: s.slice(0, 10) };
+    return { raw: raw, core: core, coreR: coreR, term: term, ranked: ranked, forced: forced || null, searches: s.slice(0, 10) };
   }
 
   /* ---------- Google links (open in a new tab) ---------- */
@@ -73,7 +95,7 @@
   var NOUN = /\b(?:startup|start-up|company|maker|firm|developer|manufacturer|specialist|unicorn|provider|supplier|subsidiary|spinout|spin-off|partner|Startup|Company|Maker|Firm|Developer|Manufacturer)\s+(\p{Lu}[\p{L}\p{N}&.'’+-]*(?:\s+\p{Lu}[\p{L}\p{N}&.'’+-]*){0,3})/gu;
   var POSS = /\b(\p{Lu}[\p{L}\p{N}&.+-]*(?:\s+\p{Lu}[\p{L}\p{N}&.+-]*){0,3})['’]s\s+(?:new\s+|latest\s+|first\s+|AI\s+|autonomous\s+)*(?:robot|robots|robotic|drone|humanoid|machine|system|platform|bot|Robot|Robots)\b/gu;
   var BRAND = /\b(\p{Lu}[\p{L}\p{N}&+-]*(?:\s+\p{Lu}[\p{L}\p{N}&+-]*){0,1}\s+(?:Robotics|Technologies|Automation|Labs|Industries|Dynamics|Bots|Machines|Innovations|Robot Technology))\b/gu;
-  var GENERIC = /^(?:robots?|robotics?|robotic|cleaning|security|patrol|smart|autonomous|window|printed|printing|powered|ai|two|three|four|five|groundbreaking|intelligent|advanced?|integrating|construction|design|friendly|single-wheel|one-wheeled|spherical|monowheel|restroom|dancing|deploy|use|thanks|to|physical|mission-ready|rapid|border|infrastructure|multi-storey|house|houses|homes?|bridge|low-carbon|port|enhance|makes?|history|with|rides|layer|while|commerce|seeking|humanoids?|ground|mission|master|guards?|super|cobots?|new|first|world's|largest|mobile|industrial|commercial|service|delivery|inspection|drone|drones|facade|façade|painting|spray|spraying|wall|floor|automated|automation|machine|machines|technology|technologies|solutions?|systems?|platform|fleet|units?|unit|model|series|version|edition|launch|multifunctional|engineering|finishing|drywall|concrete|3d|printer|printers?|world|global|future|next-gen|next|generation|of|for|the|and|in|on|at|by)$/i;
+  var GENERIC = /^(?:robots?|robotics?|robotic|cleaning|security|patrol|smart|autonomous|window|printed|printing|powered|ai|two|three|four|five|groundbreaking|intelligent|advanced?|integrating|construction|design|friendly|single-wheel|one-wheeled|spherical|monowheel|restroom|dancing|deploy|use|thanks|to|physical|mission-ready|rapid|border|infrastructure|multi-storey|house|houses|homes?|bridge|low-carbon|port|enhance|makes?|history|with|rides|layer|while|commerce|seeking|humanoids?|ground|mission|master|guards?|super|cobots?|new|first|world's|largest|mobile|industrial|commercial|service|delivery|inspection|drone|drones|facade|façade|painting|spray|spraying|wall|floor|automated|automation|machine|machines|technology|technologies|solutions?|systems?|platform|fleet|units?|unit|model|series|version|edition|launch|multifunctional|engineering|finishing|drywall|concrete|3d|printer|printers?|world|global|future|next-gen|next|generation|of|for|the|and|in|on|at|by|from|pulls|also|its)$/i;
   var PLACE_TAIL = /\s(?:County|City|Police|Pradesh|Province|State|Ministry|Municipality|Council|Authority|University|College|School|Hospital|Airport|Government|Department|Region|District)$/;
   var STOP = new RegExp("^(?:" + [
     "The", "A", "An", "This", "That", "These", "How", "Why", "What", "When", "Where", "Who", "Watch", "Video", "Photos?", "Opinion", "Exclusive", "Update", "Breaking", "Report", "Study", "Analysis",
@@ -81,7 +103,7 @@
     "China", "Chinese", "US", "U\\.S\\.", "USA", "America", "American", "UK", "Britain", "British", "Europe", "European", "EU", "Japan", "Japanese", "Korea", "Korean", "South Korea", "India", "Indian", "Germany", "German", "France", "French",
     "Singapore", "Australia", "Canada", "UAE", "Dubai", "Abu Dhabi", "Saudi", "Saudi Arabia", "Qatar", "Gulf", "GCC", "Middle East", "Israel", "Israeli", "Russia", "Russian", "Taiwan", "Hong Kong", "Beijing", "Shanghai", "Shenzhen",
     "Government", "Ministry", "City", "Council", "Police", "Army", "Navy", "Military", "Construction", "Builders?", "Contractors?", "Developers?", "Researchers?", "Scientists?", "Engineers?", "Workers?", "Students?", "University", "Schools?",
-    "Sells", "Congress", "Senator", "Seven-Eleven", "Abu", "LA", "Czech", "Angola", "Guadalajara", "Andhra", "Is", "Are", "Was", "Were", "Has", "Have", "Can", "Will", "Its", "His", "Her", "Their", "Sending", "Using", "Meet", "Inside", "From", "With", "After", "Before", "Behind", "North", "South", "East", "West", "Central", "Northern", "Southern", "Eastern", "Western", "KSA", "Business", "Booth",
+    "Also", "Pulls", "Sells", "Congress", "Senator", "Seven-Eleven", "Abu", "LA", "Czech", "Angola", "Guadalajara", "Andhra", "Is", "Are", "Was", "Were", "Has", "Have", "Can", "Will", "Its", "His", "Her", "Their", "Sending", "Using", "Meet", "Inside", "From", "With", "After", "Before", "Behind", "North", "South", "East", "West", "Central", "Northern", "Southern", "Eastern", "Western", "KSA", "Business", "Booth",
     "Hangzhou", "Taipei", "Dublin", "Salem", "London", "Paris", "Berlin", "Tokyo", "Seoul", "Mumbai", "Chennai", "Bengaluru", "Riyadh", "Doha", "NEOM", "Venezuela", "Brazil", "Mexico", "Spain", "Italy", "Sweden", "Norway", "Finland", "Denmark", "Netherlands", "Switzerland", "Austria", "Poland", "Turkey", "Egypt", "Africa", "Asia", "Montgomery", "Montgomery Co", "Montgomery County", "County", "Co", "State", "Federal", "National", "FIFA", "FIFA World Cup", "World Cup", "Olympics", "Amazon", "Google", "Apple", "Meta", "Microsoft", "Nvidia", "Tesla", "OpenAI", "Dog", "Star", "Raise", "Spring", "Mind", "Extend", "Logic", "Architect", "Prison Service", "Army", "Starbucks", "Walmart", "Village", "Airways",
     "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", "CES", "Here", "There", "It", "We", "You", "They", "He", "She", "Our", "Your", "Its"
   ].join("|") + ")$", "i");
@@ -132,7 +154,7 @@
   function topicTest(P) {
     var words = P.core.toLowerCase().split(/\s+/).filter(function (w) { return w.length > 3 && !/robot|autonom/.test(w); })
       .map(function (w) { return w.replace(/(ing|ed|s)$/, ""); });
-    var tre = P.term ? new RegExp(P.term.match, "i") : null;
+    var tre = P.term ? new RegExp(P.term.topic || P.term.match, "i") : null;
     var avoid = P.term && P.term.avoid ? new RegExp("\\b(?:" + P.term.avoid + ")\\b", "i") : null;
     return function (title) {
       if (NOISE.test(title) || (avoid && avoid.test(title))) return false;
@@ -307,13 +329,13 @@
   document.addEventListener("keydown", function (e) { if (e.target.id === "q" && e.key === "Enter") { e.preventDefault(); if (($("q").value || "").trim().length >= 3) run(); } });
 
   // Used by the chat page: run the live news scan and analyse it in one call.
-  function fetchWeb(q) {
-    var P = plan(q);
+  function fetchWeb(q, forced) {
+    var P = plan(q, forced);
     var url = API + "?" + P.searches.map(function (s) { return "s=" + encodeURIComponent(s[0] + "|" + s[1]); }).join("&");
     return fetch(url).then(function (r) { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(function (j) { return { P: P, j: j, A: analyse(j.items || [], P) }; });
   }
-  window.ScoutWeb = { plan: plan, namesIn: namesIn, analyse: analyse, fetchWeb: fetchWeb, digLinks: digLinks, google: g,
+  window.ScoutWeb = { plan: plan, rankTerms: rankTerms, terms: WS.terms || [], namesIn: namesIn, analyse: analyse, fetchWeb: fetchWeb, digLinks: digLinks, google: g,
     todo: todo, toggleTodo: toggleTodo, inTodo: inTodo, todoText: todoText, setTodo: setTodo, known: known };
   if (!$("ws")) return;
   renderPanel();

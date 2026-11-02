@@ -52,6 +52,12 @@ Icons are in `assets/icons/`; app name and colours are in `manifest.webmanifest`
 - **New in the market:** companies named in a live Google News scan (`netlify/functions/scout-news.mjs`), with one-click Google searches in six languages. **+ To research** builds a list to send to Claude for full profiles.
 - **Market signals and next steps:** Market Pulse and news items, plus suggested actions.
 
+**How Scout reads a question.** Every use case in `data/scout-strategy.js` (`web_scout.terms`) is scored against the question.
+- Each *match* word (the subject, such as *delivery*, *façade* or *painting*) scores 3. Each *weak* word (the setting, such as *high-rise*, *tower* or *cleaning*) scores 1.
+- The highest score wins. On a tie, the use case named first in the question wins.
+- A use case needs at least one match word, or two weak words, to be chosen. Otherwise the scout is exploratory.
+- The brief's **Read as** switch lets you correct the reading. Scout then re-scouts, and the choice is kept in the link (`&as=`).
+
 Briefs can be **saved** (in this browser; they appear on the Scout home page), **shared** as a link (`scout.html?q=...` re-runs the scout), and **downloaded** as PDF (print) or a Markdown text file. Code: `assets/js/scout-chat.js` and `assets/css/scout-chat.css`.
 
 **Provider memory** (`scout-library.html`) lists every researched provider. Scout draws on it for every brief. It has search, a filter builder with *is any of / is none of / is all of*, a Fit × Maturity matrix, a category leaderboard, compare (up to 5, print to PDF), CSV export and *How scoring works*, where you can try other weights.

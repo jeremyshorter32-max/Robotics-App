@@ -131,7 +131,7 @@ main{position:relative;z-index:1}
 .you span{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
 .you b{font-weight:400;font-size:17px;background:rgba(118,156,210,.16);border:1px solid rgba(157,185,224,.28);padding:12px 18px;border-radius:18px 18px 4px 18px;max-width:90%}
 .think{display:flex;gap:16px;align-items:flex-start}
-.steps{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:12px}
+.steps{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-direction:column;gap:14px}
 .steps li{display:flex;align-items:center;gap:12px;font-size:14.5px;color:rgba(255,255,255,.4);transition:color .3s}
 .steps li .ic{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.22);flex:none;display:grid;place-items:center;font-size:11px}
 .steps li.on{color:#fff}
@@ -141,7 +141,18 @@ main{position:relative;z-index:1}
 .steps li.ok .ic::after{content:"✓"}
 .steps li.warn .ic{border-color:var(--mid);background:var(--mid);color:#fff}
 .steps li.warn .ic::after{content:"!"}
-.steps li small{color:rgba(255,255,255,.45);font-size:12.5px}
+.steps li{align-items:flex-start}
+.steps li .ic{margin-top:2px}
+.steps li .tx{display:flex;flex-direction:column;gap:2px}
+.steps li .tx > span{display:inline}
+.steps li small{color:rgba(255,255,255,.5);font-size:12.5px;display:block}
+.steps li .doing{font-style:normal;font-size:13px;color:var(--accent-soft);animation:fadein .4s ease}
+@keyframes fadein{from{opacity:0;transform:translateY(-2px)}to{opacity:1;transform:none}}
+.asel{position:relative;padding-right:24px;cursor:pointer}
+.asel select{appearance:none;-webkit-appearance:none;border:0;background:transparent;color:#fff;font:inherit;font-weight:600;padding:0 0 0 6px;cursor:pointer;max-width:340px;text-overflow:ellipsis}
+.asel select option,.asel select optgroup{color:#14122B;background:#fff}
+.asel svg{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--accent-soft)}
+.asel:hover{border-color:var(--gold)}
 
 /* ---------- Brief ---------- */
 .stage-brief .home{display:none}
@@ -349,6 +360,7 @@ main{position:relative;z-index:1}
   .bhead h1{font-size:26px}
   .bact .lbl{display:none}
   .bact{padding:9px 11px}
+  .asel select{max-width:220px}
   .bbody{padding:16px 12px 130px;gap:12px}
   .bcard{padding:16px}
   .pgrid2,.newco{grid-template-columns:1fr}
@@ -368,6 +380,8 @@ main{position:relative;z-index:1}
 
 /* ---------- Print: the brief as a clean document ---------- */
 @media print{
+  .asel svg{display:none}
+  .asel select{color:#000}
   body{background:#fff;color:#000}
   .top,.sky,.dock,.bacts,.toast,.home,.run,.newco .act,.todo,#profile{display:none!important}
   body.print-profile > *:not(#profile){display:none!important}

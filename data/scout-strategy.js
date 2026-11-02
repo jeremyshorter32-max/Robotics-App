@@ -342,7 +342,7 @@ window.SCOUT_STRATEGY = {
   }
  ],
  "web_scout": {
-  "_readme": "Scout the web (free): terms used to build Google News and Google searches for a typed need. 'match' is a pattern tried against the search text; the first match supplies English variants, context words that keep results on Aldar-relevant uses, and translations for Chinese, Japanese, Korean, German and Arabic searches. 'avoid' lists words that mark a headline as off-topic for Aldar (for example sports-field or car painting).",
+  "_readme": "Scout the web and question reading. Every term is scored against the question: each 'match' word (the subject being scouted) scores 3, each 'weak' word (setting or context, such as high-rise or tower) scores 1. The highest score wins; on a tie, the term named first in the question wins. A term needs at least one 'match' word, or 2 points of 'weak' words, to be chosen; otherwise the scout is exploratory. 'avoid' words rule a term out (for example 'pool' rules out floor cleaning). 'topic' (optional) is what a news headline must contain; it defaults to 'match'. 'ctx' are context words added to news searches; zh/ja/ko/de/ar are translations for searches in other languages.",
   "filler": "solutions?|providers?|companies|company|vendors?|suppliers?|technology|technologies|systems?|tools?|options|for|the|and|of|in|best|top",
   "gcc_words": "UAE|Dubai|Abu Dhabi|Saudi|Riyadh|NEOM|Qatar|Doha|Kuwait|Bahrain|Oman|GCC|Gulf|Middle East|Sharjah",
   "terms": [
@@ -361,11 +361,12 @@ window.SCOUT_STRATEGY = {
     "ko": "도장 로봇",
     "de": "Malerroboter",
     "ar": "روبوت طلاء",
-    "avoid": "fields?|football|soccer|sports?|athletic|stadium|art|artist|artwork|portrait|ink|canvas|car|cars|automotive|car-body|vehicle|collision|ship|hull|shipyard|road|roads|line marking|gundam|toy|trump|music|drinks|nail|tattoo|portrait|king charles|museum|gallery|auction|campaign|election|surgery|medical"
+    "avoid": "fields?|football|soccer|sports?|athletic|stadium|art|artist|artwork|portrait|ink|canvas|car|cars|automotive|car-body|vehicle|collision|ship|hull|shipyard|road|roads|line marking|gundam|toy|trump|music|drinks|nail|tattoo|portrait|king charles|museum|gallery|auction|campaign|election|surgery|medical",
+    "weak": "wall|interior|apartment|finish|coating"
    },
    {
     "id": "plastering",
-    "match": "plaster",
+    "match": "plaster|render(ing)?\\b",
     "cat": "construction",
     "en": [
      "plastering robot",
@@ -374,7 +375,8 @@ window.SCOUT_STRATEGY = {
     "ctx": "construction OR building OR wall",
     "zh": "抹灰机器人",
     "de": "Verputzroboter",
-    "avoid": "art|toy|surgery|cast"
+    "avoid": "art|toy|surgery|cast",
+    "weak": "wall|interior"
    },
    {
     "id": "drywall",
@@ -384,7 +386,8 @@ window.SCOUT_STRATEGY = {
      "drywall robot",
      "drywall finishing robot"
     ],
-    "ctx": "construction OR building OR interior"
+    "ctx": "construction OR building OR interior",
+    "weak": "interior|wall|partition"
    },
    {
     "id": "tiling",
@@ -395,18 +398,20 @@ window.SCOUT_STRATEGY = {
      "tile laying robot"
     ],
     "ctx": "construction OR building OR floor",
-    "zh": "铺砖机器人"
+    "zh": "铺砖机器人",
+    "weak": "floor|bathroom|interior"
    },
    {
     "id": "screed",
-    "match": "screed|levell?ing|concrete",
+    "match": "screed|levell?ing",
     "cat": "construction",
     "en": [
      "concrete screeding robot",
      "concrete levelling robot"
     ],
     "ctx": "construction OR site OR floor",
-    "zh": "地坪整平机器人"
+    "zh": "地坪整平机器人",
+    "weak": "concrete|slab|floor|site"
    },
    {
     "id": "layout",
@@ -417,7 +422,8 @@ window.SCOUT_STRATEGY = {
      "layout marking robot"
     ],
     "ctx": "construction OR site OR jobsite",
-    "zh": "放线机器人"
+    "zh": "放线机器人",
+    "weak": "site|drawing|bim"
    },
    {
     "id": "brick",
@@ -428,7 +434,8 @@ window.SCOUT_STRATEGY = {
     ],
     "ctx": "construction OR building OR site",
     "zh": "砌砖机器人",
-    "de": "Maurerroboter"
+    "de": "Maurerroboter",
+    "weak": "wall|site"
    },
    {
     "id": "rebar",
@@ -438,7 +445,8 @@ window.SCOUT_STRATEGY = {
      "rebar tying robot"
     ],
     "ctx": "construction OR site",
-    "zh": "钢筋绑扎机器人"
+    "zh": "钢筋绑扎机器人",
+    "weak": "site|steel"
    },
    {
     "id": "print3d",
@@ -449,11 +457,12 @@ window.SCOUT_STRATEGY = {
      "3D printed homes robot"
     ],
     "ctx": "construction OR building OR homes",
-    "zh": "建筑3D打印"
+    "zh": "建筑3D打印",
+    "weak": "house|homes|building"
    },
    {
     "id": "facade",
-    "match": "fa[cç]ade|window|curtain.wall|high.?rise|glass",
+    "match": "fa[cç]ade|window|curtain.wall",
     "cat": "facade",
     "en": [
      "facade cleaning robot",
@@ -465,22 +474,24 @@ window.SCOUT_STRATEGY = {
     "ja": "窓拭きロボット",
     "de": "Fassadenreinigung Roboter",
     "ar": "روبوت تنظيف الواجهات",
-    "avoid": "home|household|deal|pool|car|aquarium|phone|winbot|hobot|hutt\\d*|window cleaner|ecovacs"
+    "avoid": "home|household|deal|pool|car|aquarium|phone|winbot|hobot|hutt\\d*|window cleaner|ecovacs",
+    "weak": "high.?rise|tower|glass|skyscraper|clean|exterior|building"
    },
    {
     "id": "solar",
-    "match": "solar",
+    "match": "solar|pv.panel",
     "cat": "facade",
     "en": [
      "solar panel cleaning robot"
     ],
     "ctx": "solar OR rooftop OR PV",
     "zh": "光伏清扫机器人",
-    "avoid": "space|satellite|mars"
+    "avoid": "space|satellite|mars",
+    "weak": "clean|rooftop|panel"
    },
    {
     "id": "floor",
-    "match": "floor|scrub|vacuum|clean|sweep|janitor",
+    "match": "floor|scrub|vacuum|sweep|janitor",
     "cat": "cleaning",
     "en": [
      "commercial cleaning robot",
@@ -493,7 +504,9 @@ window.SCOUT_STRATEGY = {
     "ko": "청소 로봇",
     "de": "Reinigungsroboter",
     "ar": "روبوت تنظيف",
-    "avoid": "home|household|consumer|robot vacuums?|robovacs?|vacuums?|mops?|pool|pools|lawn|kitchen|dish|laundry|toilet|litter|roomba|roborock|dyson|deebot|eufy|shark|dreame|mova|narwal|irobot|underwater"
+    "avoid": "home|household|consumer|robot vacuums?|robovacs?|vacuums?|mops?|pool|pools|lawn|kitchen|dish|laundry|toilet|litter|roomba|roborock|dyson|deebot|eufy|shark|dreame|mova|narwal|irobot|underwater",
+    "weak": "clean|mall|office|airport|lobby|commercial|car.?park|basement",
+    "topic": "floor|scrub|vacuum|sweep|janitor|cleaning robot|commercial cleaning|autonomous cleaning"
    },
    {
     "id": "security",
@@ -509,7 +522,8 @@ window.SCOUT_STRATEGY = {
     "ko": "순찰 로봇",
     "de": "Sicherheitsroboter",
     "ar": "روبوت أمني",
-    "avoid": "toy|movie|film|game|cyber|software|password"
+    "avoid": "toy|movie|film|game|cyber|software|password",
+    "weak": "night|community|perimeter|campus|cctv|safety"
    },
    {
     "id": "delivery",
@@ -525,7 +539,8 @@ window.SCOUT_STRATEGY = {
     "ko": "배송 로봇",
     "de": "Lieferroboter",
     "ar": "روبوت توصيل",
-    "avoid": "food court|pizza toy|movie"
+    "avoid": "food court|pizza toy|movie",
+    "weak": "residential|community|apartment|food|package|grocery|parcel|resident"
    },
    {
     "id": "pipe",
@@ -536,7 +551,8 @@ window.SCOUT_STRATEGY = {
      "duct inspection robot"
     ],
     "ctx": "inspection OR building OR pipe",
-    "zh": "管道检测机器人"
+    "zh": "管道检测机器人",
+    "weak": "plumbing|leak|hidden|mep"
    },
    {
     "id": "quadruped",
@@ -548,7 +564,8 @@ window.SCOUT_STRATEGY = {
     ],
     "ctx": "inspection OR security OR site OR industrial",
     "zh": "四足机器人",
-    "ja": "四足歩行ロボット"
+    "ja": "四足歩行ロボット",
+    "weak": "site|patrol"
    },
    {
     "id": "drone",
@@ -562,11 +579,12 @@ window.SCOUT_STRATEGY = {
     "zh": "无人机巡检",
     "ja": "点検ドローン",
     "ar": "طائرة بدون طيار فحص",
-    "avoid": "military|strike|attack|war|missile|kamikaze|ukraine|russia|army"
+    "avoid": "military|strike|attack|war|missile|kamikaze|ukraine|russia|army",
+    "weak": "aerial|roof"
    },
    {
     "id": "inspection",
-    "match": "inspect|survey|thermal|snag",
+    "match": "inspect|survey|thermal|snag|scann|digital.twin|progress.monitor|reality.capture|site.progress",
     "cat": "inspection",
     "en": [
      "inspection robot",
@@ -577,11 +595,12 @@ window.SCOUT_STRATEGY = {
     "ja": "点検ロボット",
     "ko": "점검 로봇",
     "de": "Inspektionsroboter",
-    "ar": "روبوت فحص"
+    "ar": "روبوت فحص",
+    "weak": "building|site|facility|asset|defect|condition"
    },
    {
     "id": "humanoid",
-    "match": "humanoid|concierge|reception|wayfinding|greet|guest",
+    "match": "humanoid|concierge|reception|wayfinding|greet",
     "cat": "humanoids",
     "en": [
      "humanoid robot",
@@ -594,18 +613,20 @@ window.SCOUT_STRATEGY = {
     "ko": "휴머노이드",
     "de": "humanoider Roboter",
     "ar": "روبوت بشري",
-    "avoid": "movie|film|game|toy|anime"
+    "avoid": "movie|film|game|toy|anime",
+    "weak": "guest|hospitality|retail|hotel|lobby|visitor"
    },
    {
     "id": "lift",
-    "match": "lift|elevator|fleet|interop|orchestrat",
+    "match": "lift|elevator|fleet.management|interop|orchestrat|\\bdoors?\\b",
     "cat": "physical_ai",
     "en": [
      "robot elevator integration",
      "robot fleet management"
     ],
     "ctx": "robot OR building OR fleet",
-    "zh": "机器人梯控"
+    "zh": "机器人梯控",
+    "weak": "building|integration|platform|bms"
    },
    {
     "id": "landscaping",
@@ -619,18 +640,20 @@ window.SCOUT_STRATEGY = {
     "zh": "割草机器人",
     "ja": "芝刈りロボット",
     "de": "Mähroboter",
-    "avoid": "home|household|deal|garden gnome"
+    "avoid": "home|household|deal|garden gnome",
+    "weak": "park|outdoor|green"
    },
    {
     "id": "parking",
-    "match": "parking|valet|charging",
+    "match": "valet|parking.robot|ev.charging|charging.robot",
     "cat": "delivery",
     "en": [
      "parking robot",
      "EV charging robot"
     ],
     "ctx": "parking OR garage OR EV",
-    "zh": "停车机器人"
+    "zh": "停车机器人",
+    "weak": "parking|car.?park|garage"
    }
   ]
  }

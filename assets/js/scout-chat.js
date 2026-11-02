@@ -57,20 +57,20 @@
 
   /* ---------- understand the question ---------- */
   var STOPW = /^(?:robots?|robotic|robotics|autonomous|solutions?|providers?|companies|vendors?|technology|technologies|systems?|for|the|and|with|that|our|in|of|to|a|an|on|at|inside|use|using|best|new)$/i;
-  function understand(q) {
-    var P = WEB.plan(q);
+  function understand(q, as) {
+    var P = WEB.plan(q, as);
     var words = (q.toLowerCase().match(/[\p{L}\p{N}-]+/gu) || []).filter(function (w) { return w.length > 2 && !STOPW.test(w); });
     var stems = words.map(function (w) { return w.replace(/(ing|ed|es|s)$/, ""); }).filter(function (w) { return w.length > 2; });
     var named = CORE.providers.filter(function (p) {
       return [shortName(p)].concat(p.aliases || []).some(function (n) { return n && n.length > 2 && new RegExp("\\b" + n.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b", "i").test(q); });
     });
-    if (P.term && P.term.avoid && new RegExp("\\b(?:" + P.term.avoid + ")\\b", "i").test(q)) P.term = null;
+    if (!as && P.term && P.term.avoid && new RegExp("\\b(?:" + P.term.avoid + ")\\b", "i").test(q)) P.term = null;
     var cat = P.term ? P.term.cat : null;
     if (!cat) {
       // fall back to category names and keywords
       if (named.length) cat = (named[0].categories || [])[0];
     }
-    return { q: q, P: P, term: P.term, cat: cat, stems: stems, named: named, re: P.term ? new RegExp(P.term.match, "i") : null };
+    return { q: q, as: as || null, P: P, term: P.term, cat: cat, stems: stems, named: named, re: P.term ? new RegExp(P.term.match, "i") : null };
   }
 
   /* ---------- match the provider memory ---------- */
@@ -142,8 +142,8 @@
   }
 
   /* ---------- build the brief (data) ---------- */
-  function build(q, web) {
-    var U = understand(q);
+  function build(q, web, as) {
+    var U = understand(q, as);
     var provs = matchProviders(U);
     var fleet = matchFleet(U, provs);
     var live = provs.filter(function (m) { return !m.p._knock.length; });
@@ -310,12 +310,28 @@
       return '<li><a href="' + esc(n.l) + '" target="_blank" rel="noopener"><span class="tagp">' + n.tag + "</span>" + esc(n.t) + "</a><small>" + esc([n.s, fmtDate(n.d)].filter(Boolean).join(" · ")) + "</small></li>";
     }).join("") + "</ul>";
   }
+  function termLabel(t) { var c = CAT[t.cat]; return cap1(t.en[0]) + (c ? " · " + c.label : ""); }
+  function cap1(x) { return x.charAt(0).toUpperCase() + x.slice(1); }
+  function readAs(U) {
+    var ranked = (U.P.ranked || []).map(function (r) { return r.t; });
+    var cur = U.term ? U.term.id : "none";
+    var opt = function (t) { return '<option value="' + esc(t.id) + '"' + (t.id === cur ? " selected" : "") + ">" + esc(cap1(t.en[0])) + "</option>"; };
+    var groups = CATS.map(function (c) {
+      var ts = WEB.terms.filter(function (t) { return t.cat === c.id && ranked.indexOf(t) < 0; });
+      return ts.length ? '<optgroup label="' + esc(c.label) + '">' + ts.map(opt).join("") + "</optgroup>" : "";
+    }).join("");
+    return '<label class="btag asel" title="Not what you meant? Pick the right use case and Scout will re-scout">Read as' +
+      '<select data-act="as" aria-label="Read this question as">' +
+        (ranked.length ? '<optgroup label="Best matches for your words">' + ranked.map(opt).join("") + "</optgroup>" : "") + groups +
+        '<optgroup label="Other"><option value="none"' + (cur === "none" ? " selected" : "") + ">Nothing specific (exploratory)</option></optgroup>" +
+      '</select><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></label>';
+  }
   function render(B) {
     var U = B.U, c = U.cat && CAT[U.cat];
     var saved = isSaved(B.q);
     var tags = [];
     if (c) tags.push('<span class="btag" style="--c:' + esc(c.color) + '"><i></i>' + esc(c.label) + "</span>");
-    if (U.term) tags.push('<span class="btag">Read as: ' + esc(U.term.en[0]) + "</span>");
+    tags.push(readAs(U));
     if (B.strat.pri) tags.push('<span class="btag pri">' + (B.strat.named ? "Named strategy use case" : "Strategy focus area") + "</span>");
     var n = { deployed: 0, pilot: 0, planned: 0 };
     B.fleet.forEach(function (f) { n[f.status]++; });
@@ -382,6 +398,7 @@
   /* ---------- running a scout ---------- */
   var current = null;
   var STEPS = [
+    ["read", "Understanding the question"],
     ["fleet", "Reading Aldar’s deployments"],
     ["strategy", "Checking the robotics strategy"],
     ["memory", "Searching the provider memory"],
@@ -391,7 +408,9 @@
   function stepHtml(state) {
     return STEPS.map(function (s) {
       var st = state[s[0]] || {};
-      return '<li class="' + (st.cls || "") + '"><span class="ic"></span><span>' + esc(s[1]) + (st.note ? " <small>" + esc(st.note) + "</small>" : "") + "</span></li>";
+      return '<li class="' + (st.cls || "") + '"><span class="ic"></span><span class="tx"><span>' + esc(s[1]) + "</span>" +
+        (st.note ? " <small>" + esc(st.note) + "</small>" : "") +
+        (st.doing ? '<em class="doing">' + esc(st.doing) + "</em>" : "") + "</span></li>";
     }).join("");
   }
   function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
@@ -406,30 +425,40 @@
     $("home").hidden = true; $("brief").hidden = true; $("run").hidden = false;
     $("runQ").textContent = q;
     window.scrollTo({ top: 0 });
-    setUrl(q);
+    setUrl(q, opts.as);
     var st = {};
     var draw = function () { $("steps").innerHTML = stepHtml(st); };
-    var U = understand(q);
-    var B0 = build(q, null);
+    var U = understand(q, opts.as);
+    var B0 = build(q, null, opts.as);
     var webP = opts.web ? Promise.resolve({ snap: opts.web }) :
-      WEB.fetchWeb(q).then(function (r) { return { snap: snapshot(r) }; }).catch(function (e) { return { snap: { error: e.message || "no answer" } }; });
+      WEB.fetchWeb(q, opts.as).then(function (r) { return { snap: snapshot(r) }; }).catch(function (e) { return { snap: { error: e.message || "no answer" } }; });
     var seq = Promise.resolve();
-    [["fleet", plural(B0.fleet.length, "deployment") + " in this area"],
-     ["strategy", B0.strat.pri ? B0.strat.pri.label : "not a named focus area"],
-     ["memory", plural(B0.live.length, "matching provider")]].forEach(function (s) {
-      seq = seq.then(function () { st[s[0]] = { cls: "on" }; draw(); return wait(opts.fast ? 0 : 380); })
-        .then(function () { st[s[0]] = { cls: "ok", note: s[1] }; draw(); });
+    var fast = !!opts.fast;
+    var T = function (ms) { return wait(fast ? 60 : ms); };
+    var nFleet = FLEET.length, nMem = CORE.providers.length;
+    var reading = U.term ? termLabel(U.term) : "nothing specific, so this is exploratory";
+    [["read", "Working out what is being scouted, and which focus area it belongs to…", "Read as: " + reading, 1300],
+     ["fleet", "Looking through " + nFleet + " deployments and trials on the fleet map…", plural(B0.fleet.length, "deployment") + " in this area", 1300],
+     ["strategy", "Matching it to the eight focus areas and named use cases in Aldar’s robotics strategy…", B0.strat.named ? "named use case: " + B0.strat.named : B0.strat.pri ? "focus area: " + B0.strat.pri.label : "not a named focus area", 1300],
+     ["memory", "Comparing " + nMem + " researched providers and ranking them by Aldar Fit Score…", plural(B0.live.length, "matching provider"), 1300]].forEach(function (x) {
+      seq = seq.then(function () { st[x[0]] = { cls: "on", doing: x[1] }; draw(); return T(x[3]); })
+        .then(function () { st[x[0]] = { cls: "ok", note: x[2] }; draw(); return T(250); });
     });
+    var t0;
     return seq.then(function () {
-      st.web = { cls: "on", note: opts.web ? "using the saved scan" : "10 Google News searches" }; draw();
+      t0 = Date.now();
+      st.web = { cls: "on", doing: opts.web ? "Using the scan saved with this brief…" : "Running 10 Google News searches across English, UAE and Chinese editions, and picking out the companies named…" }; draw();
       return webP;
+    }).then(function (res) {
+      var left = Math.max(0, (fast ? 0 : 1800) - (Date.now() - t0));
+      return wait(left).then(function () { return res; });
     }).then(function (res) {
       var snap = res.snap;
       st.web = snap.error ? { cls: "warn", note: "did not answer" } : { cls: "ok", note: plural(snap.total || 0, "article") + ", " + plural((snap.companies || []).length, "new company", "new companies") };
-      st.write = { cls: "on" }; draw();
-      return wait(opts.fast ? 0 : 350).then(function () { return snap; });
+      st.write = { cls: "on", doing: "Pulling it together: Aldar experience, strategy fit, best-fit providers, new names and next steps…" }; draw();
+      return T(1100).then(function () { return snap; });
     }).then(function (snap) {
-      current = build(q, snap);
+      current = build(q, snap, opts.as);
       if (opts.at) current.at = opts.at;
       render(current);
       $("run").hidden = true; $("brief").hidden = false;
@@ -449,7 +478,7 @@
     var i = L.findIndex(function (b) { return b.q.toLowerCase() === current.q.toLowerCase(); });
     if (i >= 0) { L.splice(i, 1); toast("Removed from saved scouts"); }
     else {
-      L.unshift({ q: current.q, at: current.at, web: current.web && !current.web.error ? current.web : null, cat: current.U.cat });
+      L.unshift({ q: current.q, as: current.U.as, at: current.at, web: current.web && !current.web.error ? current.web : null, cat: current.U.cat });
       toast("Saved. Find it on the Scout home page");
     }
     store("briefs", L.slice(0, 30));
@@ -484,8 +513,8 @@
   }
   function openBrief(q) {
     var b = savedList().filter(function (x) { return x.q.toLowerCase() === q.toLowerCase(); })[0];
-    if (b && b.web) return scout(b.q, { web: b.web, at: b.at, fast: true });
-    return scout(q);
+    if (b && b.web) return scout(b.q, { web: b.web, at: b.at, as: b.as, fast: true });
+    return scout(q, { as: as0 && q === q0 ? as0 : null });
   }
   function goHome() {
     current = null;
@@ -499,14 +528,15 @@
   }
 
   /* ---------- share, download ---------- */
-  function setUrl(q) {
+  function setUrl(q, as) {
     var u = new URLSearchParams();
     if (q) u.set("q", q);
+    if (q && as) u.set("as", as);
     var s = u.toString();
     try { history.pushState({ q: q || null }, "", location.pathname + (s ? "?" + s : "")); } catch (e) {}
   }
   function share() {
-    var url = location.origin + location.pathname + "?q=" + encodeURIComponent(current.q);
+    var url = location.origin + location.pathname + "?q=" + encodeURIComponent(current.q) + (current.U.as ? "&as=" + encodeURIComponent(current.U.as) : "");
     var done = function () { toast("Link copied. Anyone with it can open this scout"); };
     if (navigator.share && /Mobi|Android|iPhone|iPad/.test(navigator.userAgent)) {
       navigator.share({ title: "Market Scout: " + current.q, text: "Scout brief: " + current.q, url: url }).catch(function () {});
@@ -518,7 +548,7 @@
   function markdown(B) {
     var L = [];
     var strip = function (h) { return h.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/&lt;/g, "<").replace(/&gt;/g, ">"); };
-    L.push("# Scout brief: " + B.q, "", "Aldar Market Scout · " + fmtDate(B.at), "");
+    L.push("# Scout brief: " + B.q, "", "Aldar Market Scout · " + fmtDate(B.at) + " · Read as: " + (B.U.term ? termLabel(B.U.term) : "nothing specific (exploratory)"), "");
     L.push("## Scout's read", "");
     readout(B).forEach(function (p) { L.push(strip(p), ""); });
     L.push("## Aldar experience", "");
@@ -585,20 +615,23 @@
     else if (a === "share") share();
     else if (a === "pdf") window.print();
     else if (a === "md") download("scout-brief-" + slug(current.q) + ".md", markdown(current), "text/markdown;charset=utf-8");
-    else if (a === "rescan") scout(current.q);
+    else if (a === "rescan") scout(current.q, { as: current.U.as });
     else if (a === "todo-copy") {
       var txt = WEB.todoText();
       if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(txt).then(function () { toast("Research request copied"); }, function () { prompt("Copy this request", txt); });
       else prompt("Copy this request", txt);
     } else if (a === "todo-mail") location.href = "mailto:?subject=" + encodeURIComponent("Market Scout: providers to research") + "&body=" + encodeURIComponent(WEB.todoText());
   });
+  document.addEventListener("change", function (e) {
+    if (e.target.getAttribute && e.target.getAttribute("data-act") === "as" && current) scout(current.q, { as: e.target.value });
+  });
   document.addEventListener("keydown", function (e) {
     var t = e.target;
     if ((e.key === "Enter" || e.key === " ") && t.hasAttribute && t.hasAttribute("data-open-brief")) { e.preventDefault(); openBrief(t.getAttribute("data-open-brief")); }
   });
   window.addEventListener("popstate", function () {
-    var q = new URLSearchParams(location.search).get("q");
-    if (q) scout(q, { fast: true }); else goHome();
+    var u = new URLSearchParams(location.search), q = u.get("q");
+    if (q) scout(q, { fast: true, as: u.get("as") }); else goHome();
   });
 
   /* ---------- start ---------- */
@@ -606,6 +639,7 @@
   $("ask").placeholder = homePlaceholder();
   renderHome();
   var q0 = new URLSearchParams(location.search).get("q");
+  var as0 = new URLSearchParams(location.search).get("as");
   if (q0) openBrief(q0);
   else setTimeout(function () { try { $("ask").focus({ preventScroll: true }); } catch (e) {} }, 50);
 })();

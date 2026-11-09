@@ -51,9 +51,1536 @@
     "ink": "#A04C74"
    }
   ],
-  "updated_at": "2026-11-02T10:52+04:00"
+  "updated_at": "2026-11-09T10:57+04:00"
  },
  "editions": [
+  {
+   "id": "2026-W46",
+   "label": "Week 46 · 9 Nov 2026",
+   "published_at": "2026-11-09T10:57+04:00",
+   "period": {
+    "from": "2026-11-02",
+    "to": "2026-11-09"
+   },
+   "stories_scanned": 657,
+   "distinct_events": 368,
+   "signals": {
+    "volume": {
+     "construction": 33,
+     "facade": 11,
+     "inspection": 73,
+     "cleaning": 13,
+     "security": 14,
+     "delivery": 37,
+     "humanoids": 84,
+     "physical_ai": 103
+    },
+    "deals": {
+     "construction": 3,
+     "facade": 0,
+     "inspection": 1,
+     "cleaning": 2,
+     "security": 1,
+     "delivery": 1,
+     "humanoids": 0,
+     "physical_ai": 14
+    }
+   },
+   "momentum": [
+    {
+     "category": "construction",
+     "volume": 33,
+     "deals": 3,
+     "avg_prev": 37.5,
+     "change_pct": -12
+    },
+    {
+     "category": "facade",
+     "volume": 11,
+     "deals": 0,
+     "avg_prev": 6.0,
+     "change_pct": 83
+    },
+    {
+     "category": "inspection",
+     "volume": 73,
+     "deals": 1,
+     "avg_prev": 87.0,
+     "change_pct": -16
+    },
+    {
+     "category": "cleaning",
+     "volume": 13,
+     "deals": 2,
+     "avg_prev": 18.5,
+     "change_pct": -30
+    },
+    {
+     "category": "security",
+     "volume": 14,
+     "deals": 1,
+     "avg_prev": 26.5,
+     "change_pct": -47
+    },
+    {
+     "category": "delivery",
+     "volume": 37,
+     "deals": 1,
+     "avg_prev": 60.0,
+     "change_pct": -38
+    },
+    {
+     "category": "humanoids",
+     "volume": 84,
+     "deals": 0,
+     "avg_prev": 73.0,
+     "change_pct": 15
+    },
+    {
+     "category": "physical_ai",
+     "volume": 103,
+     "deals": 14,
+     "avg_prev": 128.0,
+     "change_pct": -20
+    }
+   ],
+   "generated_by": "claude",
+   "headline": "China blocks SoftBank's $5.4B ABB robotics deal as trade risk runs both ways",
+   "takeaways": [
+    "Robot trade risk now runs both ways: China blocked SoftBank's $5.4B ABB robotics takeover while the US weighs a DJI ban, escalating the US-led pressure of the past two weeks.",
+    "Humanoids moved further into commercial service, with Agility listing on Nasdaq, AGIBOT's 24-hour store trial, Pudu's humanoid pivot and the UAE's first humanoid showroom; humanoid stories rose 15% while most categories fell.",
+    "Physical AI funding cooled to 14 deals from 25 last week and 22 the week before, and China robot funding is slowing, though drones drew big money (Axon–Skydio $1.2B, Zipline $21.5B valuation)."
+   ],
+   "trend_watch": [
+    {
+     "trend": "Physical AI foundation-model funding boom",
+     "status": "cooling",
+     "evidence": "14 Physical AI funding deals versus 25 last week; Bloomberg reports China robot funding slowing to $1.6B amid shakeout fears."
+    },
+    {
+     "trend": "US–China restrictions on robot and drone hardware",
+     "status": "rising",
+     "evidence": "China blocked SoftBank's $5.4B ABB robotics deal (49 outlets); reports say DJI drones could be banned from the US."
+    },
+    {
+     "trend": "GCC regulation of autonomous vehicles and delivery",
+     "status": "steady",
+     "evidence": "Saudi Transport Authority approved executive regulations for autonomous passenger transport, following Abu Dhabi plates and Ras Al Khaimah testing rules."
+    },
+    {
+     "trend": "Public safety and privacy scrutiny of street robots",
+     "status": "steady",
+     "evidence": "Delivery robot blamed for a bus incident, another ran a red light, and a woman was arrested for blocking one."
+    },
+    {
+     "trend": "Humanoids moving into paid commercial service",
+     "status": "rising",
+     "evidence": "Agility began trading on Nasdaq, AGIBOT ran a 24-hour store trial, Xiaomi ran 8-hour factory shifts, and Dubai opened a humanoid showroom."
+    }
+   ],
+   "posts": [
+    {
+     "id": "chinablockssoftbanks54billiontakeoverofa",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "China",
+     "company": "SoftBank / ABB",
+     "amount_usd_m": null,
+     "headline": "China blocks SoftBank's $5.4 billion takeover of ABB's robotics division",
+     "summary": "Chinese regulators blocked SoftBank's planned $5.4 billion purchase of ABB's robotics division, the week's most widely covered story at 49 outlets.",
+     "why_it_matters": "Robot supply chains now face approval risk from Beijing as well as Washington, so multi-sourcing and contract exit clauses matter more.",
+     "source": "Reuters",
+     "url": "https://www.reuters.com/business/media-telecom/china-blocks-softbanks-54-billion-takeover-abbs-robotics-division-ft-reports-2026-11-05/",
+     "published": "2026-11-04",
+     "coverage": 49,
+     "also_covered_by": [
+      "Bloomberg.com",
+      "Financial Times",
+      "The Robot Report"
+     ],
+     "portfolio": [],
+     "portfolio_note": ""
+    },
+    {
+     "id": "djidronescouldbebannedfromtheusduetoalle",
+     "category": "inspection",
+     "type": "trend",
+     "region": "North America",
+     "company": "DJI",
+     "amount_usd_m": null,
+     "headline": "DJI drones could be banned from the US on national security grounds",
+     "summary": "Reports say DJI drones face a possible US ban over alleged national security risks, continuing the US pressure on Chinese drone hardware.",
+     "why_it_matters": "UAE operations are not directly affected, but US moves can squeeze DJI parts, software updates and insurer or tenant acceptance.",
+     "source": "Yahoo",
+     "url": "https://www.yahoo.com/news/politics/articles/dji-drones-could-banned-us-142027608.html",
+     "published": "2026-11-06",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "AirTech",
+       "via": "oem",
+       "oem": "DJI",
+       "status": "pilot",
+       "status_label": "Trialled",
+       "use_case": "Drone Inspections for Unit Exterior",
+       "model": "Thermal: M300 H20T · General capture: Matrice 4E",
+       "site": "Saadiyat Lagoons",
+       "site_count": 1
+      }
+     ],
+     "portfolio_note": "AirTech's Saadiyat Lagoons exterior inspection trial uses DJI M300 and Matrice 4E; a non-DJI fallback should be checked before any scale-up.",
+     "image": "https://s.yimg.com/lo/mysterio/api/b07dc7db5b2f637400e612d0eb2e790a4405b1a2f7581f2438f7232489318074/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fdigital_camera_world_590%2Fa8ec1b4aad1288a5be0a62e46417efdc.jpg"
+    },
+    {
+     "id": "djimatrice5tenterprisedronefeaturesnight",
+     "category": "inspection",
+     "type": "product",
+     "region": "Global",
+     "company": "DJI",
+     "amount_usd_m": null,
+     "headline": "DJI launches Matrice 5T enterprise drone with thermal and night imaging",
+     "summary": "DJI's Matrice 5T enterprise drone adds thermal imaging and night vision in a folding airframe. DroneXL notes US buyers cannot purchase it.",
+     "why_it_matters": "Higher-resolution thermal in a compact drone improves façade, roof and MEP leak detection across large residential portfolios.",
+     "source": "Mashable",
+     "url": "https://mashable.com/tech/dji-matrice-5t-drone-launch",
+     "published": "2026-11-02",
+     "coverage": 4,
+     "also_covered_by": [
+      "Mezha.net",
+      "Notebookcheck",
+      "PTTL.gr"
+     ],
+     "portfolio": [
+      {
+       "vendor": "AirTech",
+       "via": "oem",
+       "oem": "DJI",
+       "status": "pilot",
+       "status_label": "Trialled",
+       "use_case": "Drone Inspections for Unit Exterior",
+       "model": "Thermal: M300 H20T · General capture: Matrice 4E",
+       "site": "Saadiyat Lagoons",
+       "site_count": 1
+      }
+     ],
+     "portfolio_note": "AirTech could test the Matrice 5T as a newer thermal option for Saadiyat Lagoons unit-exterior inspections, replacing the older M300 H20T setup.",
+     "image": "https://helios-i.mashable.com/imagery/articles/06vh2bQeEoSRFKbnlOsXUzK/hero-image.fill.size_1200x675.v1793948612.png"
+    },
+    {
+     "id": "djidock4landsintatramountainsautonomousr",
+     "category": "inspection",
+     "type": "deployment",
+     "region": "Europe",
+     "company": "DJI",
+     "amount_usd_m": null,
+     "headline": "DJI Dock 4 runs autonomous rescue flights in Tatra Mountains without a handler",
+     "summary": "Mountain rescuers in the Tatras use DJI Dock 4 for automated drone launches without an on-site pilot, saving response time.",
+     "why_it_matters": "Docked, pilot-free drones point to scheduled roof and perimeter inspections at communities without daily crew call-outs.",
+     "source": "Tech Times",
+     "url": "https://www.techtimes.com/articles/330000/20261103/dji-dock-4-lands-tatra-mountains-autonomous-rescue-no-handler-required.htm",
+     "published": "2026-11-04",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "AirTech",
+       "via": "oem",
+       "oem": "DJI",
+       "status": "pilot",
+       "status_label": "Trialled",
+       "use_case": "Drone Inspections for Unit Exterior",
+       "model": "Thermal: M300 H20T · General capture: Matrice 4E",
+       "site": "Saadiyat Lagoons",
+       "site_count": 1
+      }
+     ],
+     "portfolio_note": "AirTech could propose a docked DJI setup to turn the Saadiyat Lagoons trial into recurring automated inspections, subject to UAE drone rules.",
+     "image": "https://d.techtimes.com/en/full/477659/dji-dock-4.png"
+    },
+    {
+     "id": "blacklinesafetyintegratesgasdetectiontec",
+     "category": "inspection",
+     "type": "product",
+     "region": "North America",
+     "company": "Blackline Safety / Boston Dynamics",
+     "amount_usd_m": null,
+     "headline": "Blackline Safety adds gas detection to Boston Dynamics Spot",
+     "summary": "Blackline Safety integrated its gas detection technology with Boston Dynamics' Spot quadruped for hazardous-area monitoring.",
+     "why_it_matters": "Gas sensing lets one robot check plant rooms, basements and car parks for leaks during routine patrols.",
+     "source": "BIC Magazine",
+     "url": "https://www.bicmagazine.com/resources/products-services/blackline-safety-integrates-gas-detection-technology-with-bo/",
+     "published": "2026-11-02",
+     "coverage": 2,
+     "also_covered_by": [
+      "매일경제"
+     ],
+     "portfolio": [
+      {
+       "vendor": "Analog",
+       "via": "oem",
+       "oem": "Boston Dynamics",
+       "status": "pilot",
+       "status_label": "Trialled",
+       "use_case": "Quadruped Dog Interior Inspections",
+       "model": "Boston Dynamics Spot",
+       "site": "Yas Park Gate",
+       "site_count": 1
+      }
+     ],
+     "portfolio_note": "Analog could add gas sensing to Spot interior inspections like the Yas Park Gate trial, extending them into plant rooms and basements.",
+     "image": "https://www.bicmagazine.com/downloads/41138/download/Blackline%20Image.jpg?cb=d43ceeecc7308fc686bcce636b835fc9&w=1200"
+    },
+    {
+     "id": "puduroboticsunveilsonebrainmultipleembod",
+     "category": "physical_ai",
+     "type": "product",
+     "region": "Europe",
+     "company": "Pudu Robotics",
+     "amount_usd_m": null,
+     "headline": "Pudu unveils 'One Brain, Multiple Embodiments' strategy at European showcase",
+     "summary": "Pudu showed its full portfolio in Europe for the first time and set out a strategy that runs six robot categories on one shared AI brain.",
+     "why_it_matters": "A shared software layer across cleaning, delivery and concierge robots could simplify fleet management across mixed-use estates.",
+     "source": "Robotics & Automation News",
+     "url": "https://roboticsandautomationnews.com/2026/11/05/pudu-robotics-unveils-one-brain-multiple-embodiments-strategy-and-showcases-full-portfolio-in-european-first/106725/",
+     "published": "2026-11-05",
+     "coverage": 3,
+     "also_covered_by": [
+      "KuCoin",
+      "TechStory"
+     ],
+     "portfolio": [
+      {
+       "vendor": "Pudu",
+       "via": "vendor",
+       "oem": "",
+       "status": "deployed",
+       "status_label": "Launched",
+       "use_case": "Floor Scrubbing and Sweeping",
+       "model": "1× CC1 Pro, 1× MT1 Max, 1× BG1 Pro",
+       "site": "International Tower",
+       "site_count": 25
+      }
+     ],
+     "portfolio_note": "A common Pudu brain could ease management of CC1 Pro, MT1 Max and BellaBot units across Aldar HQ, ADGM Square and the 19 pending cleaning sites.",
+     "image": "https://roboticsandautomationnews.com/wp-content/uploads/2026/11/Pudu-opens-European-HQ-in-Germany.png"
+    },
+    {
+     "id": "servicerobotleaderpudupivotstohumanoidst",
+     "category": "humanoids",
+     "type": "trend",
+     "region": "China",
+     "company": "Pudu Robotics",
+     "amount_usd_m": null,
+     "headline": "Service robot leader Pudu pivots to humanoids to fuel global growth",
+     "summary": "SCMP reports Pudu is shifting toward humanoid robots to support its international expansion beyond service robots.",
+     "why_it_matters": "Aldar's largest robot supplier may soon offer humanoids for concierge and guest roles alongside cleaning.",
+     "source": "South China Morning Post",
+     "url": "https://www.scmp.com/tech/tech-trends/article/3373641/chinas-pudu-robotics-which-makes-80-its-sales-abroad-takes-tesla-humanoids",
+     "published": "2026-11-08",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "Pudu",
+       "via": "vendor",
+       "oem": "",
+       "status": "deployed",
+       "status_label": "Launched",
+       "use_case": "Floor Scrubbing and Sweeping",
+       "model": "1× CC1 Pro, 1× MT1 Max, 1× BG1 Pro",
+       "site": "International Tower",
+       "site_count": 25
+      }
+     ],
+     "portfolio_note": "Confirm Pudu's support commitments for the large CC1 Pro rollout at pending sites; its humanoids may later suit Yas Mall concierge.",
+     "image": "https://cdn.i-scmp.com/sites/default/files/styles/og_image_scmp_generic/public/d8/images/canvas/2026/11/07/72b2d711-aefc-4900-900d-c775d4409ea9_7be83cd5.jpg?itok=NcW4scxh&v=1794036142"
+    },
+    {
+     "id": "puduroboticslaunchesautonomousgtseriesmo",
+     "category": "cleaning",
+     "type": "product",
+     "region": "Global",
+     "company": "Pudu Robotics",
+     "amount_usd_m": null,
+     "headline": "Pudu launches autonomous GT Series robot mower lineup",
+     "summary": "Pudu introduced the GT Series of autonomous mowers and separately unveiled TOMO S models that extend lawn care to blade sharpening.",
+     "why_it_matters": "Robot mowing could cut landscaping labour in master communities, parks and school grounds.",
+     "source": "Thomasnet",
+     "url": "https://www.thomasnet.com/insights/pudu-robotics-gt-series-mower-lineup/",
+     "published": "2026-11-06",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "Pudu",
+       "via": "vendor",
+       "oem": "",
+       "status": "deployed",
+       "status_label": "Launched",
+       "use_case": "Floor Scrubbing and Sweeping",
+       "model": "1× CC1 Pro, 1× MT1 Max, 1× BG1 Pro",
+       "site": "International Tower",
+       "site_count": 25
+      }
+     ],
+     "portfolio_note": "Pudu mowers could be piloted at landscaped communities or academies in the Pudu + other school rollout, alongside existing external sweepers."
+    },
+    {
+     "id": "deeproboticslaunchesx50quadrupedwithacla",
+     "category": "inspection",
+     "type": "product",
+     "region": "China",
+     "company": "DEEP Robotics",
+     "amount_usd_m": null,
+     "headline": "DEEP Robotics launches X50 quadruped with claimed 50 kg working payload",
+     "summary": "DEEP Robotics' new X50 quadruped claims a 50-kilogram working payload, aimed at heavier industrial inspection and patrol kits.",
+     "why_it_matters": "Higher payload lets one quadruped carry more sensors for combined security and plant inspection patrols.",
+     "source": "Pandaily",
+     "url": "https://pandaily.com/deep-robotics-x50-heavy-duty-quadruped-50kg-payload-inspection-firefighting",
+     "published": "2026-11-07",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "Deep Robotics",
+       "via": "vendor",
+       "oem": "",
+       "status": "pilot",
+       "status_label": "Trialled",
+       "use_case": "Security Patrolling",
+       "model": "X30",
+       "site": "ADGM Square",
+       "site_count": 1
+      }
+     ],
+     "portfolio_note": "The X50 is a possible upgrade path from the X30 trialled for security patrols at ADGM Square if heavier sensor kits are needed.",
+     "image": "https://cms-image.pandaily.com/1/robot_058ae551da.png"
+    },
+    {
+     "id": "deeproboticshumanoidrobotssupporttraffic",
+     "category": "humanoids",
+     "type": "deployment",
+     "region": "China",
+     "company": "DEEP Robotics",
+     "amount_usd_m": null,
+     "headline": "DEEP Robotics humanoids help manage traffic at 2026 Hangzhou Marathon",
+     "summary": "DEEP Robotics deployed humanoid robots to support traffic management at the Hangzhou Marathon.",
+     "why_it_matters": "Public-event crowd and traffic roles hint at humanoid use for mall events and community race days.",
+     "source": "Digital Journal",
+     "url": "https://www.digitaljournal.com/pr/news/access-newswire/deep-robotics-humanoid-robots-support-1148380314.html",
+     "published": "2026-11-08",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [
+      {
+       "vendor": "Deep Robotics",
+       "via": "vendor",
+       "oem": "",
+       "status": "pilot",
+       "status_label": "Trialled",
+       "use_case": "Security Patrolling",
+       "model": "X30",
+       "site": "ADGM Square",
+       "site_count": 1
+      }
+     ],
+     "portfolio_note": "Shows DEEP Robotics moving beyond quadrupeds; useful context if the ADGM Square X30 security trial expands to event support."
+    },
+    {
+     "id": "agilityroboticsbeginstradingonnasdaq",
+     "category": "humanoids",
+     "type": "investment",
+     "region": "North America",
+     "company": "Agility Robotics",
+     "amount_usd_m": null,
+     "headline": "Agility Robotics begins trading on Nasdaq, first US humanoid maker listed",
+     "summary": "Agility Robotics became the first US-based legged humanoid company to go public, after shareholders approved its SPAC merger.",
+     "why_it_matters": "Public listing brings disclosed humanoid economics, giving buyers firmer data on cost, uptime and vendor durability.",
+     "source": "The Robot Report",
+     "url": "https://www.therobotreport.com/agility-robotics-begins-trading-on-nasdaq/",
+     "published": "2026-11-03",
+     "coverage": 15,
+     "also_covered_by": [
+      "Forbes",
+      "Business Insider",
+      "OregonLive.com"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://www.therobotreport.com/wp-content/uploads/2026/09/Agility_Digit5_06-featured.jpg"
+    },
+    {
+     "id": "sixagibotg2robotscomplete1730tasksin24ho",
+     "category": "humanoids",
+     "type": "deployment",
+     "region": "China",
+     "company": "AGIBOT",
+     "amount_usd_m": null,
+     "headline": "Six AGIBOT G2 humanoids complete 1,730 tasks in 24-hour store trial",
+     "summary": "Six AGIBOT G2 robots ran a 24-hour Shanghai convenience store trial and completed 1,730 tasks; other reports say two failed the assessment.",
+     "why_it_matters": "Round-the-clock retail tests give realistic failure rates for mall and convenience-retail humanoid pilots.",
+     "source": "The Manila Times",
+     "url": "https://www.manilatimes.net/2026/11/09/tmt-newswire/globenewswire/six-agibot-g2-robots-complete-1730-tasks-in-24-hour-shanghai-convenience-store-trial/2464777",
+     "published": "2026-11-04",
+     "coverage": 5,
+     "also_covered_by": [
+      "FourWeekMBA",
+      "AI Insider",
+      "AI Magazine"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://manilatimes.net/manilatimes/uploads/images/2026/11/09/1297636.png"
+    },
+    {
+     "id": "xiaomishumanoidrobotsworkafull8hourshift",
+     "category": "humanoids",
+     "type": "deployment",
+     "region": "China",
+     "company": "Xiaomi",
+     "amount_usd_m": null,
+     "headline": "Xiaomi humanoid robots work a full 8-hour shift in its EV factory",
+     "summary": "Xiaomi ran humanoid robots through a full 8-hour production shift at its electric-vehicle factory.",
+     "why_it_matters": "Full-shift endurance is the benchmark to demand before humanoids staff lobbies or back-of-house roles.",
+     "source": "Electrek",
+     "url": "https://electrek.co/2026/11/04/xiaomi-humanoid-robot-8-hour-shift-ev-factory/",
+     "published": "2026-11-04",
+     "coverage": 8,
+     "also_covered_by": [
+      "Martin Cid Magazine",
+      "The Gadgeteer",
+      "TechEBlog -"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://electrek.co/wp-content/uploads/sites/3/2026/11/Xiaomi-humanoid-robot.jpeg?quality=82&strip=all&resize=1200,628"
+    },
+    {
+     "id": "axoninvests12billioninskydiosecuresexclu",
+     "category": "inspection",
+     "type": "investment",
+     "region": "North America",
+     "company": "Axon / Skydio",
+     "amount_usd_m": 1200,
+     "headline": "Axon invests $1.2 billion in Skydio for exclusive public-safety drone rights",
+     "summary": "Axon invested $1.2 billion in US drone maker Skydio and secured exclusive distribution rights for public-safety drones.",
+     "why_it_matters": "A well-funded non-Chinese drone ecosystem is emerging as an alternative for security and inspection fleets.",
+     "source": "Dronelife",
+     "url": "https://dronelife.com/2026/11/06/axon-skydio-investment-exclusive-drone-distribution/",
+     "published": "2026-11-02",
+     "coverage": 7,
+     "also_covered_by": [
+      "Yahoo Finance",
+      "People.com",
+      "Fashion Times UK"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://dronelife.com/wp-content/uploads/2025/09/Skydio-family-scaled.jpeg"
+    },
+    {
+     "id": "ziplinehits215bvaluationaswalmartexpands",
+     "category": "delivery",
+     "type": "investment",
+     "region": "North America",
+     "company": "Zipline",
+     "amount_usd_m": null,
+     "headline": "Zipline reaches $21.5 billion valuation as Walmart expands drone delivery",
+     "summary": "Drone delivery firm Zipline hit a $21.5 billion valuation as Walmart widens its drone delivery programme.",
+     "why_it_matters": "Scaled drone delivery means planning landing points and airspace consent in new communities.",
+     "source": "TechCrunch",
+     "url": "https://techcrunch.com/2026/11/05/zipline-hits-21-5b-valuation-as-walmart-expands-bet-on-drone-delivery/",
+     "published": "2026-11-04",
+     "coverage": 12,
+     "also_covered_by": [
+      "DroneLife",
+      "Securities.io",
+      "Wowtale"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://techcrunch.com/wp-content/uploads/2026/11/Precision-Zip-Delivering-3QTR.jpg?resize=1200,800"
+    },
+    {
+     "id": "autonomouscleaningrobotsfirmpeppermintra",
+     "category": "cleaning",
+     "type": "investment",
+     "region": "Global",
+     "company": "Peppermint",
+     "amount_usd_m": 10,
+     "headline": "Autonomous cleaning robot firm Peppermint raises $10 million",
+     "summary": "Peppermint, which builds autonomous cleaning robots, raised $10 million.",
+     "why_it_matters": "More funded cleaning vendors increase price competition for future floor-cleaning tenders beyond Pudu.",
+     "source": "Evertiq",
+     "url": "https://evertiq.com/news/2026-11-06-autonomous-cleaning-robots-firm-peppermint-raises-10-million",
+     "published": "2026-11-04",
+     "coverage": 9,
+     "also_covered_by": [
+      "ET Entrepreneur",
+      "Indian Startup News",
+      "Urban Acres"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://evertiq.com/nimg/robotics/Peppermint_Robotics.jpg"
+    },
+    {
+     "id": "tutorintelligenceraisesseriesbtoscalemod",
+     "category": "physical_ai",
+     "type": "investment",
+     "region": "Global",
+     "company": "Tutor Intelligence",
+     "amount_usd_m": null,
+     "headline": "Tutor Intelligence raises Series B to scale model training and deployments",
+     "summary": "Tutor Intelligence closed a Series B to expand robot model training and field deployments.",
+     "why_it_matters": "Funding is shifting toward deployed, trainable robots, which favours vendors that improve on site.",
+     "source": "The Robot Report",
+     "url": "https://www.therobotreport.com/tutor-intelligence-raises-series-b-to-scale-model-training-robot-deployments/",
+     "published": "2026-11-02",
+     "coverage": 10,
+     "also_covered_by": [
+      "Forbes",
+      "Business Wire",
+      "Wisconsin State Farmer"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://www.therobotreport.com/wp-content/uploads/2026/11/Tutor_Sonny.jpg"
+    },
+    {
+     "id": "physiclraises10mtomakethedigitalworldrea",
+     "category": "physical_ai",
+     "type": "investment",
+     "region": "Global",
+     "company": "Physicl",
+     "amount_usd_m": 10,
+     "headline": "Physicl raises $10M for realistic simulation to train robots",
+     "summary": "Physicl raised $10 million to build simulated environments realistic enough to train robots.",
+     "why_it_matters": "Better simulation could shorten robot commissioning time in new malls and towers.",
+     "source": "TechCrunch",
+     "url": "https://techcrunch.com/2026/11/06/physicl-raises-10m-to-make-the-digital-world-real-enough-for-robots/",
+     "published": "2026-11-06",
+     "coverage": 5,
+     "also_covered_by": [
+      "The Tech Buzz",
+      "TOKENPOST",
+      "Dealroom"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://techcrunch.com/wp-content/uploads/2026/11/physicl-studio-hero-kitchen-16x9-1.jpg?resize=1200,675"
+    },
+    {
+     "id": "serveroboticslaunchesphysicalaiservicesf",
+     "category": "physical_ai",
+     "type": "product",
+     "region": "North America",
+     "company": "Serve Robotics",
+     "amount_usd_m": null,
+     "headline": "Serve Robotics opens fleet connectivity and training services to other firms",
+     "summary": "Serve Robotics launched a business offering its fleet software, connectivity and data to other physical AI companies, pitched as an 'AWS for robots'.",
+     "why_it_matters": "Third-party fleet platforms could let operators run mixed-vendor robots without each vendor's separate stack.",
+     "source": "AI Insider",
+     "url": "https://theaiinsider.tech/2026/11/06/serve-robotics-launches-physical-ai-services-for-robot-fleet-connectivity-and-training/",
+     "published": "2026-11-02",
+     "coverage": 7,
+     "also_covered_by": [
+      "GlobeNewswire",
+      "Mezha.net",
+      "TOKENPOST"
+     ],
+     "portfolio": [],
+     "portfolio_note": ""
+    },
+    {
+     "id": "newisointeroperabilitystandardcoverscoll",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "Global",
+     "company": "ISO",
+     "amount_usd_m": null,
+     "headline": "New ISO 21423:2026 standard lets mobile robots from multiple vendors coordinate",
+     "summary": "ISO 21423:2026 sets an interoperability standard so mobile robots from different vendors can communicate and coordinate.",
+     "why_it_matters": "Aldar can require ISO 21423 compliance in tenders so cleaning, delivery and security robots share lifts and corridors.",
+     "source": "The Robot Report",
+     "url": "https://www.therobotreport.com/new-iso-interoperability-standard-covers-collaboration-among-mobile-robots-from-multiple-vendors/",
+     "published": "2026-11-03",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://www.therobotreport.com/wp-content/uploads/2026/11/AdobeStock_2225516731-copy.jpg"
+    },
+    {
+     "id": "chinarobotfundingslowsto16billionasshake",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "China",
+     "company": "Chinese robotics sector",
+     "amount_usd_m": null,
+     "headline": "China robot funding slows to $1.6 billion as shakeout fears grow",
+     "summary": "Bloomberg reports funding for Chinese robot companies slowed to $1.6 billion amid fears of a sector shakeout.",
+     "why_it_matters": "A shakeout could leave smaller Chinese suppliers unable to support deployed fleets; check vendor finances.",
+     "source": "Bloomberg.com",
+     "url": "https://www.bloomberg.com/news/articles/2026-11-04/china-robot-funding-slows-to-1-6-billion-as-shakeout-fears-grow",
+     "published": "2026-11-04",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [],
+     "portfolio_note": ""
+    },
+    {
+     "id": "bluelightbringsautonomytoasphaltrollersw",
+     "category": "construction",
+     "type": "product",
+     "region": "Global",
+     "company": "Bluelight",
+     "amount_usd_m": null,
+     "headline": "Bluelight offers autonomy kit for asphalt rollers under $50K",
+     "summary": "Bluelight launched a retrofit kit that makes existing asphalt rollers autonomous for under $50,000.",
+     "why_it_matters": "Low-cost retrofits allow trials of site autonomy on road and infrastructure packages without new fleets.",
+     "source": "Equipment World",
+     "url": "https://www.equipmentworld.com/equipment-controls/autonomous/article/16423002/bluelight-launches-autopilot-asphalt-roller-autonomy-kit",
+     "published": "2026-11-03",
+     "coverage": 3,
+     "also_covered_by": [
+      "PhoneWorld",
+      "TechEBlog -"
+     ],
+     "portfolio": [],
+     "portfolio_note": ""
+    },
+    {
+     "id": "busincidentinvolvingdeliveryrobotthrowsp",
+     "category": "delivery",
+     "type": "trend",
+     "region": "Global",
+     "company": "Delivery robot developer (unnamed)",
+     "amount_usd_m": null,
+     "headline": "Delivery robot bus incident blamed on bright billboard and faulty sensor",
+     "summary": "A bus braked for a delivery robot and threw passengers from seats; the developer blamed a bright billboard and a faulty sensor. Another robot reportedly ran a red light.",
+     "why_it_matters": "Community delivery robots need sensor-failure protocols, incident reporting and liability terms before expansion.",
+     "source": "Yahoo",
+     "url": "https://www.yahoo.com/news/world/articles/bus-incident-involving-delivery-robot-222500122.html",
+     "published": "2026-11-02",
+     "coverage": 3,
+     "also_covered_by": [
+      "The Cool Down",
+      "ShiftDelete.Net"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://s.yimg.com/lo/mysterio/api/8ae75fd7711b92c92e8a30af88610f2def2869e556088f7ea2b7f42eae27e253/lightyear_networkapi/resizefill_w1200%3Bquality_80%3Bformat_jpg/https%3A%2F%2Fmedia.zenfs.com%2Fen%2Fthe_cool_down_737%2Ff48478d21d6124ebfd3370e08debb8ea.jpg"
+    },
+    {
+     "id": "uaeopensitsfirsthumanoidroboticsshowroom",
+     "category": "humanoids",
+     "type": "trend",
+     "region": "GCC",
+     "company": "Dubai humanoid showroom",
+     "amount_usd_m": null,
+     "headline": "UAE opens first humanoid robotics showroom as Dubai targets 200,000 robots",
+     "summary": "The UAE's first humanoid robotics showroom opened in Dubai, supporting the emirate's push toward 200,000 robots.",
+     "why_it_matters": "Local showrooms make it easier to evaluate humanoids for malls and concierge roles before procurement.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/news/uae/2026/11/06/uae-opens-its-first-humanoid-robotics-showroom-as-dubai-races-to-200000-robots/",
+     "published": "2026-11-06",
+     "coverage": 3,
+     "also_covered_by": [
+      "Gulf Today",
+      "UA.NEWS"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://www.thenationalnews.com/resizer/v2/OQ3E23A6E5ES5MLJWLFRAYEPHQ.jpg?auth=88afe0a93af70843e38753919d71836564714933ea0ec6b13df1abb4df90c054&focal=2224%2C2667&width=1200&height=630"
+    },
+    {
+     "id": "sauditransportauthorityapprovesexecutive",
+     "category": "delivery",
+     "type": "trend",
+     "region": "GCC",
+     "company": "Saudi Transport General Authority",
+     "amount_usd_m": null,
+     "headline": "Saudi Arabia approves executive regulations for autonomous passenger transport",
+     "summary": "Saudi Arabia's Transport Authority approved executive regulations governing autonomous-vehicle passenger transport.",
+     "why_it_matters": "GCC rules for autonomous mobility are maturing, which supports planning shuttle and delivery services in communities.",
+     "source": "صحيفة سبق الإلكترونية",
+     "url": "https://sabq.org/en/article/1a71k95",
+     "published": "2026-11-06",
+     "coverage": 2,
+     "also_covered_by": [
+      "jawlah.co"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://media.sabq.org/news/2026/11/f9542fe8-f8a0-4034-9ad1-6c84b22e8fa4/w1600.webp"
+    },
+    {
+     "id": "adnocexpandsaiacrossenergyoperationswith",
+     "category": "physical_ai",
+     "type": "deployment",
+     "region": "GCC",
+     "company": "ADNOC",
+     "amount_usd_m": null,
+     "headline": "ADNOC expands AI across operations with 70 robotic use cases",
+     "summary": "ADNOC is expanding AI across its energy operations and has identified 70 robotic use cases.",
+     "why_it_matters": "ADNOC's scale builds an Abu Dhabi base of inspection and maintenance robot suppliers Aldar can use.",
+     "source": "Khaleej Times",
+     "url": "https://www.khaleejtimes.com/uae/adnoc-expansion-ai-robotics-energy-operations",
+     "published": "2026-11-03",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://imgengine.khaleejtimes.com/khaleejtimes-english/2026-11-02/haz8znzs/http___doc_afp_com_D64V4CP.jpeg?width=1200&height=630&q=60&format=auto&ogImage=true&mode=crop&rect=0,0,8256,5504"
+    },
+    {
+     "id": "uaeistheplacetobeforroboticsandaisaysgec",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "GCC",
+     "company": "Gecko Robotics",
+     "amount_usd_m": null,
+     "headline": "Gecko Robotics CEO calls UAE the 'place to be for robotics and AI'",
+     "summary": "Gecko Robotics' CEO told CNBC the UAE is the place to be for robotics and AI.",
+     "why_it_matters": "Global robotics firms looking to the UAE give Aldar more local pilot partners and negotiating options.",
+     "source": "CNBC",
+     "url": "https://www.cnbc.com/video/2026/11/03/uae-is-the-place-to-be-for-robotics-and-ai-says-gecko-robotics-ceo.html",
+     "published": "2026-11-03",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://image.cnbcfm.com/api/v1/image/108509168-17936958021793695799-49405593351-1080pnbcnews.jpg?v=1793695801&w=1920&h=1080"
+    },
+    {
+     "id": "howwallclimbingrobotscouldhelpgulfenergy",
+     "category": "inspection",
+     "type": "trend",
+     "region": "GCC",
+     "company": "Wall-climbing robot makers",
+     "amount_usd_m": null,
+     "headline": "Wall-climbing robots pitched to help Gulf energy producers recover from attacks",
+     "summary": "The National examines how wall-climbing inspection robots could speed damage assessment and repair at Gulf energy facilities.",
+     "why_it_matters": "Wall-climbing inspection proven on industrial assets could transfer to tower façades and structural checks.",
+     "source": "The National",
+     "url": "https://www.thenationalnews.com/future/technology/2026/11/04/how-wall-climbing-robots-could-help-gulf-energy-producers-recover-from-attacks/",
+     "published": "2026-11-04",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://www.thenationalnews.com/resizer/v2/V33QJM3PU5HCPLSHWWT2UFXB4I.jpg?auth=84bd930e6bfc0aaac016d04ffeb72370f4d866ffb1eed3637a821f719b504720&smart=true&width=1200&height=630"
+    },
+    {
+     "id": "ubtechroboticsnewsroomavatarsgulfpilotde",
+     "category": "humanoids",
+     "type": "deployment",
+     "region": "GCC",
+     "company": "UBTech Robotics",
+     "amount_usd_m": null,
+     "headline": "UBTech reports Gulf pilot deals alongside newsroom avatar work",
+     "summary": "A report on UBTech Robotics cites Gulf pilot deals, newsroom avatars and a share incentive plan.",
+     "why_it_matters": "Another Chinese humanoid maker piloting in the Gulf widens options for guest-engagement trials.",
+     "source": "ad-hoc-news.de",
+     "url": "https://www.ad-hoc-news.de/boerse/news/unternehmensnachrichten/ubtech-robotics-newsroom-avatars-gulf-pilot-deals-and-a-2-million-share-incentive-bill/70477806",
+     "published": "2026-11-08",
+     "coverage": 1,
+     "also_covered_by": [],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://mdb.ad-hoc-news.de/bild/bild-2844824_1920_1080.webp"
+    },
+    {
+     "id": "jashanmalbringsglobalhomeroboticsinnovat",
+     "category": "cleaning",
+     "type": "deployment",
+     "region": "GCC",
+     "company": "Jashanmal / ECOVACS",
+     "amount_usd_m": null,
+     "headline": "Jashanmal brings home robotics maker ECOVACS to the UAE",
+     "summary": "Retailer Jashanmal is introducing ECOVACS home robots, including cleaning robots, to the UAE market.",
+     "why_it_matters": "Wider consumer robot retail raises resident expectations for robot cleaning in homes and shared spaces.",
+     "source": "Gulf News",
+     "url": "https://gulfnews.com/friday/lifetstyle/jashanmal-brings-global-home-robotics-innovator-ecovacs-to-the-uae-1.500738684",
+     "published": "2026-11-06",
+     "coverage": 3,
+     "also_covered_by": [
+      "Khaleej Times",
+      "Mashable"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://media.assettype.com/gulfnews%2F2026-11-06%2F88mcbioc%2FDCC219AE-9835-4E87-881F-82F676582D6A.jpeg?rect=0%2C194%2C1170%2C614&w=1200&ar=40%3A21&auto=format%2Ccompress&ogImage=true&mode=crop&enlarge=true&overlay=false&overlay_position=bottom&overlay_width=100"
+    },
+    {
+     "id": "tiiandnavalgrouppartnertodevelopautonomo",
+     "category": "security",
+     "type": "deployment",
+     "region": "GCC",
+     "company": "TII / Naval Group",
+     "amount_usd_m": null,
+     "headline": "Abu Dhabi's TII partners Naval Group to develop autonomous underwater vehicles",
+     "summary": "Abu Dhabi's Technology Innovation Institute and France's Naval Group will jointly develop autonomous underwater vehicles.",
+     "why_it_matters": "Local underwater autonomy could later serve marina, quay wall and waterfront inspection at coastal developments.",
+     "source": "Israel Defense",
+     "url": "https://www.israeldefense.co.il/en/node/72556",
+     "published": "2026-11-04",
+     "coverage": 3,
+     "also_covered_by": [
+      "36氪",
+      "DC Velocity"
+     ],
+     "portfolio": [],
+     "portfolio_note": "",
+     "image": "https://www.israeldefense.co.il/sites/default/files/2026-11/4370d3fb7989cd078d42daf7b5e810b4281c01104f1d723329f313e94dd4.jpg"
+    },
+    {
+     "id": "adipec2026trendsresilienceaiandrobotsand",
+     "category": "physical_ai",
+     "type": "trend",
+     "region": "GCC",
+     "company": "ADIPEC 2026",
+     "amount_usd_m": null,
+     "headline": "ADIPEC 2026 highlights gap between robot demos and plant-floor reality",
+     "summary": "Coverage of ADIPEC in Abu Dhabi notes strong focus on AI and robots but a gap between stage demos and actual plant use.",
+     "why_it_matters": "A reminder to judge vendors on field uptime and support in Abu Dhabi, not exhibition demos.",
+     "source": "Oil & Gas Middle East",
+     "url": "https://www.oilandgasmiddleeast.com/news/adipec-2026-trends",
+     "published": "2026-11-03",
+     "coverage": 2,
+     "also_covered_by": [
+      "Process and Control Today"
+     ],
+     "portfolio": [],
+     "portfolio_note": ""
+    }
+   ],
+   "vendor_watch": [
+    {
+     "vendor": "AirTech",
+     "oem": "DJI",
+     "status": "pilot",
+     "status_label": "Trialled",
+     "use_cases": [
+      "Drone Inspections for Unit Exterior"
+     ],
+     "models": [
+      "Thermal: M300 H20T · General capture: Matrice 4E"
+     ],
+     "sites": [
+      "Saadiyat Lagoons"
+     ],
+     "mentions": 8,
+     "post_ids": [
+      "djidronescouldbebannedfromtheusduetoalle",
+      "djimatrice5tenterprisedronefeaturesnight",
+      "djidock4landsintatramountainsautonomousr"
+     ],
+     "signal": "mixed",
+     "note": "DJI's Matrice 5T and Dock 4 offer upgrades, but a possible US ban on DJI adds supply and support risk.",
+     "signal_by": "claude",
+     "article": null
+    },
+    {
+     "vendor": "Pudu",
+     "oem": "",
+     "status": "deployed",
+     "status_label": "Launched",
+     "use_cases": [
+      "Concierge Service",
+      "Customer Management Delivery Bot",
+      "Floor Scrubbing and Sweeping"
+     ],
+     "models": [
+      "1× CC1 Pro, 1× MT1 Max",
+      "1× CC1 Pro, 1× MT1 Max, 1× BG1 Pro",
+      "1× CC1 Pro, 3× MT1 Max",
+      "2× CC1 Pro",
+      "2× CC1 Pro, 1× MT1 Max, 1× BG1 Pro",
+      "33× CC1 Pro",
+      "3× CC1 Pro",
+      "3× CC1 Pro, 1× MT1 Max",
+      "4× CC1 Pro, 1× MT1 Max",
+      "4× CC1 Pro, 2× MT1 Max, 2× BG1 Pro",
+      "6× CC1 Pro",
+      "6× CC1 Pro, 3× MT1 Max, 2× BG1 Pro",
+      "Bellabot Pro"
+     ],
+     "sites": [
+      "International Tower",
+      "ADGM Square",
+      "Aldar HQ",
+      "Al Maryah Tower",
+      "Yas Place",
+      "Aldar Square",
+      "Aldar Estates Office · Yas Mall",
+      "Masdar City",
+      "Al Rayanna",
+      "The Bridges",
+      "Mamsha Al Saadiyat",
+      "Gate & Arc Towers",
+      "Al Zeina",
+      "Sun & Sky Tower",
+      "Saadiyat Grove",
+      "Saadiyat Beach Residences",
+      "Al Muneera",
+      "Waters Edge",
+      "Yas Golf Collection",
+      "West Yas Plaza",
+      "Noya Plaza",
+      "Shams Boutik",
+      "Eastern Mangroves",
+      "Muneera Retail (Al Muneera Beach Plaza)",
+      "Gardens Plaza"
+     ],
+     "mentions": 11,
+     "post_ids": [
+      "puduroboticsunveilsonebrainmultipleembod",
+      "servicerobotleaderpudupivotstohumanoidst",
+      "puduroboticslaunchesautonomousgtseriesmo"
+     ],
+     "signal": "positive",
+     "note": "European portfolio launch, shared-brain strategy and new mowers broaden offerings; watch that the humanoid pivot does not dilute support for cleaning rollouts.",
+     "signal_by": "claude",
+     "article": null
+    },
+    {
+     "vendor": "Analog",
+     "oem": "Boston Dynamics",
+     "status": "pilot",
+     "status_label": "Trialled",
+     "use_cases": [
+      "Quadruped Dog Interior Inspections"
+     ],
+     "models": [
+      "Boston Dynamics Spot"
+     ],
+     "sites": [
+      "Yas Park Gate"
+     ],
+     "mentions": 3,
+     "post_ids": [
+      "blacklinesafetyintegratesgasdetectiontec"
+     ],
+     "signal": "positive",
+     "note": "Blackline gas detection for Spot expands what interior inspections like Yas Park Gate can cover.",
+     "signal_by": "claude",
+     "article": null
+    },
+    {
+     "vendor": "Deep Robotics",
+     "oem": "",
+     "status": "pilot",
+     "status_label": "Trialled",
+     "use_cases": [
+      "Security Patrolling"
+     ],
+     "models": [
+      "X30"
+     ],
+     "sites": [
+      "ADGM Square"
+     ],
+     "mentions": 2,
+     "post_ids": [
+      "deeproboticslaunchesx50quadrupedwithacla",
+      "deeproboticshumanoidrobotssupporttraffic"
+     ],
+     "signal": "positive",
+     "note": "New X50 quadruped and humanoid event deployment show a widening product line relevant to the ADGM Square patrol trial.",
+     "signal_by": "claude",
+     "article": null
+    },
+    {
+     "vendor": "BarqAir",
+     "oem": "",
+     "status": "deployed",
+     "status_label": "Launched",
+     "use_cases": [
+      "Drone Façade Cleaning"
+     ],
+     "models": [
+      "Cleaning Drone"
+     ],
+     "sites": [
+      "Yas Place"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "Cargo X / Noon",
+     "oem": "Neolix",
+     "status": "deployed",
+     "status_label": "Launched",
+     "use_cases": [
+      "Autonomous Delivery Vans",
+      "Autonomous Delivery Vans (Al Merief expansion)",
+      "Autonomous Delivery Vans (Golf Gardens expansion)"
+     ],
+     "models": [
+      "Neolix X3"
+     ],
+     "sites": [
+      "Al Raha Gardens",
+      "Golf Gardens",
+      "Al Merief"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "SINDAN",
+     "oem": "",
+     "status": "pilot",
+     "status_label": "Trialled",
+     "use_cases": [
+      "Floor Scrubbing and Sweeping",
+      "Humanoid Guest Engagement",
+      "Security Patrolling (2)"
+     ],
+     "models": [
+      "D1 Max",
+      "MK-02 Humanoid",
+      "NOVA-02 and NOVA-05"
+     ],
+     "sites": [
+      "Yas Mall",
+      "ADGM Square",
+      "Livex · ADNEC"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "Thub Technologies",
+     "oem": "",
+     "status": "pilot",
+     "status_label": "Trialled",
+     "use_cases": [
+      "Crawler Façade Cleaning (2)",
+      "Façade Cleaning"
+     ],
+     "models": [
+      "TowerCraft"
+     ],
+     "sites": [
+      "Yas Place",
+      "World Trade Center Abu Dhabi"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "X-Human",
+     "oem": "",
+     "status": "pilot",
+     "status_label": "Trialled",
+     "use_cases": [
+      "Crawler Façade Cleaning"
+     ],
+     "models": [
+      "Lingkong K3"
+     ],
+     "sites": [
+      "Yas Place"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "AD Robotics",
+     "oem": "",
+     "status": "planned",
+     "status_label": "Pending",
+     "use_cases": [
+      "Community Delivery Bot",
+      "Security Patrolling"
+     ],
+     "models": [
+      "ADR Delivery Bot",
+      "ADR Quadruped"
+     ],
+     "sites": [
+      "Noya Luma",
+      "Ansam"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "Falcon Tech Robotics",
+     "oem": "",
+     "status": "planned",
+     "status_label": "Pending",
+     "use_cases": [
+      "Interactive Visitor Engagement"
+     ],
+     "models": [
+      "KODY"
+     ],
+     "sites": [
+      "The Galleria"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "Pudu + other",
+     "oem": "",
+     "status": "planned",
+     "status_label": "Pending",
+     "use_cases": [
+      "Floor Scrubbing and Sweeping"
+     ],
+     "models": [
+      "2× CC1 Pro, 1× MT1 Max, 1× External Sweeper",
+      "3× CC1 Pro, 1× MT1 Max, 1× External Sweeper",
+      "3× MT1 Max, 1× BG1 Pro, 1× External Sweeper"
+     ],
+     "sites": [
+      "Pearl British Academy",
+      "Muna British Academy",
+      "Bateen World Academy",
+      "Al Ain British Academy",
+      "Yasmina British Academy",
+      "Mamoura British Academy",
+      "Cranleigh Abu Dhabi",
+      "Noya British School",
+      "Yasmina American School",
+      "Eastern Mangroves"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "Solinas",
+     "oem": "",
+     "status": "planned",
+     "status_label": "Pending",
+     "use_cases": [
+      "Hidden Cavity Inspection"
+     ],
+     "models": [
+      "Endobot 90 and Endobot 250"
+     ],
+     "sites": [
+      "Saadiyat Grove"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    },
+    {
+     "vendor": "Subdivo",
+     "oem": "",
+     "status": "planned",
+     "status_label": "Pending",
+     "use_cases": [
+      "Façade Cleaning"
+     ],
+     "models": [],
+     "sites": [
+      "International Tower"
+     ],
+     "mentions": 0,
+     "post_ids": [],
+     "signal": "none",
+     "note": "",
+     "signal_by": "",
+     "article": null
+    }
+   ],
+   "viral": [
+    {
+     "platform": "X",
+     "date": "2026-11-04",
+     "title": "A robot got its head kicked off during a fight in China and just kept fighting.",
+     "category": "humanoids",
+     "views_reported": "11M (weakly sourced)",
+     "views_source": "grandgoldman.com blog (low credibility); no mainstream figure",
+     "what_shows": "Two EngineAI T800 humanoids fight in a cage at the URKL tournament in Shenzhen (filmed 16 Jul 2026). One kicks the other's head off; the headless robot keeps fighting because its main control unit is in the torso.",
+     "what_behind": "EngineAI organises the tournament; all teams use the T800. Teams could mix human operator and software control. A San Francisco T800 event was remote-controlled. Sunday Guardian says the clip doesn't prove lasting headless operation.",
+     "checks": {
+      "real": "yes",
+      "autonomous": "unknown",
+      "corroborated": "yes",
+      "deployed": "no",
+      "gcc": "unknown"
+     },
+     "verdict": "hype",
+     "fit": "Low",
+     "portfolio_match": "SINDAN MK-02 Humanoid (pending, Humanoid Guest Engagement at Livex · ADNEC)",
+     "action": "Ignore",
+     "leadership_line": "It's a robot combat show, partly remote-controlled; it shows the robots are tough, not that they can do any work for us.",
+     "assessed_from": "Web pages and news coverage; video not watched",
+     "video_url": "",
+     "corroboration": [
+      {
+       "label": "Sunday Guardian (5 Nov 2026)",
+       "url": "https://sundayguardianlive.com/trending/watch-video-china-robot-fight-goes-viral-humanoid-machine-keeps-fighting-after-opponent-kicks-its-head-off-317778/"
+      },
+      {
+       "label": "grandgoldman.com (index date ~3 Nov 2026)",
+       "url": "https://grandgoldman.com/blogs/ai-video/humanoid-robots-decapitate-each-other-in-viral-kick-fight"
+      },
+      {
+       "label": "Mike Kalil, URKL begins (~mid-Jul 2026)",
+       "url": "https://mikekalil.com/blog/engineai-urkl-begins/"
+      },
+      {
+       "label": "Electronics For You, teleoperated combat (~late Sep 2026)",
+       "url": "https://www.electronicsforu.com/news/humanoid-robot-demonstrates-teleoperated-combat-skills-in-cage"
+      }
+     ]
+    },
+    {
+     "platform": "X",
+     "date": "2026-11-02",
+     "title": "Newly manufactured F.03 robots leaving BotQ and heading across campus",
+     "category": "humanoids",
+     "views_reported": "Not verified",
+     "views_source": "No source gives a figure",
+     "what_shows": "A roughly 19-second clip of several Figure 03 robots walking across Figure's campus; one crosses a marked pedestrian crossing.",
+     "what_behind": "Company footage only. Adcock did not say whether robots walked autonomously or under remote supervision, how many, or where. Figure built its 1,000th robot in July 2026; no delivery figures released.",
+     "checks": {
+      "real": "yes",
+      "autonomous": "unknown",
+      "corroborated": "no",
+      "deployed": "unknown",
+      "gcc": "unknown"
+     },
+     "verdict": "watch",
+     "fit": "Low",
+     "portfolio_match": "SINDAN MK-02 Humanoid",
+     "action": "Watch",
+     "leadership_line": "Figure is clearly making robots in volume, but it hasn't shown them working for paying customers, let alone in our conditions.",
+     "assessed_from": "Interesting Engineering coverage; video not watched",
+     "video_url": "https://x.com/adcock_brett/status/2117286067472937012",
+     "corroboration": [
+      {
+       "label": "Interesting Engineering (3 Nov 2026)",
+       "url": "https://interestingengineering.com/ai-robotics/figure-03-humanoids-take-campus-walk"
+      }
+     ]
+    },
+    {
+     "platform": "X",
+     "date": "2026-11-06",
+     "title": "Shinkei Systems' Poseidon: \"the most absurd AI startup ever\"",
+     "category": "physical_ai",
+     "views_reported": "Not verified",
+     "views_source": "Dealroom says \"millions of views\", no exact number",
+     "what_shows": "A fridge-sized robot on fishing-boat decks whose camera identifies fish species, then kills the fish in about seven seconds using a traditional Japanese method that keeps meat fresher.",
+     "what_behind": "Shinkei Systems (El Segundo) gives robots to crews free and buys catch at a premium. Running on three US West Coast boats (Semafor, July 2025). Raised $22M Series A led by Founders Fund, June 2025.",
+     "checks": {
+      "real": "yes",
+      "autonomous": "unknown",
+      "corroborated": "yes",
+      "deployed": "yes",
+      "gcc": "unknown"
+     },
+     "verdict": "real",
+     "fit": "Low",
+     "portfolio_match": "None",
+     "action": "Ignore",
+     "leadership_line": "It's a real, working niche robot for fishing boats, and it has nothing to do with our assets.",
+     "assessed_from": "Dealroom coverage; video not watched",
+     "video_url": "",
+     "corroboration": [
+      {
+       "label": "Dealroom (6 Nov 2026)",
+       "url": "https://dealroom.co/news/170489-shinkeis-poseidon-robot-goes-viral-ai-ike-jime-on-us-fishing-boats-after/"
+      }
+     ]
+    }
+   ],
+   "challengers": [
+    {
+     "name": "Micropolis Robotics",
+     "category": "security",
+     "what": "UAE-based, NYSE American-listed maker of DPR-02 autonomous patrol vehicles, in service with Dubai Police at Global Village since October 2025.",
+     "scores": {
+      "funding": 3,
+      "deployments": 3,
+      "scale": 1,
+      "partners": 4,
+      "gcc": 4
+     },
+     "why": "UAE-built outdoor patrol with a verifiable police customer; local alternative to quadrupeds for community patrol such as pending Noya Luma.",
+     "source": {
+      "label": "AOL (19 Oct 2026)",
+      "url": "https://www.aol.com/articles/dubai-robot-police-cars-flag-192937000.html"
+     },
+     "total": 15,
+     "verdict": "add"
+    },
+    {
+     "name": "URobotics",
+     "category": "physical_ai",
+     "what": "KAIST spin-off; add-on kit lets humanoids and quadrupeds navigate rough ground. Series A about $30M; amount varies by source.",
+     "scores": {
+      "funding": 3,
+      "deployments": 1,
+      "scale": 1,
+      "partners": 2,
+      "gcc": 1
+     },
+     "why": "Could make robot-dog inspections on our construction sites need less human control, like our Spot and X30 trials.",
+     "source": {
+      "label": "Dealroom (6 Nov 2026)",
+      "url": "https://dealroom.co/news/170189-robot-autonomy-startup-urobotics-raises-29-9m-series-a-at-a-tenfold-valu/"
+     },
+     "total": 8,
+     "verdict": "watch"
+    },
+    {
+     "name": "Unitree (H2-X)",
+     "category": "humanoids",
+     "what": "Released H2-X bodyguard video; autonomy unconfirmed. Ranked second in global humanoid shipments, H1 2026.",
+     "scores": {
+      "funding": 0,
+      "deployments": 0,
+      "scale": 3,
+      "partners": 0,
+      "gcc": 0
+     },
+     "why": "High-volume humanoid seller that could compete with SINDAN for guest-engagement and patrol pilots; bodyguard claims unproven.",
+     "source": {
+      "label": "SCMP (~22 Oct 2026)",
+      "url": "https://www.scmp.com/video/china/3371678/unitree-robotics-unveils-bodyguard-robot-capable-lifting-front-car"
+     },
+     "total": 3,
+     "verdict": "ignore"
+    },
+    {
+     "name": "Figure AI",
+     "category": "humanoids",
+     "what": "Over 1,000 humanoids built (company figure, July 2026); no customer or delivery numbers published.",
+     "scores": {
+      "funding": 0,
+      "deployments": 0,
+      "scale": 3,
+      "partners": 0,
+      "gcc": 0
+     },
+     "why": "Benchmark for where humanoids are heading, not something Aldar could buy soon.",
+     "source": {
+      "label": "Interesting Engineering (3 Nov 2026)",
+      "url": "https://interestingengineering.com/ai-robotics/figure-03-humanoids-take-campus-walk"
+     },
+     "total": 3,
+     "verdict": "ignore"
+    }
+   ],
+   "matrix": [
+    {
+     "category": "construction",
+     "readiness": 35,
+     "relevance": 60,
+     "hype": 40,
+     "substance": 40,
+     "reason": "Niche products; no Aldar construction deployments yet."
+    },
+    {
+     "category": "facade",
+     "readiness": 40,
+     "relevance": 85,
+     "hype": 35,
+     "substance": 45,
+     "reason": "One launched project; this week only pitches, no new deployments."
+    },
+    {
+     "category": "inspection",
+     "readiness": 75,
+     "relevance": 70,
+     "hype": 55,
+     "substance": 75,
+     "reason": "Mature products; possible US DJI ban is supply-chain risk."
+    },
+    {
+     "category": "cleaning",
+     "readiness": 85,
+     "relevance": 95,
+     "hype": 30,
+     "substance": 80,
+     "reason": "Largest category; Pudu at scale, market maturing."
+    },
+    {
+     "category": "security",
+     "readiness": 50,
+     "relevance": 70,
+     "hype": 65,
+     "substance": 45,
+     "reason": "Micropolis Dubai Police deployment; much hype from unverified videos."
+    },
+    {
+     "category": "delivery",
+     "readiness": 65,
+     "relevance": 75,
+     "hype": 55,
+     "substance": 65,
+     "reason": "Zipline and Serve scaling; sensor failures still occur."
+    },
+    {
+     "category": "humanoids",
+     "readiness": 25,
+     "relevance": 45,
+     "hype": 95,
+     "substance": 35,
+     "reason": "Biggest hype gap; most shipments go to entertainment."
+    },
+    {
+     "category": "physical_ai",
+     "readiness": 35,
+     "relevance": 50,
+     "hype": 80,
+     "substance": 45,
+     "reason": "Big funding, results lag; Chinese funding slowing."
+    }
+   ],
+   "research_meta": {
+    "searches": 15,
+    "sources": 113
+   }
+  },
   {
    "id": "2026-W45",
    "label": "Week 45 · 2 Nov 2026",

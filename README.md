@@ -118,13 +118,14 @@ The site has an MCP endpoint so AI agents can pull the latest deployment data:
 
 **`https://roboticdeploymentsataldar.netlify.app/mcp`** (Streamable HTTP, no login)
 
-It reads the same `data/fleet-data.js` and `data/intel-feed.json` the site shows, so it is always as current as the live site. Tools:
+It reads the same `data/fleet-data.js`, `data/construction-data.js`, `data/intel-feed.json` and `assets/video/` files the site shows, so it is always as current as the live site. Tools:
 | Tool | What it returns |
 |---|---|
-| `get_overview` | Totals by status, robot type, district and vendor, plus the data date. |
-| `list_deployments` | Deployments, filterable by status, robot type, district, asset, vendor or free text. |
-| `get_deployment` | Full detail for one tracker id (e.g. `07`). |
+| `get_overview` | Totals by layer (operations / construction), status, robot type, district and vendor, footage count, and the data date. |
+| `list_deployments` | What's deployed and where: site, district, map coordinates, status, vendor and footage links. Filter by status, layer, robot type, district, asset, vendor, has_media or free text. |
+| `get_deployment` | Full detail for one tracker id (e.g. `07`, `CN06`), including its footage. |
 | `list_assets` | Sites with location and the deployments at each. |
+| `get_media` | Site footage: thumbnails returned as images plus direct MP4 video links. Filter by deployment, asset or layer. |
 | `get_market_pulse` | The weekly Market Pulse briefing (latest, or by edition id / category). |
 
 Code: `netlify/functions/mcp.mjs`. Netlify picks it up automatically; no build step needed.

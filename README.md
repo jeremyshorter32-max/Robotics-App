@@ -112,3 +112,20 @@ The switch at the top swaps between two layers, each with its own data:
 - `data/construction-data.js`: Construction trials (green accents and map tint).
 
 `assets/js/modes.js` holds the layer list and colours. Adding `?map=construction` to the address opens straight into the construction layer. Videos tagged `"section": "construction"` appear in the Construction tab of the Watch deployments gallery from either layer.
+
+## MCP server (for AI agents)
+The site has an MCP endpoint so AI agents can pull the latest deployment data:
+
+**`https://roboticdeploymentsataldar.netlify.app/mcp`** (Streamable HTTP, no login)
+
+It reads the same `data/fleet-data.js` and `data/intel-feed.json` the site shows, so it is always as current as the live site. Tools:
+| Tool | What it returns |
+|---|---|
+| `get_overview` | Totals by status, robot type, district and vendor, plus the data date. |
+| `list_deployments` | Deployments, filterable by status, robot type, district, asset, vendor or free text. |
+| `get_deployment` | Full detail for one tracker id (e.g. `07`). |
+| `list_assets` | Sites with location and the deployments at each. |
+| `get_market_pulse` | The weekly Market Pulse briefing (latest, or by edition id / category). |
+
+Code: `netlify/functions/mcp.mjs`. Netlify picks it up automatically; no build step needed.
+Note: like the website, the endpoint is public. Anyone with the link can read the data.
